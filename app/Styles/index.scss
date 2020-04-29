@@ -1,0 +1,194 @@
+@import "./animations.css";
+@import "./loader.scss";
+
+:root {
+  --modile-area: "header" "body" "footer";
+  --area: "header" "body" "footer";
+}
+
+@font-face {
+  font-family: "SilverThreadJF";
+  src: url("fonts/SilverThreadJF.woff2") format("woff2"),
+    url("fonts/SilverThreadJF.woff") format("woff"),
+    url("fonts/SilverThreadJF.ttf") format("truetype");
+}
+
+$primary-color: #5755d9;
+$secondary-color: #f1f1fc;
+$success: #32b643;
+$warning: #ffb700;
+$error: #e85600;
+$disabled: #f7f8f9;
+$dark-grey: #303742;
+$grey: #66758c;
+$light-grey: #bcc3ce;
+$white: #fff;
+$text: #1caffc;
+
+.bg-light-grey {
+  background-color: $light-grey;
+}
+
+.bg-dark-grey {
+  background-color: $dark-grey;
+}
+
+%icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+* {
+  font-family: "SilverThreadJF" sans-serif;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100vh;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:focus,
+a:hover,
+a.active {
+  color: !important $light-grey;
+  text-decoration: none;
+}
+
+a:visited {
+  color: $light-grey;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.btn {
+  &:hover {
+    font-weight: bold;
+    background-color: box-shadow(inset 0 1px 0 lighten($primary-color, 20%));
+  }
+}
+
+#content {
+  grid-area: content;
+  padding: 10px;
+  min-height: 100vh;
+  height: 100%;
+}
+
+#footer {
+  grid-area: footer;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  min-height: 200px;
+  color: $white;
+  align-items: center;
+
+  > a {
+    margin: 4px;
+  }
+}
+
+#header {
+  grid-area: header;
+  min-height: 140px;
+}
+
+#layout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 140px 1fr 100px;
+  grid-template-areas: "header" "body" "footer";
+}
+
+.loader {
+  height: 80vh;
+  width: 80vw;
+}
+
+.navbarBkg {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $dark-grey;
+  min-height: 40px;
+  > a {
+    color: $light-grey;
+    text-decoration: none;
+  }
+
+  &:a:visited {
+    color: $light-grey;
+  }
+}
+
+.navMenuHide {
+  display: none;
+}
+
+.navMenuOverlay {
+  z-index: 1;
+  padding: 30px;
+  line-height: 3.2rem;
+  width: 100vw;
+  min-width: 100vw;
+  background: transparent;
+
+  > ul.nav {
+    width: 30vw;
+  }
+}
+.navMenuShow {
+  transition: ease-in-out;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 80vw;
+  height: 100vh;
+  min-width: 80vw;
+  min-height: 100vh;
+  background: $dark-grey;
+}
+
+.products {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+
+  .product {
+    margin: 2px;
+  }
+}
+
+.required {
+  color: $warning;
+  padding: 4px;
+}
+
+progress {
+  z-index: 500;
+}
+
+.progressBar {
+  display: contents;
+}
