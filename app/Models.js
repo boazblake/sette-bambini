@@ -1,7 +1,9 @@
-import Stream from "mithril-stream"
 import Routes from "./Routes/index.js"
+import Data from "./mock-data"
+import http from "./Utils/http"
 
 const state = {
+  showAuthModal: Stream(false),
   showNavMenu: Stream(false),
   paginate: {
     page: Stream(1),
@@ -22,34 +24,15 @@ const settings = {}
 const data = {}
 const errors = {}
 
-const mockData = [
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
-  }),
-]
-
 const Model = {
-  mockData,
+  http,
+  Data,
   Routes,
   state,
   user,
   data,
   errors,
   settings,
+  toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
 }
 export default Model

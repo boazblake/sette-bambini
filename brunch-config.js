@@ -69,11 +69,4 @@ exports.paths = {
 exports.npm = {
   enabled: true,
   globals: { m: "mithril", Stream: "mithril-stream" },
-  styles: {
-    "spectre.css": [
-      "dist/spectre.css",
-      "dist/spectre-exp.css",
-      "dist/spectre-icons.css",
-    ],
-  },
 }

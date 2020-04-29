@@ -1,5 +1,7 @@
 import NavLink from "./nav-link"
 import { SlideInRight, SlideOutLeft } from "../Styles/animations.js"
+import { LockLine } from "@mithril-icons/clarity/cjs/index"
+
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
 const NavItem = () => {
@@ -28,18 +30,23 @@ const NavMenu = () => {
           {
             onclick: () => mdl.state.showNavMenu(!mdl.state.showNavMenu()),
           },
-          m(
-            `ul.nav`,
-            { id: "" },
+          m(`ul.nav`, { id: "" }, [
+            m(
+              "a",
+              {
+                onclick: () => mdl.toggleAuthModal(mdl),
+              },
+              m(LockLine)
+            ),
             routes(mdl).map((r) =>
-              m(NavLink, {
+              m(NavItem, {
                 mdl,
                 href: r.route,
                 link: r.name,
                 classList: isActiveRoute(r.route),
               })
-            )
-          )
+            ),
+          ])
         )
       ),
   }
