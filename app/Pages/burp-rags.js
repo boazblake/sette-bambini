@@ -1,8 +1,14 @@
 import Task from "data.task"
-import Product from "./Product"
+import Masonry from "Components/Masonry"
 
 const fetchBurpRagsTask = (mdl) =>
-  Task.of([...Array(10).keys()].map((k) => 250))
+  Task.of(
+    [...Array(10).keys()].map((k) => ({
+      imgSrc: 250,
+      title: "",
+      description: "",
+    }))
+  )
 
 const onPageInit = (state) => ({ attrs: { mdl } }) => {
   const onError = (s) => (error) => {
@@ -32,10 +38,7 @@ const BurpRags = () => {
     view: ({ attrs: { mdl } }) =>
       m(".container", [
         m("h1.title", mdl.state.route.name),
-        m(
-          ".products",
-          state.data.map((p) => m(Product, { classList: "", size: p }))
-        ),
+        m(Masonry, { data: state.data }),
       ]),
   }
 }
