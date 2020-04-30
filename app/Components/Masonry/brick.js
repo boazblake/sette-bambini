@@ -10,7 +10,10 @@ const Brick = () => {
           m("h3.title", data.title),
           m(".description", [
             m("img", {
-              oncreate: ({ dom }) => imagesLoaded(dom, (x) => m.redraw()),
+              onload: (x) => m.redraw(),
+              oncreate: ({ dom }) => {
+                dom.complete && m.redraw()
+              },
               src: `https://via.placeholder.com/${data.imgSrc}`,
             }),
 
