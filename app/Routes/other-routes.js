@@ -1,7 +1,22 @@
 import Layout from "../Layouts/index.js"
 import Default from "../Pages/default.js"
+import Blog from "../Pages/blog.js"
 
 const OtherRoutes = [
+  {
+    id: "blog",
+    name: "Blog",
+    // icon: Icons.home,
+    route: "/blog",
+    isNav: true,
+    group: ["other", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor && scrollToAnchor(mdl.state.anchor)
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
+  },
   {
     id: "about-us",
     name: "About Us",

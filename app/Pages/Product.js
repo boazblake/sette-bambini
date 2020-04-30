@@ -1,5 +1,6 @@
 const Product = () => {
   return {
+    oncreate: ({ dom }) => imagesLoaded(dom, (x) => m.redraw()),
     view: ({ attrs: { classList, size } }) =>
       m(
         ".product",
@@ -7,9 +8,13 @@ const Product = () => {
           class: classList,
         },
         m(".content", [
-          m("img", {
-            src: `https://via.placeholder.com/${size}`,
-          }),
+          m("h3.title", "Title"),
+          m(
+            ".description",
+            m("img", {
+              src: `https://via.placeholder.com/${size}`,
+            })
+          ),
         ])
       ),
   }

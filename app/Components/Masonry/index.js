@@ -1,7 +1,8 @@
-import Product from "./Product"
+import Brick from "./brick"
 
 const resizeGridItem = (dom) => (item) => {
   let grid = dom
+
   let rowHeight = parseInt(
     window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
   )
@@ -12,27 +13,24 @@ const resizeGridItem = (dom) => (item) => {
     (item.querySelector(".content").getBoundingClientRect().height + rowGap) /
       (rowHeight + rowGap)
   )
-  item.style.gridRowEnd = "span " + rowSpan
+
+  return (item.style.gridRowEnd = "span " + rowSpan)
 }
 
-function resizeAllGridItems() {
-  allItems = document.getElementsByClassName("item")
-  for (x = 0; x < allItems.length; x++) {
-    resizeGridItem(allItems[x])
-  }
+const onResize = (dom) => Array.from(dom.children).map(resizeGridItem(dom))
+
+const resizeAllGridItems = (dom) => {
+  window.addEventListener("resize", (x) => onResize(dom))
+  return onResize(dom)
 }
 
 const Masonry = () => {
   return {
-    oncreate: ({ dom }) => Array.from(dom.children).map(resizeGridItem(dom)),
+    oncreate: ({ dom }) => resizeAllGridItems(dom),
     view: ({ attrs: { data } }) =>
       m(
         ".grid",
-        {
-          id: "grid",
-          onresize: (x) => console.log("resize", x),
-        },
-        data.map((p) => m(Product, { classList: "item", size: p }))
+        data.map((brick) => m(Brick, { classList: "item", data: brick }))
       ),
   }
 }

@@ -1,7 +1,16 @@
 import Task from "data.task"
-import MasonBoard from "./mason-board.js"
+import Masonry from "Components/Masonry"
 
-const fetchBurpRagsTask = (mdl) => Task.of([250, 350, 450, 250, 350, 450])
+const fetchBurpRagsTask = (mdl) =>
+  Task.of([
+    { imgSrc: 320, title: "", description: "" },
+    { imgSrc: 250, title: "", description: "" },
+    { imgSrc: 220, title: "", description: "" },
+    { imgSrc: 200, title: "", description: "" },
+    { imgSrc: 250, title: "", description: "" },
+    { imgSrc: 320, title: "", description: "" },
+    { imgSrc: 320, title: "", description: "" },
+  ])
 
 const onPageInit = (state) => ({ attrs: { mdl } }) => {
   const onError = (s) => (error) => {
@@ -31,7 +40,7 @@ const Home = () => {
       m(".container", { id: "home-page" }, [
         m("h1.title", mdl.state.route.name),
 
-        m(MasonBoard, { data: state.data }),
+        m(Masonry, { data: state.data }),
       ]),
   }
 }
