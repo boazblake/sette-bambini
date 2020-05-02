@@ -1,25 +1,5 @@
-/*
-contains
-  logo -> center -> home link
-
-  mobile:
-  hamburger -> left
-  cart -> right
-  [[hamburger] , [LOGO] ,[cart] ]
-
-  tablet+
-  login/reg -> left
-  social media -> right
-  cart -> right
-  [[login/register] , [LOGO] , [social-media, cart] ]
-
-*/
 import NavLink from "./nav-link.js"
-import {
-  ShoppingBagLine,
-  MenuLine,
-  LockLine,
-} from "@mithril-icons/clarity/cjs/index"
+import { ShoppingBagLine, MenuLine } from "@mithril-icons/clarity/cjs/index"
 import Logo from "./Logo"
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
@@ -31,9 +11,14 @@ const ToolBar = () => {
         m("nav.frow row-between row-center", [
           m("nav.frow", [
             mdl.settings.profile == "desktop"
-              ? mdl.state.user
-                ? m(LockLine, {
-                    onclick: () => mdl.state.showAuthModal(true),
+              ? mdl.state.isAuth()
+                ? m(NavLink, {
+                    mdl,
+                    href: `/account/${mdl.user.name}`,
+                    link: "Your Account",
+                    classList: `${isActiveRoute(
+                      `/account/${mdl.user.name}`
+                    )} button`,
                   })
                 : m(".frow", [
                     m(NavLink, {

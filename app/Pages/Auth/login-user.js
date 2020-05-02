@@ -19,6 +19,9 @@ const validateForm = (mdl) => (data) => {
   const onSuccess = (data) => {
     state.errors = {}
     console.log("login s", data)
+    mdl.state.isAuth(true)
+    mdl.user = data
+    m.route.set(`/account/${mdl.user.name}`)
   }
 
   state.isSubmitted = true
@@ -53,12 +56,13 @@ const resetState = () => {
   state.errors = {}
   state.httpError = undefined
   state.isSubmitted = false
-  showErrorMsg(false)
-  errorMsg("")
+  state.showErrorMsg(false)
+  state.errorMsg("")
 }
 
 export const Login = () => {
   return {
+    onremove: () => resetState(),
     view: ({ attrs: { mdl } }) =>
       m(".frow centered pt-30", [
         state.showErrorMsg() && m("code.warning", state.errorMsg()),

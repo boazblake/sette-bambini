@@ -27,8 +27,8 @@ const resetState = () => {
   state.errors = {}
   state.httpError = undefined
   state.isSubmitted = false
-  showErrorMsg(false)
-  errorMsg("")
+  state.showErrorMsg(false)
+  state.errorMsg("")
 }
 
 export const validateForm = (mdl) => (data) => {
@@ -41,6 +41,9 @@ export const validateForm = (mdl) => (data) => {
 
   const onSuccess = (data) => {
     state.errors = {}
+    mdl.user = data
+    mdl.state.isAuth(true)
+    m.route.set(`/account/${mdl.user.name}`)
     console.log("reg s", data)
   }
 
@@ -66,12 +69,12 @@ const RegisterUser = () => {
         isSubmitted && { class: errors.name ? "has-error" : "has-success" },
         [
           m("label.bold.row-start", { for: "reg-name" }, [
-            "Name",
+            "Full Name",
             m("span.span required", "*"),
             m("input.form-input", {
               id: "reg-name",
               type: "text",
-              placeholder: "Name",
+              placeholder: "Full Name",
               onkeyup: (e) => (data.name = e.target.value),
               value: data.name,
             }),
@@ -164,6 +167,7 @@ const RegisterUser = () => {
 
 export const Register = () => {
   return {
+    onremove: () => resetState(),
     view: ({ attrs: { mdl } }) => [
       m(".frow centered pt-30", [
         state.showErrorMsg() && m("code.warning", state.errorMsg()),
