@@ -40,7 +40,7 @@
   ],
   "start_url": "./index.html",
   "background_color": "#FFFF",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/",
   "theme_color": "#3367D6"
 }
