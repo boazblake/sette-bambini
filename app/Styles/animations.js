@@ -1,14 +1,14 @@
-export const SlideInRight = ({ dom }) => {
+export const SlideInLeft = ({ dom }) => {
   dom.style.opacity = 0
-  dom.classList.toggle("slideRight")
+  dom.classList.toggle("slideInLeft")
   dom.style.opacity = 1
 }
 
-export const SlideOutLeft = ({ dom }) => {
+export const SlideOutRight = ({ dom }) => {
   return new Promise(() => {
-    dom.classList.remove("slideRight")
+    dom.classList.remove("slideInLeft")
     return setTimeout(() => {
-      dom.classList.add("reverseAnimation", "slideRight")
+      dom.classList.add("reverseAnimation", "slideInLeft")
     }, 200)
   })
 }
@@ -19,7 +19,7 @@ export const SlideChildrenInRight = ({ dom }) => {
   return children.map((child, idx) => {
     child.style.opacity = 0
     setTimeout(() => {
-      child.classList.toggle("slideRight")
+      child.classList.toggle("slideInLeft")
       child.style.opacity = 1
     }, (idx + 1) * 10)
   })

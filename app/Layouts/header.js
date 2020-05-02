@@ -5,7 +5,7 @@ const Header = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        "header.header",
+        "nav.header",
         {
           id: "header",
         },

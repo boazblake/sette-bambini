@@ -17,11 +17,16 @@ exports.files = {
 }
 
 exports.plugins = {
+  postcss: {
+    processors: [require("autoprefixer")(["last 8 versions"])],
+  },
   sass: {
     precision: 8,
     mode: "native",
     sourceMapEmbed: true,
-    includePaths: ["node_modules/spectre.css/src/**/*.scss"],
+    includePaths: [
+      // "node_modules/frow.scss"
+    ],
   },
   imagemin: {
     plugins: {

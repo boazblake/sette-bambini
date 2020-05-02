@@ -25,12 +25,23 @@ const resizeAllGridItems = (dom) => {
 }
 
 const Masonry = () => {
+  let _dom = null
   return {
-    oncreate: ({ dom }) => resizeAllGridItems(dom),
+    oncreate: ({ dom }) => {
+      _dom = dom
+      resizeAllGridItems(dom)
+    },
     view: ({ attrs: { data } }) =>
       m(
         ".grid",
-        data.map((brick) => m(Brick, { classList: "item", data: brick }))
+        data.map((brick) =>
+          m(Brick, {
+            classList: "item",
+            data: brick,
+            parent: _dom,
+            redraw: resizeGridItem,
+          })
+        )
       ),
   }
 }

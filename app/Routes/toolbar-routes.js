@@ -2,6 +2,8 @@ import m from "mithril"
 import Layout from "../Layouts/index.js"
 import Default from "../Pages/default.js"
 import Home from "../Pages/home.js"
+import Login from "../Pages/Auth/login-user.js"
+import Register from "../Pages/Auth/register-user.js"
 
 const ToolbarRoutes = [
   {
@@ -38,13 +40,27 @@ const ToolbarRoutes = [
     // icon: Icons.search,
     route: "/login",
     isNav: false,
-    group: ["toolbar"],
+    group: [],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor && scrollToAnchor(mdl.state.anchor)
     },
-    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(Login, { mdl })),
+  },
+  {
+    id: "register",
+    name: "Register Account",
+    // icon: Icons.search,
+    route: "/register",
+    isNav: false,
+    group: [],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor && scrollToAnchor(mdl.state.anchor)
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Register, { mdl })),
   },
 ]
 

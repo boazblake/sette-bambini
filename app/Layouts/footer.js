@@ -6,15 +6,18 @@ const Footer = () => {
     view: ({ attrs: { mdl } }) => {
       let routes = mdl.Routes.filter((r) => r.group.includes("other"))
       return m(
-        "nav.navbarBkg.footer",
+        "nav",
         { id: "footer" },
-        routes.map((r) =>
-          m(NavLink, {
-            mdl,
-            href: r.route,
-            link: r.name,
-            classList: isActiveRoute(r.route),
-          })
+        m(
+          ".frow row-around",
+          routes.map((r) =>
+            m(NavLink, {
+              mdl,
+              href: r.route,
+              link: r.name,
+              classList: isActiveRoute(r.route),
+            })
+          )
         )
       )
     },

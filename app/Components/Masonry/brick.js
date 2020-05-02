@@ -1,6 +1,7 @@
 const Brick = () => {
+  let _dom = null
   return {
-    view: ({ attrs: { classList, data } }) =>
+    view: ({ attrs: { classList, data, parent, redraw } }) =>
       m(
         ".brick",
         {
@@ -10,9 +11,15 @@ const Brick = () => {
           m("h3.title", data.title),
           m(".description", [
             m("img", {
-              onload: (x) => m.redraw(),
+              onload: (x) => {
+                console.log("brick image onload", x, _dom)
+                // m.redraw()
+              },
               oncreate: ({ dom }) => {
-                dom.complete && m.redraw()
+                _dom = dom
+                console.log("brick image oncreate", dom)
+                console.log("brick image oncreate and complete", parent, dom)
+                redraw(parent)(dom)
               },
               src: `https://via.placeholder.com/${data.imgSrc}`,
             }),

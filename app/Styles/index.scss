@@ -1,3 +1,4 @@
+@import "./colors.scss";
 @import "./animations.css";
 @import "./loader.scss";
 
@@ -19,25 +20,7 @@
   font-style: normal;
 }
 
-$primary-color: #5755d9;
-$secondary-color: #f1f1fc;
-$success: #32b643;
-$warning: #ffb700;
-$error: #e85600;
-$disabled: #f7f8f9;
-$dark-grey: #303742;
-$grey: #66758c;
-$light-grey: #bcc3ce;
-$white: #fff;
-$text: #1caffc;
-
-.bg-light-grey {
-  background-color: $light-grey;
-}
-
-.bg-dark-grey {
-  background-color: $dark-grey;
-}
+@import "./frow/frow.sass";
 
 %icon {
   width: 36px;
@@ -48,7 +31,8 @@ $text: #1caffc;
 }
 
 * {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+  color: $color5;
   font-size: 16px;
 }
 
@@ -61,36 +45,15 @@ $text: #1caffc;
 body,
 html {
   scroll-behavior: smooth;
+  color: $color5;
 }
 
 body {
-  height: 100vh;
-}
-
-a {
-  cursor: pointer;
-}
-
-a:focus,
-a:hover,
-a.active {
-  color: !important $light-grey;
-  text-decoration: none;
-}
-
-a:visited {
-  color: $light-grey;
+  max-height: 100vh;
 }
 
 .bold {
   font-weight: 700;
-}
-
-.btn {
-  &:hover {
-    font-weight: bold;
-    background-color: box-shadow(inset 0 1px 0 lighten($primary-color, 20%));
-  }
 }
 
 #content {
@@ -102,16 +65,24 @@ a:visited {
 
 #footer {
   grid-area: footer;
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-between;
   min-height: 200px;
   color: $white;
   align-items: center;
 
-  > a {
+  > * a {
     margin: 4px;
   }
+}
+
+.auth-form {
+  width: 500px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 200px;
 }
 
 h1 {
@@ -126,8 +97,9 @@ h1 {
 #layout {
   height: 100vh;
   display: grid;
+  padding: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 1fr 100px;
+  grid-template-rows: 100px 1fr 100px;
   grid-template-areas: "header" "body" "footer";
 }
 
@@ -135,26 +107,37 @@ h1 {
   height: 80vh;
   width: 80vw;
 }
-.grid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-auto-rows: 200px;
+
+.logo {
+  width: 50px;
+  height: 50px;
 }
 
-.navbarBkg {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: $dark-grey;
-  min-height: 40px;
-  > a {
-    color: $light-grey;
-    text-decoration: none;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background: transparent;
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $gradient-radial-reverse;
   }
 
-  &:a:visited {
-    color: $light-grey;
+  .modal-container {
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    background-color: white;
+    width: 50%;
+    height: 50%;
   }
 }
 
@@ -163,49 +146,76 @@ h1 {
 }
 
 .navMenuOverlay {
-  z-index: 1;
+  z-index: 100;
   padding: 30px;
   line-height: 3.2rem;
   width: 100vw;
   min-width: 100vw;
-  background: transparent;
+  min-height: 100vh;
+  // background: $gradient-top-left;
 
   > ul.nav {
     width: 30vw;
+    list-style: none;
 
     > li {
-      list-style: none;
       > a {
         text-decoration: none;
       }
     }
   }
 }
+
+.navbar {
+  background-color: $color3;
+  height: 40px;
+  padding-top: 0.5rem;
+}
+
 .navMenuShow {
   transition: ease-in-out;
-  position: absolute;
+  animation-duration: 0.5s;
+  position: fixed;
   top: 2px;
   left: 0;
   width: 80vw;
   height: 100vh;
   min-width: 80vw;
   min-height: 100vh;
-  background: $dark-grey;
+  background-color: $color3;
 }
 
-.products {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-evenly;
-
-  .product {
-    margin: 2px;
+a.button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid $color5;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: $color5;
+  text-align: center;
+  transition: all 0.2s;
+  &:hover {
+    color: $color1;
+    background-color: $color5;
   }
 }
 
-.required {
-  color: $warning;
-  padding: 4px;
+@media all and (max-width: 30em) {
+  a.button {
+    & {
+      display: block;
+      margin: 0.4em auto;
+    }
+  }
+}
+
+.products {
+  .product {
+    margin: 2px;
+  }
 }
 
 progress {
@@ -216,8 +226,10 @@ progress {
   display: contents;
 }
 
+.required {
+  // color: $warning;
+  padding: 4px;
+}
+
 .toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
