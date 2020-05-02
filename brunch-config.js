@@ -9,6 +9,7 @@ exports.files = {
   stylesheets: {
     joinTo: {
       "app.css": [
+        (path) => path.includes(".sass"),
         (path) => path.includes(".scss"),
         (path) => path.includes(".css"),
       ],

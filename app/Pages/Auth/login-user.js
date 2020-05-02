@@ -56,7 +56,7 @@ export const Login = () => {
       m(".frow centered", [
         m("h1.title", mdl.state.route.name),
         m(
-          "form.auth-form frow centered",
+          "form.frow centered",
           {
             role: "form",
             id: "Login-form",

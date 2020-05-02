@@ -172,7 +172,7 @@ export const Register = () => {
       m(".frow centered", [
         m("h1.title", mdl.state.route.name),
         m(
-          "form.auth-form",
+          "form.frow centered",
           {
             role: "form",
             id: "Register-form",
