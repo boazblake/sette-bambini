@@ -23,7 +23,7 @@ const OtherRoutes = [
     // icon: Icons.home,
     route: "/about-us",
     isNav: true,
-    group: ["other", "menu"],
+    group: ["other"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -37,7 +37,7 @@ const OtherRoutes = [
     // icon: Icons.search,
     route: "/contact-us",
     isNav: false,
-    group: ["other", "menu"],
+    group: ["other"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -65,7 +65,7 @@ const OtherRoutes = [
     // icon: Icons.search,
     route: "/terms-of-service",
     isNav: false,
-    group: ["other", "menu"],
+    group: ["other"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -79,7 +79,7 @@ const OtherRoutes = [
     // icon: Icons.search,
     route: "/privacy-policy",
     isNav: false,
-    group: ["other", "menu"],
+    group: ["other"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
