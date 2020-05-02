@@ -52,6 +52,32 @@ body {
   max-height: 100vh;
 }
 
+a.button {
+  line-height: initial;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid $color5;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: $color5;
+  text-align: center;
+  transition: all 0.2s;
+  &:hover {
+    color: $color1;
+    background-color: $color5;
+  }
+}
+
+.auth-btn {
+  width: 100%;
+}
+.auth-link {
+  color: $color4;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -185,25 +211,6 @@ h1 {
   background-color: $color3;
 }
 
-a.button {
-  line-height: initial;
-  display: inline-block;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid $color5;
-  margin: 0 0.3em 0.3em 0;
-  border-radius: 0.12em;
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  color: $color5;
-  text-align: center;
-  transition: all 0.2s;
-  &:hover {
-    color: $color1;
-    background-color: $color5;
-  }
-}
-
 @media all and (max-width: 30em) {
   a.button {
     & {
@@ -228,7 +235,12 @@ progress {
 }
 
 .required {
-  // color: $warning;
+  color: #e43e02;
+  padding: 4px;
+}
+
+.warning {
+  color: rgb(230, 150, 2);
   padding: 4px;
 }
 

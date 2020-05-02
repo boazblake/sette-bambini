@@ -1,5 +1,5 @@
 import { validateUserRegistrationTask } from "./Validations"
-
+import NavLink from "Components/nav-link"
 import { jsonCopy } from "Utils"
 
 const userModel = {
@@ -18,6 +18,8 @@ const state = {
   errors: {},
   httpError: undefined,
   data: jsonCopy(dataModel),
+  showErrorMsg: Stream(false),
+  errorMsg: Stream(""),
 }
 
 const resetState = () => {
@@ -25,21 +27,15 @@ const resetState = () => {
   state.errors = {}
   state.httpError = undefined
   state.isSubmitted = false
-}
-
-const onError = (error) => {
-  console.log("error with http calll", error)
-  state.httpError = error.message
-  state.isSubmitted = false
-}
-
-const onSuccess = (data) => {
-  console.log("succes with registering", data, state)
+  showErrorMsg(false)
+  errorMsg("")
 }
 
 export const validateForm = (mdl) => (data) => {
-  const onValidationError = (errs) => {
+  const onError = (errs) => {
     state.errors = errs
+    state.errorMsg(errs.message)
+    state.showErrorMsg(true)
     console.log("failed - state", state)
   }
 
@@ -51,7 +47,7 @@ export const validateForm = (mdl) => (data) => {
   state.isSubmitted = true
   validateUserRegistrationTask(data.userModel)
     .chain(registerUser(mdl))
-    .fork(onValidationError, onSuccess)
+    .fork(onError, onSuccess)
 }
 
 const registerUser = (mdl) => ({ name, email, password, isAdmin }) =>
@@ -66,100 +62,100 @@ const RegisterUser = () => {
   return {
     view: ({ attrs: { data, errors, isSubmitted } }) => [
       m(
-        ".form-group",
+        ".form-group.py-10",
         isSubmitted && { class: errors.name ? "has-error" : "has-success" },
         [
-          m("label.bold", { for: "reg-name" }, [
+          m("label.bold.row-start", { for: "reg-name" }, [
             "Name",
             m("span.span required", "*"),
+            m("input.form-input", {
+              id: "reg-name",
+              type: "text",
+              placeholder: "Name",
+              onkeyup: (e) => (data.name = e.target.value),
+              value: data.name,
+            }),
+            errors.name && m("p.form-input-hint", errors.name),
           ]),
-          m("input.form-input", {
-            id: "reg-name",
-            type: "text",
-            placeholder: "Name",
-            onkeyup: (e) => (data.name = e.target.value),
-            value: data.name,
-          }),
-          errors.name && m("p.form-input-hint", errors.name),
         ]
       ),
       m(
-        ".form-group",
+        ".form-group.py-10",
         isSubmitted && { class: errors.email ? "has-error" : "has-success" },
         [
-          m("label.bold", { for: "reg-email" }, [
+          m("label.bold.row-start", { for: "reg-email" }, [
             "Email",
             m("span.span required", "*"),
+            m("input.form-input", {
+              id: "reg-email",
+              type: "email",
+              placeholder: "Email",
+              onkeyup: (e) => (data.email = e.target.value),
+              value: data.email,
+            }),
+            errors.email && m("p.form-input-hint", errors.email),
           ]),
-          m("input.form-input", {
-            id: "reg-email",
-            type: "email",
-            placeholder: "Email",
-            onkeyup: (e) => (data.email = e.target.value),
-            value: data.email,
-          }),
-          errors.email && m("p.form-input-hint", errors.email),
         ]
       ),
       m(
-        ".form-group",
+        ".form-group.py-10",
         isSubmitted && {
           class: errors.confirmEmail ? "has-error" : "has-success",
         },
         [
-          m("label.bold", { for: "confirmEmail" }, [
+          m("label.bold.row-start", { for: "confirmEmail" }, [
             "Confirm Email",
             m("span.span required", "*"),
+            m("input.form-input", {
+              id: "confirmEmail",
+              type: "email",
+              placeholder: "Email",
+              onkeyup: (e) => (data.confirmEmail = e.target.value),
+              value: data.confirmEmail,
+            }),
+            errors.confirmEmail && m("p.form-input-hint", errors.confirmEmail),
           ]),
-          m("input.form-input", {
-            id: "confirmEmail",
-            type: "email",
-            placeholder: "Email",
-            onkeyup: (e) => (data.confirmEmail = e.target.value),
-            value: data.confirmEmail,
-          }),
-          errors.confirmEmail && m("p.form-input-hint", errors.confirmEmail),
         ]
       ),
       m(
-        ".form-group",
+        ".form-group.py-10",
         isSubmitted && {
           class: errors.password ? "has-error" : "has-success",
         },
         [
-          m("label.bold", { for: "reg-pass" }, [
+          m("label.bold.row-start", { for: "reg-pass" }, [
             "Password",
             m("span.span required", "*"),
+            m("input.form-input", {
+              id: "reg-pass",
+              type: "password",
+              placeholder: "must contain and not contain",
+              onkeyup: (e) => (data.password = e.target.value),
+              value: data.password,
+            }),
+            errors.password && m("p.form-input-hint", errors.password),
           ]),
-          m("input.form-input", {
-            id: "reg-pass",
-            type: "password",
-            placeholder: "must contain and not contain",
-            onkeyup: (e) => (data.password = e.target.value),
-            value: data.password,
-          }),
-          errors.password && m("p.form-input-hint", errors.password),
         ]
       ),
       m(
-        ".form-group",
+        ".form-group.py-10",
         isSubmitted && {
           class: errors.confirmPassword ? "has-error" : "has-success",
         },
         [
-          m("label.bold", { for: "pass-confirm" }, [
+          m("label.bold.row-start", { for: "pass-confirm" }, [
             "Confirm Password",
             m("span.span required", "*"),
+            m("input.form-input", {
+              id: "pass-confirm",
+              type: "password",
+              placeholder: "must contain and not contain",
+              onkeyup: (e) => (data.confirmPassword = e.target.value),
+              value: data.confirmPassword,
+            }),
+            errors.confirmPassword &&
+              m("p.form-input-hint", errors.confirmPassword),
           ]),
-          m("input.form-input", {
-            id: "pass-confirm",
-            type: "password",
-            placeholder: "must contain and not contain",
-            onkeyup: (e) => (data.confirmPassword = e.target.value),
-            value: data.confirmPassword,
-          }),
-          errors.confirmPassword &&
-            m("p.form-input-hint", errors.confirmPassword),
         ]
       ),
     ],
@@ -169,7 +165,8 @@ const RegisterUser = () => {
 export const Register = () => {
   return {
     view: ({ attrs: { mdl } }) => [
-      m(".frow centered", [
+      m(".frow centered pt-30", [
+        state.showErrorMsg() && m("code.warning", state.errorMsg()),
         m(
           "form.frow-container column-center",
           {
@@ -182,18 +179,26 @@ export const Register = () => {
               data: state.data.userModel,
               errors: state.errors,
               isSubmitted: state.isSubmitted,
-              httpError: state.httpError,
             }),
             m(
-              "input",
+              "a.button.auth-btn",
               {
-                type: "submit",
                 form: `register-form`,
                 onclick: () => validateForm(mdl)(state.data),
                 class: mdl.state.isLoading() && "loading",
               },
               "Register"
             ),
+            m(".auth-link", [
+              "Need to ",
+              m(NavLink, {
+                mdl,
+                href: "/login",
+                link: "Login",
+                classList: "bold",
+              }),
+              " ?",
+            ]),
           ]
         ),
       ]),

@@ -1,5 +1,6 @@
 import NavBar from "Components/navbar.js"
 import ToolBar from "Components/toolbar.js"
+import ProgressBar from "Components/ProgressBar.js"
 
 const Header = () => {
   return {
