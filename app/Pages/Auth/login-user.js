@@ -54,9 +54,8 @@ export const Login = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(".frow centered", [
-        m("h1.title", mdl.state.route.name),
         m(
-          "form.frow centered",
+          "form.frow-container frow-center",
           {
             role: "form",
             id: "Login-form",

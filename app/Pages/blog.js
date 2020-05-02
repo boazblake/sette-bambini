@@ -72,9 +72,7 @@ const Blog = () => {
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".container", { id: "home-page" }, [
-        m("h1.title", mdl.state.route.name),
-
+      m(".frow-container frow-center", { id: "blog-page" }, [
         m(Masonry, { data: state.data }),
       ]),
   }

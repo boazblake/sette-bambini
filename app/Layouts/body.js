@@ -6,11 +6,11 @@ const Body = () => {
       m(
         ".body",
         { id: "body" },
-        m(".frow-container", [
+        m(".frow column-center", [
           mdl.settings.profile !== "desktop" &&
             mdl.state.showNavMenu() &&
             m(NavMenu, { mdl }),
-          children,
+          [m("h1.title", mdl.state.route.name), children],
         ])
       ),
   }

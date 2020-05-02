@@ -66,7 +66,7 @@ const RegisterUser = () => {
   return {
     view: ({ attrs: { data, errors, isSubmitted } }) => [
       m(
-        ".form-group ",
+        ".form-group",
         isSubmitted && { class: errors.name ? "has-error" : "has-success" },
         [
           m("label.bold", { for: "reg-name" }, [
@@ -170,9 +170,8 @@ export const Register = () => {
   return {
     view: ({ attrs: { mdl } }) => [
       m(".frow centered", [
-        m("h1.title", mdl.state.route.name),
         m(
-          "form.frow centered",
+          "form.frow-container column-center",
           {
             role: "form",
             id: "Register-form",

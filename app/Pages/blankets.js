@@ -36,10 +36,7 @@ const Blankets = () => {
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".container", [
-        m("h1.title", mdl.state.route.name),
-        m(Masonry, { data: state.data }),
-      ]),
+      m(".frow-container frow-center", [m(Masonry, { data: state.data })]),
   }
 }
 
