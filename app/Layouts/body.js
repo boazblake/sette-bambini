@@ -10,7 +10,7 @@ const Body = () => {
           mdl.settings.profile !== "desktop" &&
             mdl.state.showNavMenu() &&
             m(NavMenu, { mdl }),
-          [m("h1.title.mb-20", mdl.state.route.name), children],
+          [m("h1.title.mb-20.text-center", mdl.state.route.name), children],
         ])
       ),
   }

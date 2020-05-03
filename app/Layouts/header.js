@@ -12,7 +12,6 @@ const Header = () => {
         },
         [
           mdl.state.isLoading() && m(ProgressBar, { mdl }),
-
           m(ToolBar, { mdl }),
           m(NavBar, { mdl }),
         ]

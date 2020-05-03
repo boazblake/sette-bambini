@@ -10,10 +10,11 @@ const ProgressBar = () => {
       },
     }) =>
       m(
-        ".progressBar",
-        m("progress.progress", {
-          max: max ? max() : null,
-          value: value ? value() : null,
+        ".progress-bar",
+        m("progress.progress-bar", {
+          id: "progressbar",
+          value: value ? value() : 0,
+          max: max ? max() : 0,
         })
       ),
   }
