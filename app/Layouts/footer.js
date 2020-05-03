@@ -4,7 +4,7 @@ const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 const Footer = () => {
   return {
     view: ({ attrs: { mdl } }) => {
-      let routes = mdl.Routes.filter((r) => r.group.includes("other"))
+      let routes = mdl.Routes.filter((r) => r.group.includes("footer"))
       return m(
         "footer.frow content-end items-end",
         { id: "footer" },

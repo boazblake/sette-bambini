@@ -4,11 +4,12 @@ import Default from "../Pages/default.js"
 import Home from "../Pages/home.js"
 import Login from "../Pages/Auth/login-user.js"
 import Register from "../Pages/Auth/register-user.js"
+import Logo from "Components/Logo"
 
 const ToolbarRoutes = [
   {
     id: "sette-bambini",
-    name: "Sette Bambini",
+    name: m(Logo),
     // icon: Icons.home,
     route: "/",
     isNav: true,
@@ -22,7 +23,7 @@ const ToolbarRoutes = [
   },
   {
     id: "cart",
-    name: "cart",
+    name: "Cart",
     // icon: Icons.search,
     route: "/cart",
     isNav: false,

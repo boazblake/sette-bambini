@@ -1,5 +1,9 @@
 import NavLink from "./nav-link.js"
-import { ShoppingBagLine, BarsLine } from "@mithril-icons/clarity/cjs/index"
+import {
+  AlertSolid,
+  ShoppingBagLine,
+  BarsLine,
+} from "@mithril-icons/clarity/cjs/index"
 import Logo from "./Logo"
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
@@ -47,11 +51,12 @@ const ToolBar = () => {
             mdl,
             href: "/",
             classList: "logo",
-            link: m("icon", { width: "12px" }, Logo),
+            link: m(Logo, { id: "toolbar-logo", class: "frow row-center" }),
           }),
           m(NavLink, {
             mdl,
             href: "/cart",
+            classList: "shadow",
             link: m(ShoppingBagLine),
           }),
         ])
