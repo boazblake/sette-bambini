@@ -8,7 +8,7 @@ const Brick = () => {
           class: classList,
         },
         m(".content", [
-          m("h3.title", data.title),
+          data.title && m("h3.title", data.title),
           m(".description", [
             m("img", {
               onload: (x) => {
@@ -19,7 +19,9 @@ const Brick = () => {
                 _dom = dom
                 console.log("brick image oncreate", dom)
                 console.log("brick image oncreate and complete", parent, dom)
-                redraw(parent)(dom)
+                if (parent) {
+                  redraw(parent)(dom)
+                }
               },
               src: `https://via.placeholder.com/${data.imgSrc}`,
             }),

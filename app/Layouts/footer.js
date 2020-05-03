@@ -6,7 +6,7 @@ const Footer = () => {
     view: ({ attrs: { mdl } }) => {
       let routes = mdl.Routes.filter((r) => r.group.includes("other"))
       return m(
-        "nav.frow content-end items-end",
+        "footer.frow content-end items-end",
         { id: "footer" },
         m(
           ".frow row-container",

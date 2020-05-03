@@ -80,7 +80,7 @@ export const Login = () => {
                 class: state.errors.email ? "has-error" : "has-success",
               },
               [
-                m("label.bold.row-start", { for: "reg-email" }, [
+                m("label.label.row-start", { for: "reg-email" }, [
                   "Email",
                   m("input.form-input", {
                     id: "reg-email",
@@ -102,7 +102,7 @@ export const Login = () => {
                 class: state.errors.password ? "has-error" : "has-success",
               },
               [
-                m("label.bold.row-start", { for: "reg-pass" }, [
+                m("label.label.row-start", { for: "reg-pass" }, [
                   "Password",
                   m("input.form-input", {
                     id: "reg-pass",

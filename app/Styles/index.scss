@@ -105,6 +105,11 @@ a.button {
   width: 500px;
 }
 
+.label {
+  font-weight: bold;
+  color: $color5;
+}
+
 .grid {
   display: grid;
   grid-gap: 10px;
@@ -162,9 +167,18 @@ h1 {
     position: absolute;
     top: 15%;
     left: 25%;
-    background-color: white;
+    background-color: $white;
     width: 50%;
     height: 50%;
+  }
+}
+
+.navMenuButton {
+  border: none;
+  background-color: $white;
+  &::hover {
+    border: none;
+    background-color: $white;
   }
 }
 
@@ -182,7 +196,7 @@ h1 {
   // background: $gradient-top-left;
 
   > ul.nav {
-    width: 30vw;
+    width: 70vw;
     list-style: none;
 
     > li {

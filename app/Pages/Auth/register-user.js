@@ -68,7 +68,7 @@ const RegisterUser = () => {
         ".form-group.py-10",
         isSubmitted && { class: errors.name ? "has-error" : "has-success" },
         [
-          m("label.bold.row-start", { for: "reg-name" }, [
+          m("label.label.row-start", { for: "reg-name" }, [
             "Full Name",
             m("span.span required", "*"),
             m("input.form-input", {
@@ -86,7 +86,7 @@ const RegisterUser = () => {
         ".form-group.py-10",
         isSubmitted && { class: errors.email ? "has-error" : "has-success" },
         [
-          m("label.bold.row-start", { for: "reg-email" }, [
+          m("label.label.row-start", { for: "reg-email" }, [
             "Email",
             m("span.span required", "*"),
             m("input.form-input", {
@@ -106,7 +106,7 @@ const RegisterUser = () => {
           class: errors.confirmEmail ? "has-error" : "has-success",
         },
         [
-          m("label.bold.row-start", { for: "confirmEmail" }, [
+          m("label.label.row-start", { for: "confirmEmail" }, [
             "Confirm Email",
             m("span.span required", "*"),
             m("input.form-input", {
@@ -126,7 +126,7 @@ const RegisterUser = () => {
           class: errors.password ? "has-error" : "has-success",
         },
         [
-          m("label.bold.row-start", { for: "reg-pass" }, [
+          m("label.label.row-start", { for: "reg-pass" }, [
             "Password",
             m("span.span required", "*"),
             m("input.form-input", {
@@ -146,7 +146,7 @@ const RegisterUser = () => {
           class: errors.confirmPassword ? "has-error" : "has-success",
         },
         [
-          m("label.bold.row-start", { for: "pass-confirm" }, [
+          m("label.label.row-start", { for: "pass-confirm" }, [
             "Confirm Password",
             m("span.span required", "*"),
             m("input.form-input", {

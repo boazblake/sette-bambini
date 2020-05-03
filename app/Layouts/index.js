@@ -7,7 +7,7 @@ const Layout = () => {
     view: ({ children, attrs: { mdl } }) =>
       m(
         ".layout",
-        { id: "layout" },
+        { id: "layout", role: "main" },
         m(Header, { mdl }),
         m(Body, { mdl, children }),
         m(Footer, { mdl })
