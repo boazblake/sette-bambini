@@ -7,7 +7,7 @@ const Body = () => {
         ".body",
         { id: "body" },
         m(".frow column-center items-stretch", [
-          mdl.settings.profile !== "desktop" &&
+          mdl.settings.screenSize !== "desktop" &&
             mdl.state.showNavMenu() &&
             m(NavMenu, { mdl }),
           [

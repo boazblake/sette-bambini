@@ -204,6 +204,13 @@ h1 {
   font-weight: 900;
 }
 
+.sub-navbar {
+  background-color: $color2;
+  height: 40px;
+  padding-top: 0.5rem;
+  font-weight: 900;
+}
+
 .navMenu {
   transition: ease-in-out;
   animation-duration: 0.5s;

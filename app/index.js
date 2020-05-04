@@ -38,14 +38,14 @@ const checkWidth = (winW) => {
   const w = window.innerWidth
   if (winW !== w) {
     winW = w
-    var lastProfile = Model.settings.profile
-    Model.settings.profile = getProfile(w)
-    if (lastProfile != Model.settings.profile) m.redraw()
+    var lastProfile = Model.settings.screenSize
+    Model.settings.screenSize = getProfile(w)
+    if (lastProfile != Model.settings.screenSize) m.redraw()
   }
   return requestAnimationFrame(checkWidth)
 }
 
-Model.settings.profile = getProfile(winW)
+Model.settings.screenSize = getProfile(winW)
 
 checkWidth(winW)
 
