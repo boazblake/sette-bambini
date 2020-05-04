@@ -28,7 +28,7 @@ const ToolBar = () => {
                   link: "Your Account",
                   classList: `${isActiveRoute(
                     `/account/${mdl.user.name}`
-                  )} button`,
+                  )} button hidden-xs`,
                 })
               : m(".frow hidden-xs", [
                   m(NavLink, {

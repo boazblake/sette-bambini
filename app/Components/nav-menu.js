@@ -12,19 +12,22 @@ const NavItem = () => {
 
 const NavMenu = () => {
   let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
-
+  let _dom
   return {
     view: ({ attrs: { mdl } }) =>
       m(
         `.navMenu`,
         {
           oncreate: SlideInLeft,
-          onbeforeremove: SlideOutRight,
+          // onbeforeremove: SlideOutRight,
+          onremove: SlideOutRight,
         },
         m(
           ".navMenuOverlay",
           {
-            onclick: () => mdl.state.showNavMenu(false),
+            onclick: (e) => {
+              mdl.state.showNavMenu(false)
+            },
           },
           m(`ul.nav`, { id: "" }, [
             mdl.state.isAuth()
