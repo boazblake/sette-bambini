@@ -180,7 +180,7 @@ const Routes = [
   },
   {
     id: "partnerships",
-    name: "partnerships",
+    name: "Partnerships",
     // icon: Icons.search,
     route: "/partnerships",
     isNav: false,

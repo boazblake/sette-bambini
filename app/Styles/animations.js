@@ -4,12 +4,12 @@ export const SlideInLeft = ({ dom }) => {
   dom.style.opacity = 1
 }
 
-export const SlideOutRight = ({ dom }) => {
-  return new Promise(() => {
-    dom.classList.remove("slideInLeft")
-    return setTimeout(() => {
-      dom.classList.add("reverseAnimation", "slideInLeft")
-    }, 200)
+export const SlideOutRight = (v) => {
+  v.dom.classList.remove("slideInLeft")
+  console.log("anime end", v)
+  new Promise(function (resolve) {
+    v.dom.classList.add("slideOutLeft")
+    v.dom.addEventListener("animationend", resolve)
   })
 }
 

@@ -11,15 +11,12 @@ const NavItem = () => {
 }
 
 const NavMenu = () => {
-  const state = {
-    status: (mdl) => (mdl.state.showNavMenu() ? "navMenuShow" : "navMenuHide"),
-  }
   let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
 
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        `.${state.status(mdl)}`,
+        `.navMenu`,
         {
           oncreate: SlideInLeft,
           onbeforeremove: SlideOutRight,
@@ -44,14 +41,14 @@ const NavMenu = () => {
                     mdl,
                     href: "/login",
                     link: "Login",
-                    classList: `${isActiveRoute("/login")} button`,
+                    classList: `${isActiveRoute("/login")} button para`,
                   }),
 
                   m(NavItem, {
                     mdl,
                     href: "/register",
                     link: "Register",
-                    classList: `${isActiveRoute("/register")} button`,
+                    classList: `${isActiveRoute("/register")} button para`,
                   }),
                 ]),
             routes(mdl).map((r) =>

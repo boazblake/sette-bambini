@@ -1,6 +1,7 @@
 import Header from "./header.js"
 import Body from "./body.js"
 import Footer from "./footer.js"
+import LogoLoader from "Components/LogoLoader"
 
 const Layout = () => {
   return {
@@ -9,7 +10,7 @@ const Layout = () => {
         ".layout",
         { id: "layout", role: "main" },
         m(Header, { mdl }),
-        m(Body, { mdl, children }),
+        mdl.state.isLoading() ? m(LogoLoader) : m(Body, { mdl, children }),
         m(Footer, { mdl })
       ),
   }

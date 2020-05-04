@@ -110,6 +110,20 @@ a.button {
   color: $color5;
 }
 
+.logoLoader {
+  position: relative;
+
+  .heartbeat {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+  }
+}
+
 .grid {
   display: grid;
   grid-gap: 10px;
@@ -121,8 +135,9 @@ h1 {
   font-size: 2rem;
 }
 
-.text-4x > * {
-  font-size: 4rem;
+.heartbeat {
+  -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+  animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
 #header {
@@ -148,7 +163,8 @@ h1 {
   .logo {
     logo-text {
       font-family: "SilverThreadJF";
-      font-size: 0.5rem;
+      font-size: 10px;
+      text-transform: initial;
     }
   }
 }
@@ -181,6 +197,26 @@ h1 {
   }
 }
 
+.navbar {
+  background-color: $color3;
+  height: 40px;
+  padding-top: 0.5rem;
+  font-weight: 900;
+}
+
+.navMenu {
+  transition: ease-in-out;
+  animation-duration: 0.5s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  height: 100vh;
+  min-width: 80vw;
+  min-height: 100vh;
+  background-color: $color3;
+}
+
 .navMenuButton {
   border: none;
   background-color: $white;
@@ -190,10 +226,6 @@ h1 {
   }
 }
 
-.navMenuHide {
-  display: none;
-}
-
 .navMenuOverlay {
   z-index: 100;
   padding: 30px;
@@ -201,7 +233,6 @@ h1 {
   width: 100vw;
   min-width: 100vw;
   min-height: 100vh;
-  // background: $gradient-top-left;
 
   > ul.nav {
     width: 70vw;
@@ -213,26 +244,6 @@ h1 {
       }
     }
   }
-}
-
-.navbar {
-  background-color: $color3;
-  height: 40px;
-  padding-top: 0.5rem;
-  font-weight: 900;
-}
-
-.navMenuShow {
-  transition: ease-in-out;
-  animation-duration: 0.5s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 80vw;
-  height: 100vh;
-  min-width: 80vw;
-  min-height: 100vh;
-  background-color: $color3;
 }
 
 @media all and (max-width: 30em) {
@@ -316,6 +327,10 @@ h1 {
     -webkit-filter: drop-shadow(2px 2px 1px $color5);
     filter: drop-shadow(2px 2px 1px $color5);
   }
+}
+
+.text-4x > * {
+  font-size: 4rem;
 }
 
 .warning {
