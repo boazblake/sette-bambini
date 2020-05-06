@@ -1,5 +1,5 @@
 import NavLink from "./nav-link"
-import { SlideInLeft, SlideOutRight } from "../Styles/animations.js"
+import { SlideInLeft } from "../Styles/animations.js"
 
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
@@ -12,15 +12,12 @@ const NavItem = () => {
 
 const NavMenu = () => {
   let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
-  let _dom
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        `.navMenu`,
+        `.navMenu.animated`,
         {
           oncreate: SlideInLeft,
-          // onbeforeremove: SlideOutRight,
-          onremove: SlideOutRight,
         },
         m(
           ".navMenuOverlay",

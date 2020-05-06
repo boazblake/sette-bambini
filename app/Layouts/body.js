@@ -1,4 +1,5 @@
 import NavMenu from "Components/nav-menu.js"
+import { SlideOutRight } from "../Styles/animations.js"
 
 const Body = () => {
   return {
@@ -9,7 +10,7 @@ const Body = () => {
         m(".frow column-center items-stretch", [
           mdl.settings.screenSize !== "desktop" &&
             mdl.state.showNavMenu() &&
-            m(NavMenu, { mdl }),
+            m(NavMenu, { onbeforeremove: SlideOutRight, mdl }),
           [
             m(
               ".text-4x",

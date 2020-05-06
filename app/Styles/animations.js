@@ -5,18 +5,12 @@ export const SlideInLeft = ({ dom }) => {
 }
 
 export const SlideOutRight = ({ dom }) => {
-  // console.log("before", dom)
-  dom.style.opacity = 0
-  dom.classList.remove("slideInLeft")
-  dom.classList.add("animated")
-  dom.classList.add("slideOutLeft")
-  // dom.style.opacity = 1
+  dom.classList.replace("slideInLeft", "slideOutLeft")
   return new Promise(function (resolve) {
-    console.log("after", dom)
-    //   setTimeout(() => {
-    resolve()
-  }, 500)
-  // })
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
 }
 
 export const SlideChildrenInRight = ({ dom }) => {
