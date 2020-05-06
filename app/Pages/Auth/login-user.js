@@ -86,8 +86,8 @@ export const Login = () => {
                 type: "email",
                 placeholder: "Enter Your Email Here",
                 onkeyup: (e) => {
-                  // state.data.userModel.email = e.target.value
-                  state.isSubmitted && validateForm(mdl)(state.data)
+                  // state.isSubmitted && validateForm(mdl)(state.data)
+                  state.data.userModel.email = e.target.value
                 },
                 value: state.data.userModel.email,
               }),

@@ -1,11 +1,11 @@
-import NavMenu from "Components/nav-menu.js"
-import { SlideOutRight } from "../Styles/animations.js"
+import NavMenu from "./nav-menu.js"
+import { SlideOutRight } from "Styles/animations.js"
 
 const Body = () => {
   return {
     view: ({ attrs: { mdl, children } }) =>
       m(
-        ".body",
+        ".body.mt-20",
         { id: "body" },
         m(".frow column-center items-stretch", [
           mdl.settings.screenSize !== "desktop" &&

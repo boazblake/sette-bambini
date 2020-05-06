@@ -66,6 +66,7 @@ exports.paths = {
     "app/Utils",
     "app/FP",
     "app/Components",
+    "app/Styles",
     "app/Layouts",
     "app/Pages",
     "app",

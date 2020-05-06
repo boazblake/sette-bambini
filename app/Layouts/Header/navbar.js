@@ -1,13 +1,13 @@
-import NavLink from "./nav-link.js"
+import NavLink from "Components/nav-link.js"
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
-const SubNavBar = () => {
-  let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
+const NavBar = () => {
+  let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("navbar"))
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        ".sub-navbar",
-        m("nav.frow row-around hidden-xs", { id: "sub-navbar" }, [
+        ".navbar",
+        m("nav.frow row-around", { id: "navbar" }, [
           routes(mdl).map((r) =>
             m(NavLink, {
               mdl,
@@ -21,4 +21,4 @@ const SubNavBar = () => {
   }
 }
 
-export default SubNavBar
+export default NavBar

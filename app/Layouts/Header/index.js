@@ -1,7 +1,7 @@
-import NavBar from "Components/navbar.js"
-import SubNavBar from "Components/sub-nav.js"
-import ToolBar from "Components/toolbar.js"
-import ProgressBar from "Components/ProgressBar.js"
+import NavBar from "./navbar.js"
+import SubNavBar from "./sub-nav.js"
+import ToolBar from "./toolbar.js"
+import ProgressBar from "./ProgressBar.js"
 
 const Header = () => {
   return {

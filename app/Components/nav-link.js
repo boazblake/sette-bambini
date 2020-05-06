@@ -1,8 +1,14 @@
 const touchEnd = () => {
-  consolelog("enm")
+  state.touch(false)
+  // console.log("end")
 }
 const touchStart = () => {
-  console.log("atrt")
+  // console.log("start")
+  state.touch(true)
+}
+
+const state = {
+  touch: Stream(false),
 }
 
 export const NavLink = () => {
@@ -12,9 +18,11 @@ export const NavLink = () => {
         m.route.Link,
         {
           ontouchstart: touchStart,
+          onmousedown: touchStart,
           ontouchend: touchEnd,
+          on: touchEnd,
           href,
-          class: `${classList}`,
+          class: `${classList} ${state.touch() && "shadow"}`,
           ...rest,
         },
         link

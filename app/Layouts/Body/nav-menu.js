@@ -1,5 +1,5 @@
-import NavLink from "./nav-link"
-import { SlideInLeft } from "../Styles/animations.js"
+import NavLink from "Components/nav-link"
+import { SlideInLeft } from "Styles/animations.js"
 
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 

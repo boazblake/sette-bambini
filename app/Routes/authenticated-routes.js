@@ -1,6 +1,6 @@
-import Default from "../Pages/default.js"
-import Account from "../Pages/account.js"
-import Layout from "../Layouts/index.js"
+import Default from "Pages/default.js"
+import Account from "Pages/account.js"
+import Layout from "Layouts/index.js"
 import { scrollToAnchor } from "Utils"
 
 const AuthenticatedRoutes = [

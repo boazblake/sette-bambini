@@ -1,5 +1,5 @@
-import Header from "./header.js"
-import Body from "./body.js"
+import Header from "./Header/index.js"
+import Body from "./Body/index.js"
 import Footer from "./footer.js"
 import LogoLoader from "Components/LogoLoader"
 

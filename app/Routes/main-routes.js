@@ -1,12 +1,12 @@
-import Layout from "../Layouts/index.js"
-import BurpRags from "../Pages/burp-rags.js"
-import BabyTowels from "../Pages/blankets.js"
-import Default from "../Pages/default.js"
-import Blog from "../Pages/blog.js"
-import Home from "../Pages/home.js"
+import Layout from "Layouts/index.js"
+import BurpRags from "Pages/burp-rags.js"
+import BabyTowels from "Pages/blankets.js"
+import Default from "Pages/default.js"
+import Blog from "Pages/blog.js"
+import Home from "Pages/home.js"
 import Logo from "Components/Logo"
-import Login from "../Pages/Auth/login-user.js"
-import Register from "../Pages/Auth/register-user.js"
+import Login from "Pages/Auth/login-user.js"
+import Register from "Pages/Auth/register-user.js"
 
 const Routes = [
   {

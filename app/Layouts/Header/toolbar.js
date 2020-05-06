@@ -1,17 +1,13 @@
-import NavLink from "./nav-link.js"
-import {
-  AlertSolid,
-  ShoppingBagLine,
-  BarsLine,
-} from "@mithril-icons/clarity/cjs/index"
-import Logo from "./Logo"
+import NavLink from "Components/nav-link.js"
+import { ShoppingBagLine, BarsLine } from "@mithril-icons/clarity/cjs/index"
+import Logo from "Components/Logo"
 const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
 const ToolBar = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        ".toolbar",
+        ".toolbar.my-5",
         m(".frow row-between row-center", [
           m(".frow", [
             m(
