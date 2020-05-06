@@ -64,103 +64,67 @@ const registerUser = (mdl) => ({ name, email, password, isAdmin }) =>
 const RegisterUser = () => {
   return {
     view: ({ attrs: { data, errors, isSubmitted } }) => [
-      m(
-        ".form-group.py-10",
-        isSubmitted && { class: errors.name ? "has-error" : "has-success" },
-        [
-          m("label.label.row-start", { for: "reg-name" }, [
-            "Full Name",
-            m("span.span required", "*"),
-            m("input.form-input", {
-              id: "reg-name",
-              type: "text",
-              placeholder: "Full Name",
-              onkeyup: (e) => (data.name = e.target.value),
-              value: data.name,
-            }),
-            errors.name && m("p.form-input-hint", errors.name),
-          ]),
-        ]
-      ),
-      m(
-        ".form-group.py-10",
-        isSubmitted && { class: errors.email ? "has-error" : "has-success" },
-        [
-          m("label.label.row-start", { for: "reg-email" }, [
-            "Email",
-            m("span.span required", "*"),
-            m("input.form-input", {
-              id: "reg-email",
-              type: "email",
-              placeholder: "Email",
-              onkeyup: (e) => (data.email = e.target.value),
-              value: data.email,
-            }),
-            errors.email && m("p.form-input-hint", errors.email),
-          ]),
-        ]
-      ),
-      m(
-        ".form-group.py-10",
-        isSubmitted && {
-          class: errors.confirmEmail ? "has-error" : "has-success",
-        },
-        [
-          m("label.label.row-start", { for: "confirmEmail" }, [
-            "Confirm Email",
-            m("span.span required", "*"),
-            m("input.form-input", {
-              id: "confirmEmail",
-              type: "email",
-              placeholder: "Email",
-              onkeyup: (e) => (data.confirmEmail = e.target.value),
-              value: data.confirmEmail,
-            }),
-            errors.confirmEmail && m("p.form-input-hint", errors.confirmEmail),
-          ]),
-        ]
-      ),
-      m(
-        ".form-group.py-10",
-        isSubmitted && {
-          class: errors.password ? "has-error" : "has-success",
-        },
-        [
-          m("label.label.row-start", { for: "reg-pass" }, [
-            "Password",
-            m("span.span required", "*"),
-            m("input.form-input", {
-              id: "reg-pass",
-              type: "password",
-              placeholder: "must contain and not contain",
-              onkeyup: (e) => (data.password = e.target.value),
-              value: data.password,
-            }),
-            errors.password && m("p.form-input-hint", errors.password),
-          ]),
-        ]
-      ),
-      m(
-        ".form-group.py-10",
-        isSubmitted && {
-          class: errors.confirmPassword ? "has-error" : "has-success",
-        },
-        [
-          m("label.label.row-start", { for: "pass-confirm" }, [
-            "Confirm Password",
-            m("span.span required", "*"),
-            m("input.form-input", {
-              id: "pass-confirm",
-              type: "password",
-              placeholder: "must contain and not contain",
-              onkeyup: (e) => (data.confirmPassword = e.target.value),
-              value: data.confirmPassword,
-            }),
-            errors.confirmPassword &&
-              m("p.form-input-hint", errors.confirmPassword),
-          ]),
-        ]
-      ),
+      m("input.form-input", {
+        class: isSubmitted ? (errors.name ? "has-error" : "has-success") : "",
+        id: "reg-name",
+        type: "text",
+        placeholder: "Enter Full Name Here",
+        onkeyup: (e) => (data.name = e.target.value),
+        value: data.name,
+      }),
+      errors.name && m("p.form-input-hint", errors.name),
+
+      m("input.form-input", {
+        class: isSubmitted ? (errors.email ? "has-error" : "has-success") : "",
+        id: "reg-email",
+        type: "email",
+        placeholder: "Enter Email Here",
+        onkeyup: (e) => (data.email = e.target.value),
+        value: data.email,
+      }),
+      errors.email && m("p.form-input-hint", errors.email),
+
+      m("input.form-input", {
+        id: "confirmEmail",
+        class: isSubmitted
+          ? errors.confirmEmail
+            ? "has-error"
+            : "has-success"
+          : "",
+        type: "email",
+        placeholder: "Confirm Email Here",
+        onkeyup: (e) => (data.confirmEmail = e.target.value),
+        value: data.confirmEmail,
+      }),
+      errors.confirmEmail && m("p.form-input-hint", errors.confirmEmail),
+
+      m("input.form-input", {
+        class: isSubmitted
+          ? errors.password
+            ? "has-error"
+            : "has-success"
+          : "",
+        id: "reg-pass",
+        type: "password",
+        placeholder: "Enter Password Here",
+        onkeyup: (e) => (data.password = e.target.value),
+        value: data.password,
+      }),
+      errors.password && m("p.form-input-hint", errors.password),
+
+      m("input.form-input", {
+        class: isSubmitted
+          ? errors.confirmPassword
+            ? "has-error"
+            : "has-success"
+          : "",
+        id: "pass-confirm",
+        type: "password",
+        placeholder: "Confirm Password Here",
+        onkeyup: (e) => (data.confirmPassword = e.target.value),
+        value: data.confirmPassword,
+      }),
+      errors.confirmPassword && m("p.form-input-hint", errors.confirmPassword),
     ],
   }
 }

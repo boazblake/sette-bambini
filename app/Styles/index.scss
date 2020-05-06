@@ -55,20 +55,22 @@ body {
 
 a.button {
   line-height: initial;
+  background-color: $color5;
   display: inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid $color5;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  color: $color5;
+  color: $color1;
   text-align: center;
   transition: all 0.2s;
   &:hover {
-    color: $color1;
-    background-color: $color5;
+    color: $color5;
+    background-color: $color1;
+    border: 0.1em solid $color5;
+    font-weight: 500;
   }
 }
 
@@ -144,6 +146,21 @@ h1 {
 #header {
   grid-area: header;
   min-height: 140px;
+}
+
+input {
+  border: 2px solid $color3;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.has-error {
+  border: 2px solid #e43e02;
+}
+
+.has-success {
+  border: 2px solid #29a10a;
 }
 
 #layout {
