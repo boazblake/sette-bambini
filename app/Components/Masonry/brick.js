@@ -12,13 +12,13 @@ const Brick = () => {
           m(".description", [
             m("img", {
               onload: (x) => {
-                console.log("brick image onload", x, _dom)
+                // console.log("brick image onload", x, _dom)
                 // m.redraw()
               },
               oncreate: ({ dom }) => {
                 _dom = dom
-                console.log("brick image oncreate", dom)
-                console.log("brick image oncreate and complete", parent, dom)
+                // console.log("brick image oncreate", dom)
+                // console.log("brick image oncreate and complete", parent, dom)
                 if (parent) {
                   redraw(parent)(dom)
                 }

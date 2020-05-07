@@ -1,12 +1,15 @@
 import NavLink from "Components/nav-link"
 import { SlideInLeft } from "Styles/animations.js"
-
-const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
+import { isActiveRoute } from "Utils/index.js"
+let state = {
+  onHover: () => {},
+  selected: () => {},
+}
 
 const NavItem = () => {
   return {
     view: ({ attrs: { mdl, href, link, classList } }) =>
-      m(`li.nav-item`, m(NavLink, { mdl, href, link, classList })),
+      m(`li.nav-item`, m(NavLink, { mdl, state, href, link, classList })),
   }
 }
 
@@ -29,6 +32,7 @@ const NavMenu = () => {
           m(`ul.nav`, { id: "" }, [
             mdl.state.isAuth()
               ? m(NavLink, {
+                  state,
                   mdl,
                   href: `/account/${mdl.user.name}`,
                   link: "Your Account",

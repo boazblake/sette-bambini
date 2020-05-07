@@ -15,7 +15,12 @@ const Header = () => {
           mdl.state.isLoading() && m(ProgressBar, { mdl }),
           m(ToolBar, { mdl }),
           m(NavBar, { mdl }),
-          m(".hidden-xs", m(SubNavBar, { mdl })),
+          m(
+            ".",
+            m(SubNavBar, {
+              mdl,
+            })
+          ),
         ]
       ),
   }

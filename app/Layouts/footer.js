@@ -1,5 +1,5 @@
 import NavLink from "Components/nav-link.js"
-const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
+import { isActiveRoute } from "Utils/index.js"
 
 const Footer = () => {
   return {

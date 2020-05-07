@@ -30,13 +30,18 @@ const Blankets = () => {
   }
 
   return {
-    oninit: onPageInit(state),
+    // oninit: onPageInit(state),
     onremove: () => {
       state.errors = {}
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", [m(Masonry, { data: state.data })]),
+      m(".frow-container frow-center", [
+        // m(Masonry, { data: state.data })
+
+        m("", { id: "christening" }),
+        m("", { id: "wraps" }),
+      ]),
   }
 }
 

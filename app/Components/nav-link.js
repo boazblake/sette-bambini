@@ -1,28 +1,26 @@
-const touchEnd = () => {
-  state.touch(false)
-  // console.log("end")
-}
-const touchStart = () => {
-  // console.log("start")
-  state.touch(true)
-}
-
-const state = {
-  touch: Stream(false),
-}
+// const touchEnd = (state) => {
+//   state.onHover(true)
+//   // console.log("end")
+// }
+// const touchStart = (state) => {
+//   state.onHover(false)
+//   // console.log("start")
+// }
 
 export const NavLink = () => {
   return {
-    view: ({ attrs: { mdl, href, link, classList = "nav-link", ...rest } }) =>
+    view: ({ attrs: { mdl, href, link, classList, ...rest } }) =>
       m(
         m.route.Link,
         {
-          ontouchstart: touchStart,
-          onmousedown: touchStart,
-          ontouchend: touchEnd,
-          on: touchEnd,
+          // ontouchstart: (e) => touchStart(),
+          // onmousedown: (e) => touchStart(state),
+          // ontouchend: (e) => touchEnd(),
+          // onmouseup: (e) => touchEnd(state),
           href,
-          class: `${classList} ${state.touch() && "shadow"}`,
+          class: `nav-link ${classList} ${
+            mdl.state.navSelected() == link && "shadow"
+          }`,
           ...rest,
         },
         link

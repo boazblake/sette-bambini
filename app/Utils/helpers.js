@@ -17,7 +17,7 @@ import {
   trim,
   max,
   min,
-  map
+  map,
 } from "ramda"
 import Task from "data.task"
 
@@ -72,10 +72,10 @@ export const filterTask = (query) => (prop) => (direction) => (offset) => (
 
 export const debounce = (wait, now) => (fn) => {
   let timeout = undefined
-  return function() {
+  return function () {
     let context = this
     let args = arguments
-    let later = function() {
+    let later = function () {
       timeout = undefined
       if (!now) fn.apply(context, args)
     }
@@ -99,8 +99,10 @@ export const scrollToAnchor = (anchor) => {
   window.scroll({
     top: target + scrollTop - 10,
     left: 0,
-    behavior: "smooth"
+    behavior: "smooth",
   })
 }
 
 export const jsonCopy = (src) => JSON.parse(JSON.stringify(src))
+
+export const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")

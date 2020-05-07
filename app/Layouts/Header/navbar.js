@@ -1,5 +1,5 @@
 import NavLink from "Components/nav-link.js"
-const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
+import { isActiveRoute } from "Utils/index.js"
 
 const NavBar = () => {
   let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("navbar"))
@@ -8,14 +8,14 @@ const NavBar = () => {
       m(
         ".navbar",
         m("nav.frow row-around", { id: "navbar" }, [
-          routes(mdl).map((r) =>
-            m(NavLink, {
+          routes(mdl).map((r) => {
+            return m(NavLink, {
               mdl,
               href: r.route,
               link: r.name,
               classList: isActiveRoute(r.route),
             })
-          ),
+          }),
         ])
       ),
   }

@@ -18,6 +18,7 @@ const state = {
   },
   dragging: {},
   isAuth: Stream(false),
+  navSelected: Stream(""),
 }
 const user = {}
 const settings = {}
