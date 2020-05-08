@@ -48,8 +48,10 @@ const configure = (_) => {
   Object.defineProperty(Array.prototype, "any", value(_any))
 
   const _last = function () {
-    return this.length[this.length - 1]
+    return this[this.length - 1]
   }
+
+  Object.defineProperty(Array.prototype, "last", value(_last))
 
   const _in = function (comparer) {
     for (var i = 0; i < this.length; i++) {

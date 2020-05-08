@@ -592,8 +592,10 @@ var configure = function configure(_) {
   Object.defineProperty(Array.prototype, "any", (0, _util.value)(_any));
 
   var _last = function _last() {
-    return this.length[this.length - 1];
+    return this[this.length - 1];
   };
+
+  Object.defineProperty(Array.prototype, "last", (0, _util.value)(_last));
 
   var _in = function _in(comparer) {
     for (var i = 0; i < this.length; i++) {
@@ -1870,10 +1872,6 @@ var _ramda = require("ramda");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var currentRoute = function currentRoute() {
-  return m.route.get();
-};
-
 var SubNavBar = function SubNavBar() {
   return {
     view: function view(_ref) {
@@ -1881,7 +1879,7 @@ var SubNavBar = function SubNavBar() {
 
       var routes = function routes(mdl) {
         return mdl.Routes.filter(function (r) {
-          return r.route == currentRoute();
+          return r.route == mdl.state.route.route;
         })[0].children.map(function (r) {
           return mdl.Routes.filter((0, _ramda.propEq)("id", r))[0];
         });
@@ -2531,7 +2529,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var fetchBlanketsTask = function fetchBlanketsTask(mdl) {
-  return _data["default"].of(_toConsumableArray(Array(10).keys()).map(function (k) {
+  return _data["default"].of(_toConsumableArray(Array(3).keys()).map(function (k) {
     return {
       imgSrc: 250,
       title: "",
@@ -2557,6 +2555,7 @@ var onPageInit = function onPageInit(state) {
       };
     };
 
+    console.log(mdl.Data);
     fetchBlanketsTask(mdl).fork(onError(state), onSuccess(state));
   };
 };
@@ -2567,7 +2566,7 @@ var Blankets = function Blankets() {
     data: []
   };
   return {
-    // oninit: onPageInit(state),
+    oninit: onPageInit(state),
     onremove: function onremove() {
       state.errors = {};
       state.data = [];
@@ -2577,9 +2576,13 @@ var Blankets = function Blankets() {
       return m(".frow-container frow-center", [// m(Masonry, { data: state.data })
       m("", {
         id: "christening"
-      }), m("", {
+      }, [m("h2", "Christening Blankets"), m(".frow row-around", [m("img.product.pb-10", {
+        src: "https://via.placeholder.com/250"
+      })])]), m("", {
         id: "wraps"
-      })]);
+      }, [m("h2", "Wraps"), m(".frow row-around", [m("img.product.pb-10", {
+        src: "https://via.placeholder.com/250"
+      })])])]);
     }
   };
 };
@@ -3015,6 +3018,8 @@ var _loginUser = _interopRequireDefault(require("Pages/Auth/login-user.js"));
 
 var _registerUser = _interopRequireDefault(require("Pages/Auth/register-user.js"));
 
+var _index2 = require("Utils/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Routes = [{
@@ -3027,7 +3032,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3046,7 +3051,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3065,7 +3070,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3084,7 +3089,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3103,7 +3108,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3122,8 +3127,7 @@ var Routes = [{
   children: ["wraps-blankets", "christ-blankets"],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    console.log("blankets", path, isAnchor, mdl.state.anchor);
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3142,7 +3146,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3161,8 +3165,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    console.log("christ", path);
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3181,7 +3184,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3200,7 +3203,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3219,7 +3222,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3238,7 +3241,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3257,7 +3260,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3276,7 +3279,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3295,7 +3298,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3314,7 +3317,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -3333,7 +3336,7 @@ var Routes = [{
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor && scrollToAnchor(mdl.state.anchor);
+    isAnchor && (0, _index2.scrollToAnchor)(mdl.state.anchor);
   },
   component: function component(mdl) {
     return m(_index["default"], {
@@ -4186,8 +4189,7 @@ var toRoutes = function toRoutes(mdl) {
         }
 
         mdl.state.route = route;
-        mdl.state.anchor = path == "/" || path == "/blankets" ? 0 : path.split("#").last();
-        console.log(path, path.includes("#") && path.split("#").last());
+        mdl.state.anchor = path.split("#")[1];
         var isAnchor = Boolean(mdl.state.anchor);
         route.onmatch(mdl, args, path, fullroute, isAnchor);
       },
@@ -4311,18 +4313,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var Data = [m("img.product", {
-  src: "https://via.placeholder.com/250"
-}), m("img.product", {
-  src: "https://via.placeholder.com/250"
-}), m("img.product", {
-  src: "https://via.placeholder.com/250"
-}), m("img.product", {
-  src: "https://via.placeholder.com/250"
-}), m("img.product", {
-  src: "https://via.placeholder.com/250"
-}), m("img.product", {
-  src: "https://via.placeholder.com/250"
+var Data = [m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
+}), m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
+}), m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
+}), m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
+}), m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
+}), m("img.product.pb-10", {
+  src: "https://via.placeholder.com/85"
 })];
 var _default = Data;
 exports["default"] = _default;

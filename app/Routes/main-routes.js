@@ -7,6 +7,7 @@ import Home from "Pages/home.js"
 import Logo from "Components/Logo"
 import Login from "Pages/Auth/login-user.js"
 import Register from "Pages/Auth/register-user.js"
+import { scrollToAnchor } from "Utils/index.js"
 
 const Routes = [
   {
@@ -90,7 +91,6 @@ const Routes = [
     children: ["wraps-blankets", "christ-blankets"],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      console.log("blankets", path, isAnchor, mdl.state.anchor)
       isAnchor && scrollToAnchor(mdl.state.anchor)
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
@@ -119,7 +119,6 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      console.log("christ", path)
       isAnchor && scrollToAnchor(mdl.state.anchor)
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),

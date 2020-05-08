@@ -1,21 +1,21 @@
 const Data = [
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
-  m("img.product", {
-    src: "https://via.placeholder.com/250",
+  m("img.product.pb-10", {
+    src: "https://via.placeholder.com/85",
   }),
 ]
 

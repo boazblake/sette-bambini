@@ -5,10 +5,7 @@ const toRoutes = (mdl) => (acc, route) => {
         mdl.route.set(m.route.get())
       }
       mdl.state.route = route
-
-      mdl.state.anchor =
-        path == "/" || path == "/blankets" ? 0 : path.split("#").last()
-      console.log(path, path.includes("#") && path.split("#").last())
+      mdl.state.anchor = path.split("#")[1]
       let isAnchor = Boolean(mdl.state.anchor)
       route.onmatch(mdl, args, path, fullroute, isAnchor)
     },

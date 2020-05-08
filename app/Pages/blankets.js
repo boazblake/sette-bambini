@@ -3,7 +3,7 @@ import Masonry from "Components/Masonry"
 
 const fetchBlanketsTask = (mdl) =>
   Task.of(
-    [...Array(10).keys()].map((k) => ({
+    [...Array(3).keys()].map((k) => ({
       imgSrc: 250,
       title: "",
       description: "",
@@ -20,6 +20,8 @@ const onPageInit = (state) => ({ attrs: { mdl } }) => {
     s.data = data
   }
 
+  console.log(mdl.Data)
+
   fetchBlanketsTask(mdl).fork(onError(state), onSuccess(state))
 }
 
@@ -30,7 +32,7 @@ const Blankets = () => {
   }
 
   return {
-    // oninit: onPageInit(state),
+    oninit: onPageInit(state),
     onremove: () => {
       state.errors = {}
       state.data = []
@@ -39,8 +41,22 @@ const Blankets = () => {
       m(".frow-container frow-center", [
         // m(Masonry, { data: state.data })
 
-        m("", { id: "christening" }),
-        m("", { id: "wraps" }),
+        m("", { id: "christening" }, [
+          m("h2", "Christening Blankets"),
+          m(".frow row-around", [
+            m("img.product.pb-10", {
+              src: "https://via.placeholder.com/250",
+            }),
+          ]),
+        ]),
+        m("", { id: "wraps" }, [
+          m("h2", "Wraps"),
+          m(".frow row-around", [
+            m("img.product.pb-10", {
+              src: "https://via.placeholder.com/250",
+            }),
+          ]),
+        ]),
       ]),
   }
 }
