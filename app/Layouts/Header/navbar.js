@@ -7,7 +7,8 @@ const NavBar = () => {
     view: ({ attrs: { mdl } }) =>
       m(
         ".navbar",
-        m("nav.frow row-around", { id: "navbar" }, [
+        { id: "navbar" },
+        m("nav.frow row-around", [
           routes(mdl).map((r) => {
             return m(NavLink, {
               mdl,

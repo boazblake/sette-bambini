@@ -1,8 +1,5 @@
-export const SlideInLeft = ({ dom }) => {
-  dom.style.opacity = 0
-  dom.classList.toggle("slideInLeft")
-  dom.style.opacity = 1
-}
+export const SlideInLeft = ({ dom }) => dom.classList.toggle("slideInLeft")
+export const SlideInRight = ({ dom }) => dom.classList.toggle("slideInRight")
 
 export const SlideOutRight = ({ dom }) => {
   dom.classList.replace("slideInLeft", "slideOutLeft")
@@ -10,6 +7,30 @@ export const SlideOutRight = ({ dom }) => {
     setTimeout(() => {
       resolve()
     }, 500)
+  })
+}
+
+export const SlideOutLeft = ({ dom }) => {
+  dom.classList.replace("slideInRight", "slideOutRight")
+  return new Promise(function (resolve) {
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
+}
+
+export const SlideDown = ({ dom }) => {
+  dom.style.opacity = 0
+  dom.classList.toggle("slideInDown")
+  dom.style.opacity = 1
+}
+
+export const SlideUp = ({ dom }) => {
+  dom.classList.replace("slideInDown", "slideOutUp")
+  return new Promise(function (resolve) {
+    setTimeout(() => {
+      resolve()
+    }, 300)
   })
 }
 

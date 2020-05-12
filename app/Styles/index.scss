@@ -90,6 +90,11 @@ a.button {
   }
 }
 
+.body {
+  height: 70vh;
+  overflow-y: scroll;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -176,7 +181,7 @@ input {
   display: grid;
   padding: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 120px 1fr 100px;
+  grid-template-rows: 120px 58vh 100px;
   grid-template-areas: "header" "body" "footer";
 }
 
@@ -196,76 +201,16 @@ input {
 }
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  background: transparent;
-
-  .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: $gradient-radial-reverse;
-  }
-
-  .modal-container {
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    background-color: $white;
-    width: 50%;
-    height: 50%;
-  }
-}
-
-.navbar {
-  background-color: $color3;
-  height: 40px;
-  padding-top: 0.5rem;
-  font-weight: 900;
-}
-
-.sub-navbar {
-  background-color: $color2;
-  height: 40px;
-  padding-top: 0.5rem;
-  font-weight: 900;
-}
-
-.navMenu {
   transition: ease-in-out;
   animation-duration: 0.5s;
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
   width: 80vw;
   height: 100vh;
   min-width: 80vw;
   min-height: 100vh;
   background-color: $color3;
-}
-
-.navMenuButton {
-  border: none;
-  background-color: $white;
-  &::hover {
-    border: none;
-    background-color: $white;
-  }
-}
-
-.navMenuOverlay {
-  z-index: 100;
   padding: 30px;
-  line-height: 3.2rem;
-  width: 100vw;
-  min-width: 100vw;
-  min-height: 100vh;
 
   > ul.nav {
     width: 70vw;
@@ -277,6 +222,45 @@ input {
       }
     }
   }
+}
+
+.modalButton {
+  border: none;
+  background-color: $white;
+  &::hover {
+    border: none;
+    background-color: $white;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  line-height: 3.2rem;
+  width: 100vw;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(92, 107, 115, 0.9);
+}
+
+.navbar {
+  order: 1;
+  background-color: $color3;
+  height: 40px;
+  padding-top: 0.5rem;
+  font-weight: 900;
+  z-index: 2;
+}
+
+.sub-navbar {
+  order: 2;
+  background-color: $color2;
+  height: 40px;
+  padding-top: 0.5rem;
+  font-weight: 900;
+  z-index: 1;
 }
 
 @media all and (max-width: 30em) {

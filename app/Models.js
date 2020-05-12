@@ -4,7 +4,8 @@ import http from "./Utils/http"
 
 const state = {
   showAuthModal: Stream(false),
-  showNavMenu: Stream(false),
+  showNavModal: Stream(false),
+  showCartModal: Stream(false),
   paginate: {
     page: Stream(1),
     total_pages: Stream(0),
@@ -24,6 +25,7 @@ const user = {}
 const settings = {}
 const data = {}
 const errors = {}
+const cart = {}
 
 const Model = {
   http,
@@ -31,6 +33,7 @@ const Model = {
   Routes,
   state,
   user,
+  cart,
   data,
   errors,
   settings,

@@ -1622,6 +1622,42 @@ var Validation = {
 exports.Validation = Validation;
 });
 
+;require.register("Layouts/Body/cart-modal.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = require("@mithril-icons/clarity/cjs/index");
+
+var CartModal = function CartModal() {
+  return {
+    oninit: function oninit(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return mdl.state.showNavModal(false);
+    },
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m(".modalOverlay.animated", {
+        onclick: function onclick(e) {
+          mdl.state.showCartModal(false);
+        }
+      }, m(".modal", {
+        style: {
+          right: 0
+        },
+        id: "cart-modal"
+      }, [m("h1.title", "Shopping Cart")]));
+    }
+  };
+};
+
+var _default = CartModal;
+exports["default"] = _default;
+});
+
 ;require.register("Layouts/Body/index.js", function(exports, require, module) {
 "use strict";
 
@@ -1630,7 +1666,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _navMenu = _interopRequireDefault(require("./nav-menu.js"));
+var _cartModal = _interopRequireDefault(require("./cart-modal.js"));
+
+var _navModal = _interopRequireDefault(require("./nav-modal.js"));
 
 var _animations = require("Styles/animations.js");
 
@@ -1644,8 +1682,13 @@ var Body = function Body() {
           children = _ref$attrs.children;
       return m(".body.mt-20", {
         id: "body"
-      }, m(".frow column-center items-stretch", [mdl.settings.screenSize !== "desktop" && mdl.state.showNavMenu() && m(_navMenu["default"], {
+      }, m(".frow column-center items-stretch", [mdl.settings.screenSize !== "desktop" && mdl.state.showNavModal() && m(_navModal["default"], {
+        oncreate: _animations.SlideInLeft,
         onbeforeremove: _animations.SlideOutRight,
+        mdl: mdl
+      }), mdl.state.showCartModal() && m(_cartModal["default"], {
+        oncreate: _animations.SlideInRight,
+        onbeforeremove: _animations.SlideOutLeft,
         mdl: mdl
       }), [m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)), children]]));
     }
@@ -1656,7 +1699,7 @@ var _default = Body;
 exports["default"] = _default;
 });
 
-;require.register("Layouts/Body/nav-menu.js", function(exports, require, module) {
+;require.register("Layouts/Body/nav-modal.js", function(exports, require, module) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1665,8 +1708,6 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var _navLink = _interopRequireDefault(require("Components/nav-link"));
-
-var _animations = require("Styles/animations.js");
 
 var _index = require("Utils/index.js");
 
@@ -1696,7 +1737,7 @@ var NavItem = function NavItem() {
   };
 };
 
-var NavMenu = function NavMenu() {
+var NavModal = function NavModal() {
   var routes = function routes(mdl) {
     return mdl.Routes.filter(function (r) {
       return r.group.includes("menu");
@@ -1704,14 +1745,19 @@ var NavMenu = function NavMenu() {
   };
 
   return {
-    view: function view(_ref2) {
+    oncreate: function oncreate(_ref2) {
       var mdl = _ref2.attrs.mdl;
-      return m(".navMenu.animated", {
-        oncreate: _animations.SlideInLeft
-      }, m(".navMenuOverlay", {
+      mdl.state.showCartModal(false);
+      console.log(mdl.state.showCartModal());
+    },
+    view: function view(_ref3) {
+      var mdl = _ref3.attrs.mdl;
+      return m(".modalOverlay.animated", {
         onclick: function onclick(e) {
-          mdl.state.showNavMenu(false);
+          mdl.state.showNavModal(false);
         }
+      }, m(".modal", {
+        id: "nav-modal"
       }, m("ul.nav", {
         id: ""
       }, [mdl.state.isAuth() ? m(_navLink["default"], {
@@ -1742,7 +1788,7 @@ var NavMenu = function NavMenu() {
   };
 };
 
-var _default = NavMenu;
+var _default = NavModal;
 exports["default"] = _default;
 });
 
@@ -1803,9 +1849,9 @@ var Header = function Header() {
         mdl: mdl
       }), m(_navbar["default"], {
         mdl: mdl
-      }), m(".", m(_subNav["default"], {
+      }), m(_subNav["default"], {
         mdl: mdl
-      }))]);
+      })]);
     }
   };
 };
@@ -1838,9 +1884,9 @@ var NavBar = function NavBar() {
   return {
     view: function view(_ref) {
       var mdl = _ref.attrs.mdl;
-      return m(".navbar", m("nav.frow row-around", {
+      return m(".navbar", {
         id: "navbar"
-      }, [routes(mdl).map(function (r) {
+      }, m("nav.frow row-around", [routes(mdl).map(function (r) {
         return m(_navLink["default"], {
           mdl: mdl,
           href: r.route,
@@ -1870,6 +1916,8 @@ var _index = require("Utils/index.js");
 
 var _ramda = require("ramda");
 
+var _animations = require("Styles/animations");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var SubNavBar = function SubNavBar() {
@@ -1885,9 +1933,11 @@ var SubNavBar = function SubNavBar() {
         });
       };
 
-      return m(".sub-navbar", m("nav.frow row-around", {
+      return routes(mdl).any() && m(".sub-navbar animated", {
+        oncreate: _animations.SlideDown,
+        onbeforeremove: _animations.SlideUp,
         id: "sub-navbar"
-      }, [routes(mdl).map(function (r) {
+      }, m("nav.frow row-around", [routes(mdl).map(function (r) {
         return m(_navLink["default"], {
           mdl: mdl,
           href: r.route,
@@ -1927,7 +1977,7 @@ var ToolBar = function ToolBar() {
       var mdl = _ref.attrs.mdl;
       return m(".toolbar.my-5", m(".frow row-between row-center", [m(".frow", [m(".navMenuButton visible-xs", {
         onclick: function onclick() {
-          return mdl.state.showNavMenu(true);
+          return mdl.state.showNavModal(true);
         }
       }, m(_index.BarsLine)), mdl.state.isAuth() ? m(_navLink["default"], {
         mdl: mdl,
@@ -1952,11 +2002,10 @@ var ToolBar = function ToolBar() {
           id: "toolbar-logo",
           "class": "frow row-center"
         })
-      }), m(_navLink["default"], {
-        mdl: mdl,
-        href: "/cart",
-        classList: "",
-        link: m(_index.ShoppingBagLine)
+      }), m(_index.ShoppingBagLine, {
+        onclick: function onclick() {
+          return mdl.state.showCartModal(true);
+        }
       })]));
     }
   };
@@ -2065,7 +2114,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var state = {
   showAuthModal: Stream(false),
-  showNavMenu: Stream(false),
+  showNavModal: Stream(false),
+  showCartModal: Stream(false),
   paginate: {
     page: Stream(1),
     total_pages: Stream(0),
@@ -2085,12 +2135,14 @@ var user = {};
 var settings = {};
 var data = {};
 var errors = {};
+var cart = {};
 var Model = {
   http: _http["default"],
   Data: _mockData["default"],
   Routes: _index["default"],
   state: state,
   user: user,
+  cart: cart,
   data: data,
   errors: errors,
   settings: settings,
@@ -2264,7 +2316,7 @@ var Login = function Login() {
         "class": state.isSubmitted ? state.errors.email ? "has-error" : "has-success" : "",
         id: "reg-email",
         type: "email",
-        placeholder: "Enter Your Email Here",
+        placeholder: "Email",
         onkeyup: function onkeyup(e) {
           // state.isSubmitted && validateForm(mdl)(state.data)
           state.data.userModel.email = e.target.value;
@@ -2274,7 +2326,7 @@ var Login = function Login() {
         "class": state.isSubmitted ? state.errors.password ? "has-error" : "has-success" : "",
         id: "reg-pass",
         type: "password",
-        placeholder: "Enter Your Password Here",
+        placeholder: "Password",
         onkeyup: function onkeyup(e) {
           // state.isSubmitted && validateForm(mdl)(state.data)
           state.data.userModel.password = e.target.value;
@@ -2397,7 +2449,7 @@ var RegisterUser = function RegisterUser() {
         "class": isSubmitted ? errors.name ? "has-error" : "has-success" : "",
         id: "reg-name",
         type: "text",
-        placeholder: "Enter Full Name Here",
+        placeholder: "Full Name",
         onkeyup: function onkeyup(e) {
           return data.name = e.target.value;
         },
@@ -2406,7 +2458,7 @@ var RegisterUser = function RegisterUser() {
         "class": isSubmitted ? errors.email ? "has-error" : "has-success" : "",
         id: "reg-email",
         type: "email",
-        placeholder: "Enter Email Here",
+        placeholder: "Email",
         onkeyup: function onkeyup(e) {
           return data.email = e.target.value;
         },
@@ -2415,7 +2467,7 @@ var RegisterUser = function RegisterUser() {
         id: "confirmEmail",
         "class": isSubmitted ? errors.confirmEmail ? "has-error" : "has-success" : "",
         type: "email",
-        placeholder: "Confirm Email Here",
+        placeholder: "Confirm Email",
         onkeyup: function onkeyup(e) {
           return data.confirmEmail = e.target.value;
         },
@@ -2424,7 +2476,7 @@ var RegisterUser = function RegisterUser() {
         "class": isSubmitted ? errors.password ? "has-error" : "has-success" : "",
         id: "reg-pass",
         type: "password",
-        placeholder: "Enter Password Here",
+        placeholder: "Password",
         onkeyup: function onkeyup(e) {
           return data.password = e.target.value;
         },
@@ -2433,7 +2485,7 @@ var RegisterUser = function RegisterUser() {
         "class": isSubmitted ? errors.confirmPassword ? "has-error" : "has-success" : "",
         id: "pass-confirm",
         type: "password",
-        placeholder: "Confirm Password Here",
+        placeholder: "Confirm Password",
         onkeyup: function onkeyup(e) {
           return data.confirmPassword = e.target.value;
         },
@@ -3356,7 +3408,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RemoveChildrenOut = exports.animate = exports.SlideChildrenInDown = exports.StretchInLeft = exports.SlideChildrenInRight = exports.SlideOutRight = exports.SlideInLeft = void 0;
+exports.RemoveChildrenOut = exports.animate = exports.SlideChildrenInDown = exports.StretchInLeft = exports.SlideChildrenInRight = exports.SlideUp = exports.SlideDown = exports.SlideOutLeft = exports.SlideOutRight = exports.SlideInRight = exports.SlideInLeft = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -3372,15 +3424,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var SlideInLeft = function SlideInLeft(_ref) {
   var dom = _ref.dom;
-  dom.style.opacity = 0;
-  dom.classList.toggle("slideInLeft");
-  dom.style.opacity = 1;
+  return dom.classList.toggle("slideInLeft");
 };
 
 exports.SlideInLeft = SlideInLeft;
 
-var SlideOutRight = function SlideOutRight(_ref2) {
+var SlideInRight = function SlideInRight(_ref2) {
   var dom = _ref2.dom;
+  return dom.classList.toggle("slideInRight");
+};
+
+exports.SlideInRight = SlideInRight;
+
+var SlideOutRight = function SlideOutRight(_ref3) {
+  var dom = _ref3.dom;
   dom.classList.replace("slideInLeft", "slideOutLeft");
   return new Promise(function (resolve) {
     setTimeout(function () {
@@ -3391,8 +3448,41 @@ var SlideOutRight = function SlideOutRight(_ref2) {
 
 exports.SlideOutRight = SlideOutRight;
 
-var SlideChildrenInRight = function SlideChildrenInRight(_ref3) {
-  var dom = _ref3.dom;
+var SlideOutLeft = function SlideOutLeft(_ref4) {
+  var dom = _ref4.dom;
+  dom.classList.replace("slideInRight", "slideOutRight");
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 500);
+  });
+};
+
+exports.SlideOutLeft = SlideOutLeft;
+
+var SlideDown = function SlideDown(_ref5) {
+  var dom = _ref5.dom;
+  dom.style.opacity = 0;
+  dom.classList.toggle("slideInDown");
+  dom.style.opacity = 1;
+};
+
+exports.SlideDown = SlideDown;
+
+var SlideUp = function SlideUp(_ref6) {
+  var dom = _ref6.dom;
+  dom.classList.replace("slideInDown", "slideOutUp");
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 300);
+  });
+};
+
+exports.SlideUp = SlideUp;
+
+var SlideChildrenInRight = function SlideChildrenInRight(_ref7) {
+  var dom = _ref7.dom;
 
   var children = _toConsumableArray(dom.children);
 
@@ -3408,8 +3498,8 @@ var SlideChildrenInRight = function SlideChildrenInRight(_ref3) {
 exports.SlideChildrenInRight = SlideChildrenInRight;
 
 var StretchInLeft = function StretchInLeft(idx) {
-  return function (_ref4) {
-    var dom = _ref4.dom;
+  return function (_ref8) {
+    var dom = _ref8.dom;
     dom.style.opacity = 0;
     return setTimeout(function () {
       dom.classList.toggle("stretchRight");
@@ -3421,8 +3511,8 @@ var StretchInLeft = function StretchInLeft(idx) {
 exports.StretchInLeft = StretchInLeft;
 
 var SlideChildrenInDown = function SlideChildrenInDown(idx) {
-  return function (_ref5) {
-    var dom = _ref5.dom;
+  return function (_ref9) {
+    var dom = _ref9.dom;
     dom.style.opacity = 0;
     setTimeout(function () {
       dom.classList.toggle("slideDown");
@@ -3434,8 +3524,8 @@ var SlideChildrenInDown = function SlideChildrenInDown(idx) {
 exports.SlideChildrenInDown = SlideChildrenInDown;
 
 var animate = function animate(dir) {
-  return function (_ref6) {
-    var dom = _ref6.dom;
+  return function (_ref10) {
+    var dom = _ref10.dom;
     dom.style.opacity = 0;
     setTimeout(function () {
       dom.classList.toggle(dir);
@@ -3446,8 +3536,8 @@ var animate = function animate(dir) {
 
 exports.animate = animate;
 
-var RemoveChildrenOut = function RemoveChildrenOut(_ref7) {
-  var dom = _ref7.dom;
+var RemoveChildrenOut = function RemoveChildrenOut(_ref11) {
+  var dom = _ref11.dom;
   return new Promise(function () {
     ;
 

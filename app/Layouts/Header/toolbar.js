@@ -13,7 +13,7 @@ const ToolBar = () => {
             m(
               ".navMenuButton visible-xs",
               {
-                onclick: () => mdl.state.showNavMenu(true),
+                onclick: () => mdl.state.showNavModal(true),
               },
               m(BarsLine)
             ),
@@ -48,11 +48,8 @@ const ToolBar = () => {
             classList: "logo",
             link: m(Logo, { id: "toolbar-logo", class: "frow row-center" }),
           }),
-          m(NavLink, {
-            mdl,
-            href: "/cart",
-            classList: "",
-            link: m(ShoppingBagLine),
+          m(ShoppingBagLine, {
+            onclick: () => mdl.state.showCartModal(true),
           }),
         ])
       ),

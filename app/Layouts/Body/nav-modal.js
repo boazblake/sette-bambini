@@ -1,6 +1,6 @@
 import NavLink from "Components/nav-link"
-import { SlideInLeft } from "Styles/animations.js"
 import { isActiveRoute } from "Utils/index.js"
+
 let state = {
   onHover: () => {},
   selected: () => {},
@@ -13,22 +13,27 @@ const NavItem = () => {
   }
 }
 
-const NavMenu = () => {
+const NavModal = () => {
   let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
   return {
+    oncreate: ({ attrs: { mdl } }) => {
+      mdl.state.showCartModal(false)
+      console.log(mdl.state.showCartModal())
+    },
     view: ({ attrs: { mdl } }) =>
       m(
-        `.navMenu.animated`,
+        ".modalOverlay.animated",
         {
-          oncreate: SlideInLeft,
+          onclick: (e) => {
+            mdl.state.showNavModal(false)
+          },
         },
         m(
-          ".navMenuOverlay",
+          `.modal`,
           {
-            onclick: (e) => {
-              mdl.state.showNavMenu(false)
-            },
+            id: "nav-modal",
           },
+
           m(`ul.nav`, { id: "" }, [
             mdl.state.isAuth()
               ? m(NavLink, {
@@ -69,4 +74,4 @@ const NavMenu = () => {
   }
 }
 
-export default NavMenu
+export default NavModal
