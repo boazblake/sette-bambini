@@ -1,6 +1,7 @@
 @import "./colors.scss";
 @import "./animations.css";
 @import "./loader.scss";
+@import "./frow/frow.sass";
 
 :root {
   --modile-area: "header" "body" "footer";
@@ -14,13 +15,14 @@
     url("./fonts/SilverThreadJF.ttf") format("truetype");
 }
 
-.title {
-  font-family: "SilverThreadJF";
-  font-weight: normal;
-  font-style: normal;
+@media all and (max-width: 30em) {
+  a.button {
+    & {
+      display: block;
+      margin: 0.4em auto;
+    }
+  }
 }
-
-@import "./frow/frow.sass";
 
 %icon {
   width: 36px;
@@ -263,12 +265,17 @@ input {
   z-index: 1;
 }
 
-@media all and (max-width: 30em) {
-  a.button {
-    & {
-      display: block;
-      margin: 0.4em auto;
-    }
+.point-left {
+  width: 40px;
+  > svg {
+    transform: rotate(-90deg);
+  }
+}
+
+.point-right {
+  width: 40px;
+  > svg {
+    transform: rotate(90deg);
   }
 }
 
@@ -348,6 +355,12 @@ input {
 
 .text-4x > * {
   font-size: 4rem;
+}
+
+.title {
+  font-family: "SilverThreadJF";
+  font-weight: normal;
+  font-style: normal;
 }
 
 .warning {

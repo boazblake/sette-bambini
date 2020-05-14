@@ -1,5 +1,5 @@
 import Routes from "./Routes/index.js"
-import Data from "./mock-data"
+import { Data } from "./mock-data"
 import http from "./Utils/http"
 
 const state = {

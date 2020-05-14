@@ -1,22 +1,14 @@
-const Data = [
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
-  m("img.product.pb-10", {
-    src: "https://via.placeholder.com/85",
-  }),
+import { range, traverse } from "ramda"
+import { log } from "Utils"
+
+const getImg = ({ width, height }) => [
+  `https://loremflickr.com/${width}/${height}`,
 ]
 
-export default Data
+export const Data = (size) => (amount) => {
+  let arr = [...Array(amount).keys()]
+  let res = arr.traverse((_) => getImg(size), Array.of)
+  console.log(res)
+  return res[0]
+  // return []
+}

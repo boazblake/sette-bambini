@@ -1,62 +1,30 @@
-import Task from "data.task"
-import Masonry from "Components/Masonry"
-
-const fetchBlanketsTask = (mdl) =>
-  Task.of(
-    [...Array(3).keys()].map((k) => ({
-      imgSrc: 250,
-      title: "",
-      description: "",
-    }))
-  )
-
-const onPageInit = (state) => ({ attrs: { mdl } }) => {
-  const onError = (s) => (error) => {
-    s.errors.init = error
-    console.log("errror", error)
-  }
-
-  const onSuccess = (s) => (data) => {
-    s.data = data
-  }
-
-  console.log(mdl.Data)
-
-  fetchBlanketsTask(mdl).fork(onError(state), onSuccess(state))
-}
+import Carousel from "Components/Carousel"
 
 const Blankets = () => {
   const state = {
     errors: {},
-    data: [],
+    data: [
+      "https://loremflickr.com/cache/resized/65535_49681641278_39a3783443_b_900_500_nofilter.jpg",
+      "https://loremflickr.com/cache/resized/6043_6297055785_9f172cd858_b_900_500_nofilter.jpg",
+      "https://loremflickr.com/cache/resized/65535_49805957881_9fd2435097_h_900_500_nofilter.jpg",
+      "https://loremflickr.com/cache/resized/65535_49845303721_80df43c416_b_900_500_nofilter.jpg",
+    ],
   }
 
   return {
-    oninit: onPageInit(state),
     onremove: () => {
       state.errors = {}
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
-        // m(Masonry, { data: state.data })
-
-        m("", { id: "christening" }, [
+        m(
+          "",
+          { id: "christening" },
           m("h2", "Christening Blankets"),
-          m(".frow row-around", [
-            m("img.product.pb-10", {
-              src: "https://via.placeholder.com/250",
-            }),
-          ]),
-        ]),
-        m("", { id: "wraps" }, [
-          m("h2", "Wraps"),
-          m(".frow row-around", [
-            m("img.product.pb-10", {
-              src: "https://via.placeholder.com/250",
-            }),
-          ]),
-        ]),
+          m(".frow row-around", m(Carousel, { cid: "chr", data: state.data }))
+        ),
+        m("", { id: "wraps" }, [m("h2", "Wraps"), m(".frow row-around", [])]),
       ]),
   }
 }
