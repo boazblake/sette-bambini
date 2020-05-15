@@ -103,6 +103,10 @@ a.button {
   font-weight: 700;
 }
 
+#body {
+  margin-top: 185px;
+}
+
 #content {
   grid-area: content;
   padding: 10px;
@@ -162,7 +166,14 @@ h1 {
 
 #header {
   grid-area: header;
-  min-height: 140px;
+  max-height: 140px;
+  position: fixed;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 img {
@@ -208,9 +219,6 @@ input {
   }
 }
 
-.main {
-}
-
 .modal {
   transition: ease-in-out;
   animation-duration: 0.5s;
@@ -246,7 +254,7 @@ input {
 
 .modalOverlay {
   position: fixed;
-  z-index: 100;
+  z-index: 300;
   top: 0;
   left: 0;
   line-height: 3.2rem;
@@ -262,7 +270,6 @@ input {
   height: 40px;
   padding-top: 0.5rem;
   font-weight: 900;
-  z-index: 2;
 }
 
 .sub-navbar {
@@ -271,7 +278,6 @@ input {
   height: 40px;
   padding-top: 0.5rem;
   font-weight: 900;
-  z-index: 1;
 }
 
 .point-left {

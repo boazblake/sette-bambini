@@ -11,7 +11,7 @@ const Body = () => {
   return {
     view: ({ attrs: { mdl, children } }) =>
       m(
-        ".body.mt-20",
+        ".body",
         { id: "body" },
         m(".frow column-center items-stretch", [
           mdl.settings.screenSize !== "desktop" &&

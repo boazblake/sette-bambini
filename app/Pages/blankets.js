@@ -4,10 +4,10 @@ const Blankets = () => {
   const state = {
     errors: {},
     data: [
-      "https://via.placeholder.com/150",
-      "https://via.placeholder.com/150",
-      "https://via.placeholder.com/150",
-      "https://via.placeholder.com/150",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
     ],
   }
 
