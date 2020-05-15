@@ -3,7 +3,6 @@
 @import "./loader.scss";
 @import "./frow/frow.sass";
 @import "./single_carousel.scss";
-@import "./swiper.scss";
 
 :root {
   --modile-area: "header" "body" "footer";
@@ -37,7 +36,17 @@
 * {
   font-family: "Roboto", sans-serif;
   color: $color5;
-  font-size: 16px;
+  > p {
+    font-size: 16px;
+  }
+  > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "SilverThreadJF", sans-serif;
+  }
 }
 
 *,
@@ -94,17 +103,8 @@ a.button {
   }
 }
 
-.body {
-  height: 70vh;
-  overflow-y: scroll;
-}
-
 .bold {
   font-weight: 700;
-}
-
-#body {
-  margin-top: 185px;
 }
 
 #content {
@@ -166,7 +166,7 @@ h1 {
 
 #header {
   grid-area: header;
-  max-height: 140px;
+  // max-height: 140px;
   position: fixed;
   width: 100%;
   margin: 0 auto;
@@ -200,7 +200,7 @@ input {
   display: grid;
   padding: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 120px 58vh 100px;
+  grid-template-rows: 1fr 2fr 1fr; //120px 58vh 100px;
   grid-template-areas: "header" "body" "footer";
 }
 

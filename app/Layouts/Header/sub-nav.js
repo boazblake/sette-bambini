@@ -1,17 +1,12 @@
 import NavLink from "Components/nav-link.js"
 import { isActiveRoute } from "Utils/index.js"
-import { propEq } from "ramda"
 import { SlideDown, SlideUp } from "Styles/animations"
 
 const SubNavBar = () => {
   return {
-    view: ({ attrs: { mdl } }) => {
-      let routes = (mdl) =>
-        mdl.Routes.filter(
-          (r) => r.route == mdl.state.route.route
-        )[0].children.map((r) => mdl.Routes.filter(propEq("id", r))[0])
+    view: ({ attrs: { mdl, subRoutes } }) => {
       return (
-        routes(mdl).any() &&
+        subRoutes(mdl).any() &&
         m(
           ".sub-navbar animated",
           {
@@ -20,7 +15,7 @@ const SubNavBar = () => {
             id: "sub-navbar",
           },
           m("nav.frow row-around", [
-            routes(mdl).map((r) =>
+            subRoutes(mdl).map((r) =>
               m(NavLink, {
                 mdl,
                 href: r.route,

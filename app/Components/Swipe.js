@@ -6,8 +6,6 @@ const Swiper = () => {
         contain: true,
         contain: true,
         wrapAround: true,
-        fullscreen: true,
-        fade: true,
       }),
     view: ({ attrs: { mdl, data } }) =>
       m(".main-carousel", [

@@ -19,13 +19,13 @@ const Blankets = () => {
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(
-          "",
+          ".mb-30",
           { id: "christening" },
-          m("h2", "Christening Blankets"),
+          m("h2.pb-10", "Christening Blankets"),
           m(Swiper, { mdl, data: state.data })
         ),
-        m("", { id: "wraps" }, [
-          m("h2", "Wraps"),
+        m(".mb-30", { id: "wraps" }, [
+          m("h2.pb-10", "Wraps"),
           m(Swiper, { mdl, data: state.data }),
         ]),
       ]),

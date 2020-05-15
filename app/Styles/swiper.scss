@@ -3,13 +3,13 @@
 .main-carousel {
   max-width: 60vw;
   margin: 0 auto;
-  // height: 160px;
+  height: 100%;
 }
 
 .carousel-cell {
   width: 100%; /* full width */
   height: 160px; /* height of carousel */
-  margin-right: 10px;
+  margin: 0 10px;
 }
 
 /* smaller, dark, rounded square */
@@ -37,16 +37,20 @@
   right: -40px;
 }
 
-/* position dots up a bit */
-.flickity-page-dots {
-  bottom: -22px;
-}
-/* dots are lines */
-.flickity-page-dots .dot {
-  height: 4px;
-  width: 40px;
-  margin: 0;
-  border-radius: 0;
+// /* position dots up a bit */
+// .flickity-page-dots {
+//   bottom: -22px;
+// }
+// /* dots are lines */
+// .flickity-page-dots .dot {
+//   height: 4px;
+//   width: 40px;
+//   margin: 0;
+//   border-radius: 0;
+// }
+
+.flickity-viewport {
+  height: 275px !important;
 }
 
 .flickity-enabled:focus .flickity-viewport {
