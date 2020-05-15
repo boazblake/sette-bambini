@@ -163,6 +163,10 @@ h1 {
   min-height: 140px;
 }
 
+img {
+  object-fit: cover;
+}
+
 input {
   border: 2px solid $color3;
   border-radius: 20px;
@@ -200,6 +204,9 @@ input {
       text-transform: initial;
     }
   }
+}
+
+.main {
 }
 
 .modal {
