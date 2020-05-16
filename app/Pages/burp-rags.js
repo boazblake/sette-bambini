@@ -1,42 +1,30 @@
-import Task from "data.task"
-import Masonry from "Components/Masonry"
-
-const fetchBurpRagsTask = (mdl) =>
-  Task.of(
-    [...Array(10).keys()].map((k) => ({
-      imgSrc: 250,
-      title: "",
-      description: "",
-    }))
-  )
-
-const onPageInit = (state) => ({ attrs: { mdl } }) => {
-  const onError = (s) => (error) => {
-    s.errors.init = error
-    console.log("errror", error)
-  }
-
-  const onSuccess = (s) => (data) => {
-    s.data = data
-  }
-
-  fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state))
-}
+import Flicker from "Components/Flicker.js"
+import Selector from "Components/Selector.js"
 
 const BurpRags = () => {
   const state = {
     errors: {},
-    data: [],
+    data: [
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+    ],
   }
-
   return {
-    oninit: onPageInit(state),
     onremove: () => {
       state.errors = {}
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", [m(Masonry, { data: state.data })]),
+      m(".frow-container frow-center", [
+        m(
+          ".mb-30",
+          { id: "burps" },
+          m(Flicker, { mdl, data: state.data }),
+          m(".mt-20", m(Selector, { mdl, product: "burps" }))
+        ),
+      ]),
   }
 }
 

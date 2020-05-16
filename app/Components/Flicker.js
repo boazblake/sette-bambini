@@ -1,9 +1,10 @@
-const Swiper = () => {
+import Flickity from "flickity"
+
+const Flicker = () => {
   return {
     oncreate: ({ dom }) =>
       new Flickity(dom, {
         freeScroll: true,
-        contain: true,
         contain: true,
         wrapAround: true,
       }),
@@ -14,4 +15,4 @@ const Swiper = () => {
   }
 }
 
-export default Swiper
+export default Flicker

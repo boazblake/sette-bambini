@@ -25,7 +25,11 @@ const user = {}
 const settings = {}
 const data = {}
 const errors = {}
-const cart = {}
+const cart = {
+  wraps: { m: 0, f: 0, u: 0 },
+  christs: { m: 0, f: 0, u: 0 },
+  burps: { m: 0, f: 0, u: 0 },
+}
 
 const Model = {
   http,

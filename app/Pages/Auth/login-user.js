@@ -76,7 +76,7 @@ export const Login = () => {
               onsubmit: (e) => e.preventDefault(),
             },
             [
-              m("input.form-input", {
+              m("input.auth-input", {
                 class: state.isSubmitted
                   ? state.errors.email
                     ? "has-error"
@@ -91,9 +91,9 @@ export const Login = () => {
                 },
                 value: state.data.userModel.email,
               }),
-              state.errors.email && m("p.form-input-hint", state.errors.email),
+              state.errors.email && m("p.auth-input-hint", state.errors.email),
 
-              m("input.form-input", {
+              m("input.auth-input", {
                 class: state.isSubmitted
                   ? state.errors.password
                     ? "has-error"
@@ -109,7 +109,7 @@ export const Login = () => {
                 value: state.data.userModel.password,
               }),
               state.errors.password &&
-                m("p.form-input-hint", state.errors.password),
+                m("p.auth-input-hint", state.errors.password),
             ]
           ),
           state.httpError && m(".toast toast-error", state.httpError),

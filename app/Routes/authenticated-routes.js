@@ -14,7 +14,13 @@ const AuthenticatedRoutes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Account, { mdl })),
   },
@@ -37,7 +43,13 @@ const AuthenticatedRoutes = [
         isAnchor,
         !mdl.state.isAuth()
       )
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -62,7 +74,13 @@ const AuthenticatedRoutes = [
       //   mdl.user.isAdmin
       // )
       !mdl.user.isAdmin && m.route.set(m.route.get())
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },

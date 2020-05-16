@@ -22,7 +22,7 @@ const NavModal = () => {
     },
     view: ({ attrs: { mdl } }) =>
       m(
-        ".modalOverlay.animated",
+        ".modalOverlay-left.animated",
         {
           onclick: (e) => {
             mdl.state.showNavModal(false)

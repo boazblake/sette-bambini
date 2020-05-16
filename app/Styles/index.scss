@@ -180,7 +180,7 @@ img {
   object-fit: cover;
 }
 
-input {
+.auth-input {
   border: 2px solid $color3;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -252,11 +252,23 @@ input {
   }
 }
 
-.modalOverlay {
+.modalOverlay-left {
   position: fixed;
   z-index: 300;
   top: 0;
   left: 0;
+  line-height: 3.2rem;
+  width: 100vw;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(92, 107, 115, 0.9);
+}
+
+.modalOverlay-right {
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  right: 0;
   line-height: 3.2rem;
   width: 100vw;
   min-width: 100vw;
@@ -381,4 +393,38 @@ input {
 .warning {
   color: rgb(230, 150, 2);
   padding: 4px;
+}
+
+@media screen and (min-width: 668px) {
+  .modal {
+    width: 80%;
+    min-width: 80%;
+  }
+
+  .modalOverlay-left {
+    width: 60%;
+    min-width: 60%;
+  }
+
+  .modalOverlay-right {
+    width: 60%;
+    min-width: 60%;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .modal {
+    width: 80%;
+    min-width: 80%;
+  }
+
+  .modalOverlay-left {
+    width: 40%;
+    min-width: 40%;
+  }
+
+  .modalOverlay-right {
+    width: 40%;
+    min-width: 40%;
+  }
 }

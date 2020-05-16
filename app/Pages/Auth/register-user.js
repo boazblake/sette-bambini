@@ -64,7 +64,7 @@ const registerUser = (mdl) => ({ name, email, password, isAdmin }) =>
 const RegisterUser = () => {
   return {
     view: ({ attrs: { data, errors, isSubmitted } }) => [
-      m("input.form-input", {
+      m("input.auth-input", {
         class: isSubmitted ? (errors.name ? "has-error" : "has-success") : "",
         id: "reg-name",
         type: "text",
@@ -72,9 +72,9 @@ const RegisterUser = () => {
         onkeyup: (e) => (data.name = e.target.value),
         value: data.name,
       }),
-      errors.name && m("p.form-input-hint", errors.name),
+      errors.name && m("p.auth-input-hint", errors.name),
 
-      m("input.form-input", {
+      m("input.auth-input", {
         class: isSubmitted ? (errors.email ? "has-error" : "has-success") : "",
         id: "reg-email",
         type: "email",
@@ -82,9 +82,9 @@ const RegisterUser = () => {
         onkeyup: (e) => (data.email = e.target.value),
         value: data.email,
       }),
-      errors.email && m("p.form-input-hint", errors.email),
+      errors.email && m("p.auth-input-hint", errors.email),
 
-      m("input.form-input", {
+      m("input.auth-input", {
         id: "confirmEmail",
         class: isSubmitted
           ? errors.confirmEmail
@@ -96,9 +96,9 @@ const RegisterUser = () => {
         onkeyup: (e) => (data.confirmEmail = e.target.value),
         value: data.confirmEmail,
       }),
-      errors.confirmEmail && m("p.form-input-hint", errors.confirmEmail),
+      errors.confirmEmail && m("p.auth-input-hint", errors.confirmEmail),
 
-      m("input.form-input", {
+      m("input.auth-input", {
         class: isSubmitted
           ? errors.password
             ? "has-error"
@@ -110,9 +110,9 @@ const RegisterUser = () => {
         onkeyup: (e) => (data.password = e.target.value),
         value: data.password,
       }),
-      errors.password && m("p.form-input-hint", errors.password),
+      errors.password && m("p.auth-input-hint", errors.password),
 
-      m("input.form-input", {
+      m("input.auth-input", {
         class: isSubmitted
           ? errors.confirmPassword
             ? "has-error"
@@ -124,7 +124,7 @@ const RegisterUser = () => {
         onkeyup: (e) => (data.confirmPassword = e.target.value),
         value: data.confirmPassword,
       }),
-      errors.confirmPassword && m("p.form-input-hint", errors.confirmPassword),
+      errors.confirmPassword && m("p.auth-input-hint", errors.confirmPassword),
     ],
   }
 }

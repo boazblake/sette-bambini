@@ -20,7 +20,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
   },
@@ -34,7 +40,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Login, { mdl })),
   },
@@ -48,7 +60,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Register, { mdl })),
   },
@@ -62,7 +80,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -77,7 +101,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(BurpRags, { mdl })),
   },
@@ -91,7 +121,13 @@ const Routes = [
     children: ["wraps-blankets", "christ-blankets"],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
   },
@@ -105,7 +141,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
   },
@@ -119,7 +161,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
   },
@@ -133,7 +181,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
   },
@@ -147,7 +201,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -161,7 +221,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -175,7 +241,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -189,7 +261,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -203,7 +281,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -217,7 +301,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -231,7 +321,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
@@ -245,7 +341,13 @@ const Routes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor && scrollToAnchor(mdl.state.anchor)
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
