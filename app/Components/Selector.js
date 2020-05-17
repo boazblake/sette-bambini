@@ -13,7 +13,14 @@ const Selector = () => {
         ".frow",
         m(".frow content-center gutters row-between pt-20", [
           m(
-            ".col-sm-1-3",
+            ".col-sm-1-4",
+            m(
+              "h2.pb-10",
+              `${mdl.state.currency()} ${mdl.state.prices[product]}`
+            )
+          ),
+          m(
+            ".col-sm-1-4",
             m(
               "label",
               m("input", {
@@ -27,7 +34,7 @@ const Selector = () => {
             )
           ),
           m(
-            ".col-sm-1-3",
+            ".col-sm-1-4",
             m(
               "label",
 
@@ -39,15 +46,15 @@ const Selector = () => {
                 },
                 [
                   m("option", { value: null }, "Select a Gender"),
-                  m("option", { value: "m" }, "Male"),
-                  m("option", { value: "f" }, "Female"),
-                  m("option", { value: "u" }, "Uni"),
+                  m("option", { value: "Male" }, "Male"),
+                  m("option", { value: "Female" }, "Female"),
+                  m("option", { value: "Unisex" }, "Unisex"),
                 ]
               )
             )
           ),
           m(
-            ".col-sm-1-3",
+            ".col-sm-1-4",
             m(
               "button",
               {

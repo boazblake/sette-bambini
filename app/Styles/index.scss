@@ -3,6 +3,7 @@
 @import "./loader.scss";
 @import "./frow/frow.sass";
 @import "./single_carousel.scss";
+// @import "./flickerty.css";
 
 :root {
   --modile-area: "header" "body" "footer";
@@ -25,13 +26,13 @@
   }
 }
 
-%icon {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
+// @include icon {
+//   width: 36px;
+//   height: 36px;
+//   display: flex;
+//   align-content: center;
+//   justify-content: center;
+// }
 
 * {
   font-family: "Roboto", sans-serif;
@@ -230,6 +231,7 @@ img {
   min-height: 100vh;
   background-color: $color3;
   padding: 30px;
+  overflow-y: scroll;
 
   > ul.nav {
     width: 70vw;

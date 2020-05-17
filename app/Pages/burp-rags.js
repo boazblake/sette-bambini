@@ -22,7 +22,7 @@ const BurpRags = () => {
           ".mb-30",
           { id: "burps" },
           m(Flicker, { mdl, data: state.data }),
-          m(".mt-20", m(Selector, { mdl, product: "burps" }))
+          m(".mt-20", m(Selector, { mdl, product: "Burp Rags" }))
         ),
       ]),
   }

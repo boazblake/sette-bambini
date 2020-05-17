@@ -2,7 +2,15 @@ import Routes from "./Routes/index.js"
 import { Data } from "./mock-data"
 import http from "./Utils/http"
 
+const currencies = { $: "US Dollar", "£": "British Pound" }
+
 const state = {
+  currency: Stream("$"),
+  prices: {
+    Wraps: 35,
+    "Christening Blankets": 55,
+    "Burp Rags": 15,
+  },
   showAuthModal: Stream(false),
   showNavModal: Stream(false),
   showCartModal: Stream(false),
@@ -26,12 +34,13 @@ const settings = {}
 const data = {}
 const errors = {}
 const cart = {
-  wraps: { m: 0, f: 0, u: 0 },
-  christs: { m: 0, f: 0, u: 0 },
-  burps: { m: 0, f: 0, u: 0 },
+  Wraps: { Male: 0, Female: 0, Unisex: 0 },
+  "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
+  "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
 }
 
 const Model = {
+  currencies,
   http,
   Data,
   Routes,
@@ -42,5 +51,6 @@ const Model = {
   errors,
   settings,
   toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
+  toggleCurrencies: (mdl) => (currency) => mdl.state.currency(currency),
 }
 export default Model
