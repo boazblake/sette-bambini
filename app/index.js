@@ -1,5 +1,6 @@
 import App from "./app.js"
 import Model from "./Models.js"
+import { isEmpty } from "ramda"
 import { FP } from "FP"
 FP.configure()
 
@@ -48,5 +49,13 @@ const checkWidth = (winW) => {
 Model.settings.screenSize = getProfile(winW)
 
 checkWidth(winW)
+
+if (localStorage.getItem("sb-user")) {
+  Model.user = JSON.parse(localStorage.getItem("sb-user"))
+  Model.state.isAuth(true)
+  //fetch cart from db.
+} else if (localStorage.getItem("sb-cart")) {
+  Model.cart = JSON.parse(localStorage.getItem("sb-cart"))
+}
 
 m.route(root, "/", App(Model))

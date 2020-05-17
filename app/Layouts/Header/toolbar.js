@@ -18,14 +18,22 @@ const ToolBar = () => {
               m(BarsLine)
             ),
             mdl.state.isAuth()
-              ? m(NavLink, {
-                  mdl,
-                  href: `/account/${mdl.user.name}`,
-                  link: "Your Account",
-                  classList: `${isActiveRoute(
-                    `/account/${mdl.user.name}`
-                  )} button hidden-xs`,
-                })
+              ? [
+                  m(NavLink, {
+                    mdl,
+                    href: `/account/${mdl.user.name}`,
+                    link: "Your Account",
+                    classList: `${isActiveRoute(
+                      `/account/${mdl.user.name}`
+                    )} button hidden-xs`,
+                  }),
+                  m(NavLink, {
+                    mdl,
+                    href: "/logout",
+                    link: "Logout",
+                    classList: "bold auth-link hidden-xs",
+                  }),
+                ]
               : m(".frow hidden-xs", [
                   m(NavLink, {
                     mdl,

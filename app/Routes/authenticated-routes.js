@@ -1,4 +1,5 @@
 import Default from "Pages/default.js"
+import Home from "Pages/home.js"
 import Account from "Pages/account.js"
 import Layout from "Layouts/index.js"
 import { scrollToAnchor } from "Utils"
@@ -83,6 +84,30 @@ const AuthenticatedRoutes = [
           })
     },
     component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "logout",
+    name: "",
+    // icon: Icons.users,
+    route: "/logout",
+    position: [],
+    group: ["authenticated", "admin"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      console.log("loggingout", mdl.user, mdl.state.isAuth(), localStorage)
+      localStorage.clear()
+      mdl.user = {}
+      mdl.state.isAuth(false)
+      console.log("loggingout", mdl.user, mdl.state.isAuth(), localStorage)
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
+      m.route.set(m.route.get())
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
   },
 ]
 

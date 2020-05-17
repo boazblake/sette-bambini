@@ -13,22 +13,27 @@ const Blankets = () => {
   }
 
   return {
+    oninit: () => {
+      // console.log("init blankets")
+    },
     onremove: () => {
       state.errors = {}
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
-        m(
-          ".mb-30",
-          { id: "christening" },
-          m(Flicker, { mdl, data: state.data }),
-          m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" }))
-        ),
         m(".mb-30", { id: "wraps" }, [
+          m("h2.pb-10", "Wraps"),
           m(Flicker, { mdl, data: state.data }),
           m(".mt-20", m(Selector, { mdl, product: "Wraps" })),
         ]),
+        m(
+          ".mb-30",
+          { id: "christening" },
+          m("h2.pb-10", "Christening Blankets"),
+          m(Flicker, { mdl, data: state.data }),
+          m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" }))
+        ),
       ]),
   }
 }

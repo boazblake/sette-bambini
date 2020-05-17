@@ -21,6 +21,7 @@ const validateForm = (mdl) => (data) => {
     console.log("login s", data)
     mdl.state.isAuth(true)
     mdl.user = data
+    localStorage.setItem("sb-user", JSON.stringify(data))
     m.route.set(`/account/${mdl.user.name}`)
   }
 

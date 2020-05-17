@@ -18,7 +18,6 @@ const NavModal = () => {
   return {
     oncreate: ({ attrs: { mdl } }) => {
       mdl.state.showCartModal(false)
-      console.log(mdl.state.showCartModal())
     },
     view: ({ attrs: { mdl } }) =>
       m(
@@ -36,15 +35,23 @@ const NavModal = () => {
 
           m(`ul.nav`, { id: "" }, [
             mdl.state.isAuth()
-              ? m(NavLink, {
-                  state,
-                  mdl,
-                  href: `/account/${mdl.user.name}`,
-                  link: "Your Account",
-                  classList: `${isActiveRoute(
-                    `/account/${mdl.user.name}`
-                  )} button`,
-                })
+              ? [
+                  m(NavLink, {
+                    state,
+                    mdl,
+                    href: `/account/${mdl.user.name}`,
+                    link: "Your Account",
+                    classList: `${isActiveRoute(
+                      `/account/${mdl.user.name}`
+                    )} button`,
+                  }),
+                  m(NavLink, {
+                    mdl,
+                    href: "/logout",
+                    link: "Logout",
+                    classList: "bold auth-link",
+                  }),
+                ]
               : m(".frow", [
                   m(NavItem, {
                     mdl,

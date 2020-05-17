@@ -41,15 +41,26 @@ const Gender = () => {
         gender: [sex, quantity],
       },
     }) => {
-      return m(".", [
-        m("img", { src: "https://via.placeholder.com/80" }),
-        m("h4", `${sex} : ${quantity}`),
-      ])
+      return quantity
+        ? m(".", [
+            m("img", { src: "https://via.placeholder.com/80" }),
+            m("h4", `${sex} : ${quantity}`),
+          ])
+        : null
     },
   }
 }
 
-const Product = () => {
+const Product = ({
+  attrs: {
+    mdl,
+    p: [title, genders],
+  },
+}) => {
+  let amount = getQuantity(genders)
+
+  let price = getPrice(mdl, title, genders)
+
   return {
     view: ({
       attrs: {
@@ -57,28 +68,29 @@ const Product = () => {
         p: [title, genders],
       },
     }) => {
-      return m(".shadow-light ", [
-        m(
-          "h3",
-          `${title}: ${getQuantity(
-            genders
-          )} @ ${mdl.state.currency()} ${getPrice(mdl, title, genders)}`
-        ),
-        m(
-          ".frow",
-          genders.map((gender) => m(Gender, { mdl, gender }))
-        ),
-      ])
+      return amount
+        ? m(".frow row-around", [
+            m("h3", `${title}: ${amount} for ${mdl.state.currency()} ${price}`),
+            m(
+              ".frow",
+              genders.map((gender) => m(Gender, { mdl, gender }))
+            ),
+          ])
+        : null
     },
   }
 }
 
 const getTotal = (mdl, currency, products) => {
-  const getTotalPrice = products.map((p) => getPrice(mdl, p[0], p[1]))
-
-  return `Total of ${getQuantity(products)} for ${currency}: ${getQuantity(
-    getTotalPrice
-  )}`
+  const getTotalPrice = getQuantity(
+    products.map((p) => getPrice(mdl, p[0], p[1]))
+  )
+  return getTotalPrice
+    ? m(
+        "h1.bold",
+        `Total of ${getQuantity(products)} for ${currency}: ${getTotalPrice}`
+      )
+    : m("h1.m-30", "Your Cart is Empty")
 }
 
 const CartModal = ({ attrs: { mdl } }) => {
@@ -102,13 +114,7 @@ const CartModal = ({ attrs: { mdl } }) => {
           [
             m("h1.title", "Shopping Cart"),
             products(mdl.cart).map((p) => m(Product, { mdl, p })),
-            m(
-              ".shadow-dark",
-              m(
-                "h1.bold",
-                getTotal(mdl, mdl.state.currency(), products(mdl.cart))
-              )
-            ),
+            m(".", getTotal(mdl, mdl.state.currency(), products(mdl.cart))),
           ]
         )
       ),

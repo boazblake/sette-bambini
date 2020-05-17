@@ -1,13 +1,21 @@
 const Selector = () => {
-  const state = {
-    quantity: null,
-    gender: "Select a Gender",
+  const state = {}
+  const ResetState = () => {
+    state.quantity = null
+    state.gender = "Select a Gender"
   }
 
-  const addToCart = (mdl) => (product) => (state) =>
-    (mdl.cart[product][state.gender] += parseInt(state.quantity))
+  const addToCart = (mdl) => (product) => (state) => {
+    mdl.cart[product][state.gender] += parseInt(state.quantity)
+    //if (mdl.state.isAuth()) => save to db
+    //and always save to localStorage
+    localStorage.setItem("sb-cart", JSON.stringify(mdl.cart))
+    ResetState()
+    console.log(JSON.parse(localStorage.getItem("sb-cart")))
+  }
 
   return {
+    oninit: () => ResetState(),
     view: ({ attrs: { mdl, product } }) =>
       m(
         ".frow",
