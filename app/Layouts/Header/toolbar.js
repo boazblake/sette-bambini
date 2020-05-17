@@ -1,5 +1,6 @@
 import NavLink from "Components/nav-link.js"
-import { ShoppingBagLine, BarsLine } from "@mithril-icons/clarity/cjs/index"
+import ShoppingBag from "Components/ShoppingBag.js"
+import { BarsLine } from "@mithril-icons/clarity/cjs/index"
 import Logo from "Components/Logo"
 import { isActiveRoute } from "Utils/index.js"
 
@@ -56,8 +57,8 @@ const ToolBar = () => {
             classList: "logo",
             link: m(Logo, { id: "toolbar-logo", class: "frow row-center" }),
           }),
-          m(ShoppingBagLine, {
-            onclick: () => mdl.state.showCartModal(true),
+          m(ShoppingBag, {
+            mdl,
           }),
         ])
       ),
