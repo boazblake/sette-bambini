@@ -53,7 +53,7 @@ checkWidth(winW)
 if (localStorage.getItem("sb-user")) {
   Model.user = JSON.parse(localStorage.getItem("sb-user"))
   Model.state.isAuth(true)
-  //fetch cart from db.
+  //fetch cart from db? do i really??
 } else if (localStorage.getItem("sb-cart")) {
   Model.cart = JSON.parse(localStorage.getItem("sb-cart"))
 }

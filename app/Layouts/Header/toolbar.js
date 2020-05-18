@@ -1,6 +1,6 @@
 import NavLink from "Components/nav-link.js"
 import ShoppingBag from "Components/ShoppingBag.js"
-import { BarsLine } from "@mithril-icons/clarity/cjs/index"
+import Hamburger from "Components/Hamburger.js"
 import Logo from "Components/Logo"
 import { isActiveRoute } from "Utils/index.js"
 
@@ -16,7 +16,7 @@ const ToolBar = () => {
               {
                 onclick: () => mdl.state.showNavModal(true),
               },
-              m(BarsLine)
+              m(Hamburger, { mdl })
             ),
             mdl.state.isAuth()
               ? [

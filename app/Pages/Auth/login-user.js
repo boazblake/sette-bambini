@@ -1,34 +1,36 @@
-import { jsonCopy } from "Utils"
-import { validateLoginTask } from "./Validations.js"
 import NavLink from "Components/nav-link"
-
-const loginUser = (mdl) => ({ email, password }) =>
-  mdl.http.backEnd.postTask(mdl)("users/login")({
-    login: email,
-    password: password,
-  })
+import { jsonCopy, syncCarts, getLocalStorageTask } from "Utils"
+import { validateLoginTask } from "./Validations.js"
+import { loginUserTask } from "./fns.js"
 
 const validateForm = (mdl) => (data) => {
   const onError = (errs) => {
-    state.errors = errs
-    state.errorMsg(errs.message)
-    state.showErrorMsg(true)
-    console.log("failed - state", state)
+    if (errs instanceof Error) {
+      state.errors = errs
+      state.errorMsg(errs.message)
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    } else {
+      state.errorMsg("Issue with logging in. Have you registered?")
+      state.showErrorMsg(true)
+      console.log("failed - other?", state)
+    }
   }
 
-  const onSuccess = (data) => {
+  const onSuccess = (user) => {
     state.errors = {}
-    console.log("login s", data)
+    console.log("login s", user)
     mdl.state.isAuth(true)
-    mdl.user = data
+    window.sessionStorage.setItem("user-token", user["user-token"])
+    mdl.user = user
     localStorage.setItem("sb-user", JSON.stringify(data))
-    m.route.set(`/account/${mdl.user.name}`)
+    m.route.set("/")
   }
 
   state.isSubmitted = true
 
   validateLoginTask(data.userModel)
-    .chain(loginUser(mdl))
+    .chain(loginUserTask(mdl))
     .fork(onError, onSuccess)
 }
 

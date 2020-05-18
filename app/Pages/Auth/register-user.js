@@ -1,6 +1,7 @@
-import { validateUserRegistrationTask } from "./Validations"
 import NavLink from "Components/nav-link"
-import { jsonCopy } from "Utils"
+import { jsonCopy, log } from "Utils"
+import { validateUserRegistrationTask } from "./Validations"
+import { loginUserTask } from "./fns.js"
 
 const userModel = {
   name: "",
@@ -33,33 +34,52 @@ const resetState = () => {
 
 export const validateForm = (mdl) => (data) => {
   const onError = (errs) => {
-    state.errors = errs
-    state.errorMsg(errs.message)
-    state.showErrorMsg(true)
-    console.log("failed - state", state)
+    if (errs instanceof Error) {
+      state.errors = errs
+      state.errorMsg(errs.message)
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    } else {
+      state.errorMsg("There seems to be a problem please contact web support")
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    }
   }
 
-  const onSuccess = (data) => {
+  const onSuccess = (mdl) => (data) => {
     state.errors = {}
-    mdl.user = data
-    mdl.state.isAuth(true)
-    m.route.set(`/account/${mdl.user.name}`)
-    console.log("reg s", data)
+    m.route.set("/")
+    console.log("reg s", data, mdl)
   }
 
   state.isSubmitted = true
   validateUserRegistrationTask(data.userModel)
-    .chain(registerUser(mdl))
-    .fork(onError, onSuccess)
+    .chain(registerUserTask(mdl))
+    .fork(onError, onSuccess(mdl))
 }
 
-const registerUser = (mdl) => ({ name, email, password, isAdmin }) =>
-  mdl.http.backEnd.postTask(mdl)("users/register")({
-    name,
-    email,
-    password,
-    isAdmin,
-  })
+const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
+  mdl.http.backEnd
+    .postTask(mdl)("users/register")({
+      name,
+      email,
+      password,
+      isAdmin,
+    })
+    .chain((_) => loginUserTask(mdl)({ email, password }))
+    .chain((user) => {
+      mdl.user = user
+      mdl.state.isAuth(true)
+      window.sessionStorage.setItem("user-token", user["user-token"])
+      return mdl.http.backEnd.postTask(mdl)("data/Account")({
+        cart: JSON.stringify(mdl.cart),
+      })
+    })
+    .chain((accnt) => {
+      return mdl.http.backEnd.postTask(mdl)(
+        `data/Users/${mdl.user.objectId}/account%3AAccount%3A1`
+      )([accnt.objectId])
+    })
 
 const RegisterUser = () => {
   return {
