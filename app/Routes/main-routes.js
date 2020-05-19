@@ -5,6 +5,7 @@ import Default from "Pages/default.js"
 import Blog from "Pages/blog.js"
 import Home from "Pages/home.js"
 import Cart from "Pages/cart.js"
+import Checkout from "Pages/checkout.js"
 import Logo from "Components/Logo"
 import Login from "Pages/Auth/login-user.js"
 import Register from "Pages/Auth/register-user.js"
@@ -109,7 +110,7 @@ const Routes = [
             behavior: "smooth",
           })
     },
-    component: (mdl) => m(Layout, { mdl }, m(Cart, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(Checkout, { mdl })),
   },
   {
     id: "burp-rags",

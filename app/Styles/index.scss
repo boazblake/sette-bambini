@@ -311,6 +311,14 @@ img {
   border: 1px solid white;
 }
 
+.white {
+  color: white;
+}
+
+.underline {
+  text-decoration: underline $color5;
+}
+
 .point-left {
   width: 40px;
   > svg {

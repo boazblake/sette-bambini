@@ -1,4 +1,3 @@
-import Selector from "Components/Selector"
 import { NavLink } from "Components/nav-link"
 import { isActiveRoute } from "Utils/helpers"
 import {
@@ -37,15 +36,13 @@ const Gender = () => {
     view: ({
       attrs: {
         mdl,
-        product,
         gender: [sex, quantity],
       },
     }) => {
       return quantity
-        ? m(".frow row-around", [
+        ? m(".", [
             m("img", { src: "https://via.placeholder.com/80" }),
             m("h4", `${sex} : ${quantity}`),
-            m(Selector, { mdl, product }),
           ])
         : null
     },
@@ -70,13 +67,17 @@ const Product = ({
       },
     }) => {
       return amount
-        ? m(".frow  mt-10", [
-            m("h3", `${amount} ${title} for ${mdl.state.currency()} ${price}`),
+        ? m(".frow column-start mt-10", [
             m(
-              ".frow cart-item column-start",
-              genders.map((gender) =>
-                m(Gender, { mdl, gender, product: title })
+              "span.underline",
+              m(
+                "h3.mb-10",
+                `${amount} ${title} for ${mdl.state.currency()} ${price}`
               )
+            ),
+            m(
+              ".frow cart-item row-around",
+              genders.map((gender) => m(Gender, { mdl, gender }))
             ),
           ])
         : null
@@ -96,18 +97,26 @@ const Cart = ({ attrs: { mdl } }) => {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
       m(`.frow-container frow-center`, [
+        getTotal(mdl, products(mdl.cart))
+          ? m(NavLink, {
+              mdl,
+              href: `/cart`,
+              classList: `${isActiveRoute(`/cart`)} para button m-0`,
+              link: "Update Cart",
+            })
+          : null,
+
         products(mdl.cart).map((p) => m(Product, { mdl, p })),
 
         getTotal(mdl, products(mdl.cart)) ? "" : ".frow centered-column",
         m(NavLink, {
           mdl,
-          href: getTotal(mdl, products(mdl.cart)) ? `/checkout` : m.route.get(),
-          classList: `${isActiveRoute(`/checkout`)} button para mt-20`,
+          href: `/checkout`,
+          classList: `${isActiveRoute(`/checkout`)} mt-50`,
           link: getTotal(mdl, products(mdl.cart))
             ? [
-                "Proceed to Checkout",
                 m(
-                  "h1.bold text-center white",
+                  "h1.bold text-center.mt-20",
                   `Total of ${getQuantity(
                     products(mdl.cart)
                   )} for ${mdl.state.currency()}: ${getTotal(

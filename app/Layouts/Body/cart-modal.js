@@ -106,19 +106,24 @@ const CartModal = ({ attrs: { mdl } }) => {
 
           [
             m("h1.title text-center", "Shopping Cart"),
-            m(NavLink, {
-              mdl,
-              href: `/cart`,
-              classList: `${isActiveRoute(`/cart`)} para button m-0`,
-              link: "Update Cart",
-            }),
+            getTotal(mdl, products(mdl.cart))
+              ? m(NavLink, {
+                  mdl,
+                  href: `/cart`,
+                  classList: `${isActiveRoute(`/cart`)} para button m-0`,
+                  link: "Update Cart",
+                })
+              : null,
+
             products(mdl.cart).map((p) => m(Product, { mdl, p })),
 
             m(
               getTotal(mdl, products(mdl.cart)) ? "" : ".frow centered-column",
               m(NavLink, {
                 mdl,
-                href: `/checkout`,
+                href: getTotal(mdl, products(mdl.cart))
+                  ? `/checkout`
+                  : m.route.get(),
                 classList: `${isActiveRoute(`/checkout`)} para button m-0`,
                 link: getTotal(mdl, products(mdl.cart))
                   ? [
