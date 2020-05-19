@@ -39,7 +39,7 @@ const resetState = () => {
 
 export const validateForm = (mdl) => (data) => {
   const onError = (errs) => {
-    if (errs instanceof Error) {
+    if (errs) {
       state.errors = errs
       state.errorMsg(errs.message)
       state.showErrorMsg(true)

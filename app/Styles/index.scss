@@ -108,6 +108,11 @@ a.button {
   font-weight: 700;
 }
 
+
+.cart-item{
+  width: 100%;
+}
+
 #content {
   grid-area: content;
   padding: 10px;
@@ -220,25 +225,33 @@ img {
 }
 
 .modal {
-  transition: ease-in-out;
-  animation-duration: 0.5s;
+  animation: ease-in-out 1s;
+  -webkit-animation: ease-in-out 1s;
   position: absolute;
   top: 0;
-  width: 80vw;
+  width: 90vw;
   height: 100vh;
-  min-width: 80vw;
+  min-width: 90vw;
   min-height: 100vh;
-  background-color: $color3;
+  background-color: $color5;
   padding: 30px;
   overflow-y: auto;
+
+
+  > h1.title,h1.bold,h2,h3,h4,p {
+    color: $color1 !important;
+  }
+
 
   > ul.nav {
     width: 70vw;
     list-style: none;
 
     > li {
+
       > a {
         text-decoration: none;
+        color: $color1 !important;
       }
     }
   }
@@ -262,7 +275,7 @@ img {
   width: 100vw;
   min-width: 100vw;
   min-height: 100vh;
-  background-color: rgba(92, 107, 115, 0.9);
+  background-color: transparent;
 }
 
 .modalOverlay-right {
@@ -274,7 +287,7 @@ img {
   width: 100vw;
   min-width: 100vw;
   min-height: 100vh;
-  background-color: rgba(92, 107, 115, 0.9);
+  background-color: transparent;
 }
 
 .navbar {
@@ -291,6 +304,11 @@ img {
   height: 40px;
   padding-top: 0.5rem;
   font-weight: 900;
+}
+
+
+.para {
+  border: 1px solid white;
 }
 
 .point-left {
@@ -398,8 +416,8 @@ img {
 
 @media screen and (min-width: 668px) {
   .modal {
-    width: 80%;
-    min-width: 80%;
+    width: 60vw;
+    min-width: 60vw;
   }
 
   .modalOverlay-left {
@@ -408,24 +426,24 @@ img {
   }
 
   .modalOverlay-right {
-    width: 60%;
-    min-width: 60%;
+    width: 100%;
+    min-width: 100%;
   }
 }
 
 @media screen and (min-width: 920px) {
   .modal {
-    width: 80%;
-    min-width: 80%;
+    width: 40%;
+    min-width: 40%;
   }
 
   .modalOverlay-left {
-    width: 40%;
-    min-width: 40%;
+    width: 100%;
+    min-width: 100%;
   }
 
   .modalOverlay-right {
-    width: 40%;
-    min-width: 40%;
+    width: 100%;
+    min-width: 100%;
   }
 }

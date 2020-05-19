@@ -1,4 +1,4 @@
-import { SlideInLeft, SlideOutRight } from "Utils/animations"
+import { SlideInLeft, SlideOutRight } from "Styles/animations"
 const Modal = {
   oncreate: SlideInLeft,
   onbeforeremove: SlideOutRight,

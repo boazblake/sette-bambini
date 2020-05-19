@@ -7,11 +7,10 @@ const getLocalStorageTask = (key) =>
       : res(localStorage.getItem(key))
   )
 
-const saveLocalStorageTask = (key) => (value) =>
-  new Task((rej, res) => {
-    localStorage.setItem(key, value)
-    return res(localStorage.getItem(key))
-  })
+const saveLocalStorageTask = (key) => (value) => {
+  localStorage.setItem(key, JSON.stringify(value))
+  return Task.of(localStorage.getItem(key))
+}
 
 const saveDbStorageTask = (mdl) => (cart) =>
   mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
@@ -21,7 +20,7 @@ const saveDbStorageTask = (mdl) => (cart) =>
 const getDbStorageTask = (mdl) =>
   mdl.http.backEnd.gettTask(mdl)(`data/Accounts/${mdl.account.objectId}`)
 
-const saveToStorageTask = (mdl) => (key) => (value) => {
+const saveStorageTask = (mdl) => (key) => (value) => {
   return mdl.state.isAuth()
     ? saveLocalStorageTask(key)(value).chain(saveDbStorageTask(mdl))
     : saveLocalStorageTask(key)(value)
@@ -32,5 +31,5 @@ export {
   saveLocalStorageTask,
   saveDbStorageTask,
   getDbStorageTask,
-  saveToStorageTask,
+  saveStorageTask,
 }

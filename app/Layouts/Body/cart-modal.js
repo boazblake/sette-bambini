@@ -1,4 +1,5 @@
-import { ShoppingBagLine } from "@mithril-icons/clarity/cjs/index"
+import { NavLink } from "Components/nav-link"
+import { isActiveRoute } from "Utils/helpers"
 import {
   add,
   compose,
@@ -8,9 +9,6 @@ import {
   reduce,
   type,
   equals,
-  view,
-  lensIndex,
-  propEq,
 } from "ramda"
 
 const getQuantity = (xs) =>
@@ -69,10 +67,10 @@ const Product = ({
       },
     }) => {
       return amount
-        ? m(".frow row-around", [
-            m("h3", `${title}: ${amount} for ${mdl.state.currency()} ${price}`),
+        ? m(".frow column-start", [
+            m("h3", `${amount} ${title} for ${mdl.state.currency()} ${price}`),
             m(
-              ".frow",
+              ".frow cart-item row-around",
               genders.map((gender) => m(Gender, { mdl, gender }))
             ),
           ])
@@ -81,16 +79,11 @@ const Product = ({
   }
 }
 
-const getTotal = (mdl, currency, products) => {
+const getTotal = (mdl, products) => {
   const getTotalPrice = getQuantity(
     products.map((p) => getPrice(mdl, p[0], p[1]))
   )
   return getTotalPrice
-    ? m(
-        "h1.bold",
-        `Total of ${getQuantity(products)} for ${currency}: ${getTotalPrice}`
-      )
-    : m("h1.m-30", "Your Cart is Empty")
 }
 
 const CartModal = ({ attrs: { mdl } }) => {
@@ -112,9 +105,37 @@ const CartModal = ({ attrs: { mdl } }) => {
           },
 
           [
-            m("h1.title", "Shopping Cart"),
+            m("h1.title text-center", "Shopping Cart"),
+            m(NavLink, {
+              mdl,
+              href: `/cart`,
+              classList: `${isActiveRoute(`/cart`)} para button m-0`,
+              link: "Update Cart",
+            }),
             products(mdl.cart).map((p) => m(Product, { mdl, p })),
-            m(".", getTotal(mdl, mdl.state.currency(), products(mdl.cart))),
+
+            m(
+              getTotal(mdl, products(mdl.cart)) ? "" : ".frow centered-column",
+              m(NavLink, {
+                mdl,
+                href: `/checkout`,
+                classList: `${isActiveRoute(`/checkout`)} para button m-0`,
+                link: getTotal(mdl, products(mdl.cart))
+                  ? [
+                      "Proceed to Checkout",
+                      m(
+                        "h1.bold text-center",
+                        `Total of ${getQuantity(
+                          products(mdl.cart)
+                        )} for ${mdl.state.currency()}: ${getTotal(
+                          mdl,
+                          products(mdl.cart)
+                        )}`
+                      ),
+                    ]
+                  : m("h1.bold", "Your Cart is Empty"),
+              })
+            ),
           ]
         )
       ),

@@ -4,6 +4,7 @@ import BabyBlankets from "Pages/blankets.js"
 import Default from "Pages/default.js"
 import Blog from "Pages/blog.js"
 import Home from "Pages/home.js"
+import Cart from "Pages/cart.js"
 import Logo from "Components/Logo"
 import Login from "Pages/Auth/login-user.js"
 import Register from "Pages/Auth/register-user.js"
@@ -76,6 +77,26 @@ const Routes = [
     // icon: Icons.search,
     route: "/cart",
     isNav: false,
+    group: [],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Cart, { mdl })),
+  },
+  {
+    id: "checkout",
+    name: "Check Out",
+    // icon: Icons.search,
+    route: "/checkout",
+    isNav: false,
     group: ["toolbar"],
     children: [],
     options: [],
@@ -88,9 +109,8 @@ const Routes = [
             behavior: "smooth",
           })
     },
-    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(Cart, { mdl })),
   },
-
   {
     id: "burp-rags",
     name: "Burp Rags",

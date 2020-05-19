@@ -1,4 +1,4 @@
-import { saveToStorageTask } from "Utils/storage"
+import { saveStorageTask } from "Utils/storage"
 
 const Selector = () => {
   const state = {}
@@ -13,10 +13,7 @@ const Selector = () => {
       ResetState()
     }
 
-    saveToStorageTask(mdl)("sb-cart")(JSON.stringify(mdl.cart)).fork(
-      onError,
-      onSuccess
-    )
+    saveStorageTask(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess)
   }
 
   const addToCart = (mdl) => (product) => (state) => {
