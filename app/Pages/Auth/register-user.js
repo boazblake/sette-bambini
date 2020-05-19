@@ -1,7 +1,12 @@
 import NavLink from "Components/nav-link"
 import { jsonCopy, log } from "Utils"
 import { validateUserRegistrationTask } from "./Validations"
-import { loginUserTask } from "./fns.js"
+import {
+  loginUserTask,
+  registerUserTask,
+  createAccountTask,
+  linkAccountTask,
+} from "./fns.js"
 
 const userModel = {
   name: "",
@@ -48,38 +53,27 @@ export const validateForm = (mdl) => (data) => {
 
   const onSuccess = (mdl) => (data) => {
     state.errors = {}
+    sessionStorage.setItem("sb-user-token", mdl.user["user-token"])
+    sessionStorage.setItem("sb-user", JSON.stringify(mdl.user))
     m.route.set("/")
-    console.log("reg s", data, mdl)
   }
 
   state.isSubmitted = true
   validateUserRegistrationTask(data.userModel)
     .chain(registerUserTask(mdl))
+    .chain((_) =>
+      loginUserTask(mdl)({
+        email: data.userModel.email,
+        password: data.userModel.password,
+      })
+    )
+    .chain((_) => createAccountTask(mdl))
+    .chain((accnt) => {
+      mdl.user.account = accnt
+      return linkAccountTask(mdl)
+    })
     .fork(onError, onSuccess(mdl))
 }
-
-const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
-  mdl.http.backEnd
-    .postTask(mdl)("users/register")({
-      name,
-      email,
-      password,
-      isAdmin,
-    })
-    .chain((_) => loginUserTask(mdl)({ email, password }))
-    .chain((user) => {
-      mdl.user = user
-      mdl.state.isAuth(true)
-      window.sessionStorage.setItem("user-token", user["user-token"])
-      return mdl.http.backEnd.postTask(mdl)("data/Account")({
-        cart: JSON.stringify(mdl.cart),
-      })
-    })
-    .chain((accnt) => {
-      return mdl.http.backEnd.postTask(mdl)(
-        `data/Users/${mdl.user.objectId}/account%3AAccount%3A1`
-      )([accnt.objectId])
-    })
 
 const RegisterUser = () => {
   return {

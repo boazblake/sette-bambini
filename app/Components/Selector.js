@@ -1,3 +1,5 @@
+import { saveToStorageTask } from "Utils/storage"
+
 const Selector = () => {
   const state = {}
   const ResetState = () => {
@@ -5,13 +7,21 @@ const Selector = () => {
     state.gender = "Select a Gender"
   }
 
+  const saveToStorage = (mdl) => {
+    const onError = (e) => console.log("Error saving", e)
+    const onSuccess = (s) => {
+      ResetState()
+    }
+
+    saveToStorageTask(mdl)("sb-cart")(JSON.stringify(mdl.cart)).fork(
+      onError,
+      onSuccess
+    )
+  }
+
   const addToCart = (mdl) => (product) => (state) => {
     mdl.cart[product][state.gender] += parseInt(state.quantity)
-    //if (mdl.state.isAuth()) => save to db
-    //and always save to localStorage
-    localStorage.setItem("sb-cart", JSON.stringify(mdl.cart))
-    ResetState()
-    console.log(JSON.parse(localStorage.getItem("sb-cart")))
+    saveToStorage(mdl)
   }
 
   return {

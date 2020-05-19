@@ -1,7 +1,7 @@
 import NavLink from "Components/nav-link"
-import { jsonCopy, syncCarts, getLocalStorageTask } from "Utils"
+import { jsonCopy } from "Utils"
 import { validateLoginTask } from "./Validations.js"
-import { loginUserTask } from "./fns.js"
+import { loginTask } from "./fns.js"
 
 const validateForm = (mdl) => (data) => {
   const onError = (errs) => {
@@ -17,21 +17,17 @@ const validateForm = (mdl) => (data) => {
     }
   }
 
-  const onSuccess = (user) => {
+  const onSuccess = (mdl) => (account) => {
     state.errors = {}
-    console.log("login s", user)
-    mdl.state.isAuth(true)
-    window.sessionStorage.setItem("user-token", user["user-token"])
-    mdl.user = user
-    localStorage.setItem("sb-user", JSON.stringify(data))
+    mdl.user.account = account
     m.route.set("/")
   }
 
   state.isSubmitted = true
 
   validateLoginTask(data.userModel)
-    .chain(loginUserTask(mdl))
-    .fork(onError, onSuccess)
+    .chain(loginTask(mdl))
+    .fork(onError, onSuccess(mdl))
 }
 
 const userModel = {

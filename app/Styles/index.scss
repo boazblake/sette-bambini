@@ -230,7 +230,7 @@ img {
   min-height: 100vh;
   background-color: $color3;
   padding: 30px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   > ul.nav {
     width: 70vw;

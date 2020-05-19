@@ -50,8 +50,8 @@ Model.settings.screenSize = getProfile(winW)
 
 checkWidth(winW)
 
-if (localStorage.getItem("sb-user")) {
-  Model.user = JSON.parse(localStorage.getItem("sb-user"))
+if (sessionStorage.getItem("sb-user")) {
+  Model.user = JSON.parse(sessionStorage.getItem("sb-user"))
   Model.state.isAuth(true)
   //fetch cart from db? do i really??
 } else if (localStorage.getItem("sb-cart")) {

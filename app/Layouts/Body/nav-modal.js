@@ -52,7 +52,7 @@ const NavModal = () => {
                     classList: "bold auth-link",
                   }),
                 ]
-              : m(".frow", [
+              : m(".frow.justify-start", [
                   m(NavItem, {
                     mdl,
                     href: "/login",
