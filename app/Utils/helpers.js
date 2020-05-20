@@ -16,8 +16,14 @@ import {
   split,
   trim,
   max,
+  toPairs,
   min,
+  add,
   map,
+  flatten,
+  reduce,
+  type,
+  equals,
 } from "ramda"
 import Task from "data.task"
 
@@ -114,3 +120,26 @@ export const uuid = () => {
     return v.toString(16)
   })
 }
+
+export const toProducts = (cart) =>
+  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
+
+export const getPrice = (mdl, title, genders) => {
+  /*
+  get realprice from mdl.state.currency, title, getQuantity(title, genders)
+*/
+  // console.log("wtf", title, genders)
+
+  let price = mdl.state.prices[title] * getQuantity(genders)
+  if (mdl.state.currency() !== "$") {
+    //price = convertPriceToCurrency(mdl.state.currency(), price)
+  }
+
+  return price
+}
+
+export const getQuantity = (xs) =>
+  reduce(add, 0, filter(compose(equals("Number"), type), flatten(xs)))
+
+export const getTotal = (mdl, products) =>
+  getQuantity(products.map((p) => getPrice(mdl, p[0], p[1])))

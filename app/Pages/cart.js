@@ -1,36 +1,12 @@
 import Selector from "Components/Selector"
 import { NavLink } from "Components/nav-link"
-import { isActiveRoute } from "Utils/helpers"
 import {
-  add,
-  compose,
-  toPairs,
-  flatten,
-  filter,
-  reduce,
-  type,
-  equals,
-} from "ramda"
-
-const getQuantity = (xs) =>
-  reduce(add, 0, filter(compose(equals("Number"), type), flatten(xs)))
-
-const getPrice = (mdl, title, genders) => {
-  /*
-  get realprice from mdl.state.currency, title, getQuantity(title, genders)
-*/
-  // console.log("wtf", title, genders)
-
-  let price = mdl.state.prices[title] * getQuantity(genders)
-  if (mdl.state.currency() !== "$") {
-    //price = convertPriceToCurrency(mdl.state.currency(), price)
-  }
-
-  return price
-}
-
-const products = (cart) =>
-  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
+  isActiveRoute,
+  getTotal,
+  getQuantity,
+  getPrice,
+  toProducts,
+} from "Utils/helpers"
 
 const Gender = () => {
   return {
@@ -84,40 +60,35 @@ const Product = ({
   }
 }
 
-const getTotal = (mdl, products) => {
-  const getTotalPrice = getQuantity(
-    products.map((p) => getPrice(mdl, p[0], p[1]))
-  )
-  return getTotalPrice
-}
-
 const Cart = ({ attrs: { mdl } }) => {
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
       m(`.frow-container frow-center`, [
-        products(mdl.cart).map((p) => m(Product, { mdl, p })),
+        toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
 
-        getTotal(mdl, products(mdl.cart)) ? "" : ".frow centered-column",
-        m(NavLink, {
-          mdl,
-          href: getTotal(mdl, products(mdl.cart)) ? `/checkout` : m.route.get(),
-          classList: `${isActiveRoute(`/checkout`)} button para mt-20`,
-          link: getTotal(mdl, products(mdl.cart))
-            ? [
-                "Proceed to Checkout",
-                m(
-                  "h1.bold text-center white",
-                  `Total of ${getQuantity(
-                    products(mdl.cart)
-                  )} for ${mdl.state.currency()}: ${getTotal(
-                    mdl,
-                    products(mdl.cart)
-                  )}`
-                ),
-              ]
-            : m("h1.bold", "Your Cart is Empty"),
-        }),
+        getTotal(mdl, toProducts(mdl.cart))
+          ? m(
+              ".frow centered-column",
+              m(NavLink, {
+                mdl,
+                href: `/checkout`,
+                classList: `${isActiveRoute(`/checkout`)} button para mt-20`,
+                link: [
+                  "Proceed to Checkout",
+                  m(
+                    "h1.bold text-center white",
+                    `Total of ${getQuantity(
+                      toProducts(mdl.cart)
+                    )} for ${mdl.state.currency()}: ${getTotal(
+                      mdl,
+                      toProducts(mdl.cart)
+                    )}`
+                  ),
+                ],
+              })
+            )
+          : m("h1.bold", "Your Cart is Empty"),
       ]),
   }
 }
