@@ -85,6 +85,11 @@ a.button {
     background-color: $color1;
     border: 0.1em solid $color5;
     font-weight: 500;
+
+  > h1 {
+    color: $color5 !important;
+    font-weight: 500;
+  }
   }
 }
 

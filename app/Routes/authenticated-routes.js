@@ -96,16 +96,14 @@ const AuthenticatedRoutes = [
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      localStorage.clear()
-      sessionStorage.clear()
-      mdl.user = {}
-      mdl.cart = jsonCopy(cart)
-      mdl.state.isAuth(false)
       window.scroll({
         top: 0,
         left: 0,
         behavior: "smooth",
       })
+
+      console.log("workl")
+
       m.route.set(m.route.get())
     },
     component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),

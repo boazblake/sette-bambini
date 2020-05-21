@@ -6,6 +6,12 @@ let state = {
   selected: () => {},
 }
 
+let cart = {
+  Wraps: { Male: 0, Female: 0, Unisex: 0 },
+  "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
+  "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
+}
+
 const NavItem = () => {
   return {
     view: ({ attrs: { mdl, href, link, classList } }) =>
@@ -49,6 +55,14 @@ const NavModal = () => {
                     mdl,
                     href: "/logout",
                     link: "Logout",
+                    onclick: () => {
+                      localStorage.clear()
+                      sessionStorage.clear()
+                      mdl.state.isAuth(false)
+                      mdl.user = {}
+                      mdl.cart = cart
+                      m.route.set(m.route.get())
+                    },
                     classList: "bold auth-link",
                   }),
                 ]

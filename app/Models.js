@@ -34,11 +34,6 @@ const user = {}
 const settings = {}
 const data = {}
 const errors = {}
-export const cart = {
-  Wraps: { Male: 0, Female: 0, Unisex: 0 },
-  "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
-  "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
-}
 
 const Model = {
   currencies,
@@ -47,11 +42,16 @@ const Model = {
   Routes,
   state,
   user,
-  cart: jsonCopy(cart),
+  cart: {
+    Wraps: { Male: 0, Female: 0, Unisex: 0 },
+    "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
+    "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
+  },
   data,
   errors,
   settings,
   toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
   toggleCurrencies: (mdl) => (currency) => mdl.state.currency(currency),
 }
+
 export default Model

@@ -9,7 +9,14 @@ import {
 
 const CheckoutButtons = () => {
   return {
-    view: ({ attrs: { mdl } }) => m("", "BUTTONS"),
+    view: ({ attrs: { mdl } }) =>
+      m(".frow centered-column mt-30", [
+        m("h2.pb-10", "Select a Checkout Option"),
+        m("img", {
+          src:
+            "https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png",
+        }),
+      ]),
   }
 }
 

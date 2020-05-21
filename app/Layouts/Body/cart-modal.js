@@ -119,7 +119,7 @@ const CartModal = ({ attrs: { mdl } }) => {
 
             getTotal(mdl, products(mdl.cart))
               ? m(
-                  ".frow centered-column",
+                  ".frow ",
                   m(NavLink, {
                     mdl,
                     href: `/checkout`,
@@ -138,7 +138,7 @@ const CartModal = ({ attrs: { mdl } }) => {
                     ],
                   })
                 )
-              : m("h1.bold", "Your Cart is Empty"),
+              : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),
             ,
           ]
         )
