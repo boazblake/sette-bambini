@@ -35,8 +35,14 @@ const settings = {}
 const data = {}
 const errors = {}
 
+const addToCart = {
+  id: Stream(null),
+  show: Stream(null),
+}
+
 const Model = {
   currencies,
+  addToCart,
   http,
   Data,
   Routes,

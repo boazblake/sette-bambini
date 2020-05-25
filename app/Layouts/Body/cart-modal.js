@@ -1,32 +1,6 @@
 import { NavLink } from "Components/nav-link"
-import { isActiveRoute } from "Utils/helpers"
-import {
-  add,
-  compose,
-  toPairs,
-  flatten,
-  filter,
-  reduce,
-  type,
-  equals,
-} from "ramda"
-
-const getQuantity = (xs) =>
-  reduce(add, 0, filter(compose(equals("Number"), type), flatten(xs)))
-
-const getPrice = (mdl, title, genders) => {
-  /*
-  get realprice from mdl.state.currency, title, getQuantity(title, genders)
-*/
-  // console.log("wtf", title, genders)
-
-  let price = mdl.state.prices[title] * getQuantity(genders)
-  if (mdl.state.currency() !== "$") {
-    //price = convertPriceToCurrency(mdl.state.currency(), price)
-  }
-
-  return price
-}
+import { isActiveRoute, getQuantity, getPrice } from "Utils/helpers"
+import { toPairs } from "ramda"
 
 const products = (cart) =>
   toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
@@ -68,7 +42,7 @@ const Product = ({
     }) => {
       return amount
         ? m(".frow column-start", [
-            m("h3", `${amount} ${title} for ${mdl.state.currency()} ${price}`),
+            m("h3", `${amount} ${title} for ${mdl.state.currency()}${price}`),
             m(
               ".frow cart-item row-around",
               genders.map((gender) => m(Gender, { mdl, gender }))
@@ -130,7 +104,7 @@ const CartModal = ({ attrs: { mdl } }) => {
                         "h1.bold text-center",
                         `Total of ${getQuantity(
                           products(mdl.cart)
-                        )} for ${mdl.state.currency()}: ${getTotal(
+                        )} for ${mdl.state.currency()}${getTotal(
                           mdl,
                           products(mdl.cart)
                         )}`

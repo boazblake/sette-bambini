@@ -1,5 +1,6 @@
 import Flicker from "Components/Flicker.js"
 import Selector from "Components/Selector.js"
+import { AddToCartOut } from "Styles/animations"
 
 const Blankets = () => {
   const state = {

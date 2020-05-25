@@ -59,11 +59,9 @@ const Product = () => {
       },
     }) => {
       return getQuantity(genders)
-        ? m(".frow mt-10", [
-            m(
-              "h2",
-              `${title} for ${mdl.state.currency()} ${mdl.state.prices[title]}`
-            ),
+        ? m(".frow mt-10 items-baseline justify-evenly", [
+            m("h2", `${title}  `),
+            m("h4", `(${mdl.state.currency()}${mdl.state.prices[title]})`),
             m(
               ".animated.frow cart-item column-start",
               genders.map((gender) =>
@@ -105,7 +103,7 @@ const Cart = ({ attrs: { mdl } }) => {
                     "h1.bold text-center white",
                     `Total of ${getQuantity(
                       toProducts(mdl.cart)
-                    )} for ${mdl.state.currency()}: ${getTotal(
+                    )} for ${mdl.state.currency()}${getTotal(
                       mdl,
                       toProducts(mdl.cart)
                     )}`

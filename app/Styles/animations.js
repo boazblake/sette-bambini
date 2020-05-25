@@ -1,5 +1,15 @@
 export const SlideInLeft = ({ dom }) => dom.classList.toggle("slideInLeft")
 export const SlideInRight = ({ dom }) => dom.classList.toggle("slideInRight")
+export const AddToCart = ({ dom }) => dom.classList.toggle("slide-out-tr")
+
+export const AddToCartOut = ({ dom }) => {
+  AddToCart({ dom })
+  return new Promise(function (resolve) {
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
+}
 
 export const SlideOutRight = ({ dom }) => {
   dom.classList.replace("slideInLeft", "slideOutLeft")

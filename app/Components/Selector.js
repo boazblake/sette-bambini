@@ -1,4 +1,5 @@
 import { saveStorageTask } from "Utils/storage"
+import { AddToCartOut } from "Styles/animations"
 
 const Selector = () => {
   const state = {}
@@ -17,22 +18,19 @@ const Selector = () => {
   }
 
   const addToCart = (mdl) => (product) => (state) => {
+    mdl.addToCart.show(product)
     mdl.cart[product][state.gender] += parseInt(state.quantity)
     saveToStorage(mdl)
   }
-
   return {
     oninit: () => ResetState(),
-    view: ({ attrs: { mdl, product } }) =>
-      m(
+    view: ({ attrs: { mdl, product } }) => {
+      return m(
         ".frow",
         m(".frow content-center gutters row-between pt-20", [
           m(
             ".col-sm-1-4",
-            m(
-              "h2.pb-10",
-              `${mdl.state.currency()} ${mdl.state.prices[product]}`
-            )
+            m("h2.pb-10", `${mdl.state.currency()}${mdl.state.prices[product]}`)
           ),
           m(
             ".col-sm-1-4",
@@ -43,7 +41,7 @@ const Selector = () => {
                 inputmode: "numeric",
                 placeholder: "quantity",
                 value: state.quantity,
-                onchange: (e) => (state.quantity = e.target.value),
+                oninput: (e) => (state.quantity = e.target.value),
                 pattern: "[0-9]*",
               })
             )
@@ -68,6 +66,14 @@ const Selector = () => {
               )
             )
           ),
+          mdl.addToCart.show() == product &&
+            m(".animated", {
+              oncreate: AddToCartOut,
+              id: "add-to-cart-img",
+              style: {
+                "background-image": `url(${mdl.addToCart.id()})`,
+              },
+            }),
           m(
             ".col-sm-1-4",
             m(
@@ -78,11 +84,13 @@ const Selector = () => {
                   state.gender == "Select a Gender",
                 onclick: () => addToCart(mdl)(product)(state),
               },
+
               "Add To Bag"
             )
           ),
         ])
-      ),
+      )
+    },
   }
 }
 

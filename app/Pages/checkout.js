@@ -61,7 +61,7 @@ const Product = ({
               "span.underline",
               m(
                 "h3.mb-10",
-                `${amount} ${title} for ${mdl.state.currency()} ${price}`
+                `${amount} ${title} for ${mdl.state.currency()}${price}`
               )
             ),
             m(
@@ -103,7 +103,7 @@ const Cart = ({ attrs: { mdl } }) => {
                       "h1.bold text-center.mt-20",
                       `Total of ${getQuantity(
                         toProducts(mdl.cart)
-                      )} for ${mdl.state.currency()}: ${getTotal(
+                      )} for ${mdl.state.currency()}${getTotal(
                         mdl,
                         toProducts(mdl.cart)
                       )}`

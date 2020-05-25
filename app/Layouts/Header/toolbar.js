@@ -1,8 +1,8 @@
 import NavLink from "Components/nav-link.js"
-import ShoppingBag from "Components/ShoppingBag.js"
 import Hamburger from "Components/Hamburger.js"
 import Logo from "Components/Logo"
 import { isActiveRoute } from "Utils/index.js"
+import CartIcon from "Components/cart-icon"
 
 const ToolBar = () => {
   return {
@@ -57,9 +57,7 @@ const ToolBar = () => {
             classList: "logo",
             link: m(Logo, { id: "toolbar-logo", class: "frow row-center" }),
           }),
-          m(ShoppingBag, {
-            mdl,
-          }),
+          m(CartIcon, { mdl }),
         ])
       ),
   }

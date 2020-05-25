@@ -93,6 +93,15 @@ a.button {
   }
 }
 
+#add-to-cart-img {
+    position: absolute;
+    top:75%;
+    left:25%;
+    width: 200px;
+    height: 200px;
+}
+
+
 .auth-btn {
   width: 100%;
 }
@@ -116,6 +125,24 @@ a.button {
 
 .cart-item{
   width: 100%;
+}
+
+#cart-icon {
+  position: relative;
+
+  .cart-pill {
+    position: absolute;
+    font-size: 0.85rem;
+    top: 42%;
+    left: 26%;
+    padding: 7%;
+    width: 20px;
+    height: 20px;
+    border-radius:50%;
+    color: $color1;
+    background-color: $color5;
+    text-align: center;
+  }
 }
 
 #content {

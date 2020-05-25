@@ -8,10 +8,14 @@ const Flicker = () => {
         contain: true,
         wrapAround: true,
       }),
-    view: ({ attrs: { mdl, data } }) =>
-      m(".main-carousel", [
-        data.map((src) => m(".carousel-cell", m("img", { src }))),
-      ]),
+    view: ({ attrs: { mdl, data } }) => {
+      return m(".main-carousel.animated", [
+        data.map((src) => {
+          mdl.addToCart.id(src)
+          return m(".carousel-cell", m("img", { src }))
+        }),
+      ])
+    },
   }
 }
 
