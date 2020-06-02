@@ -28,21 +28,22 @@ const Gender = () => {
       return quantity
         ? m(".animated.frow row-around mt-10", [
             m("img", { src: "https://via.placeholder.com/80" }),
-            m("h4", `${sex}`),
+
+            // m(
+            // ".col-xs-1-4",
             m(
-              ".col-xs-1-4",
-              m(
-                "label",
-                m("input", {
-                  type: "number",
-                  inputmode: "numeric",
-                  min: 0,
-                  placeholder: "quantity",
-                  value: quantity,
-                  onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
-                  pattern: "[0-9]*",
-                })
-              )
+              "label.col-xs-1-4",
+              m("h4", `${sex}`),
+              m("input", {
+                type: "number",
+                inputmode: "numeric",
+                min: 0,
+                placeholder: "quantity",
+                value: quantity,
+                onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
+                pattern: "[0-9]*",
+              })
+              // )
             ),
           ])
         : null

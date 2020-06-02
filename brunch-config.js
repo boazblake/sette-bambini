@@ -69,6 +69,7 @@ exports.paths = {
     "app/Styles",
     "app/Layouts",
     "app/Pages",
+    "app/Models",
     "app",
   ],
 }

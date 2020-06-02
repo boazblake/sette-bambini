@@ -2,8 +2,8 @@ import Default from "Pages/default.js"
 import Home from "Pages/home.js"
 import Account from "Pages/account.js"
 import Layout from "Layouts/index.js"
-import { jsonCopy, scrollToAnchor } from "Utils"
-import { cart } from "../Models.js"
+import { scrollToAnchor, jsonCopy } from "Utils"
+import { newCart } from "Models/cart"
 
 const AuthenticatedRoutes = [
   {
@@ -102,9 +102,13 @@ const AuthenticatedRoutes = [
         behavior: "smooth",
       })
 
-      console.log("workl")
-
+      localStorage.clear()
+      sessionStorage.clear()
+      mdl.cart = jsonCopy(newCart)
+      mdl.state.isAuth(false)
+      mdl.user = {}
       m.route.set(m.route.get())
+      console.log("loggout", mdl)
     },
     component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
   },

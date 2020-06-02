@@ -7,6 +7,7 @@ const mergeCarts = (accnt) => (cart) => mergeDeepWith(add, cart, accnt)
 const toAccountVM = (mdl) => (accnts) => {
   let cart = mergeCarts(JSON.parse(accnts[0].cart))(mdl.cart)
   mdl.user.account = { objectId: accnts[0].objectId, cart }
+  mdl.user.address = JSON.parse(accnts[0].address)
   mdl.cart = cart
   return cart
 }

@@ -39,10 +39,10 @@ const Selector = () => {
               m("input", {
                 type: "number",
                 inputmode: "numeric",
+                pattern: "[0-9]*",
                 placeholder: "quantity",
                 value: state.quantity,
                 oninput: (e) => (state.quantity = e.target.value),
-                pattern: "[0-9]*",
               })
             )
           ),

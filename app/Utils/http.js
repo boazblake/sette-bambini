@@ -1,8 +1,7 @@
 import Task from "data.task"
 import { BackEnd } from "./.secrets.js"
-import mdl from "../Models.js"
 
-function onProgress(e) {
+const onProgress = (mdl) => (e) => {
   if (e.lengthComputable) {
     mdl.state.loadingProgress.max = e.total
     mdl.state.loadingProgress.value = e.loaded
@@ -14,26 +13,26 @@ function onLoad() {
   return false
 }
 
-function onLoadStart() {
+const onLoadStart = (mdl) => (e) => {
   mdl.state.isLoading(true)
   return false
 }
 
-function onLoadEnd() {
+const onLoadEnd = (mdl) => (e) => {
   mdl.state.isLoading(false)
   mdl.state.loadingProgress.max = 0
   mdl.state.loadingProgress.value = 0
   return false
 }
 
-const xhrProgress = {
+const xhrProgress = (mdl) => ({
   config: (xhr) => {
-    xhr.onprogress = onProgress
+    xhr.onprogress = onProgress(mdl)
     xhr.onload = onLoad
-    xhr.onloadstart = onLoadStart
-    xhr.onloadend = onLoadEnd
+    xhr.onloadstart = onLoadStart(mdl)
+    xhr.onloadend = onLoadEnd(mdl)
   },
-}
+})
 
 export const parseHttpError = (mdl) => (rej) => (e) => {
   mdl.state.isLoading(false)
@@ -63,7 +62,7 @@ const HttpTask = (_headers) => (method) => (mdl) => (url) => (body) => {
         },
         body,
         withCredentials: false,
-        ...xhrProgress,
+        ...xhrProgress(mdl),
       })
       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
   )

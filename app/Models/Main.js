@@ -1,7 +1,8 @@
-import Routes from "./Routes/index.js"
+import Routes from "../Routes/index.js"
 import { Data } from "./mock-data"
 import { jsonCopy } from "Utils"
-import http from "./Utils/http"
+import http from "Utils/http"
+import { newCart } from "./cart"
 
 const currencies = { $: "US Dollar", "£": "British Pound" }
 
@@ -48,11 +49,7 @@ const Model = {
   Routes,
   state,
   user,
-  cart: {
-    Wraps: { Male: 0, Female: 0, Unisex: 0 },
-    "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
-    "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
-  },
+  cart: jsonCopy(newCart),
   data,
   errors,
   settings,

@@ -1,9 +1,7 @@
 import App from "./app.js"
-import Model from "./Models.js"
-import { isEmpty } from "ramda"
+import Model from "Models/index.js"
 import { FP } from "FP"
 FP.configure()
-
 const root = document.body
 let winW = window.innerWidth
 

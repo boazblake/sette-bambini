@@ -56,12 +56,12 @@ const NavModal = () => {
                     href: "/logout",
                     link: "Logout",
                     onclick: () => {
-                      localStorage.clear()
-                      sessionStorage.clear()
-                      mdl.state.isAuth(false)
-                      mdl.user = {}
-                      mdl.cart = cart
-                      m.route.set(m.route.get())
+                      // localStorage.clear()
+                      // sessionStorage.clear()
+                      // mdl.state.isAuth(false)
+                      // mdl.user = {}
+                      // mdl.cart = cart
+                      // m.route.set(m.route.get())
                     },
                     classList: "bold auth-link",
                   }),
