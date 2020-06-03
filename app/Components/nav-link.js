@@ -1,11 +1,5 @@
-// const touchEnd = (state) => {
-//   state.onHover(true)
-//   // console.log("end")
-// }
-// const touchStart = (state) => {
-//   state.onHover(false)
-//   // console.log("start")
-// }
+const handlers = (types, fn) =>
+  types.reduce((acc, type) => Object.assign(acc, { [type]: fn }), {})
 
 export const NavLink = () => {
   return {
@@ -13,10 +7,9 @@ export const NavLink = () => {
       m(
         m.route.Link,
         {
-          // ontouchstart: (e) => touchStart(),
-          // onmousedown: (e) => touchStart(state),
-          // ontouchend: (e) => touchEnd(),
-          // onmouseup: (e) => touchEnd(state),
+          ...handlers(["onclick", "onmouseover", "onmouseout"], (e) =>
+            console.log(e.type)
+          ),
           href,
           class: `nav-link ${classList} ${
             mdl.state.navSelected() == link && "shadow"
