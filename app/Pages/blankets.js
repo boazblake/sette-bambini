@@ -28,7 +28,10 @@ const Blankets = () => {
           m(Flicker, { mdl, data: state.data }),
           m(".mt-20", m(Selector, { mdl, product: "Wraps" })),
           m("ul", [
-            m("li.pb-10", '100% Pure Wool Carriage style Blanket 21" x 18"'),
+            m(
+              "li.pb-10",
+              'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'
+            ),
             m("li.pb-10", "Machine wash and tumble dry."),
             m("li.pb-10", "Proudly made in Houston Texas USA"),
           ]),
@@ -40,7 +43,10 @@ const Blankets = () => {
           m(Flicker, { mdl, data: state.data }),
           m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" })),
           m("ul", [
-            m("li.pb-10", '100% Pure Wool Christening style Blanket 21" x 18"'),
+            m(
+              "li.pb-10",
+              'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'
+            ),
             m(
               "li.pb-10",
               "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."

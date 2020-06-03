@@ -21,7 +21,7 @@ const CartIcon = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        ".animated",
+        ".animated.clickable",
         {
           id: "cart-icon",
           onupdate: () => mdl.addToCart.show(null),

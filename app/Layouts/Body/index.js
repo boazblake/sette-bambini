@@ -8,10 +8,22 @@ import {
 } from "Styles/animations.js"
 import { propEq } from "ramda"
 
-let bigHeader = (mdl) =>
+let isShowingProducts = (mdl) =>
   mdl.Routes.filter((r) => r.route == mdl.state.route.route)[0]
     .children.map((r) => mdl.Routes.filter(propEq("id", r))[0])
     .any()
+
+let isShowingRoutes = (mdl) => mdl.settings.screenSize !== "phone"
+
+const getStyle = (mdl) => ({
+  marginTop: isShowingRoutes(mdl)
+    ? isShowingProducts(mdl)
+      ? "180px"
+      : "140px"
+    : isShowingProducts(mdl)
+    ? "140px"
+    : "100px",
+})
 
 const Body = () => {
   return {
@@ -20,7 +32,7 @@ const Body = () => {
         ".body",
         {
           id: "body",
-          style: { marginTop: bigHeader(mdl) ? "140px" : "100px" },
+          style: getStyle(mdl),
         },
         m(".frow column-center items-stretch", [
           mdl.settings.screenSize !== "desktop" &&
