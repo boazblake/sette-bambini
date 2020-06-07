@@ -8,28 +8,27 @@ const NavBar = () => {
     mdl.Routes.filter((r) => r.group.includes("menu"))
   return {
     view: ({ attrs: { mdl } }) => [
-      mdl.settings.screenSize !== "phone" &&
-        m(
-          ".navbar",
-          m(
-            "nav.frow row-around",
-            SidebarRoutes(mdl).map((r) => {
-              return m(NavLink, {
-                mdl,
-                href: r.route,
-                link: r.name,
-                classList: isActiveRoute(r.route),
-              })
-            })
-          )
-        ),
       m(
-        ".navbar",
+        ".navbar.navbar1",
         { id: "navbar" },
 
         m(
           "nav.frow row-around",
           ProductRoutes(mdl).map((r) => {
+            return m(NavLink, {
+              mdl,
+              href: r.route,
+              link: r.name,
+              classList: isActiveRoute(r.route),
+            })
+          })
+        )
+      ),
+      m(
+        ".navbar.navbar2.hidden-xs",
+        m(
+          "nav.frow row-around",
+          SidebarRoutes(mdl).map((r) => {
             return m(NavLink, {
               mdl,
               href: r.route,
