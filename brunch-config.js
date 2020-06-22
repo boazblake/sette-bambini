@@ -64,7 +64,6 @@ exports.paths = {
   public: "docs",
   watched: [
     "app/Utils",
-    "app/FP",
     "app/Components",
     "app/Styles",
     "app/Layouts",
