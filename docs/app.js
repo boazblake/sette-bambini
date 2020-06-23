@@ -117,7 +117,6 @@
 
 (function() {
 var global = typeof window === 'undefined' ? this : window;
-var process;
 var __makeRelativeRequire = function(require, mappings, pref) {
   var none = {};
   var tryReq = function(name, pref) {
@@ -150,1270 +149,1130 @@ var __makeRelativeRequire = function(require, mappings, pref) {
   }
 };
 require.register("Components/Flicker.js", function(exports, require, module) {
-"use strict";
+import Flickity from "flickity"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _flickity = _interopRequireDefault(require("flickity"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Flicker = function Flicker() {
+const Flicker = () => {
   return {
-    oncreate: function oncreate(_ref) {
-      var dom = _ref.dom;
-      return new _flickity["default"](dom, {
+    oncreate: ({ dom }) =>
+      new Flickity(dom, {
         freeScroll: true,
         contain: true,
-        wrapAround: true
-      });
+        wrapAround: true,
+      }),
+    view: ({ attrs: { mdl, data } }) => {
+      return m(".main-carousel.animated", [
+        data.map((src) => {
+          mdl.addToCart.id(src)
+          return m(".carousel-cell", m("img", { src }))
+        }),
+      ])
     },
-    view: function view(_ref2) {
-      var _ref2$attrs = _ref2.attrs,
-          mdl = _ref2$attrs.mdl,
-          data = _ref2$attrs.data;
-      return m(".main-carousel.animated", [data.map(function (src) {
-        mdl.addToCart.id(src);
-        return m(".carousel-cell", m("img", {
-          src: src
-        }));
-      })]);
-    }
-  };
-};
+  }
+}
 
-var _default = Flicker;
-exports["default"] = _default;
+export default Flicker
+
 });
 
 ;require.register("Components/Hamburger.js", function(exports, require, module) {
-"use strict";
+import { BarsLine } from "@mithril-icons/clarity/cjs/index"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _index = require("@mithril-icons/clarity/cjs/index");
-
-var Hamburger = function Hamburger() {
+const Hamburger = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return mdl.state.isAuth() ? m("span", [m("span", "Welcome ".concat(mdl.user.name.split(" ")[0])), m(_index.BarsLine)]) : m(_index.BarsLine);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      mdl.state.isAuth()
+        ? m("span", [
+            m("span", `Welcome ${mdl.user.name.split(" ")[0]}`),
+            m(BarsLine),
+          ])
+        : m(BarsLine),
+  }
+}
 
-var _default = Hamburger;
-exports["default"] = _default;
+export default Hamburger
+
 });
 
 ;require.register("Components/Logo.js", function(exports, require, module) {
-"use strict";
+const LogoSVG = m(
+  "svg[version='1.0'][xmlns='http://www.w3.org/2000/svg'][width='34.000000pt'][height='34.000000pt'][viewBox='0 0 220.000000 220.000000'][preserveAspectRatio='xMidYMid meet']",
+  [
+    m(
+      "metadata",
+      " Created by potrace 1.11, written by Peter Selinger 2001-2013 "
+    ),
+    m(
+      "g[transform='translate(0.000000,220.000000) scale(0.100000,-0.100000)'][fill='$color5'][stroke='none']",
+      m(
+        "path[d='M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z']"
+      )
+    ),
+  ]
+)
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var LogoSVG = m("svg[version='1.0'][xmlns='http://www.w3.org/2000/svg'][width='34.000000pt'][height='34.000000pt'][viewBox='0 0 220.000000 220.000000'][preserveAspectRatio='xMidYMid meet']", [m("metadata", " Created by potrace 1.11, written by Peter Selinger 2001-2013 "), m("g[transform='translate(0.000000,220.000000) scale(0.100000,-0.100000)'][fill='$color5'][stroke='none']", m("path[d='M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z']"))]);
-
-var Logo = function Logo() {
+const Logo = () => {
   return {
-    view: function view(_ref) {
-      var attrs = _ref.attrs;
-      return m(".logo", _objectSpread({}, attrs), m(".frow row-center", [m("h1.title.logo-text", {
-        id: "logo-sette"
-      }, "SETTE"), m("icon.icon", {
-        id: "logo-svg"
-      }, LogoSVG), m("h1.title.logo-text", {
-        id: "logo-bambini"
-      }, "BAMBINI")]));
-    }
-  };
-};
+    view: ({ attrs }) =>
+      m(
+        ".logo",
+        { ...attrs },
+        m(".frow row-center", [
+          m("h1.title.logo-text", { id: "logo-sette" }, "SETTE"),
+          m("icon.icon", { id: "logo-svg" }, LogoSVG),
+          m("h1.title.logo-text", { id: "logo-bambini" }, "BAMBINI"),
+        ])
+      ),
+  }
+}
 
-var _default = Logo;
-exports["default"] = _default;
+export default Logo
+
 });
 
 ;require.register("Components/LogoLoader.js", function(exports, require, module) {
-"use strict";
+import Logo from "./Logo"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _Logo = _interopRequireDefault(require("./Logo"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var LogoLoader = function LogoLoader() {
+const LogoLoader = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".logoLoader", m(".heartbeat", m(_Logo["default"])));
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => m(".logoLoader", m(".heartbeat", m(Logo))),
+  }
+}
 
-var _default = LogoLoader;
-exports["default"] = _default;
+export default LogoLoader
+
 });
 
 ;require.register("Components/Masonry/brick.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var Brick = function Brick() {
-  var _dom = null;
+const Brick = () => {
+  let _dom = null
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          classList = _ref$attrs.classList,
-          data = _ref$attrs.data,
-          parent = _ref$attrs.parent,
-          redraw = _ref$attrs.redraw;
-      return m(".brick", {
-        "class": classList
-      }, m(".content", [data.title && m("h3.title", data.title), m(".description", [m("img", {
-        onload: function onload(x) {// console.log("brick image onload", x, _dom)
-          // m.redraw()
+    view: ({ attrs: { classList, data, parent, redraw } }) =>
+      m(
+        ".brick",
+        {
+          class: classList,
         },
-        oncreate: function oncreate(_ref2) {
-          var dom = _ref2.dom;
-          _dom = dom; // console.log("brick image oncreate", dom)
-          // console.log("brick image oncreate and complete", parent, dom)
+        m(".content", [
+          data.title && m("h3.title", data.title),
+          m(".description", [
+            m("img", {
+              onload: (x) => {
+                // console.log("brick image onload", x, _dom)
+                // m.redraw()
+              },
+              oncreate: ({ dom }) => {
+                _dom = dom
+                // console.log("brick image oncreate", dom)
+                // console.log("brick image oncreate and complete", parent, dom)
+                if (parent) {
+                  redraw(parent)(dom)
+                }
+              },
+              src: `https://via.placeholder.com/${data.imgSrc}`,
+            }),
 
-          if (parent) {
-            redraw(parent)(dom);
-          }
-        },
-        src: "https://via.placeholder.com/".concat(data.imgSrc)
-      }), m("p", data.description)])]));
-    }
-  };
-};
+            m("p", data.description),
+          ]),
+        ])
+      ),
+  }
+}
 
-var _default = Brick;
-exports["default"] = _default;
+export default Brick
+
 });
 
 ;require.register("Components/Masonry/index.js", function(exports, require, module) {
-"use strict";
+import Brick from "./brick"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const resizeGridItem = (dom) => (item) => {
+  let grid = dom
 
-var _brick = _interopRequireDefault(require("./brick"));
+  let rowHeight = parseInt(
+    window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
+  )
+  let rowGap = parseInt(
+    window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
+  )
+  let rowSpan = Math.ceil(
+    (item.querySelector(".content").getBoundingClientRect().height + rowGap) /
+      (rowHeight + rowGap)
+  )
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+  return (item.style.gridRowEnd = "span " + rowSpan)
+}
 
-var resizeGridItem = function resizeGridItem(dom) {
-  return function (item) {
-    var grid = dom;
-    var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-auto-rows"));
-    var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-row-gap"));
-    var rowSpan = Math.ceil((item.querySelector(".content").getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    return item.style.gridRowEnd = "span " + rowSpan;
-  };
-};
+const onResize = (dom) => Array.from(dom.children).map(resizeGridItem(dom))
 
-var onResize = function onResize(dom) {
-  return Array.from(dom.children).map(resizeGridItem(dom));
-};
+const resizeAllGridItems = (dom) => {
+  window.addEventListener("resize", (x) => onResize(dom))
+  return onResize(dom)
+}
 
-var resizeAllGridItems = function resizeAllGridItems(dom) {
-  window.addEventListener("resize", function (x) {
-    return onResize(dom);
-  });
-  return onResize(dom);
-};
-
-var Masonry = function Masonry() {
-  var _dom = null;
+const Masonry = () => {
+  let _dom = null
   return {
-    oncreate: function oncreate(_ref) {
-      var dom = _ref.dom;
-      _dom = dom;
-      resizeAllGridItems(dom);
+    oncreate: ({ dom }) => {
+      _dom = dom
+      resizeAllGridItems(dom)
     },
-    view: function view(_ref2) {
-      var data = _ref2.attrs.data;
-      return m(".grid", data.map(function (brick) {
-        return m(_brick["default"], {
-          classList: "item",
-          data: brick,
-          parent: _dom,
-          redraw: resizeGridItem
-        });
-      }));
-    }
-  };
-};
+    view: ({ attrs: { data } }) =>
+      m(
+        ".grid",
+        data.map((brick) =>
+          m(Brick, {
+            classList: "item",
+            data: brick,
+            parent: _dom,
+            redraw: resizeGridItem,
+          })
+        )
+      ),
+  }
+}
 
-var _default = Masonry;
-exports["default"] = _default;
+export default Masonry
+
 });
 
 ;require.register("Components/Modal.js", function(exports, require, module) {
-"use strict";
+import { SlideInLeft, SlideOutRight } from "Styles/animations"
+const Modal = {
+  oncreate: SlideInLeft,
+  onbeforeremove: SlideOutRight,
+  view: ({ attrs: { classList, isActive, close, title, content, footer } }) => {
+    console.log("MODAL", classList, isActive, close, title, content, footer)
+    return m(
+      `section.modal.${classList}`,
+      { class: isActive ? "active" : "", id: "modal" },
+      [
+        m("a.modal-overlay", {
+          "aria-label": "Close",
+          onclick: () => close(),
+        }),
+        m(".modal-container", { role: "document" }, [
+          m(".modal-header", [
+            m("a.btn btn-clear float-right", {
+              id: "modal-close",
+              "aria-label": "Close",
+              onclick: () => close(),
+            }),
+            m(".modal-title h3", title),
+          ]),
+          m(".modal-body", m(".content", content)),
+          m(".modal-footer", footer),
+        ]),
+      ]
+    )
+  },
+}
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+export default Modal
 
-var _animations = require("Styles/animations");
-
-var Modal = {
-  oncreate: _animations.SlideInLeft,
-  onbeforeremove: _animations.SlideOutRight,
-  view: function view(_ref) {
-    var _ref$attrs = _ref.attrs,
-        classList = _ref$attrs.classList,
-        isActive = _ref$attrs.isActive,
-        close = _ref$attrs.close,
-        title = _ref$attrs.title,
-        content = _ref$attrs.content,
-        footer = _ref$attrs.footer;
-    console.log("MODAL", classList, isActive, close, title, content, footer);
-    return m("section.modal.".concat(classList), {
-      "class": isActive ? "active" : "",
-      id: "modal"
-    }, [m("a.modal-overlay", {
-      "aria-label": "Close",
-      onclick: function onclick() {
-        return close();
-      }
-    }), m(".modal-container", {
-      role: "document"
-    }, [m(".modal-header", [m("a.btn btn-clear float-right", {
-      id: "modal-close",
-      "aria-label": "Close",
-      onclick: function onclick() {
-        return close();
-      }
-    }), m(".modal-title h3", title)]), m(".modal-body", m(".content", content)), m(".modal-footer", footer)])]);
-  }
-};
-var _default = Modal;
-exports["default"] = _default;
 });
 
 ;require.register("Components/Selector.js", function(exports, require, module) {
-"use strict";
+import { saveStorageTask } from "Utils/storage"
+import { AddToCartOut } from "Styles/animations"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const Selector = () => {
+  const state = {}
+  const ResetState = () => {
+    state.quantity = null
+    state.gender = "Select a Gender"
+  }
 
-var _storage = require("Utils/storage");
-
-var _animations = require("Styles/animations");
-
-var Selector = function Selector() {
-  var state = {};
-
-  var ResetState = function ResetState() {
-    state.quantity = null;
-    state.gender = "Select a Gender";
-  };
-
-  var saveToStorage = function saveToStorage(mdl) {
-    var onError = function onError(e) {
-      return console.log("Error saving", e);
-    };
-
-    var onSuccess = function onSuccess(s) {
-      ResetState();
-    };
-
-    (0, _storage.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
-  };
-
-  var addToCart = function addToCart(mdl) {
-    return function (product) {
-      return function (state) {
-        mdl.addToCart.show(product);
-        mdl.cart[product][state.gender] += parseInt(state.quantity);
-        saveToStorage(mdl);
-      };
-    };
-  };
-
-  return {
-    oninit: function oninit() {
-      return ResetState();
-    },
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          product = _ref$attrs.product;
-      return m(".frow", m(".frow content-center gutters row-between pt-20", [m(".col-sm-1-4", m("h2.pb-10", "".concat(mdl.state.currency()).concat(mdl.state.prices[product]))), m(".col-sm-1-4", m("label", m("input", {
-        type: "number",
-        inputmode: "numeric",
-        pattern: "[0-9]*",
-        placeholder: "quantity",
-        value: state.quantity,
-        oninput: function oninput(e) {
-          return state.quantity = e.target.value;
-        }
-      }))), m(".col-sm-1-4", m("label", m("select", {
-        value: state.gender,
-        onchange: function onchange(e) {
-          return state.gender = e.target.value;
-        }
-      }, [m("option", {
-        value: null
-      }, "Select a Gender"), m("option", {
-        value: "Male"
-      }, "Male"), m("option", {
-        value: "Female"
-      }, "Female"), m("option", {
-        value: "Unisex"
-      }, "Unisex")]))), mdl.addToCart.show() == product && m(".animated", {
-        oncreate: _animations.AddToCartOut,
-        id: "add-to-cart-img",
-        style: {
-          "background-image": "url(".concat(mdl.addToCart.id(), ")")
-        }
-      }), m(".col-sm-1-4", m("button", {
-        disabled: state.quantity == undefined || state.gender == "Select a Gender",
-        onclick: function onclick() {
-          return addToCart(mdl)(product)(state);
-        }
-      }, "Add To Bag"))]));
+  const saveToStorage = (mdl) => {
+    const onError = (e) => console.log("Error saving", e)
+    const onSuccess = (s) => {
+      ResetState()
     }
-  };
-};
 
-var _default = Selector;
-exports["default"] = _default;
+    saveStorageTask(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess)
+  }
+
+  const addToCart = (mdl) => (product) => (state) => {
+    mdl.addToCart.show(product)
+    mdl.cart[product][state.gender] += parseInt(state.quantity)
+    saveToStorage(mdl)
+  }
+  return {
+    oninit: () => ResetState(),
+    view: ({ attrs: { mdl, product } }) => {
+      return m(
+        ".frow",
+        m(".frow content-center gutters row-between pt-20", [
+          m(
+            ".col-sm-1-4",
+            m("h2.pb-10", `${mdl.state.currency()}${mdl.state.prices[product]}`)
+          ),
+          m(
+            ".col-sm-1-4",
+            m(
+              "label",
+              m("input", {
+                type: "number",
+                inputmode: "numeric",
+                pattern: "[0-9]*",
+                placeholder: "quantity",
+                value: state.quantity,
+                oninput: (e) => (state.quantity = e.target.value),
+              })
+            )
+          ),
+          m(
+            ".col-sm-1-4",
+            m(
+              "label",
+
+              m(
+                "select",
+                {
+                  value: state.gender,
+                  onchange: (e) => (state.gender = e.target.value),
+                },
+                [
+                  m("option", { value: null }, "Select a Gender"),
+                  m("option", { value: "Male" }, "Male"),
+                  m("option", { value: "Female" }, "Female"),
+                  m("option", { value: "Unisex" }, "Unisex"),
+                ]
+              )
+            )
+          ),
+          mdl.addToCart.show() == product &&
+            m(".animated", {
+              oncreate: AddToCartOut,
+              id: "add-to-cart-img",
+              style: {
+                "background-image": `url(${mdl.addToCart.id()})`,
+              },
+            }),
+          m(
+            ".col-sm-1-4",
+            m(
+              "button",
+              {
+                disabled:
+                  state.quantity == undefined ||
+                  state.gender == "Select a Gender",
+                onclick: () => addToCart(mdl)(product)(state),
+              },
+
+              "Add To Bag"
+            )
+          ),
+        ])
+      )
+    },
+  }
+}
+
+export default Selector
+
 });
 
 ;require.register("Components/Single_Carousel.js", function(exports, require, module) {
-"use strict";
+import { ArrowLine } from "@mithril-icons/clarity/cjs/index"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _index = require("@mithril-icons/clarity/cjs/index");
-
-var show = function show(dir, idx, cid) {
-  var slideNum;
-
+const show = (dir, idx, cid) => {
+  let slideNum
   if (dir == "prev") {
-    slideNum = idx == 0 ? 3 : idx - 1;
+    slideNum = idx == 0 ? 3 : idx - 1
   }
 
   if (dir == "next") {
-    slideNum = idx == 3 ? 0 : idx + 1;
+    slideNum = idx == 3 ? 0 : idx + 1
   }
 
-  console.log(dir, idx, "".concat(cid, "-slide-").concat(slideNum));
-  return "".concat(cid, "-slide-").concat(slideNum);
-};
+  console.log(dir, idx, `${cid}-slide-${slideNum}`)
+  return `${cid}-slide-${slideNum}`
+}
 
-var Carousel = function Carousel() {
+const Carousel = () => {
   return {
-    onupdate: function onupdate(o, n) {
-      return console.log(o, n);
-    },
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          cid = _ref$attrs.cid,
-          data = _ref$attrs.data;
-      return m(".carousel", {
-        role: "document"
-      }, [data.map(function (item, idx) {
-        return m("input.carousel-locator", {
-          id: "".concat(cid, "-slide-").concat(idx),
-          type: "radio",
-          name: "carousel-radio",
-          hidden: true,
-          checked: true
-        });
-      }), m(".carousel-container", data.map(function (item, idx) {
-        return m("figure.carousel-item", [m("label.item-next btn btn-action btn-lg", {
-          "for": show("next", idx, cid)
-        }, [m("i.icon icon-arrow-right", m(".point-right", m(_index.ArrowLine)))]), m("img.img-responsive rounded", {
-          src: item
-        }), m("label.item-prev btn btn-action btn-lg", {
-          "for": show("prev", idx, cid)
-        }, [m("i.icon icon-arrow-left", m(".point-left", m(_index.ArrowLine)))])]);
-      })), m(".carousel-nav", data.map(function (item, idx) {
-        return m("label.nav-item text-hide c-hand", {
-          "for": "".concat(cid, "-slide-").concat(idx)
-        });
-      }))]);
-    }
-  };
-};
+    onupdate: (o, n) => console.log(o, n),
+    view: ({ attrs: { cid, data } }) =>
+      m(".carousel", { role: "document" }, [
+        data.map((item, idx) =>
+          m("input.carousel-locator", {
+            id: `${cid}-slide-${idx}`,
+            type: "radio",
+            name: "carousel-radio",
+            hidden: true,
+            checked: true,
+          })
+        ),
+        m(
+          ".carousel-container",
+          data.map((item, idx) =>
+            m("figure.carousel-item", [
+              m(
+                "label.item-next btn btn-action btn-lg",
+                { for: show("next", idx, cid) },
+                [m("i.icon icon-arrow-right", m(".point-right", m(ArrowLine)))]
+              ),
+              m("img.img-responsive rounded", { src: item }),
+              m(
+                "label.item-prev btn btn-action btn-lg",
+                { for: show("prev", idx, cid) },
+                [m("i.icon icon-arrow-left", m(".point-left", m(ArrowLine)))]
+              ),
+            ])
+          )
+        ),
+        m(
+          ".carousel-nav",
+          data.map((item, idx) =>
+            m("label.nav-item text-hide c-hand", {
+              for: `${cid}-slide-${idx}`,
+            })
+          )
+        ),
+      ]),
+  }
+}
 
-var _default = Carousel;
-exports["default"] = _default;
+export default Carousel
+
 });
 
 ;require.register("Components/cart-icon.js", function(exports, require, module) {
-"use strict";
+import { ShoppingBagLine } from "@mithril-icons/clarity/cjs"
+import { toPairs } from "ramda"
+import { toProducts, getQuantity } from "Utils/helpers"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _cjs = require("@mithril-icons/clarity/cjs");
-
-var _ramda = require("ramda");
-
-var _helpers = require("Utils/helpers");
-
-var itemAddedToCart = function itemAddedToCart(mdl) {
-  var res = "";
-
+const itemAddedToCart = (mdl) => {
+  let res = ""
   if (mdl.addToCart.show()) {
-    res = "ping";
-    setTimeout(function () {
-      res = "";
-      mdl.addToCart.show(null);
-      m.redraw();
-    }, 500);
-    return res;
+    res = "ping"
+
+    setTimeout(() => {
+      res = ""
+      mdl.addToCart.show(null)
+      m.redraw()
+    }, 500)
+
+    return res
   }
-};
+}
 
-var CartIcon = function CartIcon() {
+const CartIcon = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".animated.clickable", {
-        id: "cart-icon",
-        onupdate: function onupdate() {
-          return mdl.addToCart.show(null);
+    view: ({ attrs: { mdl } }) =>
+      m(
+        ".animated.clickable",
+        {
+          id: "cart-icon",
+          onupdate: () => mdl.addToCart.show(null),
+          class: itemAddedToCart(mdl),
+          onclick: () => mdl.state.showCartModal(true),
         },
-        "class": itemAddedToCart(mdl),
-        onclick: function onclick() {
-          return mdl.state.showCartModal(true);
-        }
-      }, [m(_cjs.ShoppingBagLine, {
-        width: "45px",
-        height: "45px"
-      }), (0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)) ? m(".cart-pill", (0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart))) : null]);
-    }
-  };
-};
+        [
+          m(ShoppingBagLine, {
+            width: "45px",
+            height: "45px",
+          }),
 
-var _default = CartIcon;
-exports["default"] = _default;
+          getQuantity(toProducts(mdl.cart))
+            ? m(".cart-pill", getQuantity(toProducts(mdl.cart)))
+            : null,
+        ]
+      ),
+  }
+}
+
+export default CartIcon
+
 });
 
 ;require.register("Components/icons/Logo.js", function(exports, require, module) {
-"use strict";
-
-var __assign = void 0 && (void 0).__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+"use strict"
+var __assign =
+  (this && this.__assign) ||
+  function () {
+    __assign =
+      Object.assign ||
+      function (t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i]
+          for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p]
+        }
+        return t
       }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var mithril_1 = __importDefault(require("mithril"));
-
-var Logo = {
-  view: function view(_a) {
-    var attrs = _a.attrs;
-    return mithril_1["default"]("svg", __assign({
-      version: 1.1,
-      width: 36,
-      height: 36,
-      viewBox: "0 0 36 36",
-      preserveAspectRatio: "xMidYMid meet",
-      xmlns: "http://www.w3.org/2000/svg",
-      "xmlns:xlink": "http://www.w3.org/1999/xlink"
-    }, attrs), mithril_1["default"]("title", {}, "logo"), mithril_1["default"]("path", {
-      d: "M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z"
-    }), mithril_1["default"]("path", {
-      d: "M25,15.5H11a1,1,0,0,0,0,2H25a1,1,0,0,0,0-2Z",
-      "class": "clr-i-outline clr-i-outline-path-2"
-    }), mithril_1["default"]("path", {
-      d: "M21.75,20.5h-7.5a1,1,0,0,0,0,2h7.5a1,1,0,0,0,0-2Z",
-      "class": "clr-i-outline clr-i-outline-path-3"
-    }), mithril_1["default"]("path", {
-      d: "M11.28,12.5H24.72a1,1,0,0,0,0-2H11.28a1,1,0,0,0,0,2Z",
-      "class": "clr-i-outline clr-i-outline-path-4"
-    }), mithril_1["default"]("rect", {
-      x: 0,
-      y: 0,
-      width: 36,
-      height: 36,
-      "fill-opacity": 0
-    }));
+    return __assign.apply(this, arguments)
   }
-};
-exports["default"] = Logo;
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod }
+  }
+Object.defineProperty(exports, "__esModule", { value: true })
+var mithril_1 = __importDefault(require("mithril"))
+var Logo = {
+  view: function (_a) {
+    var attrs = _a.attrs
+    return mithril_1.default(
+      "svg",
+      __assign(
+        {
+          version: 1.1,
+          width: 36,
+          height: 36,
+          viewBox: "0 0 36 36",
+          preserveAspectRatio: "xMidYMid meet",
+          xmlns: "http://www.w3.org/2000/svg",
+          "xmlns:xlink": "http://www.w3.org/1999/xlink",
+        },
+        attrs
+      ),
+      mithril_1.default("title", {}, "logo"),
+      mithril_1.default("path", {
+        d:
+          "M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z",
+      }),
+      mithril_1.default("path", {
+        d: "M25,15.5H11a1,1,0,0,0,0,2H25a1,1,0,0,0,0-2Z",
+        class: "clr-i-outline clr-i-outline-path-2",
+      }),
+      mithril_1.default("path", {
+        d: "M21.75,20.5h-7.5a1,1,0,0,0,0,2h7.5a1,1,0,0,0,0-2Z",
+        class: "clr-i-outline clr-i-outline-path-3",
+      }),
+      mithril_1.default("path", {
+        d: "M11.28,12.5H24.72a1,1,0,0,0,0-2H11.28a1,1,0,0,0,0,2Z",
+        class: "clr-i-outline clr-i-outline-path-4",
+      }),
+      mithril_1.default("rect", {
+        x: 0,
+        y: 0,
+        width: 36,
+        height: 36,
+        "fill-opacity": 0,
+      })
+    )
+  },
+}
+exports.default = Logo
+
 });
 
 ;require.register("Components/nav-link.js", function(exports, require, module) {
-"use strict";
+const handlers = (types, fn) =>
+  types.reduce((acc, type) => Object.assign(acc, { [type]: fn }), {})
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.NavLink = void 0;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var handlers = function handlers(types, fn) {
-  return types.reduce(function (acc, type) {
-    return Object.assign(acc, _defineProperty({}, type, fn));
-  }, {});
-};
-
-var NavLink = function NavLink() {
+export const NavLink = () => {
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          href = _ref$attrs.href,
-          link = _ref$attrs.link,
-          classList = _ref$attrs.classList,
-          rest = _objectWithoutProperties(_ref$attrs, ["mdl", "href", "link", "classList"]);
+    view: ({ attrs: { mdl, href, link, classList, ...rest } }) =>
+      m(
+        m.route.Link,
+        {
+          ...handlers(["onclick", "onmouseover", "onmouseout"], (e) =>
+            console.log(e.type)
+          ),
+          href,
+          class: `nav-link ${classList} ${
+            mdl.state.navSelected() == link && "shadow"
+          }`,
+          ...rest,
+        },
+        link
+      ),
+  }
+}
 
-      return m(m.route.Link, _objectSpread(_objectSpread({}, handlers(["onclick", "onmouseover", "onmouseout"], function (e) {
-        return console.log(e.type);
-      })), {}, {
-        href: href,
-        "class": "nav-link ".concat(classList, " ").concat(mdl.state.navSelected() == link && "shadow")
-      }, rest), link);
-    }
-  };
-};
+export default NavLink
 
-exports.NavLink = NavLink;
-var _default = NavLink;
-exports["default"] = _default;
 });
 
 ;require.register("Layouts/Body/cart-modal.js", function(exports, require, module) {
-"use strict";
+import { NavLink } from "Components/nav-link"
+import { isActiveRoute, getQuantity, getPrice } from "Utils/helpers"
+import { toPairs } from "ramda"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const products = (cart) =>
+  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
 
-var _navLink = require("Components/nav-link");
-
-var _helpers = require("Utils/helpers");
-
-var _ramda = require("ramda");
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var products = function products(cart) {
-  return (0, _ramda.toPairs)(cart).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        product = _ref2[0],
-        genders = _ref2[1];
-
-    return [product, (0, _ramda.toPairs)(genders)];
-  });
-};
-
-var Gender = function Gender() {
+const Gender = () => {
   return {
-    view: function view(_ref3) {
-      var _ref3$attrs = _ref3.attrs,
-          mdl = _ref3$attrs.mdl,
-          _ref3$attrs$gender = _slicedToArray(_ref3$attrs.gender, 2),
-          sex = _ref3$attrs$gender[0],
-          quantity = _ref3$attrs$gender[1];
-
-      return quantity ? m(".", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
-    }
-  };
-};
-
-var Product = function Product(_ref4) {
-  var _ref4$attrs = _ref4.attrs,
-      mdl = _ref4$attrs.mdl,
-      _ref4$attrs$p = _slicedToArray(_ref4$attrs.p, 2),
-      title = _ref4$attrs$p[0],
-      genders = _ref4$attrs$p[1];
-
-  var amount = (0, _helpers.getQuantity)(genders);
-  var price = (0, _helpers.getPrice)(mdl, title, genders);
-  return {
-    view: function view(_ref5) {
-      var _ref5$attrs = _ref5.attrs,
-          mdl = _ref5$attrs.mdl,
-          _ref5$attrs$p = _slicedToArray(_ref5$attrs.p, 2),
-          title = _ref5$attrs$p[0],
-          genders = _ref5$attrs$p[1];
-
-      return amount ? m(".frow column-start", [m("h3", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price)), m(".frow cart-item row-around", genders.map(function (gender) {
-        return m(Gender, {
-          mdl: mdl,
-          gender: gender
-        });
-      }))]) : null;
-    }
-  };
-};
-
-var getTotal = function getTotal(mdl, products) {
-  var getTotalPrice = (0, _helpers.getQuantity)(products.map(function (p) {
-    return (0, _helpers.getPrice)(mdl, p[0], p[1]);
-  }));
-  return getTotalPrice;
-};
-
-var CartModal = function CartModal(_ref6) {
-  var mdl = _ref6.attrs.mdl;
-  return {
-    oninit: function oninit(_ref7) {
-      var mdl = _ref7.attrs.mdl;
-      return mdl.state.showNavModal(false);
+    view: ({
+      attrs: {
+        mdl,
+        gender: [sex, quantity],
+      },
+    }) => {
+      return quantity
+        ? m(".", [
+            m("img", { src: "https://via.placeholder.com/80" }),
+            m("h4", `${sex} : ${quantity}`),
+          ])
+        : null
     },
-    view: function view(_ref8) {
-      var mdl = _ref8.attrs.mdl;
-      return m(".modalOverlay-right.animated", {
-        onclick: function onclick(e) {
-          mdl.state.showCartModal(false);
-        }
-      }, m(".modal", {
-        style: {
-          right: 0
-        },
-        id: "cart-modal"
-      }, [m("h1.title text-center", "Shopping Cart"), getTotal(mdl, products(mdl.cart)) ? m(_navLink.NavLink, {
-        mdl: mdl,
-        href: "/cart",
-        classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
-        link: "Update Cart"
-      }) : null, products(mdl.cart).map(function (p) {
-        return m(Product, {
-          mdl: mdl,
-          p: p
-        });
-      }), getTotal(mdl, products(mdl.cart)) ? m(".frow ", m(_navLink.NavLink, {
-        mdl: mdl,
-        href: "/checkout",
-        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " para button m-0"),
-        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(products(mdl.cart)), " for ").concat(mdl.state.currency()).concat(getTotal(mdl, products(mdl.cart))))]
-      })) : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),,]));
-    }
-  };
-};
+  }
+}
 
-var _default = CartModal;
-exports["default"] = _default;
+const Product = ({
+  attrs: {
+    mdl,
+    p: [title, genders],
+  },
+}) => {
+  let amount = getQuantity(genders)
+
+  let price = getPrice(mdl, title, genders)
+
+  return {
+    view: ({
+      attrs: {
+        mdl,
+        p: [title, genders],
+      },
+    }) => {
+      return amount
+        ? m(".frow column-start", [
+            m("h3", `${amount} ${title} for ${mdl.state.currency()}${price}`),
+            m(
+              ".frow cart-item row-around",
+              genders.map((gender) => m(Gender, { mdl, gender }))
+            ),
+          ])
+        : null
+    },
+  }
+}
+
+const getTotal = (mdl, products) => {
+  const getTotalPrice = getQuantity(
+    products.map((p) => getPrice(mdl, p[0], p[1]))
+  )
+  return getTotalPrice
+}
+
+const CartModal = ({ attrs: { mdl } }) => {
+  return {
+    oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
+    view: ({ attrs: { mdl } }) =>
+      m(
+        ".modalOverlay-right.animated",
+        {
+          onclick: (e) => {
+            mdl.state.showCartModal(false)
+          },
+        },
+        m(
+          `.modal`,
+          {
+            style: { right: 0 },
+            id: "cart-modal",
+          },
+
+          [
+            m("h1.title text-center", "Shopping Cart"),
+            getTotal(mdl, products(mdl.cart))
+              ? m(NavLink, {
+                  mdl,
+                  href: `/cart`,
+                  classList: `${isActiveRoute(`/cart`)} para button m-0`,
+                  link: "Update Cart",
+                })
+              : null,
+
+            products(mdl.cart).map((p) => m(Product, { mdl, p })),
+
+            getTotal(mdl, products(mdl.cart))
+              ? m(
+                  ".frow ",
+                  m(NavLink, {
+                    mdl,
+                    href: `/checkout`,
+                    classList: `${isActiveRoute(`/checkout`)} para button m-0`,
+                    link: [
+                      "Proceed to Checkout",
+                      m(
+                        "h1.bold text-center",
+                        `Total of ${getQuantity(
+                          products(mdl.cart)
+                        )} for ${mdl.state.currency()}${getTotal(
+                          mdl,
+                          products(mdl.cart)
+                        )}`
+                      ),
+                    ],
+                  })
+                )
+              : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),
+            ,
+          ]
+        )
+      ),
+  }
+}
+
+export default CartModal
+
 });
 
 ;require.register("Layouts/Body/index.js", function(exports, require, module) {
-"use strict";
+import CartModal from "./cart-modal.js"
+import NavModal from "./nav-modal.js"
+import {
+  SlideOutRight,
+  SlideOutLeft,
+  SlideInRight,
+  SlideInLeft,
+} from "Styles/animations.js"
+import { propEq } from "ramda"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+let isShowingProducts = (mdl) =>
+  mdl.Routes.filter((r) => r.route == mdl.state.route.route)[0]
+    .children.map((r) => mdl.Routes.filter(propEq("id", r))[0])
+    .any()
 
-var _cartModal = _interopRequireDefault(require("./cart-modal.js"));
+let isShowingRoutes = (mdl) => mdl.settings.screenSize !== "phone"
 
-var _navModal = _interopRequireDefault(require("./nav-modal.js"));
+const getStyle = (mdl) => ({
+  marginTop: isShowingRoutes(mdl)
+    ? isShowingProducts(mdl)
+      ? "180px"
+      : "140px"
+    : isShowingProducts(mdl)
+    ? "140px"
+    : "100px",
+})
 
-var _animations = require("Styles/animations.js");
-
-var _ramda = require("ramda");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var isShowingProducts = function isShowingProducts(mdl) {
-  return mdl.Routes.filter(function (r) {
-    return r.route == mdl.state.route.route;
-  })[0].children.map(function (r) {
-    return mdl.Routes.filter((0, _ramda.propEq)("id", r))[0];
-  }).any();
-};
-
-var isShowingRoutes = function isShowingRoutes(mdl) {
-  return mdl.settings.screenSize !== "phone";
-};
-
-var getStyle = function getStyle(mdl) {
+const Body = () => {
   return {
-    marginTop: isShowingRoutes(mdl) ? isShowingProducts(mdl) ? "180px" : "140px" : isShowingProducts(mdl) ? "140px" : "100px"
-  };
-};
+    view: ({ attrs: { mdl, children } }) =>
+      m(
+        ".body",
+        {
+          id: "body",
+          style: getStyle(mdl),
+        },
+        m(".frow column-center items-stretch", [
+          mdl.settings.screenSize !== "desktop" &&
+            mdl.state.showNavModal() &&
+            m(NavModal, {
+              oncreate: SlideInLeft,
+              onbeforeremove: SlideOutRight,
+              mdl,
+            }),
+          mdl.state.showCartModal() &&
+            m(CartModal, {
+              oncreate: SlideInRight,
+              onbeforeremove: SlideOutLeft,
+              mdl,
+            }),
+          [
+            m(
+              ".text-4x",
+              m("h1.title.mb-20.text-center", mdl.state.route.name)
+            ),
+            children,
+          ],
+        ])
+      ),
+  }
+}
 
-var Body = function Body() {
-  return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          children = _ref$attrs.children;
-      return m(".body", {
-        id: "body",
-        style: getStyle(mdl)
-      }, m(".frow column-center items-stretch", [mdl.settings.screenSize !== "desktop" && mdl.state.showNavModal() && m(_navModal["default"], {
-        oncreate: _animations.SlideInLeft,
-        onbeforeremove: _animations.SlideOutRight,
-        mdl: mdl
-      }), mdl.state.showCartModal() && m(_cartModal["default"], {
-        oncreate: _animations.SlideInRight,
-        onbeforeremove: _animations.SlideOutLeft,
-        mdl: mdl
-      }), [m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)), children]]));
-    }
-  };
-};
+export default Body
 
-var _default = Body;
-exports["default"] = _default;
 });
 
 ;require.register("Layouts/Body/nav-modal.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link"
+import { isActiveRoute } from "Utils/index.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+let state = {
+  onHover: () => {},
+  selected: () => {},
+}
 
-var _navLink = _interopRequireDefault(require("Components/nav-link"));
+let cart = {
+  Wraps: { Male: 0, Female: 0, Unisex: 0 },
+  "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
+  "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
+}
 
-var _index = require("Utils/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var state = {
-  onHover: function onHover() {},
-  selected: function selected() {}
-};
-var cart = {
-  Wraps: {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
-  },
-  "Christening Blankets": {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
-  },
-  "Burp Rags": {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
+const NavItem = () => {
+  return {
+    view: ({ attrs: { mdl, href, link, classList } }) =>
+      m(`li.nav-item`, m(NavLink, { mdl, state, href, link, classList })),
   }
-};
+}
 
-var NavItem = function NavItem() {
+const NavModal = () => {
+  let routes = (mdl) => mdl.Routes.filter((r) => r.group.includes("menu"))
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          href = _ref$attrs.href,
-          link = _ref$attrs.link,
-          classList = _ref$attrs.classList;
-      return m("li.nav-item", m(_navLink["default"], {
-        mdl: mdl,
-        state: state,
-        href: href,
-        link: link,
-        classList: classList
-      }));
-    }
-  };
-};
-
-var NavModal = function NavModal() {
-  var routes = function routes(mdl) {
-    return mdl.Routes.filter(function (r) {
-      return r.group.includes("menu");
-    });
-  };
-
-  return {
-    oncreate: function oncreate(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      mdl.state.showCartModal(false);
+    oncreate: ({ attrs: { mdl } }) => {
+      mdl.state.showCartModal(false)
     },
-    view: function view(_ref3) {
-      var mdl = _ref3.attrs.mdl;
-      return m(".modalOverlay-left.animated", {
-        onclick: function onclick(e) {
-          mdl.state.showNavModal(false);
-        }
-      }, m(".modal", {
-        id: "nav-modal"
-      }, m("ul.nav", {
-        id: ""
-      }, [mdl.state.isAuth() ? [m(_navLink["default"], {
-        state: state,
-        mdl: mdl,
-        href: "/account/".concat(mdl.user.name),
-        link: "Your Account",
-        classList: "".concat((0, _index.isActiveRoute)("/account/".concat(mdl.user.name)), " button")
-      }), m(_navLink["default"], {
-        mdl: mdl,
-        href: "/logout",
-        link: "Logout",
-        onclick: function onclick() {// localStorage.clear()
-          // sessionStorage.clear()
-          // mdl.state.isAuth(false)
-          // mdl.user = {}
-          // mdl.cart = cart
-          // m.route.set(m.route.get())
+    view: ({ attrs: { mdl } }) =>
+      m(
+        ".modalOverlay-left.animated",
+        {
+          onclick: (e) => {
+            mdl.state.showNavModal(false)
+          },
         },
-        classList: "bold auth-link"
-      })] : m(".frow.justify-start", [m(NavItem, {
-        mdl: mdl,
-        href: "/login",
-        link: "Login",
-        classList: "".concat((0, _index.isActiveRoute)("/login"), " button para")
-      }), m(NavItem, {
-        mdl: mdl,
-        href: "/register",
-        link: "Register",
-        classList: "".concat((0, _index.isActiveRoute)("/register"), " button para")
-      })]), routes(mdl).map(function (r) {
-        return m(NavItem, {
-          mdl: mdl,
-          href: r.route,
-          link: r.name,
-          classList: (0, _index.isActiveRoute)(r.route)
-        });
-      })])));
-    }
-  };
-};
+        m(
+          `.modal`,
+          {
+            id: "nav-modal",
+          },
 
-var _default = NavModal;
-exports["default"] = _default;
+          m(`ul.nav`, { id: "" }, [
+            mdl.state.isAuth()
+              ? [
+                  m(NavLink, {
+                    state,
+                    mdl,
+                    href: `/account/${mdl.user.name}`,
+                    link: "Your Account",
+                    classList: `${isActiveRoute(
+                      `/account/${mdl.user.name}`
+                    )} button`,
+                  }),
+                  m(NavLink, {
+                    mdl,
+                    href: "/logout",
+                    link: "Logout",
+                    onclick: () => {
+                      // localStorage.clear()
+                      // sessionStorage.clear()
+                      // mdl.state.isAuth(false)
+                      // mdl.user = {}
+                      // mdl.cart = cart
+                      // m.route.set(m.route.get())
+                    },
+                    classList: "bold auth-link",
+                  }),
+                ]
+              : m(".frow.justify-start", [
+                  m(NavItem, {
+                    mdl,
+                    href: "/login",
+                    link: "Login",
+                    classList: `${isActiveRoute("/login")} button para`,
+                  }),
+
+                  m(NavItem, {
+                    mdl,
+                    href: "/register",
+                    link: "Register",
+                    classList: `${isActiveRoute("/register")} button para`,
+                  }),
+                ]),
+            routes(mdl).map((r) =>
+              m(NavItem, {
+                mdl,
+                href: r.route,
+                link: r.name,
+                classList: isActiveRoute(r.route),
+              })
+            ),
+          ])
+        )
+      ),
+  }
+}
+
+export default NavModal
+
 });
 
 ;require.register("Layouts/Header/ProgressBar.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var ProgressBar = function ProgressBar() {
+const ProgressBar = () => {
   return {
-    view: function view(_ref) {
-      var _ref$attrs$mdl$state$ = _ref.attrs.mdl.state.loadingProgress,
-          value = _ref$attrs$mdl$state$.value,
-          max = _ref$attrs$mdl$state$.max;
-      return m(".progress-bar", m("progress.progress-bar", {
-        id: "progressbar",
-        value: value ? value() : 0,
-        max: max ? max() : 0
-      }));
-    }
-  };
-};
+    view: ({
+      attrs: {
+        mdl: {
+          state: {
+            loadingProgress: { value, max },
+          },
+        },
+      },
+    }) =>
+      m(
+        ".progress-bar",
+        m("progress.progress-bar", {
+          id: "progressbar",
+          value: value ? value() : 0,
+          max: max ? max() : 0,
+        })
+      ),
+  }
+}
 
-var _default = ProgressBar;
-exports["default"] = _default;
+export default ProgressBar
+
 });
 
 ;require.register("Layouts/Header/index.js", function(exports, require, module) {
-"use strict";
+import NavBar from "./navbar.js"
+import SubNavBar from "./sub-nav.js"
+import ToolBar from "./toolbar.js"
+import ProgressBar from "./ProgressBar.js"
+import { propEq } from "ramda"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navbar = _interopRequireDefault(require("./navbar.js"));
-
-var _subNav = _interopRequireDefault(require("./sub-nav.js"));
-
-var _toolbar = _interopRequireDefault(require("./toolbar.js"));
-
-var _ProgressBar = _interopRequireDefault(require("./ProgressBar.js"));
-
-var _ramda = require("ramda");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Header = function Header(_ref) {
-  var mdl = _ref.attrs.mdl;
-
-  var subRoutes = function subRoutes(mdl) {
-    return mdl.Routes.filter(function (r) {
-      return r.route == mdl.state.route.route;
-    })[0].children.map(function (r) {
-      return mdl.Routes.filter((0, _ramda.propEq)("id", r))[0];
-    });
-  };
+const Header = ({ attrs: { mdl } }) => {
+  let subRoutes = (mdl) =>
+    mdl.Routes.filter((r) => r.route == mdl.state.route.route)[0].children.map(
+      (r) => mdl.Routes.filter(propEq("id", r))[0]
+    )
 
   return {
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return m("nav.header", {
-        id: "header",
-        style: {
-          maxHeight: subRoutes(mdl).any() ? "140px" : "100px"
-        }
-      }, [mdl.state.isLoading() && m(_ProgressBar["default"], {
-        mdl: mdl
-      }), m(_toolbar["default"], {
-        mdl: mdl
-      }), m(_navbar["default"], {
-        mdl: mdl
-      }), m(_subNav["default"], {
-        mdl: mdl,
-        subRoutes: subRoutes
-      })]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => {
+      return m(
+        "nav.header",
+        {
+          id: "header",
+          style: { maxHeight: subRoutes(mdl).any() ? "140px" : "100px" },
+        },
+        [
+          mdl.state.isLoading() && m(ProgressBar, { mdl }),
+          m(ToolBar, { mdl }),
+          m(NavBar, { mdl }),
+          m(SubNavBar, {
+            mdl,
+            subRoutes,
+          }),
+        ]
+      )
+    },
+  }
+}
 
-var _default = Header;
-exports["default"] = _default;
+export default Header
+
 });
 
 ;require.register("Layouts/Header/navbar.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link.js"
+import { isActiveRoute } from "Utils/index.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
-
-var _index = require("Utils/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var NavBar = function NavBar() {
-  var ProductRoutes = function ProductRoutes(mdl) {
-    return mdl.Routes.filter(function (r) {
-      return r.group.includes("navbar");
-    });
-  };
-
-  var SidebarRoutes = function SidebarRoutes(mdl) {
-    return mdl.Routes.filter(function (r) {
-      return r.group.includes("menu");
-    });
-  };
-
+const NavBar = () => {
+  let ProductRoutes = (mdl) =>
+    mdl.Routes.filter((r) => r.group.includes("navbar"))
+  let SidebarRoutes = (mdl) =>
+    mdl.Routes.filter((r) => r.group.includes("menu"))
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return [m(".navbar.navbar1", {
-        id: "navbar"
-      }, m("nav.frow row-around", ProductRoutes(mdl).map(function (r) {
-        return m(_navLink["default"], {
-          mdl: mdl,
-          href: r.route,
-          link: r.name,
-          classList: (0, _index.isActiveRoute)(r.route)
-        });
-      }))), m(".navbar.navbar2.hidden-xs", m("nav.frow row-around", SidebarRoutes(mdl).map(function (r) {
-        return m(_navLink["default"], {
-          mdl: mdl,
-          href: r.route,
-          link: r.name,
-          classList: (0, _index.isActiveRoute)(r.route)
-        });
-      })))];
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => [
+      m(
+        ".navbar.navbar1",
+        { id: "navbar" },
 
-var _default = NavBar;
-exports["default"] = _default;
+        m(
+          "nav.frow row-around",
+          ProductRoutes(mdl).map((r) => {
+            return m(NavLink, {
+              mdl,
+              href: r.route,
+              link: r.name,
+              classList: isActiveRoute(r.route),
+            })
+          })
+        )
+      ),
+      m(
+        ".navbar.navbar2.hidden-xs",
+        m(
+          "nav.frow row-around",
+          SidebarRoutes(mdl).map((r) => {
+            return m(NavLink, {
+              mdl,
+              href: r.route,
+              link: r.name,
+              classList: isActiveRoute(r.route),
+            })
+          })
+        )
+      ),
+    ],
+  }
+}
+
+export default NavBar
+
 });
 
 ;require.register("Layouts/Header/sub-nav.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link.js"
+import { isActiveRoute } from "Utils/index.js"
+import { SlideDown, SlideUp } from "Styles/animations"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
-
-var _index = require("Utils/index.js");
-
-var _animations = require("Styles/animations");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var SubNavBar = function SubNavBar() {
+const SubNavBar = () => {
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          subRoutes = _ref$attrs.subRoutes;
-      return subRoutes(mdl).any() && m(".sub-navbar animated", {
-        oncreate: _animations.SlideDown,
-        onbeforeremove: _animations.SlideUp,
-        id: "sub-navbar"
-      }, m("nav.frow row-around", [subRoutes(mdl).map(function (r) {
-        return m(_navLink["default"], {
-          mdl: mdl,
-          href: r.route,
-          link: r.name,
-          classList: (0, _index.isActiveRoute)(r.route)
-        });
-      })]));
-    }
-  };
-};
+    view: ({ attrs: { mdl, subRoutes } }) => {
+      return (
+        subRoutes(mdl).any() &&
+        m(
+          ".sub-navbar animated",
+          {
+            oncreate: SlideDown,
+            onbeforeremove: SlideUp,
+            id: "sub-navbar",
+          },
+          m("nav.frow row-around", [
+            subRoutes(mdl).map((r) =>
+              m(NavLink, {
+                mdl,
+                href: r.route,
+                link: r.name,
+                classList: isActiveRoute(r.route),
+              })
+            ),
+          ])
+        )
+      )
+    },
+  }
+}
 
-var _default = SubNavBar;
-exports["default"] = _default;
+export default SubNavBar
+
 });
 
 ;require.register("Layouts/Header/toolbar.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link.js"
+import Hamburger from "Components/Hamburger.js"
+import Logo from "Components/Logo"
+import { isActiveRoute } from "Utils/index.js"
+import CartIcon from "Components/cart-icon"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
-
-var _Hamburger = _interopRequireDefault(require("Components/Hamburger.js"));
-
-var _Logo = _interopRequireDefault(require("Components/Logo"));
-
-var _index = require("Utils/index.js");
-
-var _cartIcon = _interopRequireDefault(require("Components/cart-icon"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var ToolBar = function ToolBar() {
+const ToolBar = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".toolbar.my-5", m(".frow row-between row-center", [m(".frow", [m(".navMenuButton visible-xs", {
-        onclick: function onclick() {
-          return mdl.state.showNavModal(true);
-        }
-      }, m(_Hamburger["default"], {
-        mdl: mdl
-      })), mdl.state.isAuth() ? [m(_navLink["default"], {
-        mdl: mdl,
-        href: "/account/".concat(mdl.user.name),
-        link: "Your Account",
-        classList: "".concat((0, _index.isActiveRoute)("/account/".concat(mdl.user.name)), " button hidden-xs")
-      }), m(_navLink["default"], {
-        mdl: mdl,
-        href: "/logout",
-        link: "Logout",
-        classList: "bold auth-link hidden-xs"
-      })] : m(".frow hidden-xs", [m(_navLink["default"], {
-        mdl: mdl,
-        href: "/login",
-        link: "Login",
-        classList: "".concat((0, _index.isActiveRoute)("/login"), " button auth-link")
-      }), m(_navLink["default"], {
-        mdl: mdl,
-        href: "/register",
-        link: "Register",
-        classList: "".concat((0, _index.isActiveRoute)("/register"), " button auth-link")
-      })])]), m(_navLink["default"], {
-        mdl: mdl,
-        href: "/",
-        classList: "logo",
-        link: m(_Logo["default"], {
-          id: "toolbar-logo",
-          "class": "frow row-center"
-        })
-      }), m(_cartIcon["default"], {
-        mdl: mdl
-      })]));
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      m(
+        ".toolbar.my-5",
+        m(".frow row-between row-center", [
+          m(".frow", [
+            m(
+              ".navMenuButton visible-xs",
+              {
+                onclick: () => mdl.state.showNavModal(true),
+              },
+              m(Hamburger, { mdl })
+            ),
+            mdl.state.isAuth()
+              ? [
+                  m(NavLink, {
+                    mdl,
+                    href: `/account/${mdl.user.name}`,
+                    link: "Your Account",
+                    classList: `${isActiveRoute(
+                      `/account/${mdl.user.name}`
+                    )} button hidden-xs`,
+                  }),
+                  m(NavLink, {
+                    mdl,
+                    href: "/logout",
+                    link: "Logout",
+                    classList: "bold auth-link hidden-xs",
+                  }),
+                ]
+              : m(".frow hidden-xs", [
+                  m(NavLink, {
+                    mdl,
+                    href: "/login",
+                    link: "Login",
+                    classList: `${isActiveRoute("/login")} button auth-link`,
+                  }),
 
-var _default = ToolBar;
-exports["default"] = _default;
+                  m(NavLink, {
+                    mdl,
+                    href: "/register",
+                    link: "Register",
+                    classList: `${isActiveRoute("/register")} button auth-link`,
+                  }),
+                ]),
+          ]),
+          m(NavLink, {
+            mdl,
+            href: "/",
+            classList: "logo",
+            link: m(Logo, { id: "toolbar-logo", class: "frow row-center" }),
+          }),
+          m(CartIcon, { mdl }),
+        ])
+      ),
+  }
+}
+
+export default ToolBar
+
 });
 
 ;require.register("Layouts/footer.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link.js"
+import { isActiveRoute } from "Utils/index.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
-
-var _index = require("Utils/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Footer = function Footer() {
+const Footer = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      var routes = mdl.Routes.filter(function (r) {
-        return r.group.includes("footer");
-      });
-      return m("footer.frow content-end items-end", {
-        id: "footer"
-      }, m(".frow row-container", routes.map(function (r) {
-        return m(_navLink["default"], {
-          mdl: mdl,
-          href: r.route,
-          link: r.name,
-          classList: (0, _index.isActiveRoute)(r.route)
-        });
-      })));
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => {
+      let routes = mdl.Routes.filter((r) => r.group.includes("footer"))
+      return m(
+        "footer.frow content-end items-end",
+        { id: "footer" },
+        m(
+          ".frow row-container",
+          routes.map((r) =>
+            m(NavLink, {
+              mdl,
+              href: r.route,
+              link: r.name,
+              classList: isActiveRoute(r.route),
+            })
+          )
+        )
+      )
+    },
+  }
+}
 
-var _default = Footer;
-exports["default"] = _default;
+export default Footer
+
 });
 
 ;require.register("Layouts/index.js", function(exports, require, module) {
-"use strict";
+import Header from "./Header/index.js"
+import Body from "./Body/index.js"
+import Footer from "./footer.js"
+import LogoLoader from "Components/LogoLoader"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _index = _interopRequireDefault(require("./Header/index.js"));
-
-var _index2 = _interopRequireDefault(require("./Body/index.js"));
-
-var _footer = _interopRequireDefault(require("./footer.js"));
-
-var _LogoLoader = _interopRequireDefault(require("Components/LogoLoader"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Layout = function Layout() {
+const Layout = () => {
   return {
-    view: function view(_ref) {
-      var children = _ref.children,
-          mdl = _ref.attrs.mdl;
-      return m(".layout", {
-        id: "layout",
-        role: "main"
-      }, m(_index["default"], {
-        mdl: mdl
-      }), mdl.state.isLoading() ? m(_LogoLoader["default"]) : m(_index2["default"], {
-        mdl: mdl,
-        children: children
-      }), m(_footer["default"], {
-        mdl: mdl
-      }));
-    }
-  };
-};
+    view: ({ children, attrs: { mdl } }) =>
+      m(
+        ".layout",
+        { id: "layout", role: "main" },
+        m(Header, { mdl }),
+        mdl.state.isLoading() ? m(LogoLoader) : m(Body, { mdl, children }),
+        m(Footer, { mdl })
+      ),
+  }
+}
 
-var _default = Layout;
-exports["default"] = _default;
+export default Layout
+
 });
 
 ;require.register("Models/Main.js", function(exports, require, module) {
-"use strict";
+import Routes from "../Routes/index.js"
+import { Data } from "./mock-data"
+import { jsonCopy } from "Utils"
+import http from "Utils/http"
+import { newCart } from "./cart"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const currencies = { $: "US Dollar", "£": "British Pound" }
 
-var _index = _interopRequireDefault(require("../Routes/index.js"));
-
-var _mockData = require("./mock-data");
-
-var _Utils = require("Utils");
-
-var _http = _interopRequireDefault(require("Utils/http"));
-
-var _cart = require("./cart");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var currencies = {
-  $: "US Dollar",
-  "£": "British Pound"
-};
-var state = {
+const state = {
   currency: Stream("$"),
   prices: {
     Wraps: 35,
     "Christening Blankets": 55,
-    "Burp Rags": 15
+    "Burp Rags": 15,
   },
   showAuthModal: Stream(false),
   showNavModal: Stream(false),
@@ -1421,174 +1280,85 @@ var state = {
   paginate: {
     page: Stream(1),
     total_pages: Stream(0),
-    total_results: Stream(0)
+    total_results: Stream(0),
   },
   query: Stream(""),
   isLoading: Stream(false),
   loadingProgress: {
     max: Stream(null),
-    value: Stream(null)
+    value: Stream(null),
   },
   dragging: {},
   isAuth: Stream(false),
-  navSelected: Stream("")
-};
-var user = {};
-var settings = {};
-var data = {};
-var errors = {};
-var addToCart = {
+  navSelected: Stream(""),
+}
+const user = {}
+const settings = {}
+const data = {}
+const errors = {}
+
+const addToCart = {
   id: Stream(null),
-  show: Stream(null)
-};
-var Model = {
-  currencies: currencies,
-  addToCart: addToCart,
-  http: _http["default"],
-  Data: _mockData.Data,
-  Routes: _index["default"],
-  state: state,
-  user: user,
-  cart: (0, _Utils.jsonCopy)(_cart.newCart),
-  data: data,
-  errors: errors,
-  settings: settings,
-  toggleAuthModal: function toggleAuthModal(mdl) {
-    return mdl.state.showAuthModal(!mdl.state.showAuthModal());
-  },
-  toggleCurrencies: function toggleCurrencies(mdl) {
-    return function (currency) {
-      return mdl.state.currency(currency);
-    };
-  }
-};
-var _default = Model;
-exports["default"] = _default;
+  show: Stream(null),
+}
+
+const Model = {
+  currencies,
+  addToCart,
+  http,
+  Data,
+  Routes,
+  state,
+  user,
+  cart: jsonCopy(newCart),
+  data,
+  errors,
+  settings,
+  toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
+  toggleCurrencies: (mdl) => (currency) => mdl.state.currency(currency),
+}
+
+export default Model
+
 });
 
 ;require.register("Models/cart.js", function(exports, require, module) {
-"use strict";
+export const newCart = {
+  Wraps: { Male: 0, Female: 0, Unisex: 0 },
+  "Christening Blankets": { Male: 0, Female: 0, Unisex: 0 },
+  "Burp Rags": { Male: 0, Female: 0, Unisex: 0 },
+}
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.newCart = void 0;
-var newCart = {
-  Wraps: {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
-  },
-  "Christening Blankets": {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
-  },
-  "Burp Rags": {
-    Male: 0,
-    Female: 0,
-    Unisex: 0
-  }
-};
-exports.newCart = newCart;
 });
 
 ;require.register("Models/index.js", function(exports, require, module) {
-"use strict";
+export * from "./cart.js"
+export * from "./states.js"
+import Model from "./Main"
+export default Model
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _exportNames = {};
-exports["default"] = void 0;
-
-var _cart = require("./cart.js");
-
-Object.keys(_cart).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _cart[key];
-    }
-  });
-});
-
-var _states = require("./states.js");
-
-Object.keys(_states).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _states[key];
-    }
-  });
-});
-
-var _Main = _interopRequireDefault(require("./Main"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default = _Main["default"];
-exports["default"] = _default;
 });
 
 ;require.register("Models/mock-data.js", function(exports, require, module) {
-"use strict";
+import { range, traverse } from "ramda"
+import { log } from "Utils"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Data = void 0;
+const getImg = ({ width, height }) => [
+  `https://loremflickr.com/${width}/${height}`,
+]
 
-var _ramda = require("ramda");
+export const Data = (size) => (amount) => {
+  let arr = [...Array(amount).keys()]
+  let res = arr.traverse((_) => getImg(size), Array.of)
+  console.log(res)
+  return res[0]
+  // return []
+}
 
-var _Utils = require("Utils");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var getImg = function getImg(_ref) {
-  var width = _ref.width,
-      height = _ref.height;
-  return ["https://loremflickr.com/".concat(width, "/").concat(height)];
-};
-
-var Data = function Data(size) {
-  return function (amount) {
-    var arr = _toConsumableArray(Array(amount).keys());
-
-    var res = arr.traverse(function (_) {
-      return getImg(size);
-    }, Array.of);
-    console.log(res);
-    return res[0]; // return []
-  };
-};
-
-exports.Data = Data;
 });
 
 ;require.register("Models/states.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.stateDict = exports.states = void 0;
-var states = {
+export const states = {
   AL: "Alabama",
   AK: "Alaska",
   AS: "American Samoa",
@@ -1647,2377 +1417,2045 @@ var states = {
   WA: "Washington",
   WV: "West Virginia",
   WI: "Wisconsin",
-  WY: "Wyoming"
-};
-exports.states = states;
+  WY: "Wyoming",
+}
 
-var stateDict = function stateDict(state) {
-  return states[state];
-};
+export const stateDict = (state) => states[state]
 
-exports.stateDict = stateDict;
 });
 
 ;require.register("Pages/Auth/Validations.js", function(exports, require, module) {
-"use strict";
+import { curryN, identity, lensProp, mergeAll } from "ramda"
+import { Success } from "data.validation"
+import { validate, isRequired, emailFormat } from "Utils"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.validateLoginTask = exports.validateUserRegistrationTask = void 0;
+const ValidateRegistration = Success(curryN(3, identity))
+const ValidateLogin = Success(curryN(2, identity))
 
-var _ramda = require("ramda");
+const nameLense = lensProp("name")
+const passwordLense = lensProp("password")
+const passwordConfirmLense = lensProp("confirmPassword")
+const emailLense = lensProp("email")
+const emailConfirmLense = lensProp("confirmEmail")
 
-var _data = require("data.validation");
+const NAME_REQUIRED_MSG = "A Name is required"
+const PASSWORD_REQUIRED_MSG = "A Password is required"
+const EMAIL_REQUIRED_MSG = "An Email is required"
+const EMAILS_MUST_MATCH = "Emails do not match"
+const INVALID_EMAIL_FORMAT = "Email must be a valid format"
+const PASSWORDS_MUST_MATCH = "Passwords do not match"
 
-var _Utils = require("Utils");
+const inputsMatch = (input1) => (input2) => input2 === input1
 
-var ValidateRegistration = (0, _data.Success)((0, _ramda.curryN)(3, _ramda.identity));
-var ValidateLogin = (0, _data.Success)((0, _ramda.curryN)(2, _ramda.identity));
-var nameLense = (0, _ramda.lensProp)("name");
-var passwordLense = (0, _ramda.lensProp)("password");
-var passwordConfirmLense = (0, _ramda.lensProp)("confirmPassword");
-var emailLense = (0, _ramda.lensProp)("email");
-var emailConfirmLense = (0, _ramda.lensProp)("confirmEmail");
-var NAME_REQUIRED_MSG = "A Name is required";
-var PASSWORD_REQUIRED_MSG = "A Password is required";
-var EMAIL_REQUIRED_MSG = "An Email is required";
-var EMAILS_MUST_MATCH = "Emails do not match";
-var INVALID_EMAIL_FORMAT = "Email must be a valid format";
-var PASSWORDS_MUST_MATCH = "Passwords do not match";
+const validateName = (data) =>
+  Success(data).apLeft(validate(isRequired, nameLense, NAME_REQUIRED_MSG, data))
 
-var inputsMatch = function inputsMatch(input1) {
-  return function (input2) {
-    return input2 === input1;
-  };
-};
+const validateEmails = (data) =>
+  Success(data)
+    .apLeft(validate(isRequired, emailLense, EMAIL_REQUIRED_MSG, data))
+    .apLeft(validate(isRequired, emailConfirmLense, EMAIL_REQUIRED_MSG, data))
+    .apLeft(
+      validate(
+        inputsMatch(data.confirmEmail),
+        emailLense,
+        EMAILS_MUST_MATCH,
+        data
+      )
+    )
+    .apLeft(
+      validate(
+        inputsMatch(data.email),
+        emailConfirmLense,
+        EMAILS_MUST_MATCH,
+        data
+      )
+    )
+    .apLeft(
+      validate(emailFormat, emailConfirmLense, INVALID_EMAIL_FORMAT, data)
+    )
+    .apLeft(validate(emailFormat, emailLense, INVALID_EMAIL_FORMAT, data))
 
-var validateName = function validateName(data) {
-  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, nameLense, NAME_REQUIRED_MSG, data));
-};
+const validateEmail = (data) =>
+  Success(data)
+    .apLeft(validate(isRequired, emailLense, EMAIL_REQUIRED_MSG, data))
+    .apLeft(validate(emailFormat, emailLense, INVALID_EMAIL_FORMAT, data))
 
-var validateEmails = function validateEmails(data) {
-  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, emailLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.isRequired, emailConfirmLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(inputsMatch(data.confirmEmail), emailLense, EMAILS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(inputsMatch(data.email), emailConfirmLense, EMAILS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailConfirmLense, INVALID_EMAIL_FORMAT, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailLense, INVALID_EMAIL_FORMAT, data));
-};
+const validatePasswords = (data) =>
+  Success(data)
+    .apLeft(validate(isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data))
+    .apLeft(
+      validate(isRequired, passwordConfirmLense, PASSWORD_REQUIRED_MSG, data)
+    )
+    .apLeft(
+      validate(
+        inputsMatch(data.password),
+        passwordConfirmLense,
+        PASSWORDS_MUST_MATCH,
+        data
+      )
+    )
+    .apLeft(
+      validate(
+        inputsMatch(data.confirmPassword),
+        passwordLense,
+        PASSWORDS_MUST_MATCH,
+        data
+      )
+    )
 
-var validateEmail = function validateEmail(data) {
-  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, emailLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailLense, INVALID_EMAIL_FORMAT, data));
-};
+const validatePassword = (data) =>
+  Success(data).apLeft(
+    validate(isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data)
+  )
 
-var validatePasswords = function validatePasswords(data) {
-  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordConfirmLense, PASSWORD_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(inputsMatch(data.password), passwordConfirmLense, PASSWORDS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(inputsMatch(data.confirmPassword), passwordLense, PASSWORDS_MUST_MATCH, data));
-};
+export const validateUserRegistrationTask = (data) =>
+  ValidateRegistration.ap(validateName(data))
+    .ap(validateEmails(data))
+    .ap(validatePasswords(data))
+    .failureMap(mergeAll)
+    .toTask()
 
-var validatePassword = function validatePassword(data) {
-  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data));
-};
+export const validateLoginTask = (data) =>
+  ValidateLogin.ap(validateEmail(data))
+    .ap(validatePassword(data))
+    .failureMap(mergeAll)
+    .toTask()
 
-var validateUserRegistrationTask = function validateUserRegistrationTask(data) {
-  return ValidateRegistration.ap(validateName(data)).ap(validateEmails(data)).ap(validatePasswords(data)).failureMap(_ramda.mergeAll).toTask();
-};
-
-exports.validateUserRegistrationTask = validateUserRegistrationTask;
-
-var validateLoginTask = function validateLoginTask(data) {
-  return ValidateLogin.ap(validateEmail(data)).ap(validatePassword(data)).failureMap(_ramda.mergeAll).toTask();
-};
-
-exports.validateLoginTask = validateLoginTask;
 });
 
 ;require.register("Pages/Auth/fns.js", function(exports, require, module) {
-"use strict";
+import { log } from "Utils/index"
+import { saveStorageTask } from "Utils/storage"
+import { mergeDeepWith, add } from "ramda"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.linkAccountTask = exports.createAccountTask = exports.registerUserTask = exports.loginTask = exports.loginUserTask = void 0;
+const mergeCarts = (accnt) => (cart) => mergeDeepWith(add, cart, accnt)
 
-var _index = require("Utils/index");
+const toAccountVM = (mdl) => (accnts) => {
+  let cart = mergeCarts(JSON.parse(accnts[0].cart))(mdl.cart)
+  mdl.user.account = { objectId: accnts[0].objectId, cart }
+  mdl.user.address = JSON.parse(accnts[0].address)
+  mdl.cart = cart
+  return cart
+}
 
-var _storage = require("Utils/storage");
+const setUserToken = (mdl) => (user) => {
+  sessionStorage.setItem("sb-user", JSON.stringify(user))
+  sessionStorage.setItem("sb-user-token", user["user-token"])
+  mdl.state.isAuth(true)
+  mdl.user = user
+  return user
+}
 
-var _ramda = require("ramda");
-
-var mergeCarts = function mergeCarts(accnt) {
-  return function (cart) {
-    return (0, _ramda.mergeDeepWith)(_ramda.add, cart, accnt);
-  };
-};
-
-var toAccountVM = function toAccountVM(mdl) {
-  return function (accnts) {
-    var cart = mergeCarts(JSON.parse(accnts[0].cart))(mdl.cart);
-    mdl.user.account = {
-      objectId: accnts[0].objectId,
-      cart: cart
-    };
-    mdl.user.address = JSON.parse(accnts[0].address);
-    mdl.cart = cart;
-    return cart;
-  };
-};
-
-var setUserToken = function setUserToken(mdl) {
-  return function (user) {
-    sessionStorage.setItem("sb-user", JSON.stringify(user));
-    sessionStorage.setItem("sb-user-token", user["user-token"]);
-    mdl.state.isAuth(true);
-    mdl.user = user;
-    return user;
-  };
-};
-
-var loginUserTask = function loginUserTask(mdl) {
-  return function (_ref) {
-    var email = _ref.email,
-        password = _ref.password;
-    return mdl.http.backEnd.postTask(mdl)("users/login")({
+export const loginUserTask = (mdl) => ({ email, password }) =>
+  mdl.http.backEnd
+    .postTask(mdl)("users/login")({
       login: email,
-      password: password
-    }).map(setUserToken(mdl));
-  };
-};
-
-exports.loginUserTask = loginUserTask;
-
-var getUserAccountTask = function getUserAccountTask(mdl) {
-  return function (_) {
-    return mdl.http.backEnd.getTask(mdl)("data/Accounts?where=userId%3D'".concat(mdl.user.objectId, "'")).map(toAccountVM(mdl));
-  };
-};
-
-var loginTask = function loginTask(mdl) {
-  return function (_ref2) {
-    var email = _ref2.email,
-        password = _ref2.password;
-    return loginUserTask(mdl)({
-      email: email,
-      password: password
-    }).chain(getUserAccountTask(mdl)).chain((0, _storage.saveStorageTask)(mdl)("sb-cart"));
-  };
-};
-
-exports.loginTask = loginTask;
-
-var registerUserTask = function registerUserTask(mdl) {
-  return function (_ref3) {
-    var name = _ref3.name,
-        email = _ref3.email,
-        password = _ref3.password,
-        isAdmin = _ref3.isAdmin;
-    return mdl.http.backEnd.postTask(mdl)("users/register")({
-      name: name,
-      email: email,
       password: password,
-      isAdmin: isAdmin
-    });
-  };
-};
+    })
+    .map(setUserToken(mdl))
 
-exports.registerUserTask = registerUserTask;
+const getUserAccountTask = (mdl) => (_) =>
+  mdl.http.backEnd
+    .getTask(mdl)(`data/Accounts?where=userId%3D'${mdl.user.objectId}'`)
+    .map(toAccountVM(mdl))
 
-var createAccountTask = function createAccountTask(mdl) {
-  return mdl.http.backEnd.postTask(mdl)("data/Accounts")({
+export const loginTask = (mdl) => ({ email, password }) =>
+  loginUserTask(mdl)({ email, password })
+    .chain(getUserAccountTask(mdl))
+    .chain(saveStorageTask(mdl)("sb-cart"))
+
+export const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
+  mdl.http.backEnd.postTask(mdl)("users/register")({
+    name,
+    email,
+    password,
+    isAdmin,
+  })
+
+export const createAccountTask = (mdl) =>
+  mdl.http.backEnd.postTask(mdl)("data/Accounts")({
     cart: JSON.stringify(mdl.cart),
-    userId: mdl.user.objectId
-  });
-};
+    userId: mdl.user.objectId,
+  })
 
-exports.createAccountTask = createAccountTask;
+export const linkAccountTask = (mdl) =>
+  mdl.http.backEnd.postTask(mdl)(
+    `data/Users/${mdl.user.objectId}/account%3AAccounts%3A1`
+  )([mdl.user.account.objectId])
 
-var linkAccountTask = function linkAccountTask(mdl) {
-  return mdl.http.backEnd.postTask(mdl)("data/Users/".concat(mdl.user.objectId, "/account%3AAccounts%3A1"))([mdl.user.account.objectId]);
-};
-
-exports.linkAccountTask = linkAccountTask;
 });
 
 ;require.register("Pages/Auth/login-user.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link"
+import { jsonCopy } from "Utils"
+import { validateLoginTask } from "./Validations.js"
+import { loginTask } from "./fns.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.Login = void 0;
+const validateForm = (mdl) => (data) => {
+  const onError = (errs) => {
+    if (errs) {
+      state.errors = errs
+      state.errorMsg(errs.message)
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    } else {
+      state.errorMsg("Issue with logging in. Have you registered?")
+      state.showErrorMsg(true)
+      console.log("failed - other?", state)
+    }
+  }
 
-var _navLink = _interopRequireDefault(require("Components/nav-link"));
+  const onSuccess = (mdl) => (account) => {
+    state.errors = {}
+    mdl.user.account = account
+    m.route.set("/")
+  }
 
-var _Utils = require("Utils");
+  state.isSubmitted = true
 
-var _Validations = require("./Validations.js");
+  validateLoginTask(data.userModel)
+    .chain(loginTask(mdl))
+    .fork(onError, onSuccess(mdl))
+}
 
-var _fns = require("./fns.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var validateForm = function validateForm(mdl) {
-  return function (data) {
-    var onError = function onError(errs) {
-      if (errs) {
-        state.errors = errs;
-        state.errorMsg(errs.message);
-        state.showErrorMsg(true);
-        console.log("failed - state", state);
-      } else {
-        state.errorMsg("Issue with logging in. Have you registered?");
-        state.showErrorMsg(true);
-        console.log("failed - other?", state);
-      }
-    };
-
-    var onSuccess = function onSuccess(mdl) {
-      return function (account) {
-        state.errors = {};
-        mdl.user.account = account;
-        m.route.set("/");
-      };
-    };
-
-    state.isSubmitted = true;
-    (0, _Validations.validateLoginTask)(data.userModel).chain((0, _fns.loginTask)(mdl)).fork(onError, onSuccess(mdl));
-  };
-};
-
-var userModel = {
+const userModel = {
   name: "",
   email: "",
   password: "",
   confirmEmail: "",
   confirmPassword: "",
-  isAdmin: false
-};
-var dataModel = {
-  userModel: userModel
-};
-var state = {
+  isAdmin: false,
+}
+
+const dataModel = { userModel }
+
+const state = {
   isSubmitted: false,
   errors: {},
   httpError: undefined,
-  data: (0, _Utils.jsonCopy)(dataModel),
+  data: jsonCopy(dataModel),
   showErrorMsg: Stream(false),
-  errorMsg: Stream("")
-};
+  errorMsg: Stream(""),
+}
 
-var resetState = function resetState() {
-  state.data = (0, _Utils.jsonCopy)(dataModel);
-  state.errors = {};
-  state.httpError = undefined;
-  state.isSubmitted = false;
-  state.showErrorMsg(false);
-  state.errorMsg("");
-};
+const resetState = () => {
+  state.data = jsonCopy(dataModel)
+  state.errors = {}
+  state.httpError = undefined
+  state.isSubmitted = false
+  state.showErrorMsg(false)
+  state.errorMsg("")
+}
 
-var Login = function Login() {
+export const Login = () => {
   return {
-    onremove: function onremove() {
-      return resetState();
-    },
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".frow centered pt-30", [state.showErrorMsg() && m("code.warning", state.errorMsg()), m("form.frow-container frow-center", {
-        role: "form",
-        id: "Login-form",
-        onsubmit: function onsubmit(e) {
-          return e.preventDefault();
-        }
-      }, [m("input.auth-input", {
-        "class": state.isSubmitted ? state.errors.email ? "has-error" : "has-success" : "",
-        id: "reg-email",
-        type: "email",
-        placeholder: "Email",
-        onkeyup: function onkeyup(e) {
-          // state.isSubmitted && validateForm(mdl)(state.data)
-          state.data.userModel.email = e.target.value;
-        },
-        value: state.data.userModel.email
-      }), state.errors.email && m("p.auth-input-hint", state.errors.email), m("input.auth-input", {
-        "class": state.isSubmitted ? state.errors.password ? "has-error" : "has-success" : "",
-        id: "reg-pass",
-        type: "password",
-        placeholder: "Password",
-        onkeyup: function onkeyup(e) {
-          // state.isSubmitted && validateForm(mdl)(state.data)
-          state.data.userModel.password = e.target.value;
-        },
-        value: state.data.userModel.password
-      }), state.errors.password && m("p.auth-input-hint", state.errors.password)]), state.httpError && m(".toast toast-error", state.httpError)], m("a.button.auth-btn", {
-        // type: "submit",
-        form: "login-form",
-        onclick: function onclick() {
-          return validateForm(mdl)(state.data);
-        },
-        "class": mdl.state.isLoading() && "loading"
-      }, "Login"), m(".auth-link", ["Need to ", m(_navLink["default"], {
-        mdl: mdl,
-        href: "/register",
-        link: "register",
-        classList: "bold"
-      }), " ?"]));
-    }
-  };
-};
+    onremove: () => resetState(),
+    view: ({ attrs: { mdl } }) =>
+      m(
+        ".frow centered pt-30",
+        [
+          state.showErrorMsg() && m("code.warning", state.errorMsg()),
+          m(
+            "form.frow-container frow-center",
+            {
+              role: "form",
+              id: "Login-form",
+              onsubmit: (e) => e.preventDefault(),
+            },
+            [
+              m("input.auth-input", {
+                class: state.isSubmitted
+                  ? state.errors.email
+                    ? "has-error"
+                    : "has-success"
+                  : "",
+                id: "reg-email",
+                type: "email",
+                placeholder: "Email",
+                onkeyup: (e) => {
+                  // state.isSubmitted && validateForm(mdl)(state.data)
+                  state.data.userModel.email = e.target.value
+                },
+                value: state.data.userModel.email,
+              }),
+              state.errors.email && m("p.auth-input-hint", state.errors.email),
 
-exports.Login = Login;
-var _default = Login;
-exports["default"] = _default;
+              m("input.auth-input", {
+                class: state.isSubmitted
+                  ? state.errors.password
+                    ? "has-error"
+                    : "has-success"
+                  : "",
+                id: "reg-pass",
+                type: "password",
+                placeholder: "Password",
+                onkeyup: (e) => {
+                  // state.isSubmitted && validateForm(mdl)(state.data)
+                  state.data.userModel.password = e.target.value
+                },
+                value: state.data.userModel.password,
+              }),
+              state.errors.password &&
+                m("p.auth-input-hint", state.errors.password),
+            ]
+          ),
+          state.httpError && m(".toast toast-error", state.httpError),
+        ],
+        m(
+          "a.button.auth-btn",
+          {
+            // type: "submit",
+            form: `login-form`,
+            onclick: () => validateForm(mdl)(state.data),
+            class: mdl.state.isLoading() && "loading",
+          },
+          "Login"
+        ),
+        m(".auth-link", [
+          "Need to ",
+          m(NavLink, {
+            mdl,
+            href: "/register",
+            link: "register",
+            classList: "bold",
+          }),
+          " ?",
+        ])
+      ),
+  }
+}
+
+export default Login
+
 });
 
 ;require.register("Pages/Auth/register-user.js", function(exports, require, module) {
-"use strict";
+import NavLink from "Components/nav-link"
+import { jsonCopy, log } from "Utils"
+import { validateUserRegistrationTask } from "./Validations"
+import {
+  loginUserTask,
+  registerUserTask,
+  createAccountTask,
+  linkAccountTask,
+} from "./fns.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.Register = exports.validateForm = void 0;
-
-var _navLink = _interopRequireDefault(require("Components/nav-link"));
-
-var _Utils = require("Utils");
-
-var _Validations = require("./Validations");
-
-var _fns = require("./fns.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var userModel = {
+const userModel = {
   name: "",
   email: "",
   password: "",
   confirmEmail: "",
   confirmPassword: "",
-  isAdmin: false
-};
-var dataModel = {
-  userModel: userModel
-};
-var state = {
+  isAdmin: false,
+}
+
+const dataModel = { userModel }
+
+const state = {
   isSubmitted: false,
   errors: {},
   httpError: undefined,
-  data: (0, _Utils.jsonCopy)(dataModel),
+  data: jsonCopy(dataModel),
   showErrorMsg: Stream(false),
-  errorMsg: Stream("")
-};
+  errorMsg: Stream(""),
+}
 
-var resetState = function resetState() {
-  state.data = (0, _Utils.jsonCopy)(dataModel);
-  state.errors = {};
-  state.httpError = undefined;
-  state.isSubmitted = false;
-  state.showErrorMsg(false);
-  state.errorMsg("");
-};
+const resetState = () => {
+  state.data = jsonCopy(dataModel)
+  state.errors = {}
+  state.httpError = undefined
+  state.isSubmitted = false
+  state.showErrorMsg(false)
+  state.errorMsg("")
+}
 
-var validateForm = function validateForm(mdl) {
-  return function (data) {
-    var onError = function onError(errs) {
-      if (errs) {
-        state.errors = errs;
-        state.errorMsg(errs.message);
-        state.showErrorMsg(true);
-        console.log("failed - state", state);
-      } else {
-        state.errorMsg("There seems to be a problem please contact web support");
-        state.showErrorMsg(true);
-        console.log("failed - state", state);
-      }
-    };
+export const validateForm = (mdl) => (data) => {
+  const onError = (errs) => {
+    if (errs) {
+      state.errors = errs
+      state.errorMsg(errs.message)
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    } else {
+      state.errorMsg("There seems to be a problem please contact web support")
+      state.showErrorMsg(true)
+      console.log("failed - state", state)
+    }
+  }
 
-    var onSuccess = function onSuccess(mdl) {
-      return function (data) {
-        state.errors = {};
-        sessionStorage.setItem("sb-user-token", mdl.user["user-token"]);
-        sessionStorage.setItem("sb-user", JSON.stringify(mdl.user));
-        m.route.set("/");
-      };
-    };
+  const onSuccess = (mdl) => (data) => {
+    state.errors = {}
+    sessionStorage.setItem("sb-user-token", mdl.user["user-token"])
+    sessionStorage.setItem("sb-user", JSON.stringify(mdl.user))
+    m.route.set("/")
+  }
 
-    state.isSubmitted = true;
-    (0, _Validations.validateUserRegistrationTask)(data.userModel).chain((0, _fns.registerUserTask)(mdl)).chain(function (_) {
-      return (0, _fns.loginUserTask)(mdl)({
+  state.isSubmitted = true
+  validateUserRegistrationTask(data.userModel)
+    .chain(registerUserTask(mdl))
+    .chain((_) =>
+      loginUserTask(mdl)({
         email: data.userModel.email,
-        password: data.userModel.password
-      });
-    }).chain(function (_) {
-      return (0, _fns.createAccountTask)(mdl);
-    }).chain(function (accnt) {
-      mdl.user.account = accnt;
-      return (0, _fns.linkAccountTask)(mdl);
-    }).fork(onError, onSuccess(mdl));
-  };
-};
+        password: data.userModel.password,
+      })
+    )
+    .chain((_) => createAccountTask(mdl))
+    .chain((accnt) => {
+      mdl.user.account = accnt
+      return linkAccountTask(mdl)
+    })
+    .fork(onError, onSuccess(mdl))
+}
 
-exports.validateForm = validateForm;
-
-var RegisterUser = function RegisterUser() {
+const RegisterUser = () => {
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          data = _ref$attrs.data,
-          errors = _ref$attrs.errors,
-          isSubmitted = _ref$attrs.isSubmitted;
-      return [m("input.auth-input", {
-        "class": isSubmitted ? errors.name ? "has-error" : "has-success" : "",
+    view: ({ attrs: { data, errors, isSubmitted } }) => [
+      m("input.auth-input", {
+        class: isSubmitted ? (errors.name ? "has-error" : "has-success") : "",
         id: "reg-name",
         type: "text",
         placeholder: "Full Name",
-        onkeyup: function onkeyup(e) {
-          return data.name = e.target.value;
-        },
-        value: data.name
-      }), errors.name && m("p.auth-input-hint", errors.name), m("input.auth-input", {
-        "class": isSubmitted ? errors.email ? "has-error" : "has-success" : "",
+        onkeyup: (e) => (data.name = e.target.value),
+        value: data.name,
+      }),
+      errors.name && m("p.auth-input-hint", errors.name),
+
+      m("input.auth-input", {
+        class: isSubmitted ? (errors.email ? "has-error" : "has-success") : "",
         id: "reg-email",
         type: "email",
         placeholder: "Email",
-        onkeyup: function onkeyup(e) {
-          return data.email = e.target.value;
-        },
-        value: data.email
-      }), errors.email && m("p.auth-input-hint", errors.email), m("input.auth-input", {
+        onkeyup: (e) => (data.email = e.target.value),
+        value: data.email,
+      }),
+      errors.email && m("p.auth-input-hint", errors.email),
+
+      m("input.auth-input", {
         id: "confirmEmail",
-        "class": isSubmitted ? errors.confirmEmail ? "has-error" : "has-success" : "",
+        class: isSubmitted
+          ? errors.confirmEmail
+            ? "has-error"
+            : "has-success"
+          : "",
         type: "email",
         placeholder: "Confirm Email",
-        onkeyup: function onkeyup(e) {
-          return data.confirmEmail = e.target.value;
-        },
-        value: data.confirmEmail
-      }), errors.confirmEmail && m("p.auth-input-hint", errors.confirmEmail), m("input.auth-input", {
-        "class": isSubmitted ? errors.password ? "has-error" : "has-success" : "",
+        onkeyup: (e) => (data.confirmEmail = e.target.value),
+        value: data.confirmEmail,
+      }),
+      errors.confirmEmail && m("p.auth-input-hint", errors.confirmEmail),
+
+      m("input.auth-input", {
+        class: isSubmitted
+          ? errors.password
+            ? "has-error"
+            : "has-success"
+          : "",
         id: "reg-pass",
         type: "password",
         placeholder: "Password",
-        onkeyup: function onkeyup(e) {
-          return data.password = e.target.value;
-        },
-        value: data.password
-      }), errors.password && m("p.auth-input-hint", errors.password), m("input.auth-input", {
-        "class": isSubmitted ? errors.confirmPassword ? "has-error" : "has-success" : "",
+        onkeyup: (e) => (data.password = e.target.value),
+        value: data.password,
+      }),
+      errors.password && m("p.auth-input-hint", errors.password),
+
+      m("input.auth-input", {
+        class: isSubmitted
+          ? errors.confirmPassword
+            ? "has-error"
+            : "has-success"
+          : "",
         id: "pass-confirm",
         type: "password",
         placeholder: "Confirm Password",
-        onkeyup: function onkeyup(e) {
-          return data.confirmPassword = e.target.value;
-        },
-        value: data.confirmPassword
-      }), errors.confirmPassword && m("p.auth-input-hint", errors.confirmPassword)];
-    }
-  };
-};
+        onkeyup: (e) => (data.confirmPassword = e.target.value),
+        value: data.confirmPassword,
+      }),
+      errors.confirmPassword && m("p.auth-input-hint", errors.confirmPassword),
+    ],
+  }
+}
 
-var Register = function Register() {
+export const Register = () => {
   return {
-    onremove: function onremove() {
-      return resetState();
-    },
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return [m(".frow centered pt-30", [state.showErrorMsg() && m("code.warning", state.errorMsg()), m("form.frow-container column-center", {
-        role: "form",
-        id: "Register-form",
-        onsubmit: function onsubmit(e) {
-          return e.preventDefault();
-        }
-      }, [m(RegisterUser, {
-        data: state.data.userModel,
-        errors: state.errors,
-        isSubmitted: state.isSubmitted
-      }), m("a.button.auth-btn", {
-        form: "register-form",
-        onclick: function onclick() {
-          return validateForm(mdl)(state.data);
-        },
-        "class": mdl.state.isLoading() && "loading"
-      }, "Register"), m(".auth-link", ["Need to ", m(_navLink["default"], {
-        mdl: mdl,
-        href: "/login",
-        link: "Login",
-        classList: "bold"
-      }), " ?"])])]), state.httpError && m(".toast toast-error", state.httpError)];
-    }
-  };
-};
+    onremove: () => resetState(),
+    view: ({ attrs: { mdl } }) => [
+      m(".frow centered pt-30", [
+        state.showErrorMsg() && m("code.warning", state.errorMsg()),
+        m(
+          "form.frow-container column-center",
+          {
+            role: "form",
+            id: "Register-form",
+            onsubmit: (e) => e.preventDefault(),
+          },
+          [
+            m(RegisterUser, {
+              data: state.data.userModel,
+              errors: state.errors,
+              isSubmitted: state.isSubmitted,
+            }),
+            m(
+              "a.button.auth-btn",
+              {
+                form: `register-form`,
+                onclick: () => validateForm(mdl)(state.data),
+                class: mdl.state.isLoading() && "loading",
+              },
+              "Register"
+            ),
+            m(".auth-link", [
+              "Need to ",
+              m(NavLink, {
+                mdl,
+                href: "/login",
+                link: "Login",
+                classList: "bold",
+              }),
+              " ?",
+            ]),
+          ]
+        ),
+      ]),
 
-exports.Register = Register;
-var _default = Register;
-exports["default"] = _default;
+      state.httpError && m(".toast toast-error", state.httpError),
+    ],
+  }
+}
+
+export default Register
+
 });
 
 ;require.register("Pages/account.js", function(exports, require, module) {
-"use strict";
+import { PencilLine } from "@mithril-icons/clarity/cjs"
+import { states, stateDict } from "Models"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const submitAddressTask = (mdl) => (data) => {
+  console.log(data)
+  return mdl.http.backEnd.putTask(mdl)(
+    `data/Accounts/${mdl.user.account.objectId}`
+  )({
+    address: JSON.stringify(data),
+  })
+}
 
-var _cjs = require("@mithril-icons/clarity/cjs");
-
-var _Models = require("Models");
-
-var submitAddressTask = function submitAddressTask(mdl) {
-  return function (data) {
-    console.log(data);
-    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
-      address: JSON.stringify(data)
-    });
-  };
-};
-
-var Account = function Account() {
-  var state = {
-    address: {
-      street1: "",
-      street2: "",
-      city: "",
-      state: "",
-      zip: ""
-    },
+const Account = () => {
+  const state = {
+    address: { street1: "", street2: "", city: "", state: "", zip: "" },
     editAddress: Stream(false),
     showAddress: Stream(false),
-    errors: {}
-  };
+    errors: {},
+  }
+  const toggleEditAddress = (state) => state.editAddress(!state.editAddress())
 
-  var toggleEditAddress = function toggleEditAddress(state) {
-    return state.editAddress(!state.editAddress());
-  };
-
-  var submitAddress = function submitAddress(mdl) {
-    return function (state) {
-      var onError = function onError(errors) {
-        return console.log("e", e);
-      };
-
-      var onSuccess = function onSuccess(mdl) {
-        return function (s) {
-          mdl.user.address = JSON.parse(s.address);
-        };
-      };
-
-      submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl));
-    };
-  };
+  const submitAddress = (mdl) => (state) => {
+    const onError = (errors) => console.log("e", e)
+    const onSuccess = (mdl) => (s) => {
+      mdl.user.address = JSON.parse(s.address)
+    }
+    submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl))
+  }
 
   return {
-    oninit: function oninit(_ref) {
-      var mdl = _ref.attrs.mdl;
-      state.address = mdl.user.address;
-
+    oninit: ({ attrs: { mdl } }) => {
+      state.address = mdl.user.address
       if (state.address) {
-        state.showAddress(true);
-        state.editAddress(false);
+        state.showAddress(true)
+        state.editAddress(false)
       } else {
-        state.address = {};
-        state.showAddress(false);
-        state.editAddress(false);
+        state.address = {}
+        state.showAddress(false)
+        state.editAddress(false)
       }
     },
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      console.log('wtf', Object.keys(state.address).length);
-      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
-        "class": "clickable",
-        onclick: function onclick() {
-          return toggleEditAddress(state);
-        },
-        width: "16px"
-      }), Object.keys(state.address).length ? m('pre', "".concat(state.address.street1, " ").concat(state.address.street2 || '', " ").concat(state.address.city, " ").concat(state.address.state, " ").concat(state.address.zip)) : m("h4", "No Address on File")), state.editAddress() && m("form.frow column-start m-5 px-20", {
-        oninput: function oninput(e) {
-          console.log(mdl, state);
-          state.address[e.target.id] = e.target.value;
-        }
-      }, [m("input.col-xs-1-2", {
-        type: "text",
-        id: "street1",
-        placeholder: "street1",
-        value: state.address.street1
-      }), m("input.col-xs-1-2", {
-        type: "text",
-        id: "street2",
-        placeholder: "street2",
-        value: state.address.street2
-      }), m(".frow row", [m("input.col-xs-1-3", {
-        type: "text",
-        id: "city",
-        placeholder: "city",
-        value: state.address.city
-      }), m(".col-xs-1-3", m("select", {
-        id: "state",
-        placeholder: "state",
-        value: state.address.state || "state"
-      }, Object.keys(_Models.states).map(function (state) {
-        return [m("option", {
-          key: "placeholder",
-          value: "state"
-        }, "state"), m("option", {
-          key: state,
-          placeholder: "state",
-          value: (0, _Models.stateDict)(state)
-        }, "".concat((0, _Models.stateDict)(state)))];
-      }), state.address.state || "state")), m("input.col-xs-1-3", {
-        type: "number",
-        inputmode: "numeric",
-        pattern: "[0-9]*",
-        id: "zip",
-        value: state.address.zip,
-        placeholder: "zip"
-      })]), m("a.button", {
-        type: "submit",
-        "class": "clickable",
-        onclick: function onclick() {
-          return submitAddress(mdl)(state);
-        }
-      }, "Submit")])]), m("section", [m("h3", "Past Orders")]), m("section"), m("section")]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => {
+      console.log('wtf',Object.keys(state.address).length)
+      return m(".frow-container frow-center", [
+        m("h2", "Welcome ", mdl.user.name),
 
-var _default = Account;
-exports["default"] = _default;
+        m("section.m-5", [
+          m(
+            "span.frow row-start",
+            m("h3.pr-10", "Shipping Address"),
+            m(PencilLine, {
+              class: "clickable",
+              onclick: () => toggleEditAddress(state),
+              width: "16px",
+            }),
+            Object.keys(state.address).length
+            ? m('pre', `${state.address.street1} ${state.address.street2||''} ${state.address.city} ${state.address.state} ${state.address.zip}`)
+            : m("h4", "No Address on File")
+          ),
+          state.editAddress() &&
+            m(
+              "form.frow column-start m-5 px-20",
+              {
+                oninput: (e) => {
+                  console.log(mdl, state)
+                  state.address[e.target.id] = e.target.value
+                },
+              },
+              [
+                m("input.col-xs-1-2", {
+                  type: "text",
+                  id: "street1",
+                  placeholder: "street1",
+                  value: state.address.street1,
+                }),
+                m("input.col-xs-1-2", {
+                  type: "text",
+                  id: "street2",
+                  placeholder: "street2",
+                  value: state.address.street2,
+                }),
+                m(".frow row", [
+                  m("input.col-xs-1-3", {
+                    type: "text",
+                    id: "city",
+                    placeholder: "city",
+                    value: state.address.city,
+                  }),
+                  m(
+                    ".col-xs-1-3",
+
+                    m(
+                      "select",
+                      {
+                        id: "state",
+                        placeholder: "state",
+                        value: state.address.state || "state",
+                      },
+                      Object.keys(states).map((state) => [
+                        m(
+                          "option",
+                          { key: "placeholder", value: "state" },
+                          "state"
+                        ),
+                        m(
+                          "option",
+                          {
+                            key: state,
+                            placeholder: "state",
+                            value: stateDict(state),
+                          },
+                          `${stateDict(state)}`
+                        ),
+                      ]),
+                      state.address.state || "state"
+                    )
+                  ),
+                  m("input.col-xs-1-3", {
+                    type: "number",
+                    inputmode: "numeric",
+                    pattern: "[0-9]*",
+                    id: "zip",
+                    value: state.address.zip,
+                    placeholder: "zip",
+                  }),
+                ]),
+                m(
+                  "a.button",
+                  {
+                    type: "submit",
+                    class: "clickable",
+                    onclick: () => submitAddress(mdl)(state),
+                  },
+                  "Submit"
+                ),
+              ]
+            ),
+        ]),
+        m("section", [m("h3", "Past Orders")]),
+        m("section"),
+        m("section"),
+      ])
+    },
+  }
+}
+
+export default Account
+
 });
 
 ;require.register("Pages/blankets.js", function(exports, require, module) {
-"use strict";
+import Flicker from "Components/Flicker.js"
+import Selector from "Components/Selector.js"
+import { AddToCartOut } from "Styles/animations"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _Flicker = _interopRequireDefault(require("Components/Flicker.js"));
-
-var _Selector = _interopRequireDefault(require("Components/Selector.js"));
-
-var _animations = require("Styles/animations");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Blankets = function Blankets() {
-  var state = {
+const Blankets = () => {
+  const state = {
     errors: {},
-    data: ["https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600"]
-  };
-  return {
-    oninit: function oninit() {// console.log("init blankets")
-    },
-    onremove: function onremove() {
-      state.errors = {};
-      state.data = [];
-    },
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".frow-container frow-center", [m(".mb-30", {
-        id: "wraps"
-      }, [m(".text-2halfx", m("h2.pb-10", "Wraps")), m(_Flicker["default"], {
-        mdl: mdl,
-        data: state.data
-      }), m(".mt-20", m(_Selector["default"], {
-        mdl: mdl,
-        product: "Wraps"
-      })), m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'), m("li.pb-10", "Machine wash and tumble dry."), m("li.pb-10", "Proudly made in Houston Texas USA")])]), m(".mb-30", {
-        id: "christening"
-      }, m(".text-2halfx", m("h2.pb-10", "Christening Blankets")), m(_Flicker["default"], {
-        mdl: mdl,
-        data: state.data
-      }), m(".mt-20", m(_Selector["default"], {
-        mdl: mdl,
-        product: "Christening Blankets"
-      })), m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'), m("li.pb-10", "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."), m("li.pb-10", "babies should be supervised at all times when this blanket is in use."), m("li.pb-10", "Proudly made in Houston Texas USA")]))]);
-    }
-  };
-};
+    data: [
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+    ],
+  }
 
-var _default = Blankets;
-exports["default"] = _default;
+  return {
+    oninit: () => {
+      // console.log("init blankets")
+    },
+    onremove: () => {
+      state.errors = {}
+      state.data = []
+    },
+    view: ({ attrs: { mdl } }) =>
+      m(".frow-container frow-center", [
+        m(".mb-30", { id: "wraps" }, [
+          m(".text-2halfx", m("h2.pb-10", "Wraps")),
+          m(Flicker, { mdl, data: state.data }),
+          m(".mt-20", m(Selector, { mdl, product: "Wraps" })),
+          m("ul", [
+            m(
+              "li.pb-10",
+              'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'
+            ),
+            m("li.pb-10", "Machine wash and tumble dry."),
+            m("li.pb-10", "Proudly made in Houston Texas USA"),
+          ]),
+        ]),
+        m(
+          ".mb-30",
+          { id: "christening" },
+          m(".text-2halfx", m("h2.pb-10", "Christening Blankets")),
+          m(Flicker, { mdl, data: state.data }),
+          m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" })),
+          m("ul", [
+            m(
+              "li.pb-10",
+              'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'
+            ),
+            m(
+              "li.pb-10",
+              "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."
+            ),
+            m(
+              "li.pb-10",
+              "babies should be supervised at all times when this blanket is in use."
+            ),
+            m("li.pb-10", "Proudly made in Houston Texas USA"),
+          ])
+        ),
+      ]),
+  }
+}
+
+export default Blankets
+
 });
 
 ;require.register("Pages/blog.js", function(exports, require, module) {
-"use strict";
+import Task from "data.task"
+import Masonry from "Components/Masonry"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const fetchBurpRagsTask = (mdl) =>
+  Task.of([
+    {
+      imgSrc: 220,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 0,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 220,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 200,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 250,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 220,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+    {
+      imgSrc: 2,
+      title: "Title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+  ])
 
-var _data = _interopRequireDefault(require("data.task"));
+const onPageInit = (state) => ({ attrs: { mdl } }) => {
+  const onError = (s) => (error) => {
+    s.errors.init = error
+    console.log("errror", error)
+  }
 
-var _Masonry = _interopRequireDefault(require("Components/Masonry"));
+  const onSuccess = (s) => (data) => {
+    s.data = data
+  }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+  fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state))
+}
 
-var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
-  return _data["default"].of([{
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 0,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 200,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 250,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 2,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }]);
-};
-
-var onPageInit = function onPageInit(state) {
-  return function (_ref) {
-    var mdl = _ref.attrs.mdl;
-
-    var onError = function onError(s) {
-      return function (error) {
-        s.errors.init = error;
-        console.log("errror", error);
-      };
-    };
-
-    var onSuccess = function onSuccess(s) {
-      return function (data) {
-        s.data = data;
-      };
-    };
-
-    fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state));
-  };
-};
-
-var Blog = function Blog() {
-  var state = {
+const Blog = () => {
+  const state = {
     errors: {},
-    data: []
-  };
+    data: [],
+  }
   return {
     oninit: onPageInit(state),
-    onremove: function onremove() {
-      state.errors = {};
-      state.data = [];
+    onremove: () => {
+      state.errors = {}
+      state.data = []
     },
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return m(".frow-container frow-center", {
-        id: "blog-page"
-      }, [m(_Masonry["default"], {
-        data: state.data
-      })]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      m(".frow-container frow-center", { id: "blog-page" }, [
+        m(Masonry, { data: state.data }),
+      ]),
+  }
+}
 
-var _default = Blog;
-exports["default"] = _default;
+export default Blog
+
 });
 
 ;require.register("Pages/burp-rags.js", function(exports, require, module) {
-"use strict";
+import Flicker from "Components/Flicker.js"
+import Selector from "Components/Selector.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _Flicker = _interopRequireDefault(require("Components/Flicker.js"));
-
-var _Selector = _interopRequireDefault(require("Components/Selector.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var BurpRags = function BurpRags() {
-  var state = {
+const BurpRags = () => {
+  const state = {
     errors: {},
-    data: ["https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600"]
-  };
+    data: [
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+      "https://source.unsplash.com/random/800x600",
+    ],
+  }
   return {
-    onremove: function onremove() {
-      state.errors = {};
-      state.data = [];
+    onremove: () => {
+      state.errors = {}
+      state.data = []
     },
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".frow-container frow-center", [m(".mb-30", {
-        id: "burps"
-      }, [m(_Flicker["default"], {
-        mdl: mdl,
-        data: state.data
-      }), m(".mt-20", m(_Selector["default"], {
-        mdl: mdl,
-        product: "Burp Rags"
-      })), m("ul", [m("li.pb-10", "Set of 7 handcrafted burp rags"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering.")])]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      m(".frow-container frow-center", [
+        m(".mb-30", { id: "burps" }, [
+          m(Flicker, { mdl, data: state.data }),
+          m(".mt-20", m(Selector, { mdl, product: "Burp Rags" })),
+          m("ul", [
+            m("li.pb-10", "Set of 7 handcrafted burp rags"),
+            m("li.pb-10", "Each guranteed to be one of a kind"),
+            m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'),
+            m("li.pb-10", "Thick and absorbent!"),
+            m("li.pb-10", "No two cloths are the same!"),
+            m("li.pb-10", "Proudly made in Houston Texas USA"),
+          ]),
+          m(
+            "p.pb-10",
+            "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."
+          ),
+        ]),
+      ]),
+  }
+}
 
-var _default = BurpRags;
-exports["default"] = _default;
+export default BurpRags
+
 });
 
 ;require.register("Pages/cart.js", function(exports, require, module) {
-"use strict";
+import { NavLink } from "Components/nav-link"
+import { isActiveRoute, getTotal, getQuantity, toProducts } from "Utils/helpers"
+import { saveStorageTask } from "Utils/storage"
+const saveToStorage = (mdl) => {
+  const onError = (e) => console.log("Error saving", e)
+  const onSuccess = (s) => {
+    console.log("success saving", s)
+  }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+  saveStorageTask(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess)
+}
 
-var _navLink = require("Components/nav-link");
+const addToCart = (mdl) => (product, sex, quantity) => {
+  console.log(product, sex, quantity)
+  mdl.cart[product][sex] = parseInt(quantity) ? parseInt(quantity) : 0
+  saveToStorage(mdl)
+}
 
-var _helpers = require("Utils/helpers");
-
-var _storage = require("Utils/storage");
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var saveToStorage = function saveToStorage(mdl) {
-  var onError = function onError(e) {
-    return console.log("Error saving", e);
-  };
-
-  var onSuccess = function onSuccess(s) {
-    console.log("success saving", s);
-  };
-
-  (0, _storage.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
-};
-
-var addToCart = function addToCart(mdl) {
-  return function (product, sex, quantity) {
-    console.log(product, sex, quantity);
-    mdl.cart[product][sex] = parseInt(quantity) ? parseInt(quantity) : 0;
-    saveToStorage(mdl);
-  };
-};
-
-var Gender = function Gender() {
+const Gender = () => {
   return {
-    view: function view(_ref) {
-      var _ref$attrs = _ref.attrs,
-          mdl = _ref$attrs.mdl,
-          product = _ref$attrs.product,
-          _ref$attrs$gender = _slicedToArray(_ref$attrs.gender, 2),
-          sex = _ref$attrs$gender[0],
-          quantity = _ref$attrs$gender[1];
+    view: ({
+      attrs: {
+        mdl,
+        product,
+        gender: [sex, quantity],
+      },
+    }) => {
+      return quantity
+        ? m(".animated.frow row-around mt-10", [
+            m("img", { src: "https://via.placeholder.com/80" }),
 
-      return quantity ? m(".animated.frow row-around mt-10", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), // m(
-      // ".col-xs-1-4",
-      m("label.col-xs-1-4", m("h4", "".concat(sex)), m("input", {
-        type: "number",
-        inputmode: "numeric",
-        min: 0,
-        placeholder: "quantity",
-        value: quantity,
-        onchange: function onchange(e) {
-          return addToCart(mdl)(product, sex, e.target.value);
-        },
-        pattern: "[0-9]*"
-      }) // )
-      )]) : null;
-    }
-  };
-};
-
-var Product = function Product() {
-  return {
-    view: function view(_ref2) {
-      var _ref2$attrs = _ref2.attrs,
-          mdl = _ref2$attrs.mdl,
-          _ref2$attrs$p = _slicedToArray(_ref2$attrs.p, 2),
-          title = _ref2$attrs$p[0],
-          genders = _ref2$attrs$p[1];
-
-      return (0, _helpers.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "(".concat(mdl.state.currency()).concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
-        return m(Gender, {
-          mdl: mdl,
-          gender: gender,
-          product: title
-        });
-      }))]) : null;
-    }
-  };
-};
-
-var Cart = function Cart(_ref3) {
-  var mdl = _ref3.attrs.mdl;
-  return {
-    oninit: function oninit(_ref4) {
-      var mdl = _ref4.attrs.mdl;
-      return mdl.state.showNavModal(false);
+            // m(
+            // ".col-xs-1-4",
+            m(
+              "label.col-xs-1-4",
+              m("h4", `${sex}`),
+              m("input", {
+                type: "number",
+                inputmode: "numeric",
+                min: 0,
+                placeholder: "quantity",
+                value: quantity,
+                onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
+                pattern: "[0-9]*",
+              })
+              // )
+            ),
+          ])
+        : null
     },
-    view: function view(_ref5) {
-      var mdl = _ref5.attrs.mdl;
-      return m(".animated.frow-container frow-center", [(0, _helpers.toProducts)(mdl.cart).map(function (p) {
-        return m(Product, {
-          mdl: mdl,
-          p: p
-        });
-      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(".frow centered-column", m(_navLink.NavLink, {
-        mdl: mdl,
-        href: "/checkout",
-        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " button para mt-20"),
-        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))))]
-      })) : m("h1.bold", "Your Cart is Empty")]);
-    }
-  };
-};
+  }
+}
 
-var _default = Cart;
-exports["default"] = _default;
+const Product = () => {
+  return {
+    view: ({
+      attrs: {
+        mdl,
+        p: [title, genders],
+      },
+    }) => {
+      return getQuantity(genders)
+        ? m(".frow mt-10 items-baseline justify-evenly", [
+            m("h2", `${title}  `),
+            m("h4", `(${mdl.state.currency()}${mdl.state.prices[title]})`),
+            m(
+              ".animated.frow cart-item column-start",
+              genders.map((gender) =>
+                m(Gender, {
+                  mdl,
+                  gender,
+                  product: title,
+                })
+              )
+            ),
+          ])
+        : null
+    },
+  }
+}
+
+const Cart = ({ attrs: { mdl } }) => {
+  return {
+    oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
+    view: ({ attrs: { mdl } }) =>
+      m(`.animated.frow-container frow-center`, [
+        toProducts(mdl.cart).map((p) =>
+          m(Product, {
+            mdl,
+            p,
+          })
+        ),
+
+        getTotal(mdl, toProducts(mdl.cart))
+          ? m(
+              ".frow centered-column",
+              m(NavLink, {
+                mdl,
+                href: `/checkout`,
+                classList: `${isActiveRoute(`/checkout`)} button para mt-20`,
+                link: [
+                  "Proceed to Checkout",
+                  m(
+                    "h1.bold text-center white",
+                    `Total of ${getQuantity(
+                      toProducts(mdl.cart)
+                    )} for ${mdl.state.currency()}${getTotal(
+                      mdl,
+                      toProducts(mdl.cart)
+                    )}`
+                  ),
+                ],
+              })
+            )
+          : m("h1.bold", "Your Cart is Empty"),
+      ]),
+  }
+}
+
+export default Cart
+
 });
 
 ;require.register("Pages/checkout.js", function(exports, require, module) {
-"use strict";
+import { NavLink } from "Components/nav-link"
+import {
+  isActiveRoute,
+  getTotal,
+  getQuantity,
+  getPrice,
+  toProducts,
+} from "Utils/helpers"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _navLink = require("Components/nav-link");
-
-var _helpers = require("Utils/helpers");
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var CheckoutButtons = function CheckoutButtons() {
+const CheckoutButtons = () => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".frow centered-column mt-30", [m("h2.pb-10", "Select a Checkout Option"), m("img", {
-        src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png"
-      })]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      m(".frow centered-column mt-30", [
+        m("h2.pb-10", "Select a Checkout Option"),
+        m("img", {
+          src:
+            "https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png",
+        }),
+      ]),
+  }
+}
 
-var Gender = function Gender() {
+const Gender = () => {
   return {
-    view: function view(_ref2) {
-      var _ref2$attrs = _ref2.attrs,
-          mdl = _ref2$attrs.mdl,
-          _ref2$attrs$gender = _slicedToArray(_ref2$attrs.gender, 2),
-          sex = _ref2$attrs$gender[0],
-          quantity = _ref2$attrs$gender[1];
-
-      return quantity ? m(".", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
-    }
-  };
-};
-
-var Product = function Product(_ref3) {
-  var _ref3$attrs = _ref3.attrs,
-      mdl = _ref3$attrs.mdl,
-      _ref3$attrs$p = _slicedToArray(_ref3$attrs.p, 2),
-      title = _ref3$attrs$p[0],
-      genders = _ref3$attrs$p[1];
-
-  var amount = (0, _helpers.getQuantity)(genders);
-  var price = (0, _helpers.getPrice)(mdl, title, genders);
-  return {
-    view: function view(_ref4) {
-      var _ref4$attrs = _ref4.attrs,
-          mdl = _ref4$attrs.mdl,
-          _ref4$attrs$p = _slicedToArray(_ref4$attrs.p, 2),
-          title = _ref4$attrs$p[0],
-          genders = _ref4$attrs$p[1];
-
-      return amount ? m(".frow column-start mt-10", [m("span.underline", m("h3.mb-10", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price))), m(".frow cart-item row-around", genders.map(function (gender) {
-        return m(Gender, {
-          mdl: mdl,
-          gender: gender
-        });
-      }))]) : null;
-    }
-  };
-};
-
-var Cart = function Cart(_ref5) {
-  var mdl = _ref5.attrs.mdl;
-  return {
-    oninit: function oninit(_ref6) {
-      var mdl = _ref6.attrs.mdl;
-      return mdl.state.showNavModal(false);
+    view: ({
+      attrs: {
+        mdl,
+        gender: [sex, quantity],
+      },
+    }) => {
+      return quantity
+        ? m(".", [
+            m("img", { src: "https://via.placeholder.com/80" }),
+            m("h4", `${sex} : ${quantity}`),
+          ])
+        : null
     },
-    view: function view(_ref7) {
-      var mdl = _ref7.attrs.mdl;
-      return m(".frow-container frow-center", [(0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(_navLink.NavLink, {
-        mdl: mdl,
-        href: "/cart",
-        classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
-        link: "Update Cart"
-      }) : null, (0, _helpers.toProducts)(mdl.cart).map(function (p) {
-        return m(Product, {
-          mdl: mdl,
-          p: p
-        });
-      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m(".frow centered-column", m(_navLink.NavLink, {
-        mdl: mdl,
-        href: "/checkout",
-        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " mt-50"),
-        link: [m("h1.bold text-center.mt-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))))]
-      })), m(CheckoutButtons, {
-        mdl: mdl
-      })] : m("h1.bold", "Your Cart is Empty")]);
-    }
-  };
-};
+  }
+}
 
-var _default = Cart;
-exports["default"] = _default;
+const Product = ({
+  attrs: {
+    mdl,
+    p: [title, genders],
+  },
+}) => {
+  let amount = getQuantity(genders)
+
+  let price = getPrice(mdl, title, genders)
+
+  return {
+    view: ({
+      attrs: {
+        mdl,
+        p: [title, genders],
+      },
+    }) => {
+      return amount
+        ? m(".frow column-start mt-10", [
+            m(
+              "span.underline",
+              m(
+                "h3.mb-10",
+                `${amount} ${title} for ${mdl.state.currency()}${price}`
+              )
+            ),
+            m(
+              ".frow cart-item row-around",
+              genders.map((gender) => m(Gender, { mdl, gender }))
+            ),
+          ])
+        : null
+    },
+  }
+}
+
+const Cart = ({ attrs: { mdl } }) => {
+  return {
+    oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
+    view: ({ attrs: { mdl } }) =>
+      m(`.frow-container frow-center`, [
+        getTotal(mdl, toProducts(mdl.cart))
+          ? m(NavLink, {
+              mdl,
+              href: `/cart`,
+              classList: `${isActiveRoute(`/cart`)} para button m-0`,
+              link: "Update Cart",
+            })
+          : null,
+
+        toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
+
+        getTotal(mdl, toProducts(mdl.cart))
+          ? [
+              m(
+                ".frow centered-column",
+                m(NavLink, {
+                  mdl,
+                  href: `/checkout`,
+                  classList: `${isActiveRoute(`/checkout`)} mt-50`,
+                  link: [
+                    m(
+                      "h1.bold text-center.mt-20",
+                      `Total of ${getQuantity(
+                        toProducts(mdl.cart)
+                      )} for ${mdl.state.currency()}${getTotal(
+                        mdl,
+                        toProducts(mdl.cart)
+                      )}`
+                    ),
+                  ],
+                })
+              ),
+              m(CheckoutButtons, { mdl }),
+            ]
+          : m("h1.bold", "Your Cart is Empty"),
+      ]),
+  }
+}
+
+export default Cart
+
 });
 
 ;require.register("Pages/default.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var Default = function Default(mdl) {
+const Default = (mdl) => {
   return {
-    view: function view(_ref) {
-      var mdl = _ref.attrs.mdl;
-      return m(".frow-container frow-center");
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) => m(".frow-container frow-center"),
+  }
+}
 
-var _default = Default;
-exports["default"] = _default;
+export default Default
+
 });
 
 ;require.register("Pages/home.js", function(exports, require, module) {
-"use strict";
+import Task from "data.task"
+import Masonry from "Components/Masonry"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const fetchBurpRagsTask = (mdl) =>
+  Task.of([
+    { imgSrc: 320, title: "", description: "" },
+    { imgSrc: 250, title: "", description: "" },
+    { imgSrc: 220, title: "", description: "" },
+    { imgSrc: 200, title: "", description: "" },
+    { imgSrc: 250, title: "", description: "" },
+    { imgSrc: 320, title: "", description: "" },
+    { imgSrc: 320, title: "", description: "" },
+  ])
 
-var _data = _interopRequireDefault(require("data.task"));
+const onPageInit = (state) => ({ attrs: { mdl } }) => {
+  const onError = (s) => (error) => {
+    s.errors.init = error
+    console.log("errror", error)
+  }
 
-var _Masonry = _interopRequireDefault(require("Components/Masonry"));
+  const onSuccess = (s) => (data) => {
+    s.data = data
+  }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+  fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state))
+}
 
-var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
-  return _data["default"].of([{
-    imgSrc: 320,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 250,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 220,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 200,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 250,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 320,
-    title: "",
-    description: ""
-  }, {
-    imgSrc: 320,
-    title: "",
-    description: ""
-  }]);
-};
-
-var onPageInit = function onPageInit(state) {
-  return function (_ref) {
-    var mdl = _ref.attrs.mdl;
-
-    var onError = function onError(s) {
-      return function (error) {
-        s.errors.init = error;
-        console.log("errror", error);
-      };
-    };
-
-    var onSuccess = function onSuccess(s) {
-      return function (data) {
-        s.data = data;
-      };
-    };
-
-    fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state));
-  };
-};
-
-var Home = function Home() {
-  var state = {
+const Home = () => {
+  const state = {
     errors: {},
-    data: []
-  };
+    data: [],
+  }
   return {
     oninit: onPageInit(state),
-    onremove: function onremove() {
-      state.errors = {};
-      state.data = [];
+    onremove: () => {
+      state.errors = {}
+      state.data = []
     },
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return m(".frow-container frow-center", {
-        id: "home-page"
-      }, [m(_Masonry["default"], {
-        data: state.data
-      })]);
-    }
-  };
-};
+    view: ({ attrs: { mdl } }) =>
+      m(".frow-container frow-center", { id: "home-page" }, [
+        m(Masonry, { data: state.data }),
+      ]),
+  }
+}
 
-var _default = Home;
-exports["default"] = _default;
+export default Home
+
 });
 
 ;require.register("Routes/authenticated-routes.js", function(exports, require, module) {
-"use strict";
+import Default from "Pages/default.js"
+import Home from "Pages/home.js"
+import Account from "Pages/account.js"
+import Layout from "Layouts/index.js"
+import { scrollToAnchor, jsonCopy } from "Utils"
+import { newCart } from "Models/cart"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _default2 = _interopRequireDefault(require("Pages/default.js"));
-
-var _home = _interopRequireDefault(require("Pages/home.js"));
-
-var _account = _interopRequireDefault(require("Pages/account.js"));
-
-var _index = _interopRequireDefault(require("Layouts/index.js"));
-
-var _Utils = require("Utils");
-
-var _cart = require("Models/cart");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var AuthenticatedRoutes = [{
-  id: "account",
-  name: "Account",
-  // icon: Icons.logo,
-  route: "/account/:name",
-  position: ["toolbar"],
-  group: ["authenticated"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
+const AuthenticatedRoutes = [
+  {
+    id: "account",
+    name: "Account",
+    // icon: Icons.logo,
+    route: "/account/:name",
+    position: ["toolbar"],
+    group: ["authenticated"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Account, { mdl })),
   },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_account["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "profile-page",
-  name: "Profile Page",
-  // icon: Icons.home,
-  route: "/account/:name/profile",
-  position: ["settings-nav"],
-  group: ["authenticated"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    console.log("profile page login on match", mdl, args, path, fullroute, isAnchor, !mdl.state.isAuth());
-    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
+  {
+    id: "profile-page",
+    name: "Profile Page",
+    // icon: Icons.home,
+    route: "/account/:name/profile",
+    position: ["settings-nav"],
+    group: ["authenticated"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      console.log(
+        "profile page login on match",
+        mdl,
+        args,
+        path,
+        fullroute,
+        isAnchor,
+        !mdl.state.isAuth()
+      )
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "manage-users",
-  name: "Manage Users",
-  // icon: Icons.users,
-  route: "/account/:name/user-management",
-  position: ["settings-nav"],
-  group: ["authenticated", "admin"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    // console.log(
-    //   "manage users on match",
-    //   mdl,
-    //   args,
-    //   path,
-    //   fullroute,
-    //   isAnchor,
-    //   mdl.state.isAuth(),
-    //   mdl.user.isAdmin
-    // )
-    !mdl.user.isAdmin && m.route.set(m.route.get());
-    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
+  {
+    id: "manage-users",
+    name: "Manage Users",
+    // icon: Icons.users,
+    route: "/account/:name/user-management",
+    position: ["settings-nav"],
+    group: ["authenticated", "admin"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      // console.log(
+      //   "manage users on match",
+      //   mdl,
+      //   args,
+      //   path,
+      //   fullroute,
+      //   isAnchor,
+      //   mdl.state.isAuth(),
+      //   mdl.user.isAdmin
+      // )
+      !mdl.user.isAdmin && m.route.set(m.route.get())
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
   },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "logout",
-  name: "",
-  // icon: Icons.users,
-  route: "/logout",
-  position: [],
-  group: ["authenticated", "admin"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-    localStorage.clear();
-    sessionStorage.clear();
-    mdl.cart = (0, _Utils.jsonCopy)(_cart.newCart);
-    mdl.state.isAuth(false);
-    mdl.user = {};
-    m.route.set(m.route.get());
-    console.log("loggout", mdl);
+  {
+    id: "logout",
+    name: "",
+    // icon: Icons.users,
+    route: "/logout",
+    position: [],
+    group: ["authenticated", "admin"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
+
+      localStorage.clear()
+      sessionStorage.clear()
+      mdl.cart = jsonCopy(newCart)
+      mdl.state.isAuth(false)
+      mdl.user = {}
+      m.route.set(m.route.get())
+      console.log("loggout", mdl)
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
   },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_home["default"], {
-      mdl: mdl
-    }));
-  }
-}];
-var _default = AuthenticatedRoutes;
-exports["default"] = _default;
+]
+
+export default AuthenticatedRoutes
+
 });
 
 ;require.register("Routes/index.js", function(exports, require, module) {
-"use strict";
+import AuthenticatedRoutes from "./authenticated-routes.js"
+import MainRoutes from "./main-routes.js"
+import { flatten } from "ramda"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const Routes = flatten([MainRoutes, AuthenticatedRoutes])
+export default Routes
 
-var _authenticatedRoutes = _interopRequireDefault(require("./authenticated-routes.js"));
-
-var _mainRoutes = _interopRequireDefault(require("./main-routes.js"));
-
-var _ramda = require("ramda");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Routes = (0, _ramda.flatten)([_mainRoutes["default"], _authenticatedRoutes["default"]]);
-var _default = Routes;
-exports["default"] = _default;
 });
 
 ;require.register("Routes/main-routes.js", function(exports, require, module) {
-"use strict";
+import Layout from "Layouts/index.js"
+import BurpRags from "Pages/burp-rags.js"
+import BabyBlankets from "Pages/blankets.js"
+import Default from "Pages/default.js"
+import Blog from "Pages/blog.js"
+import Home from "Pages/home.js"
+import Cart from "Pages/cart.js"
+import Checkout from "Pages/checkout.js"
+import Logo from "Components/Logo"
+import Login from "Pages/Auth/login-user.js"
+import Register from "Pages/Auth/register-user.js"
+import { scrollToAnchor } from "Utils/index.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
+const Routes = [
+  {
+    id: "sette-bambini",
+    name: m(Logo),
+    // icon: Icons.home,
+    route: "/",
+    isNav: true,
+    group: ["toolbar"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
+  },
+  {
+    id: "login",
+    name: "Account Login",
+    // icon: Icons.search,
+    route: "/login",
+    isNav: false,
+    group: [],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Login, { mdl })),
+  },
+  {
+    id: "register",
+    name: "Register Account",
+    // icon: Icons.search,
+    route: "/register",
+    isNav: false,
+    group: [],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Register, { mdl })),
+  },
+  {
+    id: "cart",
+    name: "Cart",
+    // icon: Icons.search,
+    route: "/cart",
+    isNav: false,
+    group: [],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Cart, { mdl })),
+  },
+  {
+    id: "checkout",
+    name: "Check Out",
+    // icon: Icons.search,
+    route: "/checkout",
+    isNav: false,
+    group: ["toolbar"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Checkout, { mdl })),
+  },
+  {
+    id: "burp-rags",
+    name: "Burp Rags",
+    // icon: Icons.search,
+    route: "/burp-rags",
+    isNav: true,
+    group: ["navbar"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(BurpRags, { mdl })),
+  },
+  {
+    id: "blankets",
+    name: "Blankets",
+    // icon: Icons.search,
+    route: "/blankets",
+    isNav: false,
+    group: ["navbar", "blankets"],
+    children: ["wraps-blankets", "christ-blankets"],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
+  },
+  {
+    id: "wraps-blankets",
+    name: "Wraps",
+    // icon: Icons.search,
+    route: "/blankets/#wraps",
+    isNav: false,
+    group: ["sub-navbar", "blankets"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
+  },
+  {
+    id: "christ-blankets",
+    name: "Christening Blankets",
+    // icon: Icons.search,
+    route: "/blankets/#christening",
+    isNav: false,
+    group: ["sub-navbar", "blankets"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
+  },
+  {
+    id: "blog",
+    name: "Blog",
+    // icon: Icons.home,
+    route: "/blog",
+    isNav: true,
+    group: ["footer", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
+  },
+  {
+    id: "about-us",
+    name: "About Us",
+    // icon: Icons.home,
+    route: "/about-us",
+    isNav: true,
+    group: ["footer"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "Contact Us",
+    name: "Contact",
+    // icon: Icons.search,
+    route: "/contact-us",
+    isNav: false,
+    group: ["footer"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "returns",
+    name: "Returns Policy",
+    // icon: Icons.search,
+    route: "/returns",
+    isNav: false,
+    group: ["footer", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "tos",
+    name: "Terms of Service",
+    // icon: Icons.search,
+    route: "/terms-of-service",
+    isNav: false,
+    group: ["footer"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "privacy-policy",
+    name: "Privacy Policy",
+    // icon: Icons.search,
+    route: "/privacy-policy",
+    isNav: false,
+    group: ["footer"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "partnerships",
+    name: "Partnerships",
+    // icon: Icons.search,
+    route: "/partnerships",
+    isNav: false,
+    group: ["footer", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "safety-information",
+    name: "Safety Information",
+    // icon: Icons.search,
+    route: "/safety-information",
+    isNav: false,
+    group: ["footer", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+  {
+    id: "faq",
+    name: "FAQ",
+    // icon: Icons.search,
+    route: "/faq",
+    isNav: false,
+    group: ["footer", "menu"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+  },
+]
 
-var _index = _interopRequireDefault(require("Layouts/index.js"));
+export default Routes
 
-var _burpRags = _interopRequireDefault(require("Pages/burp-rags.js"));
-
-var _blankets = _interopRequireDefault(require("Pages/blankets.js"));
-
-var _default2 = _interopRequireDefault(require("Pages/default.js"));
-
-var _blog = _interopRequireDefault(require("Pages/blog.js"));
-
-var _home = _interopRequireDefault(require("Pages/home.js"));
-
-var _cart = _interopRequireDefault(require("Pages/cart.js"));
-
-var _checkout = _interopRequireDefault(require("Pages/checkout.js"));
-
-var _Logo = _interopRequireDefault(require("Components/Logo"));
-
-var _loginUser = _interopRequireDefault(require("Pages/Auth/login-user.js"));
-
-var _registerUser = _interopRequireDefault(require("Pages/Auth/register-user.js"));
-
-var _index2 = require("Utils/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var Routes = [{
-  id: "sette-bambini",
-  name: m(_Logo["default"]),
-  // icon: Icons.home,
-  route: "/",
-  isNav: true,
-  group: ["toolbar"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_home["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "login",
-  name: "Account Login",
-  // icon: Icons.search,
-  route: "/login",
-  isNav: false,
-  group: [],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_loginUser["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "register",
-  name: "Register Account",
-  // icon: Icons.search,
-  route: "/register",
-  isNav: false,
-  group: [],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_registerUser["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "cart",
-  name: "Cart",
-  // icon: Icons.search,
-  route: "/cart",
-  isNav: false,
-  group: [],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_cart["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "checkout",
-  name: "Check Out",
-  // icon: Icons.search,
-  route: "/checkout",
-  isNav: false,
-  group: ["toolbar"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_checkout["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "burp-rags",
-  name: "Burp Rags",
-  // icon: Icons.search,
-  route: "/burp-rags",
-  isNav: true,
-  group: ["navbar"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_burpRags["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "blankets",
-  name: "Blankets",
-  // icon: Icons.search,
-  route: "/blankets",
-  isNav: false,
-  group: ["navbar", "blankets"],
-  children: ["wraps-blankets", "christ-blankets"],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_blankets["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "wraps-blankets",
-  name: "Wraps",
-  // icon: Icons.search,
-  route: "/blankets/#wraps",
-  isNav: false,
-  group: ["sub-navbar", "blankets"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_blankets["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "christ-blankets",
-  name: "Christening Blankets",
-  // icon: Icons.search,
-  route: "/blankets/#christening",
-  isNav: false,
-  group: ["sub-navbar", "blankets"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_blankets["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "blog",
-  name: "Blog",
-  // icon: Icons.home,
-  route: "/blog",
-  isNav: true,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_blog["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "about-us",
-  name: "About Us",
-  // icon: Icons.home,
-  route: "/about-us",
-  isNav: true,
-  group: ["footer"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "Contact Us",
-  name: "Contact",
-  // icon: Icons.search,
-  route: "/contact-us",
-  isNav: false,
-  group: ["footer"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "returns",
-  name: "Returns Policy",
-  // icon: Icons.search,
-  route: "/returns",
-  isNav: false,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "tos",
-  name: "Terms of Service",
-  // icon: Icons.search,
-  route: "/terms-of-service",
-  isNav: false,
-  group: ["footer"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "privacy-policy",
-  name: "Privacy Policy",
-  // icon: Icons.search,
-  route: "/privacy-policy",
-  isNav: false,
-  group: ["footer"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "partnerships",
-  name: "Partnerships",
-  // icon: Icons.search,
-  route: "/partnerships",
-  isNav: false,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "safety-information",
-  name: "Safety Information",
-  // icon: Icons.search,
-  route: "/safety-information",
-  isNav: false,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
-  id: "faq",
-  name: "FAQ",
-  // icon: Icons.search,
-  route: "/faq",
-  isNav: false,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_default2["default"], {
-      mdl: mdl
-    }));
-  }
-}];
-var _default = Routes;
-exports["default"] = _default;
 });
 
 ;require.register("Styles/animations.js", function(exports, require, module) {
-"use strict";
+export const SlideInLeft = ({ dom }) => dom.classList.toggle("slideInLeft")
+export const SlideInRight = ({ dom }) => dom.classList.toggle("slideInRight")
+export const AddToCart = ({ dom }) => dom.classList.toggle("slide-out-tr")
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RemoveChildrenOut = exports.animate = exports.SlideChildrenInDown = exports.StretchInLeft = exports.SlideChildrenInRight = exports.SlideUp = exports.SlideDown = exports.SlideOutLeft = exports.SlideOutRight = exports.AddToCartOut = exports.AddToCart = exports.SlideInRight = exports.SlideInLeft = void 0;
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var SlideInLeft = function SlideInLeft(_ref) {
-  var dom = _ref.dom;
-  return dom.classList.toggle("slideInLeft");
-};
-
-exports.SlideInLeft = SlideInLeft;
-
-var SlideInRight = function SlideInRight(_ref2) {
-  var dom = _ref2.dom;
-  return dom.classList.toggle("slideInRight");
-};
-
-exports.SlideInRight = SlideInRight;
-
-var AddToCart = function AddToCart(_ref3) {
-  var dom = _ref3.dom;
-  return dom.classList.toggle("slide-out-tr");
-};
-
-exports.AddToCart = AddToCart;
-
-var AddToCartOut = function AddToCartOut(_ref4) {
-  var dom = _ref4.dom;
-  AddToCart({
-    dom: dom
-  });
+export const AddToCartOut = ({ dom }) => {
+  AddToCart({ dom })
   return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve();
-    }, 500);
-  });
-};
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
+}
 
-exports.AddToCartOut = AddToCartOut;
-
-var SlideOutRight = function SlideOutRight(_ref5) {
-  var dom = _ref5.dom;
-  dom.classList.replace("slideInLeft", "slideOutLeft");
+export const SlideOutRight = ({ dom }) => {
+  dom.classList.replace("slideInLeft", "slideOutLeft")
   return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve();
-    }, 500);
-  });
-};
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
+}
 
-exports.SlideOutRight = SlideOutRight;
-
-var SlideOutLeft = function SlideOutLeft(_ref6) {
-  var dom = _ref6.dom;
-  dom.classList.replace("slideInRight", "slideOutRight");
+export const SlideOutLeft = ({ dom }) => {
+  dom.classList.replace("slideInRight", "slideOutRight")
   return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve();
-    }, 500);
-  });
-};
+    setTimeout(() => {
+      resolve()
+    }, 500)
+  })
+}
 
-exports.SlideOutLeft = SlideOutLeft;
+export const SlideDown = ({ dom }) => {
+  dom.style.opacity = 0
+  dom.classList.toggle("slideInDown")
+  dom.style.opacity = 1
+}
 
-var SlideDown = function SlideDown(_ref7) {
-  var dom = _ref7.dom;
-  dom.style.opacity = 0;
-  dom.classList.toggle("slideInDown");
-  dom.style.opacity = 1;
-};
-
-exports.SlideDown = SlideDown;
-
-var SlideUp = function SlideUp(_ref8) {
-  var dom = _ref8.dom;
-  dom.classList.replace("slideInDown", "slideOutUp");
+export const SlideUp = ({ dom }) => {
+  dom.classList.replace("slideInDown", "slideOutUp")
   return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve();
-    }, 300);
-  });
-};
+    setTimeout(() => {
+      resolve()
+    }, 300)
+  })
+}
 
-exports.SlideUp = SlideUp;
+export const SlideChildrenInRight = ({ dom }) => {
+  let children = [...dom.children]
 
-var SlideChildrenInRight = function SlideChildrenInRight(_ref9) {
-  var dom = _ref9.dom;
+  return children.map((child, idx) => {
+    child.style.opacity = 0
+    setTimeout(() => {
+      child.classList.toggle("slideInLeft")
+      child.style.opacity = 1
+    }, (idx + 1) * 10)
+  })
+}
 
-  var children = _toConsumableArray(dom.children);
+export const StretchInLeft = (idx) => ({ dom }) => {
+  dom.style.opacity = 0
+  return setTimeout(() => {
+    dom.classList.toggle("stretchRight")
+    dom.style.opacity = 1
+  }, idx * 100 + 20)
+}
 
-  return children.map(function (child, idx) {
-    child.style.opacity = 0;
-    setTimeout(function () {
-      child.classList.toggle("slideInLeft");
-      child.style.opacity = 1;
-    }, (idx + 1) * 10);
-  });
-};
+export const SlideChildrenInDown = (idx) => ({ dom }) => {
+  dom.style.opacity = 0
+  setTimeout(() => {
+    dom.classList.toggle("slideDown")
+    dom.style.opacity = 1
+  }, (idx + 1) * 200)
+}
 
-exports.SlideChildrenInRight = SlideChildrenInRight;
+export const animate = (dir) => ({ dom }) => {
+  dom.style.opacity = 0
+  setTimeout(() => {
+    dom.classList.toggle(dir)
+    dom.style.opacity = 1
+  }, 200)
+}
 
-var StretchInLeft = function StretchInLeft(idx) {
-  return function (_ref10) {
-    var dom = _ref10.dom;
-    dom.style.opacity = 0;
-    return setTimeout(function () {
-      dom.classList.toggle("stretchRight");
-      dom.style.opacity = 1;
-    }, idx * 100 + 20);
-  };
-};
+export const RemoveChildrenOut = ({ dom }) =>
+  new Promise(() => {
+    ;[...dom.children].reverse().map((child, idx) => {
+      return setTimeout(() => {
+        child.style.display = "none"
+      }, idx * 100)
+    })
+  })
 
-exports.StretchInLeft = StretchInLeft;
-
-var SlideChildrenInDown = function SlideChildrenInDown(idx) {
-  return function (_ref11) {
-    var dom = _ref11.dom;
-    dom.style.opacity = 0;
-    setTimeout(function () {
-      dom.classList.toggle("slideDown");
-      dom.style.opacity = 1;
-    }, (idx + 1) * 200);
-  };
-};
-
-exports.SlideChildrenInDown = SlideChildrenInDown;
-
-var animate = function animate(dir) {
-  return function (_ref12) {
-    var dom = _ref12.dom;
-    dom.style.opacity = 0;
-    setTimeout(function () {
-      dom.classList.toggle(dir);
-      dom.style.opacity = 1;
-    }, 200);
-  };
-};
-
-exports.animate = animate;
-
-var RemoveChildrenOut = function RemoveChildrenOut(_ref13) {
-  var dom = _ref13.dom;
-  return new Promise(function () {
-    ;
-
-    _toConsumableArray(dom.children).reverse().map(function (child, idx) {
-      return setTimeout(function () {
-        child.style.display = "none";
-      }, idx * 100);
-    });
-  });
-};
-
-exports.RemoveChildrenOut = RemoveChildrenOut;
-});
-
-;require.register("Utils/.secrets.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BackEnd = void 0;
-
-//NEED TO MOVE THESE TO ENVIRONMENT/GITLAB IN PRODUCTION for manifest
-var getUserToken = function getUserToken() {
-  return sessionStorage.getItem("sb-user-token") ? sessionStorage.getItem("sb-user-token") : "";
-};
-
-var BackEnd = {
-  API_KEY: "6FB32F97-89BF-466F-8F6D-06FE7BA2653A",
-  APP_ID: "7A0EDE25-0509-5305-FFA3-0FA3A11BEF00",
-  baseUrl: "https://api.backendless.com",
-  headers: function headers() {
-    return {
-      "user-token": getUserToken()
-    };
-  }
-};
-exports.BackEnd = BackEnd;
 });
 
 ;require.register("Utils/helpers.js", function(exports, require, module) {
-"use strict";
+import {
+  compose,
+  last,
+  join,
+  values,
+  props,
+  assoc,
+  test,
+  prop,
+  filter,
+  sortBy,
+  toLower,
+  identity,
+  reverse,
+  slice,
+  split,
+  trim,
+  max,
+  toPairs,
+  min,
+  add,
+  map,
+  flatten,
+  reduce,
+  type,
+  equals,
+} from "ramda"
+import Task from "data.task"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getTotal = exports.getQuantity = exports.getPrice = exports.toProducts = exports.uuid = exports.isActiveRoute = exports.jsonCopy = exports.scrollToAnchor = exports.getRoute = exports.debounce = exports.filterTask = exports._paginate = exports._direction = exports._sort = exports._search = exports.addTerms = exports.infiniteScroll = exports.isEmpty = exports.log = exports.makeRoute = void 0;
+export const makeRoute = compose(join("-"), split(" "), trim(), toLower())
+export const log = (m) => (v) => {
+  console.log(m, v)
+  return v
+}
 
-var _ramda = require("ramda");
+export const isEmpty = (data) => data.length == 0
 
-var _data = _interopRequireDefault(require("data.task"));
+export const infiniteScroll = (mdl) => (e) => {
+  let route = mdl.state.route
+  let length = mdl.data[route].data.length
+  let setpoint = 10 * length * mdl.state.scrollPos
+  if (e.target.scrollTop - mdl.state.scrollPos >= setpoint) {
+    mdl.state.scrollPos++ + e.target.scrollTop
+  }
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+export const addTerms = (item) => {
+  const terms = compose(join(" "), values, props(["uuid", "id", "name"]))(item)
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+  return assoc("_terms", terms, item)
+}
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+const byTerms = (query) => compose(test(new RegExp(query, "i")), prop("name"))
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+export const _search = (query) => compose(filter(byTerms(query)))
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+export const _sort = (p) => sortBy(compose(toLower, toString, prop(p)))
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+export const _direction = (dir) => (dir == "asc" ? identity : reverse)
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+export const _paginate = (offset) => (limit) => (data) =>
+  slice(
+    max(0, min(offset, data.length)),
+    min(offset + limit, data.length),
+    data
+  )
 
-var makeRoute = (0, _ramda.compose)((0, _ramda.join)("-"), (0, _ramda.split)(" "), (0, _ramda.trim)(), (0, _ramda.toLower)());
-exports.makeRoute = makeRoute;
+export const filterTask = (query) => (prop) => (direction) => (offset) => (
+  limit
+) =>
+  compose(
+    Task.of,
+    map(_paginate(offset)(limit)),
+    map(_direction(direction)),
+    map(_sort(prop)),
+    _search(query)
+  )
 
-var log = function log(m) {
-  return function (v) {
-    console.log(m, v);
-    return v;
-  };
-};
-
-exports.log = log;
-
-var isEmpty = function isEmpty(data) {
-  return data.length == 0;
-};
-
-exports.isEmpty = isEmpty;
-
-var infiniteScroll = function infiniteScroll(mdl) {
-  return function (e) {
-    var route = mdl.state.route;
-    var length = mdl.data[route].data.length;
-    var setpoint = 10 * length * mdl.state.scrollPos;
-
-    if (e.target.scrollTop - mdl.state.scrollPos >= setpoint) {
-      mdl.state.scrollPos++ + e.target.scrollTop;
+export const debounce = (wait, now) => (fn) => {
+  let timeout = undefined
+  return function () {
+    let context = this
+    let args = arguments
+    let later = function () {
+      timeout = undefined
+      if (!now) fn.apply(context, args)
     }
-  };
-};
+    let callNow = now && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    console.log(fn)
+    if (callNow) fn.apply(context, args)
+  }
+}
 
-exports.infiniteScroll = infiniteScroll;
+export const getRoute = () => last(m.route.get().split("/"))
 
-var addTerms = function addTerms(item) {
-  var terms = (0, _ramda.compose)((0, _ramda.join)(" "), _ramda.values, (0, _ramda.props)(["uuid", "id", "name"]))(item);
-  return (0, _ramda.assoc)("_terms", terms, item);
-};
+export const scrollToAnchor = (anchor) => {
+  let is = (el) => el !== undefined && el !== null
+  //if you pass an undefined anchor it will scroll to the top of the body
+  let targetEl = is(anchor) ? document.getElementById(anchor) : document.body
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  let target = is(targetEl) ? targetEl.getBoundingClientRect().top : 0
 
-exports.addTerms = addTerms;
-
-var byTerms = function byTerms(query) {
-  return (0, _ramda.compose)((0, _ramda.test)(new RegExp(query, "i")), (0, _ramda.prop)("name"));
-};
-
-var _search = function _search(query) {
-  return (0, _ramda.compose)((0, _ramda.filter)(byTerms(query)));
-};
-
-exports._search = _search;
-
-var _sort = function _sort(p) {
-  return (0, _ramda.sortBy)((0, _ramda.compose)(_ramda.toLower, toString, (0, _ramda.prop)(p)));
-};
-
-exports._sort = _sort;
-
-var _direction = function _direction(dir) {
-  return dir == "asc" ? _ramda.identity : _ramda.reverse;
-};
-
-exports._direction = _direction;
-
-var _paginate = function _paginate(offset) {
-  return function (limit) {
-    return function (data) {
-      return (0, _ramda.slice)((0, _ramda.max)(0, (0, _ramda.min)(offset, data.length)), (0, _ramda.min)(offset + limit, data.length), data);
-    };
-  };
-};
-
-exports._paginate = _paginate;
-
-var filterTask = function filterTask(query) {
-  return function (prop) {
-    return function (direction) {
-      return function (offset) {
-        return function (limit) {
-          return (0, _ramda.compose)(_data["default"].of, (0, _ramda.map)(_paginate(offset)(limit)), (0, _ramda.map)(_direction(direction)), (0, _ramda.map)(_sort(prop)), _search(query));
-        };
-      };
-    };
-  };
-};
-
-exports.filterTask = filterTask;
-
-var debounce = function debounce(wait, now) {
-  return function (fn) {
-    var timeout = undefined;
-    return function () {
-      var context = this;
-      var args = arguments;
-
-      var later = function later() {
-        timeout = undefined;
-        if (!now) fn.apply(context, args);
-      };
-
-      var callNow = now && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      console.log(fn);
-      if (callNow) fn.apply(context, args);
-    };
-  };
-};
-
-exports.debounce = debounce;
-
-var getRoute = function getRoute() {
-  return (0, _ramda.last)(m.route.get().split("/"));
-};
-
-exports.getRoute = getRoute;
-
-var scrollToAnchor = function scrollToAnchor(anchor) {
-  var is = function is(el) {
-    return el !== undefined && el !== null;
-  }; //if you pass an undefined anchor it will scroll to the top of the body
-
-
-  var targetEl = is(anchor) ? document.getElementById(anchor) : document.body;
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  var target = is(targetEl) ? targetEl.getBoundingClientRect().top : 0;
   return window.scroll({
     top: target + scrollTop - 150,
     left: 0,
-    behavior: "smooth"
-  });
-};
+    behavior: "smooth",
+  })
+}
 
-exports.scrollToAnchor = scrollToAnchor;
+export const jsonCopy = (src) => JSON.parse(JSON.stringify(src))
 
-var jsonCopy = function jsonCopy(src) {
-  return JSON.parse(JSON.stringify(src));
-};
+export const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
 
-exports.jsonCopy = jsonCopy;
-
-var isActiveRoute = function isActiveRoute(route) {
-  return m.route.get() == route ? "bold" : "";
-};
-
-exports.isActiveRoute = isActiveRoute;
-
-var uuid = function uuid() {
+export const uuid = () => {
   return "xxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0,
-        v = c == "x" ? r : r & 0x3 | 0x8;
-    return v.toString(16);
-  });
-};
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}
 
-exports.uuid = uuid;
+export const toProducts = (cart) =>
+  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
 
-var toProducts = function toProducts(cart) {
-  return (0, _ramda.toPairs)(cart).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        product = _ref2[0],
-        genders = _ref2[1];
-
-    return [product, (0, _ramda.toPairs)(genders)];
-  });
-};
-
-exports.toProducts = toProducts;
-
-var getPrice = function getPrice(mdl, title, genders) {
+export const getPrice = (mdl, title, genders) => {
   /*
   get realprice from mdl.state.currency, title, getQuantity(title, genders)
-  */
+*/
   // console.log("wtf", title, genders)
-  var price = mdl.state.prices[title] * getQuantity(genders);
 
-  if (mdl.state.currency() !== "$") {//price = convertPriceToCurrency(mdl.state.currency(), price)
+  let price = mdl.state.prices[title] * getQuantity(genders)
+  if (mdl.state.currency() !== "$") {
+    //price = convertPriceToCurrency(mdl.state.currency(), price)
   }
 
-  return price;
-};
+  return price
+}
 
-exports.getPrice = getPrice;
+export const getQuantity = (xs) =>
+  reduce(add, 0, filter(compose(equals("Number"), type), flatten(xs)))
 
-var getQuantity = function getQuantity(xs) {
-  return (0, _ramda.reduce)(_ramda.add, 0, (0, _ramda.filter)((0, _ramda.compose)((0, _ramda.equals)("Number"), _ramda.type), (0, _ramda.flatten)(xs)));
-};
+export const getTotal = (mdl, products) =>
+  getQuantity(products.map((p) => getPrice(mdl, p[0], p[1])))
 
-exports.getQuantity = getQuantity;
-
-var getTotal = function getTotal(mdl, products) {
-  return getQuantity(products.map(function (p) {
-    return getPrice(mdl, p[0], p[1]);
-  }));
-};
-
-exports.getTotal = getTotal;
 });
 
 ;require.register("Utils/http.js", function(exports, require, module) {
-"use strict";
+import Task from "data.task"
+import { BackEnd } from "./.secrets.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.parseHttpSuccess = exports.parseHttpError = void 0;
-
-var _data = _interopRequireDefault(require("data.task"));
-
-var _secrets = require("./.secrets.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var onProgress = function onProgress(mdl) {
-  return function (e) {
-    if (e.lengthComputable) {
-      mdl.state.loadingProgress.max = e.total;
-      mdl.state.loadingProgress.value = e.loaded;
-      m.redraw();
-    }
-  };
-};
-
-function onLoad() {
-  return false;
+const onProgress = (mdl) => (e) => {
+  if (e.lengthComputable) {
+    mdl.state.loadingProgress.max = e.total
+    mdl.state.loadingProgress.value = e.loaded
+    m.redraw()
+  }
 }
 
-var onLoadStart = function onLoadStart(mdl) {
-  return function (e) {
-    mdl.state.isLoading(true);
-    return false;
-  };
-};
+function onLoad() {
+  return false
+}
 
-var onLoadEnd = function onLoadEnd(mdl) {
-  return function (e) {
-    mdl.state.isLoading(false);
-    mdl.state.loadingProgress.max = 0;
-    mdl.state.loadingProgress.value = 0;
-    return false;
-  };
-};
+const onLoadStart = (mdl) => (e) => {
+  mdl.state.isLoading(true)
+  return false
+}
 
-var xhrProgress = function xhrProgress(mdl) {
-  return {
-    config: function config(xhr) {
-      xhr.onprogress = onProgress(mdl);
-      xhr.onload = onLoad;
-      xhr.onloadstart = onLoadStart(mdl);
-      xhr.onloadend = onLoadEnd(mdl);
-    }
-  };
-};
+const onLoadEnd = (mdl) => (e) => {
+  mdl.state.isLoading(false)
+  mdl.state.loadingProgress.max = 0
+  mdl.state.loadingProgress.value = 0
+  return false
+}
 
-var parseHttpError = function parseHttpError(mdl) {
-  return function (rej) {
-    return function (e) {
-      mdl.state.isLoading(false);
-      return rej(e.response);
-    };
-  };
-};
-
-exports.parseHttpError = parseHttpError;
-
-var parseHttpSuccess = function parseHttpSuccess(mdl) {
-  return function (res) {
-    return function (data) {
-      mdl.state.isLoading(false);
-      return res(data);
-    };
-  };
-};
-
-exports.parseHttpSuccess = parseHttpSuccess;
-
-var getUserToken = function getUserToken() {
-  return window.sessionStorage.getItem("user-token") ? window.sessionStorage.getItem("user-token") : "";
-};
-
-var HttpTask = function HttpTask(_headers) {
-  return function (method) {
-    return function (mdl) {
-      return function (url) {
-        return function (body) {
-          mdl.state.isLoading(true);
-          return new _data["default"](function (rej, res) {
-            return m.request(_objectSpread({
-              method: method,
-              url: url,
-              headers: _objectSpread({
-                "content-type": "application/json"
-              }, _headers),
-              body: body,
-              withCredentials: false
-            }, xhrProgress(mdl))).then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej));
-          });
-        };
-      };
-    };
-  };
-};
-
-var lookupLocationTask = function lookupLocationTask(query) {
-  return new _data["default"](function (rej, res) {
-    return m.request({
-      method: "GET",
-      url: "https://nominatim.openstreetmap.org/search?q=".concat(query, "&format=json")
-    }).then(res, rej);
-  });
-};
-
-var getTask = function getTask(mdl) {
-  return function (url) {
-    return HttpTask({})("GET")(mdl)(url)(null);
-  };
-};
-
-var nhtsaUrl = "http://localhost:3001/nhtsa/api/";
-var nhtsa = {
-  get: function get(mdl) {
-    return function (url) {
-      return getTask(mdl)(nhtsaUrl + "/" + url);
-    };
-  }
-};
-var backEndUrl = "".concat(_secrets.BackEnd.baseUrl, "/").concat(_secrets.BackEnd.APP_ID, "/").concat(_secrets.BackEnd.API_KEY, "/");
-var backEnd = {
-  getTask: function getTask(mdl) {
-    return function (url) {
-      return HttpTask(_secrets.BackEnd.headers())("GET")(mdl)(backEndUrl + url)(null);
-    };
+const xhrProgress = (mdl) => ({
+  config: (xhr) => {
+    xhr.onprogress = onProgress(mdl)
+    xhr.onload = onLoad
+    xhr.onloadstart = onLoadStart(mdl)
+    xhr.onloadend = onLoadEnd(mdl)
   },
-  postTask: function postTask(mdl) {
-    return function (url) {
-      return function (dto) {
-        return HttpTask(_secrets.BackEnd.headers())("POST")(mdl)(backEndUrl + url)(dto);
-      };
-    };
-  },
-  putTask: function putTask(mdl) {
-    return function (url) {
-      return function (dto) {
-        return HttpTask(_secrets.BackEnd.headers())("PUT")(mdl)(backEndUrl + url)(dto);
-      };
-    };
-  }
-};
-var http = {
-  backEnd: backEnd,
-  HttpTask: HttpTask,
-  getTask: getTask,
-  lookupLocationTask: lookupLocationTask
-};
-var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(string))
+})
+
+export const parseHttpError = (mdl) => (rej) => (e) => {
+  mdl.state.isLoading(false)
+  return rej(e.response)
+}
+
+export const parseHttpSuccess = (mdl) => (res) => (data) => {
+  mdl.state.isLoading(false)
+  return res(data)
+}
+
+const getUserToken = () =>
+  window.sessionStorage.getItem("user-token")
+    ? window.sessionStorage.getItem("user-token")
+    : ""
+
+const HttpTask = (_headers) => (method) => (mdl) => (url) => (body) => {
+  mdl.state.isLoading(true)
+  return new Task((rej, res) =>
+    m
+      .request({
+        method,
+        url,
+        headers: {
+          "content-type": "application/json",
+          ..._headers,
+        },
+        body,
+        withCredentials: false,
+        ...xhrProgress(mdl),
+      })
+      .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+  )
+}
+
+const lookupLocationTask = (query) => {
+  return new Task((rej, res) =>
+    m
+      .request({
+        method: "GET",
+        url: `https://nominatim.openstreetmap.org/search?q=${query}&format=json`,
+      })
+      .then(res, rej)
+  )
+}
+
+const getTask = (mdl) => (url) => HttpTask({})("GET")(mdl)(url)(null)
+
+const nhtsaUrl = "http://localhost:3001/nhtsa/api/"
+const nhtsa = {
+  get: (mdl) => (url) => getTask(mdl)(nhtsaUrl + "/" + url),
+}
+
+const backEndUrl = `${BackEnd.baseUrl}/${BackEnd.APP_ID}/${BackEnd.API_KEY}/`
+const backEnd = {
+  getTask: (mdl) => (url) =>
+    HttpTask(BackEnd.headers())("GET")(mdl)(backEndUrl + url)(null),
+  postTask: (mdl) => (url) => (dto) =>
+    HttpTask(BackEnd.headers())("POST")(mdl)(backEndUrl + url)(dto),
+  putTask: (mdl) => (url) => (dto) =>
+    HttpTask(BackEnd.headers())("PUT")(mdl)(backEndUrl + url)(dto),
+}
+
+const http = {
+  backEnd,
+  HttpTask,
+  getTask,
+  lookupLocationTask,
+}
+
+export default http
+
+// const makeQuery = (string) => JSON.parse(JSON.stringify(string))
+
 // const parseQLResponse = (mdl) => ({ data, errors }) => {
 //   mdl.state.isLoading(false)
 //   return errors ? Promise.reject(errors) : Promise.resolve(data)
 // }
+
 // const postQl = (mdl) => (query) => {
 //   mdl.state.isLoading(true)
 //   return new Task((rej, res) =>
@@ -4039,6 +3477,7 @@ var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(
 //       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
 //   )
 // }
+
 // const postTask = (mdl) => (url) => ({ dto }) => {
 //   mdl.state.isLoading(true)
 //   return new Task((rej, res) =>
@@ -4054,6 +3493,7 @@ var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(
 //       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
 //   )
 // }
+
 // const putTask = (mdl) => (url) => ({ dto }) => {
 //   mdl.state.isLoading(true)
 //   return new Task((rej, res) =>
@@ -4069,6 +3509,7 @@ var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(
 //       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
 //   )
 // }
+
 // const getTask = (mdl) => (url) => {
 //   mdl.state.isLoading(true)
 //   return new Task((rej, res) =>
@@ -4083,6 +3524,7 @@ var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(
 //       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
 //   )
 // }
+
 // const deleteTask = (mdl) => (url) => (id) => {
 //   mdl.state.isLoading(true)
 //   return new Task((rej, res) =>
@@ -4098,346 +3540,251 @@ var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(
 //   )
 // }
 
-exports["default"] = _default;
 });
 
 ;require.register("Utils/index.js", function(exports, require, module) {
-"use strict";
+export * from "./helpers.js"
+export * from "./http.js"
+export * from "./validation.js"
+export * from "./storage.js"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _helpers = require("./helpers.js");
-
-Object.keys(_helpers).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _helpers[key];
-    }
-  });
-});
-
-var _http = require("./http.js");
-
-Object.keys(_http).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _http[key];
-    }
-  });
-});
-
-var _validation = require("./validation.js");
-
-Object.keys(_validation).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _validation[key];
-    }
-  });
-});
-
-var _storage = require("./storage.js");
-
-Object.keys(_storage).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _storage[key];
-    }
-  });
-});
 });
 
 ;require.register("Utils/storage.js", function(exports, require, module) {
-"use strict";
+import Task from "data.task"
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.saveStorageTask = exports.getDbStorageTask = exports.saveDbStorageTask = exports.saveLocalStorageTask = exports.getLocalStorageTask = void 0;
+const getLocalStorageTask = (key) =>
+  new Task((rej, res) =>
+    localStorage.getItem(key)
+      ? rej("nothing here")
+      : res(localStorage.getItem(key))
+  )
 
-var _data = _interopRequireDefault(require("data.task"));
+const saveLocalStorageTask = (key) => (value) => {
+  localStorage.setItem(key, JSON.stringify(value))
+  return Task.of(localStorage.getItem(key))
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+const saveDbStorageTask = (mdl) => (cart) =>
+  mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
+    cart,
+  })
 
-var getLocalStorageTask = function getLocalStorageTask(key) {
-  return new _data["default"](function (rej, res) {
-    return localStorage.getItem(key) ? rej("nothing here") : res(localStorage.getItem(key));
-  });
-};
+const getDbStorageTask = (mdl) =>
+  mdl.http.backEnd.gettTask(mdl)(`data/Accounts/${mdl.account.objectId}`)
 
-exports.getLocalStorageTask = getLocalStorageTask;
+const saveStorageTask = (mdl) => (key) => (value) => {
+  return mdl.state.isAuth()
+    ? saveLocalStorageTask(key)(value).chain(saveDbStorageTask(mdl))
+    : saveLocalStorageTask(key)(value)
+}
 
-var saveLocalStorageTask = function saveLocalStorageTask(key) {
-  return function (value) {
-    localStorage.setItem(key, JSON.stringify(value));
-    return _data["default"].of(localStorage.getItem(key));
-  };
-};
+export {
+  getLocalStorageTask,
+  saveLocalStorageTask,
+  saveDbStorageTask,
+  getDbStorageTask,
+  saveStorageTask,
+}
 
-exports.saveLocalStorageTask = saveLocalStorageTask;
-
-var saveDbStorageTask = function saveDbStorageTask(mdl) {
-  return function (cart) {
-    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
-      cart: cart
-    });
-  };
-};
-
-exports.saveDbStorageTask = saveDbStorageTask;
-
-var getDbStorageTask = function getDbStorageTask(mdl) {
-  return mdl.http.backEnd.gettTask(mdl)("data/Accounts/".concat(mdl.account.objectId));
-};
-
-exports.getDbStorageTask = getDbStorageTask;
-
-var saveStorageTask = function saveStorageTask(mdl) {
-  return function (key) {
-    return function (value) {
-      return mdl.state.isAuth() ? saveLocalStorageTask(key)(value).chain(saveDbStorageTask(mdl)) : saveLocalStorageTask(key)(value);
-    };
-  };
-};
-
-exports.saveStorageTask = saveStorageTask;
 });
 
 ;require.register("Utils/validation.js", function(exports, require, module) {
-"use strict";
+import {
+  compose,
+  curry,
+  isEmpty,
+  isNil,
+  length,
+  gte,
+  test,
+  not,
+  view,
+  set,
+  contains,
+  map,
+  toUpper,
+} from 'ramda'
+import { Success, Failure } from 'data.validation'
+import Maybe from 'data.maybe'
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.isNilOrEmptyOrAtom = exports.allCaps = exports.inDateRange = exports.unique = exports.maxLengthNullable = exports.onlyNumeric = exports.urlFormat = exports.phoneFormat = exports.onlyAlphaNumericSpaceSpecial = exports.onlyAlphaNumericSpaceUnderscore = exports.onlyAlphaNumericSpace = exports.onlyAlphaNumericUnderscore = exports.onlyAlphaNumeric = exports.onlyAlpha = exports.emailFormat = exports.maxSize = exports.maxLength = exports.isNullOrEmpty = exports.isNotNullOrEmpty = exports.IsNotNil = exports.isRequired = exports.validate = exports.getOrElse = void 0;
+export const getOrElse = (val) => (x) => x.getOrElse(val)
 
-var _ramda = require("ramda");
+export const validate = curry((rule, lens, msg, data) =>
+  rule(view(lens, data)) ? Success(data) : Failure([set(lens, msg, {})])
+)
 
-var _data = require("data.validation");
+export const isRequired = compose(
+  not,
+  isEmpty
+)
 
-var _data2 = _interopRequireDefault(require("data.maybe"));
+export const IsNotNil = compose(
+  not,
+  isNil
+)
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+export const isNotNullOrEmpty = (data) => !isNullOrEmpty(data)
 
-var getOrElse = function getOrElse(val) {
-  return function (x) {
-    return x.getOrElse(val);
-  };
-};
+export const isNullOrEmpty = (data) => isNil(data) || isEmpty(data)
 
-exports.getOrElse = getOrElse;
-var validate = (0, _ramda.curry)(function (rule, lens, msg, data) {
-  return rule((0, _ramda.view)(lens, data)) ? (0, _data.Success)(data) : (0, _data.Failure)([(0, _ramda.set)(lens, msg, {})]);
-});
-exports.validate = validate;
-var isRequired = (0, _ramda.compose)(_ramda.not, _ramda.isEmpty);
-exports.isRequired = isRequired;
-var IsNotNil = (0, _ramda.compose)(_ramda.not, _ramda.isNil);
-exports.IsNotNil = IsNotNil;
+export const maxLength = (max) =>
+  compose(
+    gte(max),
+    length
+  )
 
-var isNotNullOrEmpty = function isNotNullOrEmpty(data) {
-  return !isNullOrEmpty(data);
-};
+export const maxSize = curry((max, value) => gte(max, value))
 
-exports.isNotNullOrEmpty = isNotNullOrEmpty;
+export const emailFormat = test(/@/)
 
-var isNullOrEmpty = function isNullOrEmpty(data) {
-  return (0, _ramda.isNil)(data) || (0, _ramda.isEmpty)(data);
-};
+export const onlyAlpha = test(/^[a-zA-Z]*$/)
 
-exports.isNullOrEmpty = isNullOrEmpty;
+export const onlyAlphaNumeric = test(/^[a-zA-Z0-9]*$/)
 
-var maxLength = function maxLength(max) {
-  return (0, _ramda.compose)((0, _ramda.gte)(max), _ramda.length);
-};
+export const onlyAlphaNumericUnderscore = test(/^[a-zA-Z0-9_]*$/)
 
-exports.maxLength = maxLength;
-var maxSize = (0, _ramda.curry)(function (max, value) {
-  return (0, _ramda.gte)(max, value);
-});
-exports.maxSize = maxSize;
-var emailFormat = (0, _ramda.test)(/@/);
-exports.emailFormat = emailFormat;
-var onlyAlpha = (0, _ramda.test)(/^[a-zA-Z]*$/);
-exports.onlyAlpha = onlyAlpha;
-var onlyAlphaNumeric = (0, _ramda.test)(/^[a-zA-Z0-9]*$/);
-exports.onlyAlphaNumeric = onlyAlphaNumeric;
-var onlyAlphaNumericUnderscore = (0, _ramda.test)(/^[a-zA-Z0-9_]*$/);
-exports.onlyAlphaNumericUnderscore = onlyAlphaNumericUnderscore;
-var onlyAlphaNumericSpace = (0, _ramda.test)(/^[a-zA-Z0-9\s]*$/);
-exports.onlyAlphaNumericSpace = onlyAlphaNumericSpace;
-var onlyAlphaNumericSpaceUnderscore = (0, _ramda.test)(/^[a-zA-Z0-9_\s]*$/);
-exports.onlyAlphaNumericSpaceUnderscore = onlyAlphaNumericSpaceUnderscore;
-var onlyAlphaNumericSpaceSpecial = (0, _ramda.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+\s]*$/);
-exports.onlyAlphaNumericSpaceSpecial = onlyAlphaNumericSpaceSpecial;
-var phoneFormat = (0, _ramda.test)(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/);
-exports.phoneFormat = phoneFormat;
-var urlFormat = (0, _ramda.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+]*$/);
-exports.urlFormat = urlFormat;
-var onlyNumeric = (0, _ramda.test)(/^[0-9]*$/);
-exports.onlyNumeric = onlyNumeric;
+export const onlyAlphaNumericSpace = test(/^[a-zA-Z0-9\s]*$/)
 
-var maxLengthNullable = function maxLengthNullable(max) {
-  return (0, _ramda.compose)(getOrElse(false), (0, _ramda.map)((0, _ramda.gte)(max)), (0, _ramda.map)(_ramda.length), _data2["default"].fromNullable);
-};
+export const onlyAlphaNumericSpaceUnderscore = test(/^[a-zA-Z0-9_\s]*$/)
 
-exports.maxLengthNullable = maxLengthNullable;
-var unique = (0, _ramda.curry)(function (keys, value) {
-  var lookup = _data2["default"].fromNullable(keys);
+export const onlyAlphaNumericSpaceSpecial = test(
+  /^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+\s]*$/
+)
 
-  return !(0, _ramda.contains)((0, _ramda.toUpper)(value.toString()), (0, _ramda.map)(function (y) {
-    return (0, _ramda.toUpper)(y.toString());
-  }, lookup.getOrElse([])));
-});
-exports.unique = unique;
-var inDateRange = (0, _ramda.curry)(function (start, end, value) {
+export const phoneFormat = test(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)
+
+export const urlFormat = test(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+]*$/)
+
+export const onlyNumeric = test(/^[0-9]*$/)
+
+export const maxLengthNullable = (max) =>
+  compose(
+    getOrElse(false),
+    map(gte(max)),
+    map(length),
+    Maybe.fromNullable
+  )
+
+export const unique = curry((keys, value) => {
+  let lookup = Maybe.fromNullable(keys)
+  return !contains(
+    toUpper(value.toString()),
+    map((y) => toUpper(y.toString()), lookup.getOrElse([]))
+  )
+})
+
+export const inDateRange = curry((start, end, value) => {
   if (value == null || value === '') {
-    return true;
+    return true
   }
 
-  return new Date(start) <= new Date(value) && new Date(value) < new Date(end);
-});
-exports.inDateRange = inDateRange;
+  return new Date(start) <= new Date(value) && new Date(value) < new Date(end)
+})
 
-var allCaps = function allCaps(str) {
-  return str.toUpperCase() === str;
-};
+export const allCaps = (str) => str.toUpperCase() === str
 
-exports.allCaps = allCaps;
+export const isNilOrEmptyOrAtom = (item) =>
+  isNil(item) || isEmpty(item) || item === '{$type:atom}'
 
-var isNilOrEmptyOrAtom = function isNilOrEmptyOrAtom(item) {
-  return (0, _ramda.isNil)(item) || (0, _ramda.isEmpty)(item) || item === '{$type:atom}';
-};
-
-exports.isNilOrEmptyOrAtom = isNilOrEmptyOrAtom;
 });
 
 ;require.register("app.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var toRoutes = function toRoutes(mdl) {
-  return function (acc, route) {
-    acc[route.route] = {
-      onmatch: function onmatch(args, path, fullroute) {
-        if (route.group.includes("authenticated") && !mdl.state.isAuth()) {
-          mdl.route.set(m.route.get());
-        }
-
-        mdl.state.route = route;
-        mdl.state.anchor = path.split("#")[1];
-        var isAnchor = Boolean(mdl.state.anchor);
-        route.onmatch(mdl, args, path, fullroute, isAnchor);
-      },
-      render: function render() {
-        return route.component(mdl);
+const toRoutes = (mdl) => (acc, route) => {
+  acc[route.route] = {
+    onmatch: (args, path, fullroute) => {
+      if (route.group.includes("authenticated") && !mdl.state.isAuth()) {
+        mdl.route.set(m.route.get())
       }
-    };
-    return acc;
-  };
-};
+      mdl.state.route = route
+      mdl.state.anchor = path.split("#")[1]
+      let isAnchor = Boolean(mdl.state.anchor)
+      route.onmatch(mdl, args, path, fullroute, isAnchor)
+    },
+    render: () => route.component(mdl),
+  }
+  return acc
+}
 
-var App = function App(mdl) {
-  return mdl.Routes.reduce(toRoutes(mdl), {});
-};
+const App = (mdl) => mdl.Routes.reduce(toRoutes(mdl), {})
 
-var _default = App;
-exports["default"] = _default;
+export default App
+
 });
 
 ;require.register("index.js", function(exports, require, module) {
-"use strict";
+import App from "./app.js"
+import Model from "Models/index.js"
+import { FunConfig } from "fun-config"
 
-var _app = _interopRequireDefault(require("./app.js"));
-
-var _index = _interopRequireDefault(require("Models/index.js"));
-
-var _funConfig = require("fun-config");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-_funConfig.FunConfig.configure();
-
-var root = document.body;
-var winW = window.innerWidth;
+FunConfig.configure()
+const root = document.body
+let winW = window.innerWidth
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 
-if ('development' !== "production") {
-  console.log("Looks like we are in development mode!");
+if ('production' !== "production") {
+  console.log("Looks like we are in development mode!")
 } else {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./service-worker.js").then(function (registration) {
-        console.log("⚙️ SW registered: ", registration);
-      })["catch"](function (registrationError) {
-        console.log("🧟 SW registration failed: ", registrationError);
-      });
-    });
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .then((registration) => {
+          console.log("⚙️ SW registered: ", registration)
+        })
+        .catch((registrationError) => {
+          console.log("🧟 SW registration failed: ", registrationError)
+        })
+    })
   }
-} // set display profiles
+}
 
+// set display profiles
+const getProfile = (w) => {
+  if (w < 668) return "phone"
+  if (w < 920) return "tablet"
+  return "desktop"
+}
 
-var getProfile = function getProfile(w) {
-  if (w < 668) return "phone";
-  if (w < 920) return "tablet";
-  return "desktop";
-};
-
-var checkWidth = function checkWidth(winW) {
-  var w = window.innerWidth;
-
+const checkWidth = (winW) => {
+  const w = window.innerWidth
   if (winW !== w) {
-    winW = w;
-    var lastProfile = _index["default"].settings.screenSize;
-    _index["default"].settings.screenSize = getProfile(w);
-    if (lastProfile != _index["default"].settings.screenSize) m.redraw();
+    winW = w
+    var lastProfile = Model.settings.screenSize
+    Model.settings.screenSize = getProfile(w)
+    if (lastProfile != Model.settings.screenSize) m.redraw()
   }
+  return requestAnimationFrame(checkWidth)
+}
 
-  return requestAnimationFrame(checkWidth);
-};
+Model.settings.screenSize = getProfile(winW)
 
-_index["default"].settings.screenSize = getProfile(winW);
-checkWidth(winW);
+checkWidth(winW)
 
 if (sessionStorage.getItem("sb-user")) {
-  _index["default"].user = JSON.parse(sessionStorage.getItem("sb-user")); //fetch cart from db? do i really??
-
-  _index["default"].state.isAuth(true);
+  Model.user = JSON.parse(sessionStorage.getItem("sb-user"))
+  //fetch cart from db? do i really??
+  Model.state.isAuth(true)
 }
-
 if (localStorage.getItem("sb-cart")) {
-  _index["default"].cart = JSON.parse(localStorage.getItem("sb-cart"));
+  Model.cart = JSON.parse(localStorage.getItem("sb-cart"))
 }
 
-m.route(root, "/", (0, _app["default"])(_index["default"]));
+m.route(root, "/", App(Model))
+
 });
 
 ;require.register("initialize.js", function(exports, require, module) {
-"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+  require("./index.js")
+})
 
-document.addEventListener("DOMContentLoaded", function () {
-  require("./index.js");
-});
 });
 
-;require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
+;require.register("___globals___", function(exports, require, module) {
   
 
 // Auto-loaded modules from config.npm.globals.
@@ -4447,5 +3794,3 @@ window.Stream = require("mithril-stream");
 
 });})();require('___globals___');
 
-
-//# sourceMappingURL=app.js.map

@@ -75,5 +75,6 @@ exports.paths = {
 
 exports.npm = {
   enabled: true,
+  compilers: ["babel-brunch"],
   globals: { m: "mithril", Stream: "mithril-stream" },
 }
