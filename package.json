@@ -21,7 +21,7 @@
     "data.task": "^3.1.2",
     "data.validation": "^1.3.1",
     "flickity": "^2.2.1",
-    "fun-config": "github:boazblake/fun-config",
+    "@boazblake/fun-config": "1.0.0",
     "holderjs": "github:boazblake/holder",
     "mithril": "2.0.4",
     "mithril-stream": "^2.0.0",

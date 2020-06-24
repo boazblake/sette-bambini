@@ -1,6 +1,6 @@
 import App from "./app.js"
 import Model from "Models/index.js"
-import { FunConfig } from "fun-config"
+import { FunConfig } from "@boazblake/fun-config"
 
 FunConfig.configure()
 const root = document.body
