@@ -258,6 +258,20 @@ img {
   }
 }
 
+.masonry {
+  display: grid;
+  grid-gap: 2em; /* [1] Add some gap between rows and columns */
+  grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) ); /* [2] Make columns adjust according to the available viewport */
+  grid-auto-rows: 250px; /* [3] Set the height for implicitly-created row track */
+
+  .col--2x {
+    grid-row-end: span 2;
+ }
+ .col--3x {
+    grid-row-end: span 3;
+ }
+}
+
 .modal {
   animation: ease-in-out 1s;
   -webkit-animation: ease-in-out 1s;

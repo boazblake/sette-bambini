@@ -1,3 +1,4451 @@
-!function(){"use strict";var t="undefined"==typeof global?self:global;if("function"!=typeof t.require){var e={},r={},n={},o={}.hasOwnProperty,a=/^\.\.?(\/|$)/,i=function(t,e){for(var r,n=[],o=(a.test(e)?t+"/"+e:e).split("/"),i=0,u=o.length;i<u;i++)r=o[i],".."===r?n.pop():"."!==r&&""!==r&&n.push(r);return n.join("/")},u=function(t){return t.split("/").slice(0,-1).join("/")},s=function(e){return function(r){var n=i(u(e),r);return t.require(n,e)}},c=function(t,e){var n=g&&g.createHot(t),o={id:t,exports:{},hot:n};return r[t]=o,e(o.exports,s(t),o),o.exports},l=function(t){var e=n[t];return e&&t!==e?l(e):t},d=function(t,e){return l(i(u(t),e))},m=function(t,n){null==n&&(n="/");var a=l(t);if(o.call(r,a))return r[a].exports;if(o.call(e,a))return c(a,e[a]);throw new Error("Cannot find module '"+t+"' from '"+n+"'")};m.alias=function(t,e){n[e]=t};var f=/\.[^.\/]+$/,p=/\/index(\.[^\/]+)?$/,v=function(t){if(f.test(t)){var e=t.replace(f,"");o.call(n,e)&&n[e].replace(f,"")!==e+"/index"||(n[e]=t)}if(p.test(t)){var r=t.replace(p,"");o.call(n,r)||(n[r]=t)}};m.register=m.define=function(t,n){if(t&&"object"==typeof t)for(var a in t)o.call(t,a)&&m.register(a,t[a]);else e[t]=n,delete r[t],v(t)},m.list=function(){var t=[];for(var r in e)o.call(e,r)&&t.push(r);return t};var g=t._hmr&&new t._hmr(d,m,e,r);m._cache=r,m.hmr=g&&g.wrap,m.brunch=!0,t.require=m}}(),function(){var t;"undefined"==typeof window?this:window;require.register("Components/Flicker.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("flickity")),a=function(){return{oncreate:function(t){var e=t.dom;return new o["default"](e,{freeScroll:!0,contain:!0,wrapAround:!0})},view:function(t){var e=t.attrs,r=e.mdl,n=e.data;return m(".main-carousel.animated",[n.map(function(t){return r.addToCart.id(t),m(".carousel-cell",m("img",{src:t}))})])}}},i=a;t["default"]=i}),require.register("Components/Hamburger.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=e("@mithril-icons/clarity/cjs/index"),o=function(){return{view:function(t){var e=t.attrs.mdl;return e.state.isAuth()?m("span",[m("span","Welcome ".concat(e.user.name.split(" ")[0])),m(n.BarsLine)]):m(n.BarsLine)}}},a=o;t["default"]=a}),require.register("Components/Logo.js",function(t,e,r){"use strict";function n(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable})),r.push.apply(r,n)}return r}function o(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?n(Object(r),!0).forEach(function(e){a(t,e,r[e])}):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):n(Object(r)).forEach(function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))})}return t}function a(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var i=m("svg[version='1.0'][xmlns='http://www.w3.org/2000/svg'][width='34.000000pt'][height='34.000000pt'][viewBox='0 0 220.000000 220.000000'][preserveAspectRatio='xMidYMid meet']",[m("metadata"," Created by potrace 1.11, written by Peter Selinger 2001-2013 "),m("g[transform='translate(0.000000,220.000000) scale(0.100000,-0.100000)'][fill='$color5'][stroke='none']",m("path[d='M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z']"))]),u=function(){return{view:function(t){var e=t.attrs;return m(".logo",o({},e),m(".frow row-center",[m("h1.title.logo-text",{id:"logo-sette"},"SETTE"),m("icon.icon",{id:"logo-svg"},i),m("h1.title.logo-text",{id:"logo-bambini"},"BAMBINI")]))}}},s=u;t["default"]=s}),require.register("Components/LogoLoader.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./Logo")),a=function(){return{view:function(t){t.attrs.mdl;return m(".logoLoader",m(".heartbeat",m(o["default"])))}}},i=a;t["default"]=i}),require.register("Components/Masonry/brick.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=function(){var t=null;return{view:function(e){var r=e.attrs,n=r.classList,o=r.data,a=r.parent,i=r.redraw;return m(".brick",{"class":n},m(".content",[o.title&&m("h3.title",o.title),m(".description",[m("img",{onload:function(t){},oncreate:function(e){var r=e.dom;t=r,a&&i(a)(r)},src:"https://via.placeholder.com/".concat(o.imgSrc)}),m("p",o.description)])]))}}},o=n;t["default"]=o}),require.register("Components/Masonry/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./brick")),a=function(t){return function(e){var r=t,n=parseInt(window.getComputedStyle(r).getPropertyValue("grid-auto-rows")),o=parseInt(window.getComputedStyle(r).getPropertyValue("grid-row-gap")),a=Math.ceil((e.querySelector(".content").getBoundingClientRect().height+o)/(n+o));return e.style.gridRowEnd="span "+a}},i=function(t){return Array.from(t.children).map(a(t))},u=function(t){return window.addEventListener("resize",function(e){return i(t)}),i(t)},s=function(){var t=null;return{oncreate:function(e){var r=e.dom;t=r,u(r)},view:function(e){var r=e.attrs.data;return m(".grid",r.map(function(e){return m(o["default"],{classList:"item",data:e,parent:t,redraw:a})}))}}},c=s;t["default"]=c}),require.register("Components/Modal.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=e("Styles/animations"),o={oncreate:n.SlideInLeft,onbeforeremove:n.SlideOutRight,view:function(t){var e=t.attrs,r=e.classList,n=e.isActive,o=e.close,a=e.title,i=e.content,u=e.footer;return console.log("MODAL",r,n,o,a,i,u),m("section.modal.".concat(r),{"class":n?"active":"",id:"modal"},[m("a.modal-overlay",{"aria-label":"Close",onclick:function(){return o()}}),m(".modal-container",{role:"document"},[m(".modal-header",[m("a.btn btn-clear float-right",{id:"modal-close","aria-label":"Close",onclick:function(){return o()}}),m(".modal-title h3",a)]),m(".modal-body",m(".content",i)),m(".modal-footer",u)])])}},a=o;t["default"]=a}),require.register("Components/Selector.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=e("Utils/storage"),o=e("Styles/animations"),a=function(){var t={},e=function(){t.quantity=null,t.gender="Select a Gender"},r=function(t){var r=function(t){return console.log("Error saving",t)},o=function(t){e()};(0,n.saveStorageTask)(t)("sb-cart")(t.cart).fork(r,o)},a=function(t){return function(e){return function(n){t.addToCart.show(e),t.cart[e][n.gender]+=parseInt(n.quantity),r(t)}}};return{oninit:function(){return e()},view:function(e){var r=e.attrs,n=r.mdl,i=r.product;return m(".frow",m(".frow content-center gutters row-between pt-20",[m(".col-sm-1-4",m("h2.pb-10","".concat(n.state.currency()).concat(n.state.prices[i]))),m(".col-sm-1-4",m("label",m("input",{type:"number",inputmode:"numeric",pattern:"[0-9]*",placeholder:"quantity",value:t.quantity,oninput:function(e){return t.quantity=e.target.value}}))),m(".col-sm-1-4",m("label",m("select",{value:t.gender,onchange:function(e){return t.gender=e.target.value}},[m("option",{value:null},"Select a Gender"),m("option",{value:"Male"},"Male"),m("option",{value:"Female"},"Female"),m("option",{value:"Unisex"},"Unisex")]))),n.addToCart.show()==i&&m(".animated",{oncreate:o.AddToCartOut,id:"add-to-cart-img",style:{"background-image":"url(".concat(n.addToCart.id(),")")}}),m(".col-sm-1-4",m("button",{disabled:void 0==t.quantity||"Select a Gender"==t.gender,onclick:function(){return a(n)(i)(t)}},"Add To Bag"))]))}}},i=a;t["default"]=i}),require.register("Components/Single_Carousel.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=e("@mithril-icons/clarity/cjs/index"),o=function(t,e,r){var n;return"prev"==t&&(n=0==e?3:e-1),"next"==t&&(n=3==e?0:e+1),console.log(t,e,"".concat(r,"-slide-").concat(n)),"".concat(r,"-slide-").concat(n)},a=function(){return{onupdate:function(t,e){return console.log(t,e)},view:function(t){var e=t.attrs,r=e.cid,a=e.data;return m(".carousel",{role:"document"},[a.map(function(t,e){return m("input.carousel-locator",{id:"".concat(r,"-slide-").concat(e),type:"radio",name:"carousel-radio",hidden:!0,checked:!0})}),m(".carousel-container",a.map(function(t,e){return m("figure.carousel-item",[m("label.item-next btn btn-action btn-lg",{"for":o("next",e,r)},[m("i.icon icon-arrow-right",m(".point-right",m(n.ArrowLine)))]),m("img.img-responsive rounded",{src:t}),m("label.item-prev btn btn-action btn-lg",{"for":o("prev",e,r)},[m("i.icon icon-arrow-left",m(".point-left",m(n.ArrowLine)))])])})),m(".carousel-nav",a.map(function(t,e){return m("label.nav-item text-hide c-hand",{"for":"".concat(r,"-slide-").concat(e)})}))])}}},i=a;t["default"]=i}),require.register("Components/cart-icon.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=e("@mithril-icons/clarity/cjs"),o=(e("ramda"),e("Utils/helpers")),a=function(t){var e="";if(t.addToCart.show())return e="ping",setTimeout(function(){e="",t.addToCart.show(null),m.redraw()},500),e},i=function(){return{view:function(t){var e=t.attrs.mdl;return m(".animated.clickable",{id:"cart-icon",onupdate:function(){return e.addToCart.show(null)},"class":a(e),onclick:function(){return e.state.showCartModal(!0)}},[m(n.ShoppingBagLine,{width:"45px",height:"45px"}),(0,o.getQuantity)((0,o.toProducts)(e.cart))?m(".cart-pill",(0,o.getQuantity)((0,o.toProducts)(e.cart))):null])}}},u=i;t["default"]=u}),require.register("Components/icons/Logo.js",function(t,e,r){"use strict";var n=function(){return n=Object.assign||function(t){for(var e,r=1,n=arguments.length;r<n;r++){e=arguments[r];for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&(t[o]=e[o])}return t},n.apply(this,arguments)},o=function(t){return t&&t.__esModule?t:{"default":t}};Object.defineProperty(t,"__esModule",{value:!0});var a=o(e("mithril")),i={view:function(t){var e=t.attrs;return a["default"]("svg",n({version:1.1,width:36,height:36,viewBox:"0 0 36 36",preserveAspectRatio:"xMidYMid meet",xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink"},e),a["default"]("title",{},"logo"),a["default"]("path",{d:"M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z"}),a["default"]("path",{d:"M25,15.5H11a1,1,0,0,0,0,2H25a1,1,0,0,0,0-2Z","class":"clr-i-outline clr-i-outline-path-2"}),a["default"]("path",{d:"M21.75,20.5h-7.5a1,1,0,0,0,0,2h7.5a1,1,0,0,0,0-2Z","class":"clr-i-outline clr-i-outline-path-3"}),a["default"]("path",{d:"M11.28,12.5H24.72a1,1,0,0,0,0-2H11.28a1,1,0,0,0,0,2Z","class":"clr-i-outline clr-i-outline-path-4"}),a["default"]("rect",{x:0,y:0,width:36,height:36,"fill-opacity":0}))}};t["default"]=i}),require.register("Components/nav-link.js",function(t,e,r){"use strict";function n(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable})),r.push.apply(r,n)}return r}function o(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?n(Object(r),!0).forEach(function(e){u(t,e,r[e])}):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):n(Object(r)).forEach(function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))})}return t}function a(t,e){if(null==t)return{};var r,n,o=i(t,e);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(t);for(n=0;n<a.length;n++)r=a[n],e.indexOf(r)>=0||Object.prototype.propertyIsEnumerable.call(t,r)&&(o[r]=t[r])}return o}function i(t,e){if(null==t)return{};var r,n,o={},a=Object.keys(t);for(n=0;n<a.length;n++)r=a[n],e.indexOf(r)>=0||(o[r]=t[r]);return o}function u(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=t.NavLink=void 0;var s=function(t,e){return t.reduce(function(t,r){return Object.assign(t,u({},r,e))},{})},c=function(){return{view:function(t){var e=t.attrs,r=e.mdl,n=e.href,i=e.link,u=e.classList,c=a(e,["mdl","href","link","classList"]);return m(m.route.Link,o(o({},s(["onclick","onmouseover","onmouseout"],function(t){return console.log(t.type)})),{},{href:n,"class":"nav-link ".concat(u," ").concat(r.state.navSelected()==i&&"shadow")},c),i)}}};t.NavLink=c;var l=c;t["default"]=l}),require.register("Layouts/Body/cart-modal.js",function(t,e,r){"use strict";function n(t,e){return s(t)||u(t,e)||a(t,e)||o()}function o(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function a(t,e){if(t){if("string"==typeof t)return i(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?i(t,e):void 0}}function i(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function u(t,e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,a=void 0;try{for(var i,u=t[Symbol.iterator]();!(n=(i=u.next()).done)&&(r.push(i.value),!e||r.length!==e);n=!0);}catch(s){o=!0,a=s}finally{try{n||null==u["return"]||u["return"]()}finally{if(o)throw a}}return r}}function s(t){if(Array.isArray(t))return t}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var c=e("Components/nav-link"),l=e("Utils/helpers"),d=e("ramda"),f=function(t){return(0,d.toPairs)(t).map(function(t){var e=n(t,2),r=e[0],o=e[1];return[r,(0,d.toPairs)(o)]})},p=function(){return{view:function(t){var e=t.attrs,r=(e.mdl,n(e.gender,2)),o=r[0],a=r[1];return a?m(".",[m("img",{src:"https://via.placeholder.com/80"}),m("h4","".concat(o," : ").concat(a))]):null}}},v=function(t){var e=t.attrs,r=e.mdl,o=n(e.p,2),a=o[0],i=o[1],u=(0,l.getQuantity)(i),s=(0,l.getPrice)(r,a,i);return{view:function(t){var e=t.attrs,r=e.mdl,o=n(e.p,2),a=o[0],i=o[1];return u?m(".frow column-start",[m("h3","".concat(u," ").concat(a," for ").concat(r.state.currency()).concat(s)),m(".frow cart-item row-around",i.map(function(t){return m(p,{mdl:r,gender:t})}))]):null}}},g=function(t,e){var r=(0,l.getQuantity)(e.map(function(e){return(0,l.getPrice)(t,e[0],e[1])}));return r},h=function(t){t.attrs.mdl;return{oninit:function(t){var e=t.attrs.mdl;return e.state.showNavModal(!1)},view:function(t){var e=t.attrs.mdl;return m(".modalOverlay-right.animated",{onclick:function(t){e.state.showCartModal(!1)}},m(".modal",{style:{right:0},id:"cart-modal"},[m("h1.title text-center","Shopping Cart"),g(e,f(e.cart))?m(c.NavLink,{mdl:e,href:"/cart",classList:"".concat((0,l.isActiveRoute)("/cart")," para button m-0"),link:"Update Cart"}):null,f(e.cart).map(function(t){return m(v,{mdl:e,p:t})}),g(e,f(e.cart))?m(".frow ",m(c.NavLink,{mdl:e,href:"/checkout",classList:"".concat((0,l.isActiveRoute)("/checkout")," para button m-0"),link:["Proceed to Checkout",m("h1.bold text-center","Total of ".concat((0,l.getQuantity)(f(e.cart))," for ").concat(e.state.currency()).concat(g(e,f(e.cart))))]})):m(".frow centered-column",m("h1.bold","Your Cart is Empty")),,]))}}},b=h;t["default"]=b}),require.register("Layouts/Body/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./cart-modal.js")),a=n(e("./nav-modal.js")),i=e("Styles/animations.js"),u=e("ramda"),s=function(t){return t.Routes.filter(function(e){return e.route==t.state.route.route})[0].children.map(function(e){return t.Routes.filter((0,u.propEq)("id",e))[0]}).any()},c=function(t){return"phone"!==t.settings.screenSize},l=function(t){return{marginTop:c(t)?s(t)?"180px":"140px":s(t)?"140px":"100px"}},d=function(){return{view:function(t){var e=t.attrs,r=e.mdl,n=e.children;return m(".body",{id:"body",style:l(r)},m(".frow column-center items-stretch",["desktop"!==r.settings.screenSize&&r.state.showNavModal()&&m(a["default"],{oncreate:i.SlideInLeft,onbeforeremove:i.SlideOutRight,mdl:r}),r.state.showCartModal()&&m(o["default"],{oncreate:i.SlideInRight,onbeforeremove:i.SlideOutLeft,mdl:r}),[m(".text-4x",m("h1.title.mb-20.text-center",r.state.route.name)),n]]))}}},f=d;t["default"]=f}),require.register("Layouts/Body/nav-modal.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/nav-link")),a=e("Utils/index.js"),i={onHover:function(){},selected:function(){}},u=function(){return{view:function(t){var e=t.attrs,r=e.mdl,n=e.href,a=e.link,u=e.classList;return m("li.nav-item",m(o["default"],{mdl:r,state:i,href:n,link:a,classList:u}))}}},s=function(){var t=function(t){return t.Routes.filter(function(t){return t.group.includes("menu")})};return{oncreate:function(t){var e=t.attrs.mdl;e.state.showCartModal(!1)},view:function(e){var r=e.attrs.mdl;return m(".modalOverlay-left.animated",{onclick:function(t){r.state.showNavModal(!1)}},m(".modal",{id:"nav-modal"},m("ul.nav",{id:""},[r.state.isAuth()?[m(o["default"],{state:i,mdl:r,href:"/account/".concat(r.user.name),link:"Your Account",classList:"".concat((0,a.isActiveRoute)("/account/".concat(r.user.name))," button")}),m(o["default"],{mdl:r,href:"/logout",link:"Logout",onclick:function(){},classList:"bold auth-link"})]:m(".frow.justify-start",[m(u,{mdl:r,href:"/login",link:"Login",classList:"".concat((0,a.isActiveRoute)("/login")," button para")}),m(u,{mdl:r,href:"/register",link:"Register",classList:"".concat((0,a.isActiveRoute)("/register")," button para")})]),t(r).map(function(t){return m(u,{mdl:r,href:t.route,link:t.name,classList:(0,a.isActiveRoute)(t.route)})})])))}}},c=s;t["default"]=c}),require.register("Layouts/Header/ProgressBar.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=function(){return{view:function(t){var e=t.attrs.mdl.state.loadingProgress,r=e.value,n=e.max;return m(".progress-bar",m("progress.progress-bar",{id:"progressbar",value:r?r():0,max:n?n():0}))}}},o=n;t["default"]=o}),require.register("Layouts/Header/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./navbar.js")),a=n(e("./sub-nav.js")),i=n(e("./toolbar.js")),u=n(e("./ProgressBar.js")),s=e("ramda"),c=function(t){var e=(t.attrs.mdl,function(t){return t.Routes.filter(function(e){return e.route==t.state.route.route})[0].children.map(function(e){return t.Routes.filter((0,s.propEq)("id",e))[0]})});return{view:function(t){var r=t.attrs.mdl;return m("nav.header",{id:"header",style:{maxHeight:e(r).any()?"140px":"100px"}},[r.state.isLoading()&&m(u["default"],{mdl:r}),m(i["default"],{mdl:r}),m(o["default"],{mdl:r}),m(a["default"],{mdl:r,subRoutes:e})])}}},l=c;t["default"]=l}),require.register("Layouts/Header/navbar.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/nav-link.js")),a=e("Utils/index.js"),i=function(){var t=function(t){return t.Routes.filter(function(t){return t.group.includes("navbar")})},e=function(t){return t.Routes.filter(function(t){return t.group.includes("menu")})};return{view:function(r){var n=r.attrs.mdl;return[m(".navbar.navbar1",{id:"navbar"},m("nav.frow row-around",t(n).map(function(t){return m(o["default"],{mdl:n,href:t.route,link:t.name,classList:(0,a.isActiveRoute)(t.route)})}))),m(".navbar.navbar2.hidden-xs",m("nav.frow row-around",e(n).map(function(t){return m(o["default"],{mdl:n,href:t.route,link:t.name,classList:(0,a.isActiveRoute)(t.route)})})))]}}},u=i;t["default"]=u}),require.register("Layouts/Header/sub-nav.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/nav-link.js")),a=e("Utils/index.js"),i=e("Styles/animations"),u=function(){return{view:function(t){var e=t.attrs,r=e.mdl,n=e.subRoutes;return n(r).any()&&m(".sub-navbar animated",{oncreate:i.SlideDown,onbeforeremove:i.SlideUp,id:"sub-navbar"},m("nav.frow row-around",[n(r).map(function(t){return m(o["default"],{mdl:r,href:t.route,link:t.name,classList:(0,a.isActiveRoute)(t.route)})})]))}}},s=u;t["default"]=s}),require.register("Layouts/Header/toolbar.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/nav-link.js")),a=n(e("Components/Hamburger.js")),i=n(e("Components/Logo")),u=e("Utils/index.js"),s=n(e("Components/cart-icon")),c=function(){return{view:function(t){var e=t.attrs.mdl;return m(".toolbar.my-5",m(".frow row-between row-center",[m(".frow",[m(".navMenuButton visible-xs",{onclick:function(){return e.state.showNavModal(!0)}},m(a["default"],{mdl:e})),e.state.isAuth()?[m(o["default"],{mdl:e,href:"/account/".concat(e.user.name),link:"Your Account",classList:"".concat((0,u.isActiveRoute)("/account/".concat(e.user.name))," button hidden-xs")}),m(o["default"],{mdl:e,href:"/logout",link:"Logout",classList:"bold auth-link hidden-xs"})]:m(".frow hidden-xs",[m(o["default"],{mdl:e,href:"/login",link:"Login",classList:"".concat((0,u.isActiveRoute)("/login")," button auth-link")}),m(o["default"],{mdl:e,href:"/register",link:"Register",classList:"".concat((0,u.isActiveRoute)("/register")," button auth-link")})])]),m(o["default"],{mdl:e,href:"/",classList:"logo",link:m(i["default"],{id:"toolbar-logo","class":"frow row-center"})}),m(s["default"],{mdl:e})]))}}},l=c;t["default"]=l}),require.register("Layouts/footer.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/nav-link.js")),a=e("Utils/index.js"),i=function(){return{view:function(t){var e=t.attrs.mdl,r=e.Routes.filter(function(t){return t.group.includes("footer")});return m("footer.frow content-end items-end",{id:"footer"},m(".frow row-container",r.map(function(t){return m(o["default"],{mdl:e,href:t.route,link:t.name,classList:(0,a.isActiveRoute)(t.route)})})))}}},u=i;t["default"]=u}),require.register("Layouts/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./Header/index.js")),a=n(e("./Body/index.js")),i=n(e("./footer.js")),u=n(e("Components/LogoLoader")),s=function(){return{view:function(t){var e=t.children,r=t.attrs.mdl;return m(".layout",{id:"layout",role:"main"},m(o["default"],{mdl:r}),r.state.isLoading()?m(u["default"]):m(a["default"],{mdl:r,children:e}),m(i["default"],{mdl:r}))}}},c=s;t["default"]=c}),require.register("Models/Main.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("../Routes/index.js")),a=e("./mock-data"),i=e("Utils"),u=n(e("Utils/http")),s=e("./cart"),c={$:"US Dollar","£":"British Pound"},l={currency:Stream("$"),prices:{Wraps:35,"Christening Blankets":55,"Burp Rags":15},showAuthModal:Stream(!1),showNavModal:Stream(!1),showCartModal:Stream(!1),paginate:{page:Stream(1),total_pages:Stream(0),total_results:Stream(0)},query:Stream(""),isLoading:Stream(!1),loadingProgress:{max:Stream(null),value:Stream(null)},dragging:{},isAuth:Stream(!1),navSelected:Stream("")},d={},m={},f={},p={},v={id:Stream(null),show:Stream(null)},g={currencies:c,addToCart:v,http:u["default"],Data:a.Data,Routes:o["default"],state:l,user:d,cart:(0,i.jsonCopy)(s.newCart),data:f,errors:p,settings:m,toggleAuthModal:function(t){return t.state.showAuthModal(!t.state.showAuthModal())},toggleCurrencies:function(t){return function(e){return t.state.currency(e)}}},h=g;t["default"]=h}),require.register("Models/cart.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.newCart=void 0;var n={Wraps:{Male:0,Female:0,Unisex:0},"Christening Blankets":{Male:0,Female:0,Unisex:0},"Burp Rags":{Male:0,Female:0,Unisex:0}};t.newCart=n}),require.register("Models/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0});var o={};t["default"]=void 0;var a=e("./cart.js");Object.keys(a).forEach(function(e){"default"!==e&&"__esModule"!==e&&(Object.prototype.hasOwnProperty.call(o,e)||Object.defineProperty(t,e,{enumerable:!0,get:function(){return a[e]}}))});var i=e("./states.js");Object.keys(i).forEach(function(e){"default"!==e&&"__esModule"!==e&&(Object.prototype.hasOwnProperty.call(o,e)||Object.defineProperty(t,e,{enumerable:!0,get:function(){return i[e]}}))});var u=n(e("./Main")),s=u["default"];t["default"]=s}),require.register("Models/mock-data.js",function(t,e,r){"use strict";function n(t){return u(t)||i(t)||a(t)||o()}function o(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function a(t,e){if(t){if("string"==typeof t)return s(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?s(t,e):void 0}}function i(t){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function u(t){if(Array.isArray(t))return s(t)}function s(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}Object.defineProperty(t,"__esModule",{value:!0}),t.Data=void 0;var c=(e("ramda"),e("Utils"),function(t){var e=t.width,r=t.height;return["https://loremflickr.com/".concat(e,"/").concat(r)]}),l=function(t){return function(e){var r=n(Array(e).keys()),o=r.traverse(function(e){return c(t)},Array.of);return console.log(o),o[0]}};t.Data=l}),require.register("Models/states.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.stateDict=t.states=void 0;var n={AL:"Alabama",AK:"Alaska",AS:"American Samoa",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"District Of Columbia",FM:"Federated States Of Micronesia",FL:"Florida",GA:"Georgia",GU:"Guam",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MH:"Marshall Islands",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",MP:"Northern Mariana Islands",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PW:"Palau",PA:"Pennsylvania",PR:"Puerto Rico",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VI:"Virgin Islands",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};t.states=n;var o=function(t){return n[t]};t.stateDict=o}),require.register("Pages/Auth/Validations.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.validateLoginTask=t.validateUserRegistrationTask=void 0;var n=e("ramda"),o=e("data.validation"),a=e("Utils"),i=(0,o.Success)((0,n.curryN)(3,n.identity)),u=(0,o.Success)((0,n.curryN)(2,n.identity)),s=(0,n.lensProp)("name"),c=(0,n.lensProp)("password"),l=(0,n.lensProp)("confirmPassword"),d=(0,n.lensProp)("email"),m=(0,n.lensProp)("confirmEmail"),f="A Name is required",p="A Password is required",v="An Email is required",g="Emails do not match",h="Email must be a valid format",b="Passwords do not match",y=function(t){return function(e){return e===t}},w=function(t){return(0,o.Success)(t).apLeft((0,a.validate)(a.isRequired,s,f,t))},j=function(t){return(0,o.Success)(t).apLeft((0,a.validate)(a.isRequired,d,v,t)).apLeft((0,a.validate)(a.isRequired,m,v,t)).apLeft((0,a.validate)(y(t.confirmEmail),d,g,t)).apLeft((0,a.validate)(y(t.email),m,g,t)).apLeft((0,a.validate)(a.emailFormat,m,h,t)).apLeft((0,a.validate)(a.emailFormat,d,h,t))},k=function(t){return(0,o.Success)(t).apLeft((0,a.validate)(a.isRequired,d,v,t)).apLeft((0,a.validate)(a.emailFormat,d,h,t))},S=function(t){return(0,o.Success)(t).apLeft((0,a.validate)(a.isRequired,c,p,t)).apLeft((0,
-a.validate)(a.isRequired,l,p,t)).apLeft((0,a.validate)(y(t.password),l,b,t)).apLeft((0,a.validate)(y(t.confirmPassword),c,b,t))},O=function(t){return(0,o.Success)(t).apLeft((0,a.validate)(a.isRequired,c,p,t))},A=function(t){return i.ap(w(t)).ap(j(t)).ap(S(t)).failureMap(n.mergeAll).toTask()};t.validateUserRegistrationTask=A;var P=function(t){return u.ap(k(t)).ap(O(t)).failureMap(n.mergeAll).toTask()};t.validateLoginTask=P}),require.register("Pages/Auth/fns.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.linkAccountTask=t.createAccountTask=t.registerUserTask=t.loginTask=t.loginUserTask=void 0;var n=(e("Utils/index"),e("Utils/storage")),o=e("ramda"),a=function(t){return function(e){return(0,o.mergeDeepWith)(o.add,e,t)}},i=function(t){return function(e){var r=a(JSON.parse(e[0].cart))(t.cart);return t.user.account={objectId:e[0].objectId,cart:r},t.user.address=JSON.parse(e[0].address),t.cart=r,r}},u=function(t){return function(e){return sessionStorage.setItem("sb-user",JSON.stringify(e)),sessionStorage.setItem("sb-user-token",e["user-token"]),t.state.isAuth(!0),t.user=e,e}},s=function(t){return function(e){var r=e.email,n=e.password;return t.http.backEnd.postTask(t)("users/login")({login:r,password:n}).map(u(t))}};t.loginUserTask=s;var c=function(t){return function(e){return t.http.backEnd.getTask(t)("data/Accounts?where=userId%3D'".concat(t.user.objectId,"'")).map(i(t))}},l=function(t){return function(e){var r=e.email,o=e.password;return s(t)({email:r,password:o}).chain(c(t)).chain((0,n.saveStorageTask)(t)("sb-cart"))}};t.loginTask=l;var d=function(t){return function(e){var r=e.name,n=e.email,o=e.password,a=e.isAdmin;return t.http.backEnd.postTask(t)("users/register")({name:r,email:n,password:o,isAdmin:a})}};t.registerUserTask=d;var m=function(t){return t.http.backEnd.postTask(t)("data/Accounts")({cart:JSON.stringify(t.cart),userId:t.user.objectId})};t.createAccountTask=m;var f=function(t){return t.http.backEnd.postTask(t)("data/Users/".concat(t.user.objectId,"/account%3AAccounts%3A1"))([t.user.account.objectId])};t.linkAccountTask=f}),require.register("Pages/Auth/login-user.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=t.Login=void 0;var o=n(e("Components/nav-link")),a=e("Utils"),i=e("./Validations.js"),u=e("./fns.js"),s=function(t){return function(e){var r=function(t){t?(d.errors=t,d.errorMsg(t.message),d.showErrorMsg(!0),console.log("failed - state",d)):(d.errorMsg("Issue with logging in. Have you registered?"),d.showErrorMsg(!0),console.log("failed - other?",d))},n=function(t){return function(e){d.errors={},t.user.account=e,m.route.set("/")}};d.isSubmitted=!0,(0,i.validateLoginTask)(e.userModel).chain((0,u.loginTask)(t)).fork(r,n(t))}},c={name:"",email:"",password:"",confirmEmail:"",confirmPassword:"",isAdmin:!1},l={userModel:c},d={isSubmitted:!1,errors:{},httpError:void 0,data:(0,a.jsonCopy)(l),showErrorMsg:Stream(!1),errorMsg:Stream("")},f=function(){d.data=(0,a.jsonCopy)(l),d.errors={},d.httpError=void 0,d.isSubmitted=!1,d.showErrorMsg(!1),d.errorMsg("")},p=function(){return{onremove:function(){return f()},view:function(t){var e=t.attrs.mdl;return m(".frow centered pt-30",[d.showErrorMsg()&&m("code.warning",d.errorMsg()),m("form.frow-container frow-center",{role:"form",id:"Login-form",onsubmit:function(t){return t.preventDefault()}},[m("input.auth-input",{"class":d.isSubmitted?d.errors.email?"has-error":"has-success":"",id:"reg-email",type:"email",placeholder:"Email",onkeyup:function(t){d.data.userModel.email=t.target.value},value:d.data.userModel.email}),d.errors.email&&m("p.auth-input-hint",d.errors.email),m("input.auth-input",{"class":d.isSubmitted?d.errors.password?"has-error":"has-success":"",id:"reg-pass",type:"password",placeholder:"Password",onkeyup:function(t){d.data.userModel.password=t.target.value},value:d.data.userModel.password}),d.errors.password&&m("p.auth-input-hint",d.errors.password)]),d.httpError&&m(".toast toast-error",d.httpError)],m("a.button.auth-btn",{form:"login-form",onclick:function(){return s(e)(d.data)},"class":e.state.isLoading()&&"loading"},"Login"),m(".auth-link",["Need to ",m(o["default"],{mdl:e,href:"/register",link:"register",classList:"bold"})," ?"]))}}};t.Login=p;var v=p;t["default"]=v}),require.register("Pages/Auth/register-user.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=t.Register=t.validateForm=void 0;var o=n(e("Components/nav-link")),a=e("Utils"),i=e("./Validations"),u=e("./fns.js"),s={name:"",email:"",password:"",confirmEmail:"",confirmPassword:"",isAdmin:!1},c={userModel:s},l={isSubmitted:!1,errors:{},httpError:void 0,data:(0,a.jsonCopy)(c),showErrorMsg:Stream(!1),errorMsg:Stream("")},d=function(){l.data=(0,a.jsonCopy)(c),l.errors={},l.httpError=void 0,l.isSubmitted=!1,l.showErrorMsg(!1),l.errorMsg("")},f=function(t){return function(e){var r=function(t){t?(l.errors=t,l.errorMsg(t.message),l.showErrorMsg(!0),console.log("failed - state",l)):(l.errorMsg("There seems to be a problem please contact web support"),l.showErrorMsg(!0),console.log("failed - state",l))},n=function(t){return function(e){l.errors={},sessionStorage.setItem("sb-user-token",t.user["user-token"]),sessionStorage.setItem("sb-user",JSON.stringify(t.user)),m.route.set("/")}};l.isSubmitted=!0,(0,i.validateUserRegistrationTask)(e.userModel).chain((0,u.registerUserTask)(t)).chain(function(r){return(0,u.loginUserTask)(t)({email:e.userModel.email,password:e.userModel.password})}).chain(function(e){return(0,u.createAccountTask)(t)}).chain(function(e){return t.user.account=e,(0,u.linkAccountTask)(t)}).fork(r,n(t))}};t.validateForm=f;var p=function(){return{view:function(t){var e=t.attrs,r=e.data,n=e.errors,o=e.isSubmitted;return[m("input.auth-input",{"class":o?n.name?"has-error":"has-success":"",id:"reg-name",type:"text",placeholder:"Full Name",onkeyup:function(t){return r.name=t.target.value},value:r.name}),n.name&&m("p.auth-input-hint",n.name),m("input.auth-input",{"class":o?n.email?"has-error":"has-success":"",id:"reg-email",type:"email",placeholder:"Email",onkeyup:function(t){return r.email=t.target.value},value:r.email}),n.email&&m("p.auth-input-hint",n.email),m("input.auth-input",{id:"confirmEmail","class":o?n.confirmEmail?"has-error":"has-success":"",type:"email",placeholder:"Confirm Email",onkeyup:function(t){return r.confirmEmail=t.target.value},value:r.confirmEmail}),n.confirmEmail&&m("p.auth-input-hint",n.confirmEmail),m("input.auth-input",{"class":o?n.password?"has-error":"has-success":"",id:"reg-pass",type:"password",placeholder:"Password",onkeyup:function(t){return r.password=t.target.value},value:r.password}),n.password&&m("p.auth-input-hint",n.password),m("input.auth-input",{"class":o?n.confirmPassword?"has-error":"has-success":"",id:"pass-confirm",type:"password",placeholder:"Confirm Password",onkeyup:function(t){return r.confirmPassword=t.target.value},value:r.confirmPassword}),n.confirmPassword&&m("p.auth-input-hint",n.confirmPassword)]}}},v=function(){return{onremove:function(){return d()},view:function(t){var e=t.attrs.mdl;return[m(".frow centered pt-30",[l.showErrorMsg()&&m("code.warning",l.errorMsg()),m("form.frow-container column-center",{role:"form",id:"Register-form",onsubmit:function(t){return t.preventDefault()}},[m(p,{data:l.data.userModel,errors:l.errors,isSubmitted:l.isSubmitted}),m("a.button.auth-btn",{form:"register-form",onclick:function(){return f(e)(l.data)},"class":e.state.isLoading()&&"loading"},"Register"),m(".auth-link",["Need to ",m(o["default"],{mdl:e,href:"/login",link:"Login",classList:"bold"})," ?"])])]),l.httpError&&m(".toast toast-error",l.httpError)]}}};t.Register=v;var g=v;t["default"]=g}),require.register("Pages/account.js",function(t,r,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=r("@mithril-icons/clarity/cjs"),a=r("Models"),i=function(t){return function(e){return console.log(e),t.http.backEnd.putTask(t)("data/Accounts/".concat(t.user.account.objectId))({address:JSON.stringify(e)})}},u=function(){var t={address:{street1:"",street2:"",city:"",state:"",zip:""},editAddress:Stream(!1),showAddress:Stream(!1),errors:{}},r=function(t){return t.editAddress(!t.editAddress())},n=function(t){return function(r){var n=function(t){return console.log("e",e)},o=function(t){return function(e){t.user.address=JSON.parse(e.address)}};i(t)(r.address).fork(n,o(t))}};return{oninit:function(e){var r=e.attrs.mdl;t.address=r.user.address,t.address?(t.showAddress(!0),t.editAddress(!1)):(t.address={},t.showAddress(!1),t.editAddress(!1))},view:function(e){var i=e.attrs.mdl;return console.log("wtf",Object.keys(t.address).length),m(".frow-container frow-center",[m("h2","Welcome ",i.user.name),m("section.m-5",[m("span.frow row-start",m("h3.pr-10","Shipping Address"),m(o.PencilLine,{"class":"clickable",onclick:function(){return r(t)},width:"16px"}),Object.keys(t.address).length?m("pre","".concat(t.address.street1," ").concat(t.address.street2||""," ").concat(t.address.city," ").concat(t.address.state," ").concat(t.address.zip)):m("h4","No Address on File")),t.editAddress()&&m("form.frow column-start m-5 px-20",{oninput:function(e){console.log(i,t),t.address[e.target.id]=e.target.value}},[m("input.col-xs-1-2",{type:"text",id:"street1",placeholder:"street1",value:t.address.street1}),m("input.col-xs-1-2",{type:"text",id:"street2",placeholder:"street2",value:t.address.street2}),m(".frow row",[m("input.col-xs-1-3",{type:"text",id:"city",placeholder:"city",value:t.address.city}),m(".col-xs-1-3",m("select",{id:"state",placeholder:"state",value:t.address.state||"state"},Object.keys(a.states).map(function(t){return[m("option",{key:"placeholder",value:"state"},"state"),m("option",{key:t,placeholder:"state",value:(0,a.stateDict)(t)},"".concat((0,a.stateDict)(t)))]}),t.address.state||"state")),m("input.col-xs-1-3",{type:"number",inputmode:"numeric",pattern:"[0-9]*",id:"zip",value:t.address.zip,placeholder:"zip"})]),m("a.button",{type:"submit","class":"clickable",onclick:function(){return n(i)(t)}},"Submit")])]),m("section",[m("h3","Past Orders")]),m("section"),m("section")])}}},s=u;t["default"]=s}),require.register("Pages/blankets.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/Flicker.js")),a=n(e("Components/Selector.js")),i=(e("Styles/animations"),function(){var t={errors:{},data:["https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600"]};return{oninit:function(){},onremove:function(){t.errors={},t.data=[]},view:function(e){var r=e.attrs.mdl;return m(".frow-container frow-center",[m(".mb-30",{id:"wraps"},[m(".text-2halfx",m("h2.pb-10","Wraps")),m(o["default"],{mdl:r,data:t.data}),m(".mt-20",m(a["default"],{mdl:r,product:"Wraps"})),m("ul",[m("li.pb-10",'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'),m("li.pb-10","Machine wash and tumble dry."),m("li.pb-10","Proudly made in Houston Texas USA")])]),m(".mb-30",{id:"christening"},m(".text-2halfx",m("h2.pb-10","Christening Blankets")),m(o["default"],{mdl:r,data:t.data}),m(".mt-20",m(a["default"],{mdl:r,product:"Christening Blankets"})),m("ul",[m("li.pb-10",'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'),m("li.pb-10","This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."),m("li.pb-10","babies should be supervised at all times when this blanket is in use."),m("li.pb-10","Proudly made in Houston Texas USA")]))])}}}),u=i;t["default"]=u}),require.register("Pages/blog.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("data.task")),a=n(e("Components/Masonry")),i=function(t){return o["default"].of([{imgSrc:220,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:0,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:220,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:200,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:250,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:220,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{imgSrc:2,title:"Title",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}])},u=function(t){return function(e){var r=e.attrs.mdl,n=function(t){return function(e){t.errors.init=e,console.log("errror",e)}},o=function(t){return function(e){t.data=e}};i(r).fork(n(t),o(t))}},s=function(){var t={errors:{},data:[]};return{oninit:u(t),onremove:function(){t.errors={},t.data=[]},view:function(e){e.attrs.mdl;return m(".frow-container frow-center",{id:"blog-page"},[m(a["default"],{data:t.data})])}}},c=s;t["default"]=c}),require.register("Pages/burp-rags.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Components/Flicker.js")),a=n(e("Components/Selector.js")),i=function(){var t={errors:{},data:["https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600","https://source.unsplash.com/random/800x600"]};return{onremove:function(){t.errors={},t.data=[]},view:function(e){var r=e.attrs.mdl;return m(".frow-container frow-center",[m(".mb-30",{id:"burps"},[m(o["default"],{mdl:r,data:t.data}),m(".mt-20",m(a["default"],{mdl:r,product:"Burp Rags"})),m("ul",[m("li.pb-10","Set of 7 handcrafted burp rags"),m("li.pb-10","Each guranteed to be one of a kind"),m("li.pb-10",'Double sided Flannel burp cloths 21" x 12"'),m("li.pb-10","Thick and absorbent!"),m("li.pb-10","No two cloths are the same!"),m("li.pb-10","Proudly made in Houston Texas USA")]),m("p.pb-10","Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering.")])])}}},u=i;t["default"]=u}),require.register("Pages/cart.js",function(t,e,r){"use strict";function n(t,e){return s(t)||u(t,e)||a(t,e)||o()}function o(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function a(t,e){if(t){if("string"==typeof t)return i(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?i(t,e):void 0}}function i(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function u(t,e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,a=void 0;try{for(var i,u=t[Symbol.iterator]();!(n=(i=u.next()).done)&&(r.push(i.value),!e||r.length!==e);n=!0);}catch(s){o=!0,a=s}finally{try{n||null==u["return"]||u["return"]()}finally{if(o)throw a}}return r}}function s(t){if(Array.isArray(t))return t}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var c=e("Components/nav-link"),l=e("Utils/helpers"),d=e("Utils/storage"),f=function(t){var e=function(t){return console.log("Error saving",t)},r=function(t){console.log("success saving",t)};(0,d.saveStorageTask)(t)("sb-cart")(t.cart).fork(e,r)},p=function(t){return function(e,r,n){console.log(e,r,n),t.cart[e][r]=parseInt(n)?parseInt(n):0,f(t)}},v=function(){return{view:function(t){var e=t.attrs,r=e.mdl,o=e.product,a=n(e.gender,2),i=a[0],u=a[1];return u?m(".animated.frow row-around mt-10",[m("img",{src:"https://via.placeholder.com/80"}),m("label.col-xs-1-4",m("h4","".concat(i)),m("input",{type:"number",inputmode:"numeric",min:0,placeholder:"quantity",value:u,onchange:function(t){return p(r)(o,i,t.target.value)},pattern:"[0-9]*"}))]):null}}},g=function(){return{view:function(t){var e=t.attrs,r=e.mdl,o=n(e.p,2),a=o[0],i=o[1];return(0,l.getQuantity)(i)?m(".frow mt-10 items-baseline justify-evenly",[m("h2","".concat(a,"  ")),m("h4","(".concat(r.state.currency()).concat(r.state.prices[a],")")),m(".animated.frow cart-item column-start",i.map(function(t){return m(v,{mdl:r,gender:t,product:a})}))]):null}}},h=function(t){t.attrs.mdl;return{oninit:function(t){var e=t.attrs.mdl;return e.state.showNavModal(!1)},view:function(t){var e=t.attrs.mdl;return m(".animated.frow-container frow-center",[(0,l.toProducts)(e.cart).map(function(t){return m(g,{mdl:e,p:t})}),(0,l.getTotal)(e,(0,l.toProducts)(e.cart))?m(".frow centered-column",m(c.NavLink,{mdl:e,href:"/checkout",classList:"".concat((0,l.isActiveRoute)("/checkout")," button para mt-20"),link:["Proceed to Checkout",m("h1.bold text-center white","Total of ".concat((0,l.getQuantity)((0,l.toProducts)(e.cart))," for ").concat(e.state.currency()).concat((0,l.getTotal)(e,(0,l.toProducts)(e.cart))))]})):m("h1.bold","Your Cart is Empty")])}}},b=h;t["default"]=b}),require.register("Pages/checkout.js",function(t,e,r){"use strict";function n(t,e){return s(t)||u(t,e)||a(t,e)||o()}function o(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function a(t,e){if(t){if("string"==typeof t)return i(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?i(t,e):void 0}}function i(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function u(t,e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,a=void 0;try{for(var i,u=t[Symbol.iterator]();!(n=(i=u.next()).done)&&(r.push(i.value),!e||r.length!==e);n=!0);}catch(s){o=!0,a=s}finally{try{n||null==u["return"]||u["return"]()}finally{if(o)throw a}}return r}}function s(t){if(Array.isArray(t))return t}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var c=e("Components/nav-link"),l=e("Utils/helpers"),d=function(){return{view:function(t){t.attrs.mdl;return m(".frow centered-column mt-30",[m("h2.pb-10","Select a Checkout Option"),m("img",{src:"https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png"})])}}},f=function(){return{view:function(t){var e=t.attrs,r=(e.mdl,n(e.gender,2)),o=r[0],a=r[1];return a?m(".",[m("img",{src:"https://via.placeholder.com/80"}),m("h4","".concat(o," : ").concat(a))]):null}}},p=function(t){var e=t.attrs,r=e.mdl,o=n(e.p,2),a=o[0],i=o[1],u=(0,l.getQuantity)(i),s=(0,l.getPrice)(r,a,i);return{view:function(t){var e=t.attrs,r=e.mdl,o=n(e.p,2),a=o[0],i=o[1];return u?m(".frow column-start mt-10",[m("span.underline",m("h3.mb-10","".concat(u," ").concat(a," for ").concat(r.state.currency()).concat(s))),m(".frow cart-item row-around",i.map(function(t){return m(f,{mdl:r,gender:t})}))]):null}}},v=function(t){t.attrs.mdl;return{oninit:function(t){var e=t.attrs.mdl;return e.state.showNavModal(!1)},view:function(t){var e=t.attrs.mdl;return m(".frow-container frow-center",[(0,l.getTotal)(e,(0,l.toProducts)(e.cart))?m(c.NavLink,{mdl:e,href:"/cart",classList:"".concat((0,l.isActiveRoute)("/cart")," para button m-0"),link:"Update Cart"}):null,(0,l.toProducts)(e.cart).map(function(t){return m(p,{mdl:e,p:t})}),(0,l.getTotal)(e,(0,l.toProducts)(e.cart))?[m(".frow centered-column",m(c.NavLink,{mdl:e,href:"/checkout",classList:"".concat((0,l.isActiveRoute)("/checkout")," mt-50"),link:[m("h1.bold text-center.mt-20","Total of ".concat((0,l.getQuantity)((0,l.toProducts)(e.cart))," for ").concat(e.state.currency()).concat((0,l.getTotal)(e,(0,l.toProducts)(e.cart))))]})),m(d,{mdl:e})]:m("h1.bold","Your Cart is Empty")])}}},g=v;t["default"]=g}),require.register("Pages/default.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=function(t){return{view:function(t){t.attrs.mdl;return m(".frow-container frow-center")}}},o=n;t["default"]=o}),require.register("Pages/home.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("data.task")),a=n(e("Components/Masonry")),i=function(t){return o["default"].of([{imgSrc:320,title:"",description:""},{imgSrc:250,title:"",description:""},{imgSrc:220,title:"",description:""},{imgSrc:200,title:"",description:""},{imgSrc:250,title:"",description:""},{imgSrc:320,title:"",description:""},{imgSrc:320,title:"",description:""}])},u=function(t){return function(e){var r=e.attrs.mdl,n=function(t){return function(e){t.errors.init=e,console.log("errror",e)}},o=function(t){return function(e){t.data=e}};i(r).fork(n(t),o(t))}},s=function(){var t={errors:{},data:[]};return{oninit:u(t),onremove:function(){t.errors={},t.data=[]},view:function(e){e.attrs.mdl;return m(".frow-container frow-center",{id:"home-page"},[m(a["default"],{data:t.data})])}}},c=s;t["default"]=c}),require.register("Routes/authenticated-routes.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Pages/default.js")),a=n(e("Pages/home.js")),i=n(e("Pages/account.js")),u=n(e("Layouts/index.js")),s=e("Utils"),c=e("Models/cart"),l=[{id:"account",name:"Account",route:"/account/:name",position:["toolbar"],group:["authenticated"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,s.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(u["default"],{mdl:t},m(i["default"],{mdl:t}))}},{id:"profile-page",name:"Profile Page",route:"/account/:name/profile",position:["settings-nav"],group:["authenticated"],children:[],options:[],onmatch:function(t,e,r,n,o){console.log("profile page login on match",t,e,r,n,o,!t.state.isAuth()),o?(0,s.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(u["default"],{mdl:t},m(o["default"],{mdl:t}))}},{id:"manage-users",name:"Manage Users",route:"/account/:name/user-management",position:["settings-nav"],group:["authenticated","admin"],children:[],options:[],onmatch:function(t,e,r,n,o){!t.user.isAdmin&&m.route.set(m.route.get()),o?(0,s.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(u["default"],{mdl:t},m(o["default"],{mdl:t}))}},{id:"logout",name:"",route:"/logout",position:[],group:["authenticated","admin"],children:[],options:[],onmatch:function(t,e,r,n,o){window.scroll({top:0,left:0,behavior:"smooth"}),localStorage.clear(),sessionStorage.clear(),t.cart=(0,s.jsonCopy)(c.newCart),t.state.isAuth(!1),t.user={},m.route.set(m.route.get()),console.log("loggout",t)},component:function(t){return m(u["default"],{mdl:t},m(a["default"],{mdl:t}))}}],d=l;t["default"]=d}),require.register("Routes/index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("./authenticated-routes.js")),a=n(e("./main-routes.js")),i=e("ramda"),u=(0,i.flatten)([a["default"],o["default"]]),s=u;t["default"]=s}),require.register("Routes/main-routes.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var o=n(e("Layouts/index.js")),a=n(e("Pages/burp-rags.js")),i=n(e("Pages/blankets.js")),u=n(e("Pages/default.js")),s=n(e("Pages/blog.js")),c=n(e("Pages/home.js")),l=n(e("Pages/cart.js")),d=n(e("Pages/checkout.js")),f=n(e("Components/Logo")),p=n(e("Pages/Auth/login-user.js")),v=n(e("Pages/Auth/register-user.js")),g=e("Utils/index.js"),h=[{id:"sette-bambini",name:m(f["default"]),route:"/",isNav:!0,group:["toolbar"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(c["default"],{mdl:t}))}},{id:"login",name:"Account Login",route:"/login",isNav:!1,group:[],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(p["default"],{mdl:t}))}},{id:"register",name:"Register Account",route:"/register",isNav:!1,group:[],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(v["default"],{mdl:t}))}},{id:"cart",name:"Cart",route:"/cart",isNav:!1,group:[],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(l["default"],{mdl:t}))}},{id:"checkout",name:"Check Out",route:"/checkout",isNav:!1,group:["toolbar"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(d["default"],{mdl:t}))}},{id:"burp-rags",name:"Burp Rags",route:"/burp-rags",isNav:!0,group:["navbar"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(a["default"],{mdl:t}))}},{id:"blankets",name:"Blankets",route:"/blankets",isNav:!1,group:["navbar","blankets"],children:["wraps-blankets","christ-blankets"],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(i["default"],{mdl:t}))}},{id:"wraps-blankets",name:"Wraps",route:"/blankets/#wraps",isNav:!1,group:["sub-navbar","blankets"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(i["default"],{mdl:t}))}},{id:"christ-blankets",name:"Christening Blankets",route:"/blankets/#christening",isNav:!1,group:["sub-navbar","blankets"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(i["default"],{mdl:t}))}},{id:"blog",name:"Blog",route:"/blog",isNav:!0,group:["footer","menu"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(s["default"],{mdl:t}))}},{id:"about-us",name:"About Us",route:"/about-us",isNav:!0,group:["footer"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"Contact Us",name:"Contact",route:"/contact-us",isNav:!1,group:["footer"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"returns",name:"Returns Policy",route:"/returns",isNav:!1,group:["footer","menu"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"tos",name:"Terms of Service",route:"/terms-of-service",isNav:!1,group:["footer"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"privacy-policy",name:"Privacy Policy",route:"/privacy-policy",isNav:!1,group:["footer"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"partnerships",name:"Partnerships",route:"/partnerships",isNav:!1,group:["footer","menu"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({
-top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"safety-information",name:"Safety Information",route:"/safety-information",isNav:!1,group:["footer","menu"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}},{id:"faq",name:"FAQ",route:"/faq",isNav:!1,group:["footer","menu"],children:[],options:[],onmatch:function(t,e,r,n,o){o?(0,g.scrollToAnchor)(t.state.anchor):window.scroll({top:0,left:0,behavior:"smooth"})},component:function(t){return m(o["default"],{mdl:t},m(u["default"],{mdl:t}))}}],b=h;t["default"]=b}),require.register("Styles/animations.js",function(t,e,r){"use strict";function n(t){return u(t)||i(t)||a(t)||o()}function o(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function a(t,e){if(t){if("string"==typeof t)return s(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?s(t,e):void 0}}function i(t){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function u(t){if(Array.isArray(t))return s(t)}function s(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}Object.defineProperty(t,"__esModule",{value:!0}),t.RemoveChildrenOut=t.animate=t.SlideChildrenInDown=t.StretchInLeft=t.SlideChildrenInRight=t.SlideUp=t.SlideDown=t.SlideOutLeft=t.SlideOutRight=t.AddToCartOut=t.AddToCart=t.SlideInRight=t.SlideInLeft=void 0;var c=function(t){var e=t.dom;return e.classList.toggle("slideInLeft")};t.SlideInLeft=c;var l=function(t){var e=t.dom;return e.classList.toggle("slideInRight")};t.SlideInRight=l;var d=function(t){var e=t.dom;return e.classList.toggle("slide-out-tr")};t.AddToCart=d;var m=function(t){var e=t.dom;return d({dom:e}),new Promise(function(t){setTimeout(function(){t()},500)})};t.AddToCartOut=m;var f=function(t){var e=t.dom;return e.classList.replace("slideInLeft","slideOutLeft"),new Promise(function(t){setTimeout(function(){t()},500)})};t.SlideOutRight=f;var p=function(t){var e=t.dom;return e.classList.replace("slideInRight","slideOutRight"),new Promise(function(t){setTimeout(function(){t()},500)})};t.SlideOutLeft=p;var v=function(t){var e=t.dom;e.style.opacity=0,e.classList.toggle("slideInDown"),e.style.opacity=1};t.SlideDown=v;var g=function(t){var e=t.dom;return e.classList.replace("slideInDown","slideOutUp"),new Promise(function(t){setTimeout(function(){t()},300)})};t.SlideUp=g;var h=function(t){var e=t.dom,r=n(e.children);return r.map(function(t,e){t.style.opacity=0,setTimeout(function(){t.classList.toggle("slideInLeft"),t.style.opacity=1},10*(e+1))})};t.SlideChildrenInRight=h;var b=function(t){return function(e){var r=e.dom;return r.style.opacity=0,setTimeout(function(){r.classList.toggle("stretchRight"),r.style.opacity=1},100*t+20)}};t.StretchInLeft=b;var y=function(t){return function(e){var r=e.dom;r.style.opacity=0,setTimeout(function(){r.classList.toggle("slideDown"),r.style.opacity=1},200*(t+1))}};t.SlideChildrenInDown=y;var w=function(t){return function(e){var r=e.dom;r.style.opacity=0,setTimeout(function(){r.classList.toggle(t),r.style.opacity=1},200)}};t.animate=w;var j=function(t){var e=t.dom;return new Promise(function(){n(e.children).reverse().map(function(t,e){return setTimeout(function(){t.style.display="none"},100*e)})})};t.RemoveChildrenOut=j}),require.register("Utils/.secrets.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.BackEnd=void 0;var n=function(){return sessionStorage.getItem("sb-user-token")?sessionStorage.getItem("sb-user-token"):""},o={API_KEY:"6FB32F97-89BF-466F-8F6D-06FE7BA2653A",APP_ID:"7A0EDE25-0509-5305-FFA3-0FA3A11BEF00",baseUrl:"https://api.backendless.com",headers:function(){return{"user-token":n()}}};t.BackEnd=o}),require.register("Utils/helpers.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}function o(t,e){return c(t)||s(t,e)||i(t,e)||a()}function a(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function i(t,e){if(t){if("string"==typeof t)return u(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return"Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?u(t,e):void 0}}function u(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function s(t,e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,a=void 0;try{for(var i,u=t[Symbol.iterator]();!(n=(i=u.next()).done)&&(r.push(i.value),!e||r.length!==e);n=!0);}catch(s){o=!0,a=s}finally{try{n||null==u["return"]||u["return"]()}finally{if(o)throw a}}return r}}function c(t){if(Array.isArray(t))return t}Object.defineProperty(t,"__esModule",{value:!0}),t.getTotal=t.getQuantity=t.getPrice=t.toProducts=t.uuid=t.isActiveRoute=t.jsonCopy=t.scrollToAnchor=t.getRoute=t.debounce=t.filterTask=t._paginate=t._direction=t._sort=t._search=t.addTerms=t.infiniteScroll=t.isEmpty=t.log=t.makeRoute=void 0;var l=e("ramda"),d=n(e("data.task")),f=(0,l.compose)((0,l.join)("-"),(0,l.split)(" "),(0,l.trim)(),(0,l.toLower)());t.makeRoute=f;var p=function(t){return function(e){return console.log(t,e),e}};t.log=p;var v=function(t){return 0==t.length};t.isEmpty=v;var g=function(t){return function(e){var r=t.state.route,n=t.data[r].data.length,o=10*n*t.state.scrollPos;e.target.scrollTop-t.state.scrollPos>=o&&t.state.scrollPos++ +e.target.scrollTop}};t.infiniteScroll=g;var h=function(t){var e=(0,l.compose)((0,l.join)(" "),l.values,(0,l.props)(["uuid","id","name"]))(t);return(0,l.assoc)("_terms",e,t)};t.addTerms=h;var b=function(t){return(0,l.compose)((0,l.test)(new RegExp(t,"i")),(0,l.prop)("name"))},y=function(t){return(0,l.compose)((0,l.filter)(b(t)))};t._search=y;var w=function(t){return(0,l.sortBy)((0,l.compose)(l.toLower,toString,(0,l.prop)(t)))};t._sort=w;var j=function(t){return"asc"==t?l.identity:l.reverse};t._direction=j;var k=function(t){return function(e){return function(r){return(0,l.slice)((0,l.max)(0,(0,l.min)(t,r.length)),(0,l.min)(t+e,r.length),r)}}};t._paginate=k;var S=function(t){return function(e){return function(r){return function(n){return function(o){return(0,l.compose)(d["default"].of,(0,l.map)(k(n)(o)),(0,l.map)(j(r)),(0,l.map)(w(e)),y(t))}}}}};t.filterTask=S;var O=function(t,e){return function(r){var n=void 0;return function(){var o=this,a=arguments,i=function(){n=void 0,e||r.apply(o,a)},u=e&&!n;clearTimeout(n),n=setTimeout(i,t),console.log(r),u&&r.apply(o,a)}}};t.debounce=O;var A=function(){return(0,l.last)(m.route.get().split("/"))};t.getRoute=A;var P=function(t){var e=function(t){return void 0!==t&&null!==t},r=e(t)?document.getElementById(t):document.body,n=window.pageYOffset||document.documentElement.scrollTop,o=e(r)?r.getBoundingClientRect().top:0;return window.scroll({top:o+n-150,left:0,behavior:"smooth"})};t.scrollToAnchor=P;var _=function(t){return JSON.parse(JSON.stringify(t))};t.jsonCopy=_;var M=function(t){return m.route.get()==t?"bold":""};t.isActiveRoute=M;var x=function(){return"xxxxxxxx".replace(/[xy]/g,function(t){var e=16*Math.random()|0,r="x"==t?e:3&e|8;return r.toString(16)})};t.uuid=x;var L=function(t){return(0,l.toPairs)(t).map(function(t){var e=o(t,2),r=e[0],n=e[1];return[r,(0,l.toPairs)(n)]})};t.toProducts=L;var T=function(t,e,r){var n=t.state.prices[e]*q(r);return"$"!==t.state.currency(),n};t.getPrice=T;var q=function(t){return(0,l.reduce)(l.add,0,(0,l.filter)((0,l.compose)((0,l.equals)("Number"),l.type),(0,l.flatten)(t)))};t.getQuantity=q;var C=function(t,e){return q(e.map(function(e){return T(t,e[0],e[1])}))};t.getTotal=C}),require.register("Utils/http.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}function o(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable})),r.push.apply(r,n)}return r}function a(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?o(Object(r),!0).forEach(function(e){i(t,e,r[e])}):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):o(Object(r)).forEach(function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e))})}return t}function i(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function u(){return!1}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=t.parseHttpSuccess=t.parseHttpError=void 0;var s=n(e("data.task")),c=e("./.secrets.js"),l=function(t){return function(e){e.lengthComputable&&(t.state.loadingProgress.max=e.total,t.state.loadingProgress.value=e.loaded,m.redraw())}},d=function(t){return function(e){return t.state.isLoading(!0),!1}},f=function(t){return function(e){return t.state.isLoading(!1),t.state.loadingProgress.max=0,t.state.loadingProgress.value=0,!1}},p=function(t){return{config:function(e){e.onprogress=l(t),e.onload=u,e.onloadstart=d(t),e.onloadend=f(t)}}},v=function(t){return function(e){return function(r){return t.state.isLoading(!1),e(r.response)}}};t.parseHttpError=v;var g=function(t){return function(e){return function(r){return t.state.isLoading(!1),e(r)}}};t.parseHttpSuccess=g;var h=function(t){return function(e){return function(r){return function(n){return function(o){return r.state.isLoading(!0),new s["default"](function(i,u){return m.request(a({method:e,url:n,headers:a({"content-type":"application/json"},t),body:o,withCredentials:!1},p(r))).then(g(r)(u),v(r)(i))})}}}}},b=function(t){return new s["default"](function(e,r){return m.request({method:"GET",url:"https://nominatim.openstreetmap.org/search?q=".concat(t,"&format=json")}).then(r,e)})},y=function(t){return function(e){return h({})("GET")(t)(e)(null)}},w="".concat(c.BackEnd.baseUrl,"/").concat(c.BackEnd.APP_ID,"/").concat(c.BackEnd.API_KEY,"/"),j={getTask:function(t){return function(e){return h(c.BackEnd.headers())("GET")(t)(w+e)(null)}},postTask:function(t){return function(e){return function(r){return h(c.BackEnd.headers())("POST")(t)(w+e)(r)}}},putTask:function(t){return function(e){return function(r){return h(c.BackEnd.headers())("PUT")(t)(w+e)(r)}}}},k={backEnd:j,HttpTask:h,getTask:y,lookupLocationTask:b},S=k;t["default"]=S}),require.register("Utils/index.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=e("./helpers.js");Object.keys(n).forEach(function(e){"default"!==e&&"__esModule"!==e&&Object.defineProperty(t,e,{enumerable:!0,get:function(){return n[e]}})});var o=e("./http.js");Object.keys(o).forEach(function(e){"default"!==e&&"__esModule"!==e&&Object.defineProperty(t,e,{enumerable:!0,get:function(){return o[e]}})});var a=e("./validation.js");Object.keys(a).forEach(function(e){"default"!==e&&"__esModule"!==e&&Object.defineProperty(t,e,{enumerable:!0,get:function(){return a[e]}})});var i=e("./storage.js");Object.keys(i).forEach(function(e){"default"!==e&&"__esModule"!==e&&Object.defineProperty(t,e,{enumerable:!0,get:function(){return i[e]}})})}),require.register("Utils/storage.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t.saveStorageTask=t.getDbStorageTask=t.saveDbStorageTask=t.saveLocalStorageTask=t.getLocalStorageTask=void 0;var o=n(e("data.task")),a=function(t){return new o["default"](function(e,r){return localStorage.getItem(t)?e("nothing here"):r(localStorage.getItem(t))})};t.getLocalStorageTask=a;var i=function(t){return function(e){return localStorage.setItem(t,JSON.stringify(e)),o["default"].of(localStorage.getItem(t))}};t.saveLocalStorageTask=i;var u=function(t){return function(e){return t.http.backEnd.putTask(t)("data/Accounts/".concat(t.user.account.objectId))({cart:e})}};t.saveDbStorageTask=u;var s=function(t){return t.http.backEnd.gettTask(t)("data/Accounts/".concat(t.account.objectId))};t.getDbStorageTask=s;var c=function(t){return function(e){return function(r){return t.state.isAuth()?i(e)(r).chain(u(t)):i(e)(r)}}};t.saveStorageTask=c}),require.register("Utils/validation.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(t,"__esModule",{value:!0}),t.isNilOrEmptyOrAtom=t.allCaps=t.inDateRange=t.unique=t.maxLengthNullable=t.onlyNumeric=t.urlFormat=t.phoneFormat=t.onlyAlphaNumericSpaceSpecial=t.onlyAlphaNumericSpaceUnderscore=t.onlyAlphaNumericSpace=t.onlyAlphaNumericUnderscore=t.onlyAlphaNumeric=t.onlyAlpha=t.emailFormat=t.maxSize=t.maxLength=t.isNullOrEmpty=t.isNotNullOrEmpty=t.IsNotNil=t.isRequired=t.validate=t.getOrElse=void 0;var o=e("ramda"),a=e("data.validation"),i=n(e("data.maybe")),u=function(t){return function(e){return e.getOrElse(t)}};t.getOrElse=u;var s=(0,o.curry)(function(t,e,r,n){return t((0,o.view)(e,n))?(0,a.Success)(n):(0,a.Failure)([(0,o.set)(e,r,{})])});t.validate=s;var c=(0,o.compose)(o.not,o.isEmpty);t.isRequired=c;var l=(0,o.compose)(o.not,o.isNil);t.IsNotNil=l;var d=function(t){return!m(t)};t.isNotNullOrEmpty=d;var m=function(t){return(0,o.isNil)(t)||(0,o.isEmpty)(t)};t.isNullOrEmpty=m;var f=function(t){return(0,o.compose)((0,o.gte)(t),o.length)};t.maxLength=f;var p=(0,o.curry)(function(t,e){return(0,o.gte)(t,e)});t.maxSize=p;var v=(0,o.test)(/@/);t.emailFormat=v;var g=(0,o.test)(/^[a-zA-Z]*$/);t.onlyAlpha=g;var h=(0,o.test)(/^[a-zA-Z0-9]*$/);t.onlyAlphaNumeric=h;var b=(0,o.test)(/^[a-zA-Z0-9_]*$/);t.onlyAlphaNumericUnderscore=b;var y=(0,o.test)(/^[a-zA-Z0-9\s]*$/);t.onlyAlphaNumericSpace=y;var w=(0,o.test)(/^[a-zA-Z0-9_\s]*$/);t.onlyAlphaNumericSpaceUnderscore=w;var j=(0,o.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+\s]*$/);t.onlyAlphaNumericSpaceSpecial=j;var k=(0,o.test)(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/);t.phoneFormat=k;var S=(0,o.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+]*$/);t.urlFormat=S;var O=(0,o.test)(/^[0-9]*$/);t.onlyNumeric=O;var A=function(t){return(0,o.compose)(u(!1),(0,o.map)((0,o.gte)(t)),(0,o.map)(o.length),i["default"].fromNullable)};t.maxLengthNullable=A;var P=(0,o.curry)(function(t,e){var r=i["default"].fromNullable(t);return!(0,o.contains)((0,o.toUpper)(e.toString()),(0,o.map)(function(t){return(0,o.toUpper)(t.toString())},r.getOrElse([])))});t.unique=P;var _=(0,o.curry)(function(t,e,r){return null==r||""===r||new Date(t)<=new Date(r)&&new Date(r)<new Date(e)});t.inDateRange=_;var M=function(t){return t.toUpperCase()===t};t.allCaps=M;var x=function(t){return(0,o.isNil)(t)||(0,o.isEmpty)(t)||"{$type:atom}"===t};t.isNilOrEmptyOrAtom=x}),require.register("app.js",function(t,e,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=void 0;var n=function(t){return function(e,r){return e[r.route]={onmatch:function(e,n,o){r.group.includes("authenticated")&&!t.state.isAuth()&&t.route.set(m.route.get()),t.state.route=r,t.state.anchor=n.split("#")[1];var a=Boolean(t.state.anchor);r.onmatch(t,e,n,o,a)},render:function(){return r.component(t)}},e}},o=function(t){return t.Routes.reduce(n(t),{})},a=o;t["default"]=a}),require.register("index.js",function(t,e,r){"use strict";function n(t){return t&&t.__esModule?t:{"default":t}}var o=n(e("./app.js")),a=n(e("Models/index.js")),i=e("@boazblake/fun-config");i.FunConfig.configure();var u=document.body,s=window.innerWidth;r.hot&&r.hot.accept(),"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("./service-worker.js").then(function(t){console.log("⚙️ SW registered: ",t)})["catch"](function(t){console.log("🧟 SW registration failed: ",t)})});var c=function(t){return t<668?"phone":t<920?"tablet":"desktop"},l=function d(t){var e=window.innerWidth;if(t!==e){t=e;var r=a["default"].settings.screenSize;a["default"].settings.screenSize=c(e),r!=a["default"].settings.screenSize&&m.redraw()}return requestAnimationFrame(d)};a["default"].settings.screenSize=c(s),l(s),sessionStorage.getItem("sb-user")&&(a["default"].user=JSON.parse(sessionStorage.getItem("sb-user")),a["default"].state.isAuth(!0)),localStorage.getItem("sb-cart")&&(a["default"].cart=JSON.parse(localStorage.getItem("sb-cart"))),m.route(u,"/",(0,o["default"])(a["default"]))}),require.register("initialize.js",function(t,e,r){"use strict";document.addEventListener("DOMContentLoaded",function(){e("./index.js")})}),require.alias("process/browser.js","process"),t=require("process"),require.register("___globals___",function(t,e,r){window.m=e("mithril"),window.Stream=e("mithril-stream")})}(),require("___globals___");
+(function() {
+  'use strict';
+
+  var globals = typeof global === 'undefined' ? self : global;
+  if (typeof globals.require === 'function') return;
+
+  var modules = {};
+  var cache = {};
+  var aliases = {};
+  var has = {}.hasOwnProperty;
+
+  var expRe = /^\.\.?(\/|$)/;
+  var expand = function(root, name) {
+    var results = [], part;
+    var parts = (expRe.test(name) ? root + '/' + name : name).split('/');
+    for (var i = 0, length = parts.length; i < length; i++) {
+      part = parts[i];
+      if (part === '..') {
+        results.pop();
+      } else if (part !== '.' && part !== '') {
+        results.push(part);
+      }
+    }
+    return results.join('/');
+  };
+
+  var dirname = function(path) {
+    return path.split('/').slice(0, -1).join('/');
+  };
+
+  var localRequire = function(path) {
+    return function expanded(name) {
+      var absolute = expand(dirname(path), name);
+      return globals.require(absolute, path);
+    };
+  };
+
+  var initModule = function(name, definition) {
+    var hot = hmr && hmr.createHot(name);
+    var module = {id: name, exports: {}, hot: hot};
+    cache[name] = module;
+    definition(module.exports, localRequire(name), module);
+    return module.exports;
+  };
+
+  var expandAlias = function(name) {
+    var val = aliases[name];
+    return (val && name !== val) ? expandAlias(val) : name;
+  };
+
+  var _resolve = function(name, dep) {
+    return expandAlias(expand(dirname(name), dep));
+  };
+
+  var require = function(name, loaderPath) {
+    if (loaderPath == null) loaderPath = '/';
+    var path = expandAlias(name);
+
+    if (has.call(cache, path)) return cache[path].exports;
+    if (has.call(modules, path)) return initModule(path, modules[path]);
+
+    throw new Error("Cannot find module '" + name + "' from '" + loaderPath + "'");
+  };
+
+  require.alias = function(from, to) {
+    aliases[to] = from;
+  };
+
+  var extRe = /\.[^.\/]+$/;
+  var indexRe = /\/index(\.[^\/]+)?$/;
+  var addExtensions = function(bundle) {
+    if (extRe.test(bundle)) {
+      var alias = bundle.replace(extRe, '');
+      if (!has.call(aliases, alias) || aliases[alias].replace(extRe, '') === alias + '/index') {
+        aliases[alias] = bundle;
+      }
+    }
+
+    if (indexRe.test(bundle)) {
+      var iAlias = bundle.replace(indexRe, '');
+      if (!has.call(aliases, iAlias)) {
+        aliases[iAlias] = bundle;
+      }
+    }
+  };
+
+  require.register = require.define = function(bundle, fn) {
+    if (bundle && typeof bundle === 'object') {
+      for (var key in bundle) {
+        if (has.call(bundle, key)) {
+          require.register(key, bundle[key]);
+        }
+      }
+    } else {
+      modules[bundle] = fn;
+      delete cache[bundle];
+      addExtensions(bundle);
+    }
+  };
+
+  require.list = function() {
+    var list = [];
+    for (var item in modules) {
+      if (has.call(modules, item)) {
+        list.push(item);
+      }
+    }
+    return list;
+  };
+
+  var hmr = globals._hmr && new globals._hmr(_resolve, require, modules, cache);
+  require._cache = cache;
+  require.hmr = hmr && hmr.wrap;
+  require.brunch = true;
+  globals.require = require;
+})();
+
+(function() {
+var global = typeof window === 'undefined' ? this : window;
+var process;
+var __makeRelativeRequire = function(require, mappings, pref) {
+  var none = {};
+  var tryReq = function(name, pref) {
+    var val;
+    try {
+      val = require(pref + '/node_modules/' + name);
+      return val;
+    } catch (e) {
+      if (e.toString().indexOf('Cannot find module') === -1) {
+        throw e;
+      }
+
+      if (pref.indexOf('node_modules') !== -1) {
+        var s = pref.split('/');
+        var i = s.lastIndexOf('node_modules');
+        var newPref = s.slice(0, i).join('/');
+        return tryReq(name, newPref);
+      }
+    }
+    return none;
+  };
+  return function(name) {
+    if (name in mappings) name = mappings[name];
+    if (!name) return;
+    if (name[0] !== '.' && pref) {
+      var val = tryReq(name, pref);
+      if (val !== none) return val;
+    }
+    return require(name);
+  }
+};
+require.register("Components/Flicker.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _flickity = _interopRequireDefault(require("flickity"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Flicker = function Flicker() {
+  return {
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+      return new _flickity["default"](dom, {
+        freeScroll: true,
+        contain: true,
+        wrapAround: true
+      });
+    },
+    view: function view(_ref2) {
+      var _ref2$attrs = _ref2.attrs,
+          mdl = _ref2$attrs.mdl,
+          data = _ref2$attrs.data;
+      return m(".main-carousel.animated", [data.map(function (src) {
+        mdl.addToCart.id(src);
+        return m(".carousel-cell", m("img", {
+          src: src
+        }));
+      })]);
+    }
+  };
+};
+
+var _default = Flicker;
+exports["default"] = _default;
+});
+
+;require.register("Components/Hamburger.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = require("@mithril-icons/clarity/cjs/index");
+
+var Hamburger = function Hamburger() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return mdl.state.isAuth() ? m("span", [m("span", "Welcome ".concat(mdl.user.name.split(" ")[0])), m(_index.BarsLine)]) : m(_index.BarsLine);
+    }
+  };
+};
+
+var _default = Hamburger;
+exports["default"] = _default;
+});
+
+;require.register("Components/Logo.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var LogoSVG = m("svg[version='1.0'][xmlns='http://www.w3.org/2000/svg'][width='34.000000pt'][height='34.000000pt'][viewBox='0 0 220.000000 220.000000'][preserveAspectRatio='xMidYMid meet']", [m("metadata", " Created by potrace 1.11, written by Peter Selinger 2001-2013 "), m("g[transform='translate(0.000000,220.000000) scale(0.100000,-0.100000)'][fill='$color5'][stroke='none']", m("path[d='M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z']"))]);
+
+var Logo = function Logo() {
+  return {
+    view: function view(_ref) {
+      var attrs = _ref.attrs;
+      return m(".logo", _objectSpread({}, attrs), m(".frow row-center", [m("h1.title.logo-text", {
+        id: "logo-sette"
+      }, "SETTE"), m("icon.icon", {
+        id: "logo-svg"
+      }, LogoSVG), m("h1.title.logo-text", {
+        id: "logo-bambini"
+      }, "BAMBINI")]));
+    }
+  };
+};
+
+var _default = Logo;
+exports["default"] = _default;
+});
+
+;require.register("Components/LogoLoader.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Logo = _interopRequireDefault(require("./Logo"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var LogoLoader = function LogoLoader() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".logoLoader", m(".heartbeat", m(_Logo["default"])));
+    }
+  };
+};
+
+var _default = LogoLoader;
+exports["default"] = _default;
+});
+
+;require.register("Components/Masonry/brick.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var Brick = function Brick() {
+  var _dom = null;
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          classList = _ref$attrs.classList,
+          data = _ref$attrs.data,
+          parent = _ref$attrs.parent,
+          redraw = _ref$attrs.redraw;
+      return m(".brick", {
+        "class": classList
+      }, m(".content", [data.title && m("h3.title", data.title), m(".description", [m("img", {
+        onload: function onload(x) {// console.log("brick image onload", x, _dom)
+          // m.redraw()
+        },
+        oncreate: function oncreate(_ref2) {
+          var dom = _ref2.dom;
+          _dom = dom; // console.log("brick image oncreate", dom)
+          // console.log("brick image oncreate and complete", parent, dom)
+
+          if (parent) {
+            redraw(parent)(dom);
+          }
+        },
+        src: "https://via.placeholder.com/".concat(data.imgSrc)
+      }), m("p", data.description)])]));
+    }
+  };
+};
+
+var _default = Brick;
+exports["default"] = _default;
+});
+
+;require.register("Components/Masonry/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _brick = _interopRequireDefault(require("./brick"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var resizeGridItem = function resizeGridItem(dom) {
+  return function (item) {
+    var grid = dom;
+    var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-auto-rows"));
+    var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-row-gap"));
+    var rowSpan = Math.ceil((item.querySelector(".content").getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    return item.style.gridRowEnd = "span " + rowSpan;
+  };
+};
+
+var onResize = function onResize(dom) {
+  return Array.from(dom.children).map(resizeGridItem(dom));
+};
+
+var resizeAllGridItems = function resizeAllGridItems(dom) {
+  window.addEventListener("resize", function (x) {
+    return onResize(dom);
+  });
+  return onResize(dom);
+};
+
+var Masonry = function Masonry() {
+  var _dom = null;
+  return {
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+      _dom = dom;
+      resizeAllGridItems(dom);
+    },
+    view: function view(_ref2) {
+      var data = _ref2.attrs.data;
+      return m(".grid", data.map(function (brick) {
+        return m(_brick["default"], {
+          classList: "item",
+          data: brick,
+          parent: _dom,
+          redraw: resizeGridItem
+        });
+      }));
+    }
+  };
+};
+
+var _default = Masonry;
+exports["default"] = _default;
+});
+
+;require.register("Components/Modal.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _animations = require("Styles/animations");
+
+var Modal = {
+  oncreate: _animations.SlideInLeft,
+  onbeforeremove: _animations.SlideOutRight,
+  view: function view(_ref) {
+    var _ref$attrs = _ref.attrs,
+        classList = _ref$attrs.classList,
+        isActive = _ref$attrs.isActive,
+        close = _ref$attrs.close,
+        title = _ref$attrs.title,
+        content = _ref$attrs.content,
+        footer = _ref$attrs.footer;
+    console.log("MODAL", classList, isActive, close, title, content, footer);
+    return m("section.modal.".concat(classList), {
+      "class": isActive ? "active" : "",
+      id: "modal"
+    }, [m("a.modal-overlay", {
+      "aria-label": "Close",
+      onclick: function onclick() {
+        return close();
+      }
+    }), m(".modal-container", {
+      role: "document"
+    }, [m(".modal-header", [m("a.btn btn-clear float-right", {
+      id: "modal-close",
+      "aria-label": "Close",
+      onclick: function onclick() {
+        return close();
+      }
+    }), m(".modal-title h3", title)]), m(".modal-body", m(".content", content)), m(".modal-footer", footer)])]);
+  }
+};
+var _default = Modal;
+exports["default"] = _default;
+});
+
+;require.register("Components/Selector.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _storage = require("Utils/storage");
+
+var _animations = require("Styles/animations");
+
+var Selector = function Selector() {
+  var state = {};
+
+  var ResetState = function ResetState() {
+    state.quantity = null;
+    state.gender = "Select a Gender";
+  };
+
+  var saveToStorage = function saveToStorage(mdl) {
+    var onError = function onError(e) {
+      return console.log("Error saving", e);
+    };
+
+    var onSuccess = function onSuccess(s) {
+      ResetState();
+    };
+
+    (0, _storage.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
+  };
+
+  var addToCart = function addToCart(mdl) {
+    return function (product) {
+      return function (state) {
+        mdl.addToCart.show(product);
+        mdl.cart[product][state.gender] += parseInt(state.quantity);
+        saveToStorage(mdl);
+      };
+    };
+  };
+
+  return {
+    oninit: function oninit() {
+      return ResetState();
+    },
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          product = _ref$attrs.product;
+      return m(".frow", m(".frow content-center gutters row-between pt-20", [m(".col-sm-1-4", m("h2.pb-10", "".concat(mdl.state.currency()).concat(mdl.state.prices[product]))), m(".col-sm-1-4", m("label", m("input", {
+        type: "number",
+        inputmode: "numeric",
+        pattern: "[0-9]*",
+        placeholder: "quantity",
+        value: state.quantity,
+        oninput: function oninput(e) {
+          return state.quantity = e.target.value;
+        }
+      }))), m(".col-sm-1-4", m("label", m("select", {
+        value: state.gender,
+        onchange: function onchange(e) {
+          return state.gender = e.target.value;
+        }
+      }, [m("option", {
+        value: null
+      }, "Select a Gender"), m("option", {
+        value: "Male"
+      }, "Male"), m("option", {
+        value: "Female"
+      }, "Female"), m("option", {
+        value: "Unisex"
+      }, "Unisex")]))), mdl.addToCart.show() == product && m(".animated", {
+        oncreate: _animations.AddToCartOut,
+        id: "add-to-cart-img",
+        style: {
+          "background-image": "url(".concat(mdl.addToCart.id(), ")")
+        }
+      }), m(".col-sm-1-4", m("button", {
+        disabled: state.quantity == undefined || state.gender == "Select a Gender",
+        onclick: function onclick() {
+          return addToCart(mdl)(product)(state);
+        }
+      }, "Add To Bag"))]));
+    }
+  };
+};
+
+var _default = Selector;
+exports["default"] = _default;
+});
+
+;require.register("Components/Single_Carousel.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = require("@mithril-icons/clarity/cjs/index");
+
+var show = function show(dir, idx, cid) {
+  var slideNum;
+
+  if (dir == "prev") {
+    slideNum = idx == 0 ? 3 : idx - 1;
+  }
+
+  if (dir == "next") {
+    slideNum = idx == 3 ? 0 : idx + 1;
+  }
+
+  console.log(dir, idx, "".concat(cid, "-slide-").concat(slideNum));
+  return "".concat(cid, "-slide-").concat(slideNum);
+};
+
+var Carousel = function Carousel() {
+  return {
+    onupdate: function onupdate(o, n) {
+      return console.log(o, n);
+    },
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          cid = _ref$attrs.cid,
+          data = _ref$attrs.data;
+      return m(".carousel", {
+        role: "document"
+      }, [data.map(function (item, idx) {
+        return m("input.carousel-locator", {
+          id: "".concat(cid, "-slide-").concat(idx),
+          type: "radio",
+          name: "carousel-radio",
+          hidden: true,
+          checked: true
+        });
+      }), m(".carousel-container", data.map(function (item, idx) {
+        return m("figure.carousel-item", [m("label.item-next btn btn-action btn-lg", {
+          "for": show("next", idx, cid)
+        }, [m("i.icon icon-arrow-right", m(".point-right", m(_index.ArrowLine)))]), m("img.img-responsive rounded", {
+          src: item
+        }), m("label.item-prev btn btn-action btn-lg", {
+          "for": show("prev", idx, cid)
+        }, [m("i.icon icon-arrow-left", m(".point-left", m(_index.ArrowLine)))])]);
+      })), m(".carousel-nav", data.map(function (item, idx) {
+        return m("label.nav-item text-hide c-hand", {
+          "for": "".concat(cid, "-slide-").concat(idx)
+        });
+      }))]);
+    }
+  };
+};
+
+var _default = Carousel;
+exports["default"] = _default;
+});
+
+;require.register("Components/cart-icon.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _cjs = require("@mithril-icons/clarity/cjs");
+
+var _ramda = require("ramda");
+
+var _helpers = require("Utils/helpers");
+
+var itemAddedToCart = function itemAddedToCart(mdl) {
+  var res = "";
+
+  if (mdl.addToCart.show()) {
+    res = "ping";
+    setTimeout(function () {
+      res = "";
+      mdl.addToCart.show(null);
+      m.redraw();
+    }, 500);
+    return res;
+  }
+};
+
+var CartIcon = function CartIcon() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".animated.clickable", {
+        id: "cart-icon",
+        onupdate: function onupdate() {
+          return mdl.addToCart.show(null);
+        },
+        "class": itemAddedToCart(mdl),
+        onclick: function onclick() {
+          return mdl.state.showCartModal(true);
+        }
+      }, [m(_cjs.ShoppingBagLine, {
+        width: "45px",
+        height: "45px"
+      }), (0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)) ? m(".cart-pill", (0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart))) : null]);
+    }
+  };
+};
+
+var _default = CartIcon;
+exports["default"] = _default;
+});
+
+;require.register("Components/icons/Logo.js", function(exports, require, module) {
+"use strict";
+
+var __assign = void 0 && (void 0).__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var mithril_1 = __importDefault(require("mithril"));
+
+var Logo = {
+  view: function view(_a) {
+    var attrs = _a.attrs;
+    return mithril_1["default"]("svg", __assign({
+      version: 1.1,
+      width: 36,
+      height: 36,
+      viewBox: "0 0 36 36",
+      preserveAspectRatio: "xMidYMid meet",
+      xmlns: "http://www.w3.org/2000/svg",
+      "xmlns:xlink": "http://www.w3.org/1999/xlink"
+    }, attrs), mithril_1["default"]("title", {}, "logo"), mithril_1["default"]("path", {
+      d: "M736 2120 c-214 -68 -333 -297 -267 -511 37 -116 119 -207 238 -261 70 -33 236 -33 306 0 123 56 209 154 242 276 20 75 13 73 118 31 92 -37 164 -84 253 -169 46 -43 84 -82 84 -86 0 -4 -25 -10 -55 -13 -172 -18 -307 -159 -322 -337 l-6 -70 -32 0 c-53 0 -183 -38 -261 -75 -78 -38 -245 -158 -303 -219 l-35 -36 -32 46 c-39 55 -52 89 -62 169 -6 55 -9 60 -32 60 -20 0 -26 -6 -28 -30 -2 -16 1 -55 8 -85 29 -134 126 -248 273 -320 69 -34 97 -42 178 -50 148 -15 259 9 366 79 81 53 110 86 93 106 -18 22 -26 19 -74 -20 -57 -46 -160 -93 -232 -106 -113 -18 -268 12 -357 72 -26 17 -47 34 -47 38 0 14 113 115 180 163 123 86 281 148 380 148 34 0 38 -3 60 -50 31 -66 98 -132 168 -167 71 -35 182 -43 261 -20 59 17 57 23 20 -76 -50 -134 -186 -301 -310 -380 -78 -50 -210 -102 -295 -117 -112 -20 -301 -9 -399 23 -123 40 -227 107 -325 206 -115 117 -174 220 -217 382 -26 98 -24 292 5 391 27 95 62 174 102 233 34 50 36 78 5 83 -15 2 -30 -13 -58 -57 -161 -251 -177 -575 -42 -846 91 -184 212 -306 390 -395 133 -66 236 -90 390 -90 235 0 430 78 599 239 118 114 183 219 232 376 20 67 37 100 65 132 162 179 110 457 -106 564 -35 17 -72 43 -81 58 -89 136 -278 275 -446 327 -41 13 -58 23 -58 35 0 39 -41 146 -76 196 -97 141 -292 206 -458 153z m267 -68 c65 -29 141 -104 174 -171 25 -49 28 -68 28 -151 0 -77 -4 -104 -22 -142 -30 -66 -105 -143 -172 -175 -49 -25 -68 -28 -151 -28 -83 0 -102 3 -151 28 -67 32 -142 109 -172 175 -31 67 -31 216 0 284 40 86 115 155 206 189 68 26 191 21 260 -9z m788 -737 c101 -36 165 -107 195 -214 32 -116 -10 -236 -109 -310 -65 -48 -104 -61 -182 -61 -120 0 -219 60 -270 164 -82 167 -3 359 172 422 51 18 141 17 194 -1z"
+    }), mithril_1["default"]("path", {
+      d: "M25,15.5H11a1,1,0,0,0,0,2H25a1,1,0,0,0,0-2Z",
+      "class": "clr-i-outline clr-i-outline-path-2"
+    }), mithril_1["default"]("path", {
+      d: "M21.75,20.5h-7.5a1,1,0,0,0,0,2h7.5a1,1,0,0,0,0-2Z",
+      "class": "clr-i-outline clr-i-outline-path-3"
+    }), mithril_1["default"]("path", {
+      d: "M11.28,12.5H24.72a1,1,0,0,0,0-2H11.28a1,1,0,0,0,0,2Z",
+      "class": "clr-i-outline clr-i-outline-path-4"
+    }), mithril_1["default"]("rect", {
+      x: 0,
+      y: 0,
+      width: 36,
+      height: 36,
+      "fill-opacity": 0
+    }));
+  }
+};
+exports["default"] = Logo;
+});
+
+;require.register("Components/nav-link.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.NavLink = void 0;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var handlers = function handlers(types, fn) {
+  return types.reduce(function (acc, type) {
+    return Object.assign(acc, _defineProperty({}, type, fn));
+  }, {});
+};
+
+var NavLink = function NavLink() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          href = _ref$attrs.href,
+          link = _ref$attrs.link,
+          classList = _ref$attrs.classList,
+          rest = _objectWithoutProperties(_ref$attrs, ["mdl", "href", "link", "classList"]);
+
+      return m(m.route.Link, _objectSpread(_objectSpread({}, handlers(["onclick", "onmouseover", "onmouseout"], function (e) {
+        return console.log(e.type);
+      })), {}, {
+        href: href,
+        "class": "nav-link ".concat(classList, " ").concat(mdl.state.navSelected() == link && "shadow")
+      }, rest), link);
+    }
+  };
+};
+
+exports.NavLink = NavLink;
+var _default = NavLink;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Body/cart-modal.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = require("Components/nav-link");
+
+var _helpers = require("Utils/helpers");
+
+var _ramda = require("ramda");
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var products = function products(cart) {
+  return (0, _ramda.toPairs)(cart).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        product = _ref2[0],
+        genders = _ref2[1];
+
+    return [product, (0, _ramda.toPairs)(genders)];
+  });
+};
+
+var Gender = function Gender() {
+  return {
+    view: function view(_ref3) {
+      var _ref3$attrs = _ref3.attrs,
+          mdl = _ref3$attrs.mdl,
+          _ref3$attrs$gender = _slicedToArray(_ref3$attrs.gender, 2),
+          sex = _ref3$attrs$gender[0],
+          quantity = _ref3$attrs$gender[1];
+
+      return quantity ? m(".", [m("img", {
+        src: "https://via.placeholder.com/80"
+      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
+    }
+  };
+};
+
+var Product = function Product(_ref4) {
+  var _ref4$attrs = _ref4.attrs,
+      mdl = _ref4$attrs.mdl,
+      _ref4$attrs$p = _slicedToArray(_ref4$attrs.p, 2),
+      title = _ref4$attrs$p[0],
+      genders = _ref4$attrs$p[1];
+
+  var amount = (0, _helpers.getQuantity)(genders);
+  var price = (0, _helpers.getPrice)(mdl, title, genders);
+  return {
+    view: function view(_ref5) {
+      var _ref5$attrs = _ref5.attrs,
+          mdl = _ref5$attrs.mdl,
+          _ref5$attrs$p = _slicedToArray(_ref5$attrs.p, 2),
+          title = _ref5$attrs$p[0],
+          genders = _ref5$attrs$p[1];
+
+      return amount ? m(".frow column-start", [m("h3", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price)), m(".frow cart-item row-around", genders.map(function (gender) {
+        return m(Gender, {
+          mdl: mdl,
+          gender: gender
+        });
+      }))]) : null;
+    }
+  };
+};
+
+var getTotal = function getTotal(mdl, products) {
+  var getTotalPrice = (0, _helpers.getQuantity)(products.map(function (p) {
+    return (0, _helpers.getPrice)(mdl, p[0], p[1]);
+  }));
+  return getTotalPrice;
+};
+
+var CartModal = function CartModal(_ref6) {
+  var mdl = _ref6.attrs.mdl;
+  return {
+    oninit: function oninit(_ref7) {
+      var mdl = _ref7.attrs.mdl;
+      return mdl.state.showNavModal(false);
+    },
+    view: function view(_ref8) {
+      var mdl = _ref8.attrs.mdl;
+      return m(".modalOverlay-right.animated", {
+        onclick: function onclick(e) {
+          mdl.state.showCartModal(false);
+        }
+      }, m(".modal", {
+        style: {
+          right: 0
+        },
+        id: "cart-modal"
+      }, [m("h1.title text-center", "Shopping Cart"), getTotal(mdl, products(mdl.cart)) ? m(_navLink.NavLink, {
+        mdl: mdl,
+        href: "/cart",
+        classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
+        link: "Update Cart"
+      }) : null, products(mdl.cart).map(function (p) {
+        return m(Product, {
+          mdl: mdl,
+          p: p
+        });
+      }), getTotal(mdl, products(mdl.cart)) ? m(".frow ", m(_navLink.NavLink, {
+        mdl: mdl,
+        href: "/checkout",
+        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " para button m-0"),
+        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(products(mdl.cart)), " for ").concat(mdl.state.currency()).concat(getTotal(mdl, products(mdl.cart))))]
+      })) : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),,]));
+    }
+  };
+};
+
+var _default = CartModal;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Body/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _cartModal = _interopRequireDefault(require("./cart-modal.js"));
+
+var _navModal = _interopRequireDefault(require("./nav-modal.js"));
+
+var _animations = require("Styles/animations.js");
+
+var _ramda = require("ramda");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var isShowingProducts = function isShowingProducts(mdl) {
+  return mdl.Routes.filter(function (r) {
+    return r.route == mdl.state.route.route;
+  })[0].children.map(function (r) {
+    return mdl.Routes.filter((0, _ramda.propEq)("id", r))[0];
+  }).any();
+};
+
+var isShowingRoutes = function isShowingRoutes(mdl) {
+  return mdl.settings.screenSize !== "phone";
+};
+
+var getStyle = function getStyle(mdl) {
+  return {
+    marginTop: isShowingRoutes(mdl) ? isShowingProducts(mdl) ? "180px" : "140px" : isShowingProducts(mdl) ? "140px" : "100px"
+  };
+};
+
+var Body = function Body() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          children = _ref$attrs.children;
+      return m(".body", {
+        id: "body",
+        style: getStyle(mdl)
+      }, m(".frow column-center items-stretch", [mdl.settings.screenSize !== "desktop" && mdl.state.showNavModal() && m(_navModal["default"], {
+        oncreate: _animations.SlideInLeft,
+        onbeforeremove: _animations.SlideOutRight,
+        mdl: mdl
+      }), mdl.state.showCartModal() && m(_cartModal["default"], {
+        oncreate: _animations.SlideInRight,
+        onbeforeremove: _animations.SlideOutLeft,
+        mdl: mdl
+      }), [m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)), children]]));
+    }
+  };
+};
+
+var _default = Body;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Body/nav-modal.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link"));
+
+var _index = require("Utils/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var state = {
+  onHover: function onHover() {},
+  selected: function selected() {}
+};
+var cart = {
+  Wraps: {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  },
+  "Christening Blankets": {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  },
+  "Burp Rags": {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  }
+};
+
+var NavItem = function NavItem() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          href = _ref$attrs.href,
+          link = _ref$attrs.link,
+          classList = _ref$attrs.classList;
+      return m("li.nav-item", m(_navLink["default"], {
+        mdl: mdl,
+        state: state,
+        href: href,
+        link: link,
+        classList: classList
+      }));
+    }
+  };
+};
+
+var NavModal = function NavModal() {
+  var routes = function routes(mdl) {
+    return mdl.Routes.filter(function (r) {
+      return r.group.includes("menu");
+    });
+  };
+
+  return {
+    oncreate: function oncreate(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      mdl.state.showCartModal(false);
+    },
+    view: function view(_ref3) {
+      var mdl = _ref3.attrs.mdl;
+      return m(".modalOverlay-left.animated", {
+        onclick: function onclick(e) {
+          mdl.state.showNavModal(false);
+        }
+      }, m(".modal", {
+        id: "nav-modal"
+      }, m("ul.nav", {
+        id: ""
+      }, [mdl.state.isAuth() ? [m(_navLink["default"], {
+        state: state,
+        mdl: mdl,
+        href: "/account/".concat(mdl.user.name),
+        link: "Your Account",
+        classList: "".concat((0, _index.isActiveRoute)("/account/".concat(mdl.user.name)), " button")
+      }), m(_navLink["default"], {
+        mdl: mdl,
+        href: "/logout",
+        link: "Logout",
+        onclick: function onclick() {// localStorage.clear()
+          // sessionStorage.clear()
+          // mdl.state.isAuth(false)
+          // mdl.user = {}
+          // mdl.cart = cart
+          // m.route.set(m.route.get())
+        },
+        classList: "bold auth-link"
+      })] : m(".frow.justify-start", [m(NavItem, {
+        mdl: mdl,
+        href: "/login",
+        link: "Login",
+        classList: "".concat((0, _index.isActiveRoute)("/login"), " button para")
+      }), m(NavItem, {
+        mdl: mdl,
+        href: "/register",
+        link: "Register",
+        classList: "".concat((0, _index.isActiveRoute)("/register"), " button para")
+      })]), routes(mdl).map(function (r) {
+        return m(NavItem, {
+          mdl: mdl,
+          href: r.route,
+          link: r.name,
+          classList: (0, _index.isActiveRoute)(r.route)
+        });
+      })])));
+    }
+  };
+};
+
+var _default = NavModal;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Header/ProgressBar.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var ProgressBar = function ProgressBar() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs$mdl$state$ = _ref.attrs.mdl.state.loadingProgress,
+          value = _ref$attrs$mdl$state$.value,
+          max = _ref$attrs$mdl$state$.max;
+      return m(".progress-bar", m("progress.progress-bar", {
+        id: "progressbar",
+        value: value ? value() : 0,
+        max: max ? max() : 0
+      }));
+    }
+  };
+};
+
+var _default = ProgressBar;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Header/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navbar = _interopRequireDefault(require("./navbar.js"));
+
+var _subNav = _interopRequireDefault(require("./sub-nav.js"));
+
+var _toolbar = _interopRequireDefault(require("./toolbar.js"));
+
+var _ProgressBar = _interopRequireDefault(require("./ProgressBar.js"));
+
+var _ramda = require("ramda");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Header = function Header(_ref) {
+  var mdl = _ref.attrs.mdl;
+
+  var subRoutes = function subRoutes(mdl) {
+    return mdl.Routes.filter(function (r) {
+      return r.route == mdl.state.route.route;
+    })[0].children.map(function (r) {
+      return mdl.Routes.filter((0, _ramda.propEq)("id", r))[0];
+    });
+  };
+
+  return {
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m("nav.header", {
+        id: "header",
+        style: {
+          maxHeight: subRoutes(mdl).any() ? "140px" : "100px"
+        }
+      }, [mdl.state.isLoading() && m(_ProgressBar["default"], {
+        mdl: mdl
+      }), m(_toolbar["default"], {
+        mdl: mdl
+      }), m(_navbar["default"], {
+        mdl: mdl
+      }), m(_subNav["default"], {
+        mdl: mdl,
+        subRoutes: subRoutes
+      })]);
+    }
+  };
+};
+
+var _default = Header;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Header/navbar.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
+
+var _index = require("Utils/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var NavBar = function NavBar() {
+  var ProductRoutes = function ProductRoutes(mdl) {
+    return mdl.Routes.filter(function (r) {
+      return r.group.includes("navbar");
+    });
+  };
+
+  var SidebarRoutes = function SidebarRoutes(mdl) {
+    return mdl.Routes.filter(function (r) {
+      return r.group.includes("menu");
+    });
+  };
+
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return [m(".navbar.navbar1", {
+        id: "navbar"
+      }, m("nav.frow row-around", ProductRoutes(mdl).map(function (r) {
+        return m(_navLink["default"], {
+          mdl: mdl,
+          href: r.route,
+          link: r.name,
+          classList: (0, _index.isActiveRoute)(r.route)
+        });
+      }))), m(".navbar.navbar2.hidden-xs", m("nav.frow row-around", SidebarRoutes(mdl).map(function (r) {
+        return m(_navLink["default"], {
+          mdl: mdl,
+          href: r.route,
+          link: r.name,
+          classList: (0, _index.isActiveRoute)(r.route)
+        });
+      })))];
+    }
+  };
+};
+
+var _default = NavBar;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Header/sub-nav.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
+
+var _index = require("Utils/index.js");
+
+var _animations = require("Styles/animations");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var SubNavBar = function SubNavBar() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          subRoutes = _ref$attrs.subRoutes;
+      return subRoutes(mdl).any() && m(".sub-navbar animated", {
+        oncreate: _animations.SlideDown,
+        onbeforeremove: _animations.SlideUp,
+        id: "sub-navbar"
+      }, m("nav.frow row-around", [subRoutes(mdl).map(function (r) {
+        return m(_navLink["default"], {
+          mdl: mdl,
+          href: r.route,
+          link: r.name,
+          classList: (0, _index.isActiveRoute)(r.route)
+        });
+      })]));
+    }
+  };
+};
+
+var _default = SubNavBar;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/Header/toolbar.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
+
+var _Hamburger = _interopRequireDefault(require("Components/Hamburger.js"));
+
+var _Logo = _interopRequireDefault(require("Components/Logo"));
+
+var _index = require("Utils/index.js");
+
+var _cartIcon = _interopRequireDefault(require("Components/cart-icon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var ToolBar = function ToolBar() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".toolbar.my-5", m(".frow row-between row-center", [m(".frow", [m(".navMenuButton visible-xs", {
+        onclick: function onclick() {
+          return mdl.state.showNavModal(true);
+        }
+      }, m(_Hamburger["default"], {
+        mdl: mdl
+      })), mdl.state.isAuth() ? [m(_navLink["default"], {
+        mdl: mdl,
+        href: "/account/".concat(mdl.user.name),
+        link: "Your Account",
+        classList: "".concat((0, _index.isActiveRoute)("/account/".concat(mdl.user.name)), " button hidden-xs")
+      }), m(_navLink["default"], {
+        mdl: mdl,
+        href: "/logout",
+        link: "Logout",
+        classList: "bold auth-link hidden-xs"
+      })] : m(".frow hidden-xs", [m(_navLink["default"], {
+        mdl: mdl,
+        href: "/login",
+        link: "Login",
+        classList: "".concat((0, _index.isActiveRoute)("/login"), " button auth-link")
+      }), m(_navLink["default"], {
+        mdl: mdl,
+        href: "/register",
+        link: "Register",
+        classList: "".concat((0, _index.isActiveRoute)("/register"), " button auth-link")
+      })])]), m(_navLink["default"], {
+        mdl: mdl,
+        href: "/",
+        classList: "logo",
+        link: m(_Logo["default"], {
+          id: "toolbar-logo",
+          "class": "frow row-center"
+        })
+      }), m(_cartIcon["default"], {
+        mdl: mdl
+      })]));
+    }
+  };
+};
+
+var _default = ToolBar;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/footer.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link.js"));
+
+var _index = require("Utils/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Footer = function Footer() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      var routes = mdl.Routes.filter(function (r) {
+        return r.group.includes("footer");
+      });
+      return m("footer.frow content-end items-end", {
+        id: "footer"
+      }, m(".frow row-container", routes.map(function (r) {
+        return m(_navLink["default"], {
+          mdl: mdl,
+          href: r.route,
+          link: r.name,
+          classList: (0, _index.isActiveRoute)(r.route)
+        });
+      })));
+    }
+  };
+};
+
+var _default = Footer;
+exports["default"] = _default;
+});
+
+;require.register("Layouts/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = _interopRequireDefault(require("./Header/index.js"));
+
+var _index2 = _interopRequireDefault(require("./Body/index.js"));
+
+var _footer = _interopRequireDefault(require("./footer.js"));
+
+var _LogoLoader = _interopRequireDefault(require("Components/LogoLoader"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Layout = function Layout() {
+  return {
+    view: function view(_ref) {
+      var children = _ref.children,
+          mdl = _ref.attrs.mdl;
+      return m(".layout", {
+        id: "layout",
+        role: "main"
+      }, m(_index["default"], {
+        mdl: mdl
+      }), mdl.state.isLoading() ? m(_LogoLoader["default"]) : m(_index2["default"], {
+        mdl: mdl,
+        children: children
+      }), m(_footer["default"], {
+        mdl: mdl
+      }));
+    }
+  };
+};
+
+var _default = Layout;
+exports["default"] = _default;
+});
+
+;require.register("Models/Main.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = _interopRequireDefault(require("../Routes/index.js"));
+
+var _mockData = require("./mock-data");
+
+var _Utils = require("Utils");
+
+var _http = _interopRequireDefault(require("Utils/http"));
+
+var _cart = require("./cart");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var currencies = {
+  $: "US Dollar",
+  "£": "British Pound"
+};
+var state = {
+  currency: Stream("$"),
+  prices: {
+    Wraps: 35,
+    "Christening Blankets": 55,
+    "Burp Rags": 15
+  },
+  showAuthModal: Stream(false),
+  showNavModal: Stream(false),
+  showCartModal: Stream(false),
+  paginate: {
+    page: Stream(1),
+    total_pages: Stream(0),
+    total_results: Stream(0)
+  },
+  query: Stream(""),
+  isLoading: Stream(false),
+  loadingProgress: {
+    max: Stream(null),
+    value: Stream(null)
+  },
+  dragging: {},
+  isAuth: Stream(false),
+  navSelected: Stream("")
+};
+var user = {};
+var settings = {};
+var data = {};
+var errors = {};
+var addToCart = {
+  id: Stream(null),
+  show: Stream(null)
+};
+var Model = {
+  currencies: currencies,
+  addToCart: addToCart,
+  http: _http["default"],
+  Data: _mockData.Data,
+  Routes: _index["default"],
+  state: state,
+  user: user,
+  cart: (0, _Utils.jsonCopy)(_cart.newCart),
+  data: data,
+  errors: errors,
+  settings: settings,
+  toggleAuthModal: function toggleAuthModal(mdl) {
+    return mdl.state.showAuthModal(!mdl.state.showAuthModal());
+  },
+  toggleCurrencies: function toggleCurrencies(mdl) {
+    return function (currency) {
+      return mdl.state.currency(currency);
+    };
+  }
+};
+var _default = Model;
+exports["default"] = _default;
+});
+
+;require.register("Models/cart.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.newCart = void 0;
+var newCart = {
+  Wraps: {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  },
+  "Christening Blankets": {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  },
+  "Burp Rags": {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  }
+};
+exports.newCart = newCart;
+});
+
+;require.register("Models/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _exportNames = {};
+exports["default"] = void 0;
+
+var _cart = require("./cart.js");
+
+Object.keys(_cart).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _cart[key];
+    }
+  });
+});
+
+var _states = require("./states.js");
+
+Object.keys(_states).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _states[key];
+    }
+  });
+});
+
+var _Main = _interopRequireDefault(require("./Main"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _default = _Main["default"];
+exports["default"] = _default;
+});
+
+;require.register("Models/mock-data.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Data = void 0;
+
+var _ramda = require("ramda");
+
+var _Utils = require("Utils");
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var getImg = function getImg(_ref) {
+  var width = _ref.width,
+      height = _ref.height;
+  return ["https://loremflickr.com/".concat(width, "/").concat(height)];
+};
+
+var Data = function Data(size) {
+  return function (amount) {
+    var arr = _toConsumableArray(Array(amount).keys());
+
+    var res = arr.traverse(function (_) {
+      return getImg(size);
+    }, Array.of);
+    console.log(res);
+    return res[0]; // return []
+  };
+};
+
+exports.Data = Data;
+});
+
+;require.register("Models/states.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stateDict = exports.states = void 0;
+var states = {
+  AL: "Alabama",
+  AK: "Alaska",
+  AS: "American Samoa",
+  AZ: "Arizona",
+  AR: "Arkansas",
+  CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  DC: "District Of Columbia",
+  FM: "Federated States Of Micronesia",
+  FL: "Florida",
+  GA: "Georgia",
+  GU: "Guam",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MH: "Marshall Islands",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  MP: "Northern Mariana Islands",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PW: "Palau",
+  PA: "Pennsylvania",
+  PR: "Puerto Rico",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  VT: "Vermont",
+  VI: "Virgin Islands",
+  VA: "Virginia",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming"
+};
+exports.states = states;
+
+var stateDict = function stateDict(state) {
+  return states[state];
+};
+
+exports.stateDict = stateDict;
+});
+
+;require.register("Pages/Auth/Validations.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.validateLoginTask = exports.validateUserRegistrationTask = void 0;
+
+var _ramda = require("ramda");
+
+var _data = require("data.validation");
+
+var _Utils = require("Utils");
+
+var ValidateRegistration = (0, _data.Success)((0, _ramda.curryN)(3, _ramda.identity));
+var ValidateLogin = (0, _data.Success)((0, _ramda.curryN)(2, _ramda.identity));
+var nameLense = (0, _ramda.lensProp)("name");
+var passwordLense = (0, _ramda.lensProp)("password");
+var passwordConfirmLense = (0, _ramda.lensProp)("confirmPassword");
+var emailLense = (0, _ramda.lensProp)("email");
+var emailConfirmLense = (0, _ramda.lensProp)("confirmEmail");
+var NAME_REQUIRED_MSG = "A Name is required";
+var PASSWORD_REQUIRED_MSG = "A Password is required";
+var EMAIL_REQUIRED_MSG = "An Email is required";
+var EMAILS_MUST_MATCH = "Emails do not match";
+var INVALID_EMAIL_FORMAT = "Email must be a valid format";
+var PASSWORDS_MUST_MATCH = "Passwords do not match";
+
+var inputsMatch = function inputsMatch(input1) {
+  return function (input2) {
+    return input2 === input1;
+  };
+};
+
+var validateName = function validateName(data) {
+  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, nameLense, NAME_REQUIRED_MSG, data));
+};
+
+var validateEmails = function validateEmails(data) {
+  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, emailLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.isRequired, emailConfirmLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(inputsMatch(data.confirmEmail), emailLense, EMAILS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(inputsMatch(data.email), emailConfirmLense, EMAILS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailConfirmLense, INVALID_EMAIL_FORMAT, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailLense, INVALID_EMAIL_FORMAT, data));
+};
+
+var validateEmail = function validateEmail(data) {
+  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, emailLense, EMAIL_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.emailFormat, emailLense, INVALID_EMAIL_FORMAT, data));
+};
+
+var validatePasswords = function validatePasswords(data) {
+  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordConfirmLense, PASSWORD_REQUIRED_MSG, data)).apLeft((0, _Utils.validate)(inputsMatch(data.password), passwordConfirmLense, PASSWORDS_MUST_MATCH, data)).apLeft((0, _Utils.validate)(inputsMatch(data.confirmPassword), passwordLense, PASSWORDS_MUST_MATCH, data));
+};
+
+var validatePassword = function validatePassword(data) {
+  return (0, _data.Success)(data).apLeft((0, _Utils.validate)(_Utils.isRequired, passwordLense, PASSWORD_REQUIRED_MSG, data));
+};
+
+var validateUserRegistrationTask = function validateUserRegistrationTask(data) {
+  return ValidateRegistration.ap(validateName(data)).ap(validateEmails(data)).ap(validatePasswords(data)).failureMap(_ramda.mergeAll).toTask();
+};
+
+exports.validateUserRegistrationTask = validateUserRegistrationTask;
+
+var validateLoginTask = function validateLoginTask(data) {
+  return ValidateLogin.ap(validateEmail(data)).ap(validatePassword(data)).failureMap(_ramda.mergeAll).toTask();
+};
+
+exports.validateLoginTask = validateLoginTask;
+});
+
+;require.register("Pages/Auth/fns.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.linkAccountTask = exports.createAccountTask = exports.registerUserTask = exports.loginTask = exports.loginUserTask = void 0;
+
+var _index = require("Utils/index");
+
+var _storage = require("Utils/storage");
+
+var _ramda = require("ramda");
+
+var mergeCarts = function mergeCarts(accnt) {
+  return function (cart) {
+    return (0, _ramda.mergeDeepWith)(_ramda.add, cart, accnt);
+  };
+};
+
+var toAccountVM = function toAccountVM(mdl) {
+  return function (accnts) {
+    var cart = mergeCarts(JSON.parse(accnts[0].cart))(mdl.cart);
+    mdl.user.account = {
+      objectId: accnts[0].objectId,
+      cart: cart
+    };
+    mdl.user.address = JSON.parse(accnts[0].address);
+    mdl.cart = cart;
+    return cart;
+  };
+};
+
+var setUserToken = function setUserToken(mdl) {
+  return function (user) {
+    sessionStorage.setItem("sb-user", JSON.stringify(user));
+    sessionStorage.setItem("sb-user-token", user["user-token"]);
+    mdl.state.isAuth(true);
+    mdl.user = user;
+    return user;
+  };
+};
+
+var loginUserTask = function loginUserTask(mdl) {
+  return function (_ref) {
+    var email = _ref.email,
+        password = _ref.password;
+    return mdl.http.backEnd.postTask(mdl)("users/login")({
+      login: email,
+      password: password
+    }).map(setUserToken(mdl));
+  };
+};
+
+exports.loginUserTask = loginUserTask;
+
+var getUserAccountTask = function getUserAccountTask(mdl) {
+  return function (_) {
+    return mdl.http.backEnd.getTask(mdl)("data/Accounts?where=userId%3D'".concat(mdl.user.objectId, "'")).map(toAccountVM(mdl));
+  };
+};
+
+var loginTask = function loginTask(mdl) {
+  return function (_ref2) {
+    var email = _ref2.email,
+        password = _ref2.password;
+    return loginUserTask(mdl)({
+      email: email,
+      password: password
+    }).chain(getUserAccountTask(mdl)).chain((0, _storage.saveStorageTask)(mdl)("sb-cart"));
+  };
+};
+
+exports.loginTask = loginTask;
+
+var registerUserTask = function registerUserTask(mdl) {
+  return function (_ref3) {
+    var name = _ref3.name,
+        email = _ref3.email,
+        password = _ref3.password,
+        isAdmin = _ref3.isAdmin;
+    return mdl.http.backEnd.postTask(mdl)("users/register")({
+      name: name,
+      email: email,
+      password: password,
+      isAdmin: isAdmin
+    });
+  };
+};
+
+exports.registerUserTask = registerUserTask;
+
+var createAccountTask = function createAccountTask(mdl) {
+  return mdl.http.backEnd.postTask(mdl)("data/Accounts")({
+    cart: JSON.stringify(mdl.cart),
+    userId: mdl.user.objectId
+  });
+};
+
+exports.createAccountTask = createAccountTask;
+
+var linkAccountTask = function linkAccountTask(mdl) {
+  return mdl.http.backEnd.postTask(mdl)("data/Users/".concat(mdl.user.objectId, "/account%3AAccounts%3A1"))([mdl.user.account.objectId]);
+};
+
+exports.linkAccountTask = linkAccountTask;
+});
+
+;require.register("Pages/Auth/login-user.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.Login = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link"));
+
+var _Utils = require("Utils");
+
+var _Validations = require("./Validations.js");
+
+var _fns = require("./fns.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var validateForm = function validateForm(mdl) {
+  return function (data) {
+    var onError = function onError(errs) {
+      if (errs) {
+        state.errors = errs;
+        state.errorMsg(errs.message);
+        state.showErrorMsg(true);
+        console.log("failed - state", state);
+      } else {
+        state.errorMsg("Issue with logging in. Have you registered?");
+        state.showErrorMsg(true);
+        console.log("failed - other?", state);
+      }
+    };
+
+    var onSuccess = function onSuccess(mdl) {
+      return function (account) {
+        state.errors = {};
+        mdl.user.account = account;
+        m.route.set("/");
+      };
+    };
+
+    state.isSubmitted = true;
+    (0, _Validations.validateLoginTask)(data.userModel).chain((0, _fns.loginTask)(mdl)).fork(onError, onSuccess(mdl));
+  };
+};
+
+var userModel = {
+  name: "",
+  email: "",
+  password: "",
+  confirmEmail: "",
+  confirmPassword: "",
+  isAdmin: false
+};
+var dataModel = {
+  userModel: userModel
+};
+var state = {
+  isSubmitted: false,
+  errors: {},
+  httpError: undefined,
+  data: (0, _Utils.jsonCopy)(dataModel),
+  showErrorMsg: Stream(false),
+  errorMsg: Stream("")
+};
+
+var resetState = function resetState() {
+  state.data = (0, _Utils.jsonCopy)(dataModel);
+  state.errors = {};
+  state.httpError = undefined;
+  state.isSubmitted = false;
+  state.showErrorMsg(false);
+  state.errorMsg("");
+};
+
+var Login = function Login() {
+  return {
+    onremove: function onremove() {
+      return resetState();
+    },
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow centered pt-30", [state.showErrorMsg() && m("code.warning", state.errorMsg()), m("form.frow-container frow-center", {
+        role: "form",
+        id: "Login-form",
+        onsubmit: function onsubmit(e) {
+          return e.preventDefault();
+        }
+      }, [m("input.auth-input", {
+        "class": state.isSubmitted ? state.errors.email ? "has-error" : "has-success" : "",
+        id: "reg-email",
+        type: "email",
+        placeholder: "Email",
+        onkeyup: function onkeyup(e) {
+          // state.isSubmitted && validateForm(mdl)(state.data)
+          state.data.userModel.email = e.target.value;
+        },
+        value: state.data.userModel.email
+      }), state.errors.email && m("p.auth-input-hint", state.errors.email), m("input.auth-input", {
+        "class": state.isSubmitted ? state.errors.password ? "has-error" : "has-success" : "",
+        id: "reg-pass",
+        type: "password",
+        placeholder: "Password",
+        onkeyup: function onkeyup(e) {
+          // state.isSubmitted && validateForm(mdl)(state.data)
+          state.data.userModel.password = e.target.value;
+        },
+        value: state.data.userModel.password
+      }), state.errors.password && m("p.auth-input-hint", state.errors.password)]), state.httpError && m(".toast toast-error", state.httpError)], m("a.button.auth-btn", {
+        // type: "submit",
+        form: "login-form",
+        onclick: function onclick() {
+          return validateForm(mdl)(state.data);
+        },
+        "class": mdl.state.isLoading() && "loading"
+      }, "Login"), m(".auth-link", ["Need to ", m(_navLink["default"], {
+        mdl: mdl,
+        href: "/register",
+        link: "register",
+        classList: "bold"
+      }), " ?"]));
+    }
+  };
+};
+
+exports.Login = Login;
+var _default = Login;
+exports["default"] = _default;
+});
+
+;require.register("Pages/Auth/register-user.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.Register = exports.validateForm = void 0;
+
+var _navLink = _interopRequireDefault(require("Components/nav-link"));
+
+var _Utils = require("Utils");
+
+var _Validations = require("./Validations");
+
+var _fns = require("./fns.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var userModel = {
+  name: "",
+  email: "",
+  password: "",
+  confirmEmail: "",
+  confirmPassword: "",
+  isAdmin: false
+};
+var dataModel = {
+  userModel: userModel
+};
+var state = {
+  isSubmitted: false,
+  errors: {},
+  httpError: undefined,
+  data: (0, _Utils.jsonCopy)(dataModel),
+  showErrorMsg: Stream(false),
+  errorMsg: Stream("")
+};
+
+var resetState = function resetState() {
+  state.data = (0, _Utils.jsonCopy)(dataModel);
+  state.errors = {};
+  state.httpError = undefined;
+  state.isSubmitted = false;
+  state.showErrorMsg(false);
+  state.errorMsg("");
+};
+
+var validateForm = function validateForm(mdl) {
+  return function (data) {
+    var onError = function onError(errs) {
+      if (errs) {
+        state.errors = errs;
+        state.errorMsg(errs.message);
+        state.showErrorMsg(true);
+        console.log("failed - state", state);
+      } else {
+        state.errorMsg("There seems to be a problem please contact web support");
+        state.showErrorMsg(true);
+        console.log("failed - state", state);
+      }
+    };
+
+    var onSuccess = function onSuccess(mdl) {
+      return function (data) {
+        state.errors = {};
+        sessionStorage.setItem("sb-user-token", mdl.user["user-token"]);
+        sessionStorage.setItem("sb-user", JSON.stringify(mdl.user));
+        m.route.set("/");
+      };
+    };
+
+    state.isSubmitted = true;
+    (0, _Validations.validateUserRegistrationTask)(data.userModel).chain((0, _fns.registerUserTask)(mdl)).chain(function (_) {
+      return (0, _fns.loginUserTask)(mdl)({
+        email: data.userModel.email,
+        password: data.userModel.password
+      });
+    }).chain(function (_) {
+      return (0, _fns.createAccountTask)(mdl);
+    }).chain(function (accnt) {
+      mdl.user.account = accnt;
+      return (0, _fns.linkAccountTask)(mdl);
+    }).fork(onError, onSuccess(mdl));
+  };
+};
+
+exports.validateForm = validateForm;
+
+var RegisterUser = function RegisterUser() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          data = _ref$attrs.data,
+          errors = _ref$attrs.errors,
+          isSubmitted = _ref$attrs.isSubmitted;
+      return [m("input.auth-input", {
+        "class": isSubmitted ? errors.name ? "has-error" : "has-success" : "",
+        id: "reg-name",
+        type: "text",
+        placeholder: "Full Name",
+        onkeyup: function onkeyup(e) {
+          return data.name = e.target.value;
+        },
+        value: data.name
+      }), errors.name && m("p.auth-input-hint", errors.name), m("input.auth-input", {
+        "class": isSubmitted ? errors.email ? "has-error" : "has-success" : "",
+        id: "reg-email",
+        type: "email",
+        placeholder: "Email",
+        onkeyup: function onkeyup(e) {
+          return data.email = e.target.value;
+        },
+        value: data.email
+      }), errors.email && m("p.auth-input-hint", errors.email), m("input.auth-input", {
+        id: "confirmEmail",
+        "class": isSubmitted ? errors.confirmEmail ? "has-error" : "has-success" : "",
+        type: "email",
+        placeholder: "Confirm Email",
+        onkeyup: function onkeyup(e) {
+          return data.confirmEmail = e.target.value;
+        },
+        value: data.confirmEmail
+      }), errors.confirmEmail && m("p.auth-input-hint", errors.confirmEmail), m("input.auth-input", {
+        "class": isSubmitted ? errors.password ? "has-error" : "has-success" : "",
+        id: "reg-pass",
+        type: "password",
+        placeholder: "Password",
+        onkeyup: function onkeyup(e) {
+          return data.password = e.target.value;
+        },
+        value: data.password
+      }), errors.password && m("p.auth-input-hint", errors.password), m("input.auth-input", {
+        "class": isSubmitted ? errors.confirmPassword ? "has-error" : "has-success" : "",
+        id: "pass-confirm",
+        type: "password",
+        placeholder: "Confirm Password",
+        onkeyup: function onkeyup(e) {
+          return data.confirmPassword = e.target.value;
+        },
+        value: data.confirmPassword
+      }), errors.confirmPassword && m("p.auth-input-hint", errors.confirmPassword)];
+    }
+  };
+};
+
+var Register = function Register() {
+  return {
+    onremove: function onremove() {
+      return resetState();
+    },
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return [m(".frow centered pt-30", [state.showErrorMsg() && m("code.warning", state.errorMsg()), m("form.frow-container column-center", {
+        role: "form",
+        id: "Register-form",
+        onsubmit: function onsubmit(e) {
+          return e.preventDefault();
+        }
+      }, [m(RegisterUser, {
+        data: state.data.userModel,
+        errors: state.errors,
+        isSubmitted: state.isSubmitted
+      }), m("a.button.auth-btn", {
+        form: "register-form",
+        onclick: function onclick() {
+          return validateForm(mdl)(state.data);
+        },
+        "class": mdl.state.isLoading() && "loading"
+      }, "Register"), m(".auth-link", ["Need to ", m(_navLink["default"], {
+        mdl: mdl,
+        href: "/login",
+        link: "Login",
+        classList: "bold"
+      }), " ?"])])]), state.httpError && m(".toast toast-error", state.httpError)];
+    }
+  };
+};
+
+exports.Register = Register;
+var _default = Register;
+exports["default"] = _default;
+});
+
+;require.register("Pages/account.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _cjs = require("@mithril-icons/clarity/cjs");
+
+var _Models = require("Models");
+
+var submitAddressTask = function submitAddressTask(mdl) {
+  return function (data) {
+    console.log(data);
+    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
+      address: JSON.stringify(data)
+    });
+  };
+};
+
+var Account = function Account() {
+  var state = {
+    address: {
+      street1: "",
+      street2: "",
+      city: "",
+      state: "",
+      zip: ""
+    },
+    editAddress: Stream(false),
+    showAddress: Stream(false),
+    errors: {}
+  };
+
+  var toggleEditAddress = function toggleEditAddress(state) {
+    return state.editAddress(!state.editAddress());
+  };
+
+  var submitAddress = function submitAddress(mdl) {
+    return function (state) {
+      var onError = function onError(errors) {
+        return console.log("e", e);
+      };
+
+      var onSuccess = function onSuccess(mdl) {
+        return function (s) {
+          mdl.user.address = JSON.parse(s.address);
+        };
+      };
+
+      submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl));
+    };
+  };
+
+  return {
+    oninit: function oninit(_ref) {
+      var mdl = _ref.attrs.mdl;
+      state.address = mdl.user.address;
+
+      if (state.address) {
+        state.showAddress(true);
+        state.editAddress(false);
+      } else {
+        state.address = {};
+        state.showAddress(false);
+        state.editAddress(false);
+      }
+    },
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      console.log('wtf', Object.keys(state.address).length);
+      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
+        "class": "clickable",
+        onclick: function onclick() {
+          return toggleEditAddress(state);
+        },
+        width: "16px"
+      }), Object.keys(state.address).length ? m('pre', "".concat(state.address.street1, " ").concat(state.address.street2 || '', " ").concat(state.address.city, " ").concat(state.address.state, " ").concat(state.address.zip)) : m("h4", "No Address on File")), state.editAddress() && m("form.frow column-start m-5 px-20", {
+        oninput: function oninput(e) {
+          console.log(mdl, state);
+          state.address[e.target.id] = e.target.value;
+        }
+      }, [m("input.col-xs-1-2", {
+        type: "text",
+        id: "street1",
+        placeholder: "street1",
+        value: state.address.street1
+      }), m("input.col-xs-1-2", {
+        type: "text",
+        id: "street2",
+        placeholder: "street2",
+        value: state.address.street2
+      }), m(".frow row", [m("input.col-xs-1-3", {
+        type: "text",
+        id: "city",
+        placeholder: "city",
+        value: state.address.city
+      }), m(".col-xs-1-3", m("select", {
+        id: "state",
+        placeholder: "state",
+        value: state.address.state || "state"
+      }, Object.keys(_Models.states).map(function (state) {
+        return [m("option", {
+          key: "placeholder",
+          value: "state"
+        }, "state"), m("option", {
+          key: state,
+          placeholder: "state",
+          value: (0, _Models.stateDict)(state)
+        }, "".concat((0, _Models.stateDict)(state)))];
+      }), state.address.state || "state")), m("input.col-xs-1-3", {
+        type: "number",
+        inputmode: "numeric",
+        pattern: "[0-9]*",
+        id: "zip",
+        value: state.address.zip,
+        placeholder: "zip"
+      })]), m("a.button", {
+        type: "submit",
+        "class": "clickable",
+        onclick: function onclick() {
+          return submitAddress(mdl)(state);
+        }
+      }, "Submit")])]), m("section", [m("h3", "Past Orders")]), m("section"), m("section")]);
+    }
+  };
+};
+
+var _default = Account;
+exports["default"] = _default;
+});
+
+;require.register("Pages/blankets.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Flicker = _interopRequireDefault(require("Components/Flicker.js"));
+
+var _Selector = _interopRequireDefault(require("Components/Selector.js"));
+
+var _animations = require("Styles/animations");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Blankets = function Blankets() {
+  var state = {
+    errors: {},
+    data: ["https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600"]
+  };
+  return {
+    oninit: function oninit() {// console.log("init blankets")
+    },
+    onremove: function onremove() {
+      state.errors = {};
+      state.data = [];
+    },
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow-container frow-center", [m(".mb-30", {
+        id: "wraps"
+      }, [m(".text-2halfx", m("h2.pb-10", "Wraps")), m(_Flicker["default"], {
+        mdl: mdl,
+        data: state.data
+      }), m(".mt-20", m(_Selector["default"], {
+        mdl: mdl,
+        product: "Wraps"
+      })), m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'), m("li.pb-10", "Machine wash and tumble dry."), m("li.pb-10", "Proudly made in Houston Texas USA")])]), m(".mb-30", {
+        id: "christening"
+      }, m(".text-2halfx", m("h2.pb-10", "Christening Blankets")), m(_Flicker["default"], {
+        mdl: mdl,
+        data: state.data
+      }), m(".mt-20", m(_Selector["default"], {
+        mdl: mdl,
+        product: "Christening Blankets"
+      })), m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'), m("li.pb-10", "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."), m("li.pb-10", "babies should be supervised at all times when this blanket is in use."), m("li.pb-10", "Proudly made in Houston Texas USA")]))]);
+    }
+  };
+};
+
+var _default = Blankets;
+exports["default"] = _default;
+});
+
+;require.register("Pages/blog.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _data = _interopRequireDefault(require("data.task"));
+
+var _Masonry = _interopRequireDefault(require("Components/Masonry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
+  return _data["default"].of([{
+    imgSrc: 220,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 0,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 220,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 200,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 250,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 220,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    imgSrc: 2,
+    title: "Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }]);
+};
+
+var onPageInit = function onPageInit(state) {
+  return function (_ref) {
+    var mdl = _ref.attrs.mdl;
+
+    var onError = function onError(s) {
+      return function (error) {
+        s.errors.init = error;
+        console.log("errror", error);
+      };
+    };
+
+    var onSuccess = function onSuccess(s) {
+      return function (data) {
+        s.data = data;
+      };
+    };
+
+    fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state));
+  };
+};
+
+var Blog = function Blog() {
+  var state = {
+    errors: {},
+    data: []
+  };
+  return {
+    oninit: onPageInit(state),
+    onremove: function onremove() {
+      state.errors = {};
+      state.data = [];
+    },
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m(".frow-container frow-center", {
+        id: "blog-page"
+      }, [m(_Masonry["default"], {
+        data: state.data
+      })]);
+    }
+  };
+};
+
+var _default = Blog;
+exports["default"] = _default;
+});
+
+;require.register("Pages/burp-rags.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Flicker = _interopRequireDefault(require("Components/Flicker.js"));
+
+var _Selector = _interopRequireDefault(require("Components/Selector.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var BurpRags = function BurpRags() {
+  var state = {
+    errors: {},
+    data: ["https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600"]
+  };
+  return {
+    onremove: function onremove() {
+      state.errors = {};
+      state.data = [];
+    },
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow-container frow-center", [m(".mb-30", {
+        id: "burps"
+      }, [m(_Flicker["default"], {
+        mdl: mdl,
+        data: state.data
+      }), m(".mt-20", m(_Selector["default"], {
+        mdl: mdl,
+        product: "Burp Rags"
+      })), m("ul", [m("li.pb-10", "Set of 7 handcrafted burp rags"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering.")])]);
+    }
+  };
+};
+
+var _default = BurpRags;
+exports["default"] = _default;
+});
+
+;require.register("Pages/cart.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = require("Components/nav-link");
+
+var _helpers = require("Utils/helpers");
+
+var _storage = require("Utils/storage");
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var saveToStorage = function saveToStorage(mdl) {
+  var onError = function onError(e) {
+    return console.log("Error saving", e);
+  };
+
+  var onSuccess = function onSuccess(s) {
+    console.log("success saving", s);
+  };
+
+  (0, _storage.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
+};
+
+var addToCart = function addToCart(mdl) {
+  return function (product, sex, quantity) {
+    console.log(product, sex, quantity);
+    mdl.cart[product][sex] = parseInt(quantity) ? parseInt(quantity) : 0;
+    saveToStorage(mdl);
+  };
+};
+
+var Gender = function Gender() {
+  return {
+    view: function view(_ref) {
+      var _ref$attrs = _ref.attrs,
+          mdl = _ref$attrs.mdl,
+          product = _ref$attrs.product,
+          _ref$attrs$gender = _slicedToArray(_ref$attrs.gender, 2),
+          sex = _ref$attrs$gender[0],
+          quantity = _ref$attrs$gender[1];
+
+      return quantity ? m(".animated.frow row-around mt-10", [m("img", {
+        src: "https://via.placeholder.com/80"
+      }), // m(
+      // ".col-xs-1-4",
+      m("label.col-xs-1-4", m("h4", "".concat(sex)), m("input", {
+        type: "number",
+        inputmode: "numeric",
+        min: 0,
+        placeholder: "quantity",
+        value: quantity,
+        onchange: function onchange(e) {
+          return addToCart(mdl)(product, sex, e.target.value);
+        },
+        pattern: "[0-9]*"
+      }) // )
+      )]) : null;
+    }
+  };
+};
+
+var Product = function Product() {
+  return {
+    view: function view(_ref2) {
+      var _ref2$attrs = _ref2.attrs,
+          mdl = _ref2$attrs.mdl,
+          _ref2$attrs$p = _slicedToArray(_ref2$attrs.p, 2),
+          title = _ref2$attrs$p[0],
+          genders = _ref2$attrs$p[1];
+
+      return (0, _helpers.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "(".concat(mdl.state.currency()).concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
+        return m(Gender, {
+          mdl: mdl,
+          gender: gender,
+          product: title
+        });
+      }))]) : null;
+    }
+  };
+};
+
+var Cart = function Cart(_ref3) {
+  var mdl = _ref3.attrs.mdl;
+  return {
+    oninit: function oninit(_ref4) {
+      var mdl = _ref4.attrs.mdl;
+      return mdl.state.showNavModal(false);
+    },
+    view: function view(_ref5) {
+      var mdl = _ref5.attrs.mdl;
+      return m(".animated.frow-container frow-center", [(0, _helpers.toProducts)(mdl.cart).map(function (p) {
+        return m(Product, {
+          mdl: mdl,
+          p: p
+        });
+      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(".frow centered-column", m(_navLink.NavLink, {
+        mdl: mdl,
+        href: "/checkout",
+        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " button para mt-20"),
+        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))))]
+      })) : m("h1.bold", "Your Cart is Empty")]);
+    }
+  };
+};
+
+var _default = Cart;
+exports["default"] = _default;
+});
+
+;require.register("Pages/checkout.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _navLink = require("Components/nav-link");
+
+var _helpers = require("Utils/helpers");
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var CheckoutButtons = function CheckoutButtons() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow centered-column mt-30", [m("h2.pb-10", "Select a Checkout Option"), m("img", {
+        src: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png"
+      })]);
+    }
+  };
+};
+
+var Gender = function Gender() {
+  return {
+    view: function view(_ref2) {
+      var _ref2$attrs = _ref2.attrs,
+          mdl = _ref2$attrs.mdl,
+          _ref2$attrs$gender = _slicedToArray(_ref2$attrs.gender, 2),
+          sex = _ref2$attrs$gender[0],
+          quantity = _ref2$attrs$gender[1];
+
+      return quantity ? m(".", [m("img", {
+        src: "https://via.placeholder.com/80"
+      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
+    }
+  };
+};
+
+var Product = function Product(_ref3) {
+  var _ref3$attrs = _ref3.attrs,
+      mdl = _ref3$attrs.mdl,
+      _ref3$attrs$p = _slicedToArray(_ref3$attrs.p, 2),
+      title = _ref3$attrs$p[0],
+      genders = _ref3$attrs$p[1];
+
+  var amount = (0, _helpers.getQuantity)(genders);
+  var price = (0, _helpers.getPrice)(mdl, title, genders);
+  return {
+    view: function view(_ref4) {
+      var _ref4$attrs = _ref4.attrs,
+          mdl = _ref4$attrs.mdl,
+          _ref4$attrs$p = _slicedToArray(_ref4$attrs.p, 2),
+          title = _ref4$attrs$p[0],
+          genders = _ref4$attrs$p[1];
+
+      return amount ? m(".frow column-start mt-10", [m("span.underline", m("h3.mb-10", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price))), m(".frow cart-item row-around", genders.map(function (gender) {
+        return m(Gender, {
+          mdl: mdl,
+          gender: gender
+        });
+      }))]) : null;
+    }
+  };
+};
+
+var Cart = function Cart(_ref5) {
+  var mdl = _ref5.attrs.mdl;
+  return {
+    oninit: function oninit(_ref6) {
+      var mdl = _ref6.attrs.mdl;
+      return mdl.state.showNavModal(false);
+    },
+    view: function view(_ref7) {
+      var mdl = _ref7.attrs.mdl;
+      return m(".frow-container frow-center", [(0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(_navLink.NavLink, {
+        mdl: mdl,
+        href: "/cart",
+        classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
+        link: "Update Cart"
+      }) : null, (0, _helpers.toProducts)(mdl.cart).map(function (p) {
+        return m(Product, {
+          mdl: mdl,
+          p: p
+        });
+      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m(".frow centered-column", m(_navLink.NavLink, {
+        mdl: mdl,
+        href: "/checkout",
+        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " mt-50"),
+        link: [m("h1.bold text-center.mt-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))))]
+      })), m(CheckoutButtons, {
+        mdl: mdl
+      })] : m("h1.bold", "Your Cart is Empty")]);
+    }
+  };
+};
+
+var _default = Cart;
+exports["default"] = _default;
+});
+
+;require.register("Pages/default.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var Default = function Default(mdl) {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow-container frow-center");
+    }
+  };
+};
+
+var _default = Default;
+exports["default"] = _default;
+});
+
+;require.register("Pages/home.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _data = _interopRequireDefault(require("data.task"));
+
+var _Masonry = _interopRequireDefault(require("Components/Masonry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
+  return _data["default"].of([{
+    imgSrc: 320,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 250,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 220,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 200,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 250,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 320,
+    title: "",
+    description: ""
+  }, {
+    imgSrc: 320,
+    title: "",
+    description: ""
+  }]);
+};
+
+var onPageInit = function onPageInit(state) {
+  return function (_ref) {
+    var mdl = _ref.attrs.mdl;
+
+    var onError = function onError(s) {
+      return function (error) {
+        s.errors.init = error;
+        console.log("errror", error);
+      };
+    };
+
+    var onSuccess = function onSuccess(s) {
+      return function (data) {
+        s.data = data;
+      };
+    };
+
+    fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state));
+  };
+};
+
+var Home = function Home() {
+  var state = {
+    errors: {},
+    data: []
+  };
+  return {
+    oninit: onPageInit(state),
+    onremove: function onremove() {
+      state.errors = {};
+      state.data = [];
+    },
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m(".frow-container frow-center", {
+        id: "home-page"
+      }, [m(_Masonry["default"], {
+        data: state.data
+      })]);
+    }
+  };
+};
+
+var _default = Home;
+exports["default"] = _default;
+});
+
+;require.register("Routes/authenticated-routes.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _default2 = _interopRequireDefault(require("Pages/default.js"));
+
+var _home = _interopRequireDefault(require("Pages/home.js"));
+
+var _account = _interopRequireDefault(require("Pages/account.js"));
+
+var _index = _interopRequireDefault(require("Layouts/index.js"));
+
+var _Utils = require("Utils");
+
+var _cart = require("Models/cart");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var AuthenticatedRoutes = [{
+  id: "account",
+  name: "Account",
+  // icon: Icons.logo,
+  route: "/account/:name",
+  position: ["toolbar"],
+  group: ["authenticated"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_account["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "profile-page",
+  name: "Profile Page",
+  // icon: Icons.home,
+  route: "/account/:name/profile",
+  position: ["settings-nav"],
+  group: ["authenticated"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    console.log("profile page login on match", mdl, args, path, fullroute, isAnchor, !mdl.state.isAuth());
+    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "manage-users",
+  name: "Manage Users",
+  // icon: Icons.users,
+  route: "/account/:name/user-management",
+  position: ["settings-nav"],
+  group: ["authenticated", "admin"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    // console.log(
+    //   "manage users on match",
+    //   mdl,
+    //   args,
+    //   path,
+    //   fullroute,
+    //   isAnchor,
+    //   mdl.state.isAuth(),
+    //   mdl.user.isAdmin
+    // )
+    !mdl.user.isAdmin && m.route.set(m.route.get());
+    isAnchor ? (0, _Utils.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "logout",
+  name: "",
+  // icon: Icons.users,
+  route: "/logout",
+  position: [],
+  group: ["authenticated", "admin"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+    localStorage.clear();
+    sessionStorage.clear();
+    mdl.cart = (0, _Utils.jsonCopy)(_cart.newCart);
+    mdl.state.isAuth(false);
+    mdl.user = {};
+    m.route.set(m.route.get());
+    console.log("loggout", mdl);
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_home["default"], {
+      mdl: mdl
+    }));
+  }
+}];
+var _default = AuthenticatedRoutes;
+exports["default"] = _default;
+});
+
+;require.register("Routes/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _authenticatedRoutes = _interopRequireDefault(require("./authenticated-routes.js"));
+
+var _mainRoutes = _interopRequireDefault(require("./main-routes.js"));
+
+var _ramda = require("ramda");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Routes = (0, _ramda.flatten)([_mainRoutes["default"], _authenticatedRoutes["default"]]);
+var _default = Routes;
+exports["default"] = _default;
+});
+
+;require.register("Routes/main-routes.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _index = _interopRequireDefault(require("Layouts/index.js"));
+
+var _burpRags = _interopRequireDefault(require("Pages/burp-rags.js"));
+
+var _blankets = _interopRequireDefault(require("Pages/blankets.js"));
+
+var _default2 = _interopRequireDefault(require("Pages/default.js"));
+
+var _blog = _interopRequireDefault(require("Pages/blog.js"));
+
+var _home = _interopRequireDefault(require("Pages/home.js"));
+
+var _cart = _interopRequireDefault(require("Pages/cart.js"));
+
+var _checkout = _interopRequireDefault(require("Pages/checkout.js"));
+
+var _Logo = _interopRequireDefault(require("Components/Logo"));
+
+var _loginUser = _interopRequireDefault(require("Pages/Auth/login-user.js"));
+
+var _registerUser = _interopRequireDefault(require("Pages/Auth/register-user.js"));
+
+var _index2 = require("Utils/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Routes = [{
+  id: "sette-bambini",
+  name: m(_Logo["default"]),
+  // icon: Icons.home,
+  route: "/",
+  isNav: true,
+  group: ["toolbar"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_home["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "login",
+  name: "Account Login",
+  // icon: Icons.search,
+  route: "/login",
+  isNav: false,
+  group: [],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_loginUser["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "register",
+  name: "Register Account",
+  // icon: Icons.search,
+  route: "/register",
+  isNav: false,
+  group: [],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_registerUser["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "cart",
+  name: "Cart",
+  // icon: Icons.search,
+  route: "/cart",
+  isNav: false,
+  group: [],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_cart["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "checkout",
+  name: "Check Out",
+  // icon: Icons.search,
+  route: "/checkout",
+  isNav: false,
+  group: ["toolbar"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_checkout["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "burp-rags",
+  name: "Burp Rags",
+  // icon: Icons.search,
+  route: "/burp-rags",
+  isNav: true,
+  group: ["navbar"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_burpRags["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "blankets",
+  name: "Blankets",
+  // icon: Icons.search,
+  route: "/blankets",
+  isNav: false,
+  group: ["navbar", "blankets"],
+  children: ["wraps-blankets", "christ-blankets"],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_blankets["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "wraps-blankets",
+  name: "Wraps",
+  // icon: Icons.search,
+  route: "/blankets/#wraps",
+  isNav: false,
+  group: ["sub-navbar", "blankets"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_blankets["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "christ-blankets",
+  name: "Christening Blankets",
+  // icon: Icons.search,
+  route: "/blankets/#christening",
+  isNav: false,
+  group: ["sub-navbar", "blankets"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_blankets["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "blog",
+  name: "Blog",
+  // icon: Icons.home,
+  route: "/blog",
+  isNav: true,
+  group: ["footer", "menu"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_blog["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "about-us",
+  name: "About Us",
+  // icon: Icons.home,
+  route: "/about-us",
+  isNav: true,
+  group: ["footer"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "Contact Us",
+  name: "Contact",
+  // icon: Icons.search,
+  route: "/contact-us",
+  isNav: false,
+  group: ["footer"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "returns",
+  name: "Returns Policy",
+  // icon: Icons.search,
+  route: "/returns",
+  isNav: false,
+  group: ["footer", "menu"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "tos",
+  name: "Terms of Service",
+  // icon: Icons.search,
+  route: "/terms-of-service",
+  isNav: false,
+  group: ["footer"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "privacy-policy",
+  name: "Privacy Policy",
+  // icon: Icons.search,
+  route: "/privacy-policy",
+  isNav: false,
+  group: ["footer"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "partnerships",
+  name: "Partnerships",
+  // icon: Icons.search,
+  route: "/partnerships",
+  isNav: false,
+  group: ["footer", "menu"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "safety-information",
+  name: "Safety Information",
+  // icon: Icons.search,
+  route: "/safety-information",
+  isNav: false,
+  group: ["footer", "menu"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "faq",
+  name: "FAQ",
+  // icon: Icons.search,
+  route: "/faq",
+  isNav: false,
+  group: ["footer", "menu"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_default2["default"], {
+      mdl: mdl
+    }));
+  }
+}];
+var _default = Routes;
+exports["default"] = _default;
+});
+
+;require.register("Styles/animations.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RemoveChildrenOut = exports.animate = exports.SlideChildrenInDown = exports.StretchInLeft = exports.SlideChildrenInRight = exports.SlideUp = exports.SlideDown = exports.SlideOutLeft = exports.SlideOutRight = exports.AddToCartOut = exports.AddToCart = exports.SlideInRight = exports.SlideInLeft = void 0;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var SlideInLeft = function SlideInLeft(_ref) {
+  var dom = _ref.dom;
+  return dom.classList.toggle("slideInLeft");
+};
+
+exports.SlideInLeft = SlideInLeft;
+
+var SlideInRight = function SlideInRight(_ref2) {
+  var dom = _ref2.dom;
+  return dom.classList.toggle("slideInRight");
+};
+
+exports.SlideInRight = SlideInRight;
+
+var AddToCart = function AddToCart(_ref3) {
+  var dom = _ref3.dom;
+  return dom.classList.toggle("slide-out-tr");
+};
+
+exports.AddToCart = AddToCart;
+
+var AddToCartOut = function AddToCartOut(_ref4) {
+  var dom = _ref4.dom;
+  AddToCart({
+    dom: dom
+  });
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 500);
+  });
+};
+
+exports.AddToCartOut = AddToCartOut;
+
+var SlideOutRight = function SlideOutRight(_ref5) {
+  var dom = _ref5.dom;
+  dom.classList.replace("slideInLeft", "slideOutLeft");
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 500);
+  });
+};
+
+exports.SlideOutRight = SlideOutRight;
+
+var SlideOutLeft = function SlideOutLeft(_ref6) {
+  var dom = _ref6.dom;
+  dom.classList.replace("slideInRight", "slideOutRight");
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 500);
+  });
+};
+
+exports.SlideOutLeft = SlideOutLeft;
+
+var SlideDown = function SlideDown(_ref7) {
+  var dom = _ref7.dom;
+  dom.style.opacity = 0;
+  dom.classList.toggle("slideInDown");
+  dom.style.opacity = 1;
+};
+
+exports.SlideDown = SlideDown;
+
+var SlideUp = function SlideUp(_ref8) {
+  var dom = _ref8.dom;
+  dom.classList.replace("slideInDown", "slideOutUp");
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, 300);
+  });
+};
+
+exports.SlideUp = SlideUp;
+
+var SlideChildrenInRight = function SlideChildrenInRight(_ref9) {
+  var dom = _ref9.dom;
+
+  var children = _toConsumableArray(dom.children);
+
+  return children.map(function (child, idx) {
+    child.style.opacity = 0;
+    setTimeout(function () {
+      child.classList.toggle("slideInLeft");
+      child.style.opacity = 1;
+    }, (idx + 1) * 10);
+  });
+};
+
+exports.SlideChildrenInRight = SlideChildrenInRight;
+
+var StretchInLeft = function StretchInLeft(idx) {
+  return function (_ref10) {
+    var dom = _ref10.dom;
+    dom.style.opacity = 0;
+    return setTimeout(function () {
+      dom.classList.toggle("stretchRight");
+      dom.style.opacity = 1;
+    }, idx * 100 + 20);
+  };
+};
+
+exports.StretchInLeft = StretchInLeft;
+
+var SlideChildrenInDown = function SlideChildrenInDown(idx) {
+  return function (_ref11) {
+    var dom = _ref11.dom;
+    dom.style.opacity = 0;
+    setTimeout(function () {
+      dom.classList.toggle("slideDown");
+      dom.style.opacity = 1;
+    }, (idx + 1) * 200);
+  };
+};
+
+exports.SlideChildrenInDown = SlideChildrenInDown;
+
+var animate = function animate(dir) {
+  return function (_ref12) {
+    var dom = _ref12.dom;
+    dom.style.opacity = 0;
+    setTimeout(function () {
+      dom.classList.toggle(dir);
+      dom.style.opacity = 1;
+    }, 200);
+  };
+};
+
+exports.animate = animate;
+
+var RemoveChildrenOut = function RemoveChildrenOut(_ref13) {
+  var dom = _ref13.dom;
+  return new Promise(function () {
+    ;
+
+    _toConsumableArray(dom.children).reverse().map(function (child, idx) {
+      return setTimeout(function () {
+        child.style.display = "none";
+      }, idx * 100);
+    });
+  });
+};
+
+exports.RemoveChildrenOut = RemoveChildrenOut;
+});
+
+;require.register("Utils/.secrets.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BackEnd = void 0;
+
+//NEED TO MOVE THESE TO ENVIRONMENT/GITLAB IN PRODUCTION for manifest
+var getUserToken = function getUserToken() {
+  return sessionStorage.getItem("sb-user-token") ? sessionStorage.getItem("sb-user-token") : "";
+};
+
+var BackEnd = {
+  API_KEY: "6FB32F97-89BF-466F-8F6D-06FE7BA2653A",
+  APP_ID: "7A0EDE25-0509-5305-FFA3-0FA3A11BEF00",
+  baseUrl: "https://api.backendless.com",
+  headers: function headers() {
+    return {
+      "user-token": getUserToken()
+    };
+  }
+};
+exports.BackEnd = BackEnd;
+});
+
+;require.register("Utils/helpers.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getTotal = exports.getQuantity = exports.getPrice = exports.toProducts = exports.uuid = exports.isActiveRoute = exports.jsonCopy = exports.scrollToAnchor = exports.getRoute = exports.debounce = exports.filterTask = exports._paginate = exports._direction = exports._sort = exports._search = exports.addTerms = exports.infiniteScroll = exports.isEmpty = exports.log = exports.makeRoute = void 0;
+
+var _ramda = require("ramda");
+
+var _data = _interopRequireDefault(require("data.task"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var makeRoute = (0, _ramda.compose)((0, _ramda.join)("-"), (0, _ramda.split)(" "), (0, _ramda.trim)(), (0, _ramda.toLower)());
+exports.makeRoute = makeRoute;
+
+var log = function log(m) {
+  return function (v) {
+    console.log(m, v);
+    return v;
+  };
+};
+
+exports.log = log;
+
+var isEmpty = function isEmpty(data) {
+  return data.length == 0;
+};
+
+exports.isEmpty = isEmpty;
+
+var infiniteScroll = function infiniteScroll(mdl) {
+  return function (e) {
+    var route = mdl.state.route;
+    var length = mdl.data[route].data.length;
+    var setpoint = 10 * length * mdl.state.scrollPos;
+
+    if (e.target.scrollTop - mdl.state.scrollPos >= setpoint) {
+      mdl.state.scrollPos++ + e.target.scrollTop;
+    }
+  };
+};
+
+exports.infiniteScroll = infiniteScroll;
+
+var addTerms = function addTerms(item) {
+  var terms = (0, _ramda.compose)((0, _ramda.join)(" "), _ramda.values, (0, _ramda.props)(["uuid", "id", "name"]))(item);
+  return (0, _ramda.assoc)("_terms", terms, item);
+};
+
+exports.addTerms = addTerms;
+
+var byTerms = function byTerms(query) {
+  return (0, _ramda.compose)((0, _ramda.test)(new RegExp(query, "i")), (0, _ramda.prop)("name"));
+};
+
+var _search = function _search(query) {
+  return (0, _ramda.compose)((0, _ramda.filter)(byTerms(query)));
+};
+
+exports._search = _search;
+
+var _sort = function _sort(p) {
+  return (0, _ramda.sortBy)((0, _ramda.compose)(_ramda.toLower, toString, (0, _ramda.prop)(p)));
+};
+
+exports._sort = _sort;
+
+var _direction = function _direction(dir) {
+  return dir == "asc" ? _ramda.identity : _ramda.reverse;
+};
+
+exports._direction = _direction;
+
+var _paginate = function _paginate(offset) {
+  return function (limit) {
+    return function (data) {
+      return (0, _ramda.slice)((0, _ramda.max)(0, (0, _ramda.min)(offset, data.length)), (0, _ramda.min)(offset + limit, data.length), data);
+    };
+  };
+};
+
+exports._paginate = _paginate;
+
+var filterTask = function filterTask(query) {
+  return function (prop) {
+    return function (direction) {
+      return function (offset) {
+        return function (limit) {
+          return (0, _ramda.compose)(_data["default"].of, (0, _ramda.map)(_paginate(offset)(limit)), (0, _ramda.map)(_direction(direction)), (0, _ramda.map)(_sort(prop)), _search(query));
+        };
+      };
+    };
+  };
+};
+
+exports.filterTask = filterTask;
+
+var debounce = function debounce(wait, now) {
+  return function (fn) {
+    var timeout = undefined;
+    return function () {
+      var context = this;
+      var args = arguments;
+
+      var later = function later() {
+        timeout = undefined;
+        if (!now) fn.apply(context, args);
+      };
+
+      var callNow = now && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      console.log(fn);
+      if (callNow) fn.apply(context, args);
+    };
+  };
+};
+
+exports.debounce = debounce;
+
+var getRoute = function getRoute() {
+  return (0, _ramda.last)(m.route.get().split("/"));
+};
+
+exports.getRoute = getRoute;
+
+var scrollToAnchor = function scrollToAnchor(anchor) {
+  var is = function is(el) {
+    return el !== undefined && el !== null;
+  }; //if you pass an undefined anchor it will scroll to the top of the body
+
+
+  var targetEl = is(anchor) ? document.getElementById(anchor) : document.body;
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  var target = is(targetEl) ? targetEl.getBoundingClientRect().top : 0;
+  return window.scroll({
+    top: target + scrollTop - 150,
+    left: 0,
+    behavior: "smooth"
+  });
+};
+
+exports.scrollToAnchor = scrollToAnchor;
+
+var jsonCopy = function jsonCopy(src) {
+  return JSON.parse(JSON.stringify(src));
+};
+
+exports.jsonCopy = jsonCopy;
+
+var isActiveRoute = function isActiveRoute(route) {
+  return m.route.get() == route ? "bold" : "";
+};
+
+exports.isActiveRoute = isActiveRoute;
+
+var uuid = function uuid() {
+  return "xxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+        v = c == "x" ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  });
+};
+
+exports.uuid = uuid;
+
+var toProducts = function toProducts(cart) {
+  return (0, _ramda.toPairs)(cart).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        product = _ref2[0],
+        genders = _ref2[1];
+
+    return [product, (0, _ramda.toPairs)(genders)];
+  });
+};
+
+exports.toProducts = toProducts;
+
+var getPrice = function getPrice(mdl, title, genders) {
+  /*
+  get realprice from mdl.state.currency, title, getQuantity(title, genders)
+  */
+  // console.log("wtf", title, genders)
+  var price = mdl.state.prices[title] * getQuantity(genders);
+
+  if (mdl.state.currency() !== "$") {//price = convertPriceToCurrency(mdl.state.currency(), price)
+  }
+
+  return price;
+};
+
+exports.getPrice = getPrice;
+
+var getQuantity = function getQuantity(xs) {
+  return (0, _ramda.reduce)(_ramda.add, 0, (0, _ramda.filter)((0, _ramda.compose)((0, _ramda.equals)("Number"), _ramda.type), (0, _ramda.flatten)(xs)));
+};
+
+exports.getQuantity = getQuantity;
+
+var getTotal = function getTotal(mdl, products) {
+  return getQuantity(products.map(function (p) {
+    return getPrice(mdl, p[0], p[1]);
+  }));
+};
+
+exports.getTotal = getTotal;
+});
+
+;require.register("Utils/http.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.parseHttpSuccess = exports.parseHttpError = void 0;
+
+var _data = _interopRequireDefault(require("data.task"));
+
+var _secrets = require("./.secrets.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var onProgress = function onProgress(mdl) {
+  return function (e) {
+    if (e.lengthComputable) {
+      mdl.state.loadingProgress.max = e.total;
+      mdl.state.loadingProgress.value = e.loaded;
+      m.redraw();
+    }
+  };
+};
+
+function onLoad() {
+  return false;
+}
+
+var onLoadStart = function onLoadStart(mdl) {
+  return function (e) {
+    mdl.state.isLoading(true);
+    return false;
+  };
+};
+
+var onLoadEnd = function onLoadEnd(mdl) {
+  return function (e) {
+    mdl.state.isLoading(false);
+    mdl.state.loadingProgress.max = 0;
+    mdl.state.loadingProgress.value = 0;
+    return false;
+  };
+};
+
+var xhrProgress = function xhrProgress(mdl) {
+  return {
+    config: function config(xhr) {
+      xhr.onprogress = onProgress(mdl);
+      xhr.onload = onLoad;
+      xhr.onloadstart = onLoadStart(mdl);
+      xhr.onloadend = onLoadEnd(mdl);
+    }
+  };
+};
+
+var parseHttpError = function parseHttpError(mdl) {
+  return function (rej) {
+    return function (e) {
+      mdl.state.isLoading(false);
+      return rej(e.response);
+    };
+  };
+};
+
+exports.parseHttpError = parseHttpError;
+
+var parseHttpSuccess = function parseHttpSuccess(mdl) {
+  return function (res) {
+    return function (data) {
+      mdl.state.isLoading(false);
+      return res(data);
+    };
+  };
+};
+
+exports.parseHttpSuccess = parseHttpSuccess;
+
+var getUserToken = function getUserToken() {
+  return window.sessionStorage.getItem("user-token") ? window.sessionStorage.getItem("user-token") : "";
+};
+
+var HttpTask = function HttpTask(_headers) {
+  return function (method) {
+    return function (mdl) {
+      return function (url) {
+        return function (body) {
+          mdl.state.isLoading(true);
+          return new _data["default"](function (rej, res) {
+            return m.request(_objectSpread({
+              method: method,
+              url: url,
+              headers: _objectSpread({
+                "content-type": "application/json"
+              }, _headers),
+              body: body,
+              withCredentials: false
+            }, xhrProgress(mdl))).then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej));
+          });
+        };
+      };
+    };
+  };
+};
+
+var lookupLocationTask = function lookupLocationTask(query) {
+  return new _data["default"](function (rej, res) {
+    return m.request({
+      method: "GET",
+      url: "https://nominatim.openstreetmap.org/search?q=".concat(query, "&format=json")
+    }).then(res, rej);
+  });
+};
+
+var getTask = function getTask(mdl) {
+  return function (url) {
+    return HttpTask({})("GET")(mdl)(url)(null);
+  };
+};
+
+var nhtsaUrl = "http://localhost:3001/nhtsa/api/";
+var nhtsa = {
+  get: function get(mdl) {
+    return function (url) {
+      return getTask(mdl)(nhtsaUrl + "/" + url);
+    };
+  }
+};
+var backEndUrl = "".concat(_secrets.BackEnd.baseUrl, "/").concat(_secrets.BackEnd.APP_ID, "/").concat(_secrets.BackEnd.API_KEY, "/");
+var backEnd = {
+  getTask: function getTask(mdl) {
+    return function (url) {
+      return HttpTask(_secrets.BackEnd.headers())("GET")(mdl)(backEndUrl + url)(null);
+    };
+  },
+  postTask: function postTask(mdl) {
+    return function (url) {
+      return function (dto) {
+        return HttpTask(_secrets.BackEnd.headers())("POST")(mdl)(backEndUrl + url)(dto);
+      };
+    };
+  },
+  putTask: function putTask(mdl) {
+    return function (url) {
+      return function (dto) {
+        return HttpTask(_secrets.BackEnd.headers())("PUT")(mdl)(backEndUrl + url)(dto);
+      };
+    };
+  }
+};
+var http = {
+  backEnd: backEnd,
+  HttpTask: HttpTask,
+  getTask: getTask,
+  lookupLocationTask: lookupLocationTask
+};
+var _default = http; // const makeQuery = (string) => JSON.parse(JSON.stringify(string))
+// const parseQLResponse = (mdl) => ({ data, errors }) => {
+//   mdl.state.isLoading(false)
+//   return errors ? Promise.reject(errors) : Promise.resolve(data)
+// }
+// const postQl = (mdl) => (query) => {
+//   mdl.state.isLoading(true)
+//   return new Task((rej, res) =>
+//     m
+//       .request({
+//         method: 'POST',
+//         // url: graphQl,
+//         withCredentials: false,
+//         ...xhrProgress,
+//         data: makeQuery(query),
+//         headers: {
+//           Authorization: `Bearer ${mdl.state.token}`,
+//           'cache-control': 'no-cache',
+//           'x-apikey': '64fecd3f0cbb54d46d7f7260b86b8ad45d31b',
+//           'content-type': 'application/json',
+//         },
+//       })
+//       .then(parseQLResponse(mdl))
+//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+//   )
+// }
+// const postTask = (mdl) => (url) => ({ dto }) => {
+//   mdl.state.isLoading(true)
+//   return new Task((rej, res) =>
+//     m
+//       .request({
+//         method: 'POST',
+//         url: `${url}`,
+//         body: dto,
+//         headers: { 'user-token': getUserToken() },
+//         withCredentials: false,
+//         ...xhrProgress,
+//       })
+//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+//   )
+// }
+// const putTask = (mdl) => (url) => ({ dto }) => {
+//   mdl.state.isLoading(true)
+//   return new Task((rej, res) =>
+//     m
+//       .request({
+//         method: 'PUT',
+//         url: `${url}`,
+//         body: dto,
+//         headers: { 'user-token': getUserToken() },
+//         withCredentials: false,
+//         ...xhrProgress,
+//       })
+//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+//   )
+// }
+// const getTask = (mdl) => (url) => {
+//   mdl.state.isLoading(true)
+//   return new Task((rej, res) =>
+//     m
+//       .request({
+//         method: 'GET',
+//         url: `${url}`,
+//         headers: { 'user-token': getUserToken() },
+//         withCredentials: false,
+//         ...xhrProgress,
+//       })
+//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+//   )
+// }
+// const deleteTask = (mdl) => (url) => (id) => {
+//   mdl.state.isLoading(true)
+//   return new Task((rej, res) =>
+//     m
+//       .request({
+//         method: 'DELETE',
+//         url: `${url}/${id}`,
+//         headers: { 'user-token': getUserToken() },
+//         withCredentials: false,
+//         ...xhrProgress,
+//       })
+//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
+//   )
+// }
+
+exports["default"] = _default;
+});
+
+;require.register("Utils/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _helpers = require("./helpers.js");
+
+Object.keys(_helpers).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _helpers[key];
+    }
+  });
+});
+
+var _http = require("./http.js");
+
+Object.keys(_http).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _http[key];
+    }
+  });
+});
+
+var _validation = require("./validation.js");
+
+Object.keys(_validation).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _validation[key];
+    }
+  });
+});
+
+var _storage = require("./storage.js");
+
+Object.keys(_storage).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _storage[key];
+    }
+  });
+});
+});
+
+;require.register("Utils/storage.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.saveStorageTask = exports.getDbStorageTask = exports.saveDbStorageTask = exports.saveLocalStorageTask = exports.getLocalStorageTask = void 0;
+
+var _data = _interopRequireDefault(require("data.task"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var getLocalStorageTask = function getLocalStorageTask(key) {
+  return new _data["default"](function (rej, res) {
+    return localStorage.getItem(key) ? rej("nothing here") : res(localStorage.getItem(key));
+  });
+};
+
+exports.getLocalStorageTask = getLocalStorageTask;
+
+var saveLocalStorageTask = function saveLocalStorageTask(key) {
+  return function (value) {
+    localStorage.setItem(key, JSON.stringify(value));
+    return _data["default"].of(localStorage.getItem(key));
+  };
+};
+
+exports.saveLocalStorageTask = saveLocalStorageTask;
+
+var saveDbStorageTask = function saveDbStorageTask(mdl) {
+  return function (cart) {
+    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
+      cart: cart
+    });
+  };
+};
+
+exports.saveDbStorageTask = saveDbStorageTask;
+
+var getDbStorageTask = function getDbStorageTask(mdl) {
+  return mdl.http.backEnd.gettTask(mdl)("data/Accounts/".concat(mdl.account.objectId));
+};
+
+exports.getDbStorageTask = getDbStorageTask;
+
+var saveStorageTask = function saveStorageTask(mdl) {
+  return function (key) {
+    return function (value) {
+      return mdl.state.isAuth() ? saveLocalStorageTask(key)(value).chain(saveDbStorageTask(mdl)) : saveLocalStorageTask(key)(value);
+    };
+  };
+};
+
+exports.saveStorageTask = saveStorageTask;
+});
+
+;require.register("Utils/validation.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isNilOrEmptyOrAtom = exports.allCaps = exports.inDateRange = exports.unique = exports.maxLengthNullable = exports.onlyNumeric = exports.urlFormat = exports.phoneFormat = exports.onlyAlphaNumericSpaceSpecial = exports.onlyAlphaNumericSpaceUnderscore = exports.onlyAlphaNumericSpace = exports.onlyAlphaNumericUnderscore = exports.onlyAlphaNumeric = exports.onlyAlpha = exports.emailFormat = exports.maxSize = exports.maxLength = exports.isNullOrEmpty = exports.isNotNullOrEmpty = exports.IsNotNil = exports.isRequired = exports.validate = exports.getOrElse = void 0;
+
+var _ramda = require("ramda");
+
+var _data = require("data.validation");
+
+var _data2 = _interopRequireDefault(require("data.maybe"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var getOrElse = function getOrElse(val) {
+  return function (x) {
+    return x.getOrElse(val);
+  };
+};
+
+exports.getOrElse = getOrElse;
+var validate = (0, _ramda.curry)(function (rule, lens, msg, data) {
+  return rule((0, _ramda.view)(lens, data)) ? (0, _data.Success)(data) : (0, _data.Failure)([(0, _ramda.set)(lens, msg, {})]);
+});
+exports.validate = validate;
+var isRequired = (0, _ramda.compose)(_ramda.not, _ramda.isEmpty);
+exports.isRequired = isRequired;
+var IsNotNil = (0, _ramda.compose)(_ramda.not, _ramda.isNil);
+exports.IsNotNil = IsNotNil;
+
+var isNotNullOrEmpty = function isNotNullOrEmpty(data) {
+  return !isNullOrEmpty(data);
+};
+
+exports.isNotNullOrEmpty = isNotNullOrEmpty;
+
+var isNullOrEmpty = function isNullOrEmpty(data) {
+  return (0, _ramda.isNil)(data) || (0, _ramda.isEmpty)(data);
+};
+
+exports.isNullOrEmpty = isNullOrEmpty;
+
+var maxLength = function maxLength(max) {
+  return (0, _ramda.compose)((0, _ramda.gte)(max), _ramda.length);
+};
+
+exports.maxLength = maxLength;
+var maxSize = (0, _ramda.curry)(function (max, value) {
+  return (0, _ramda.gte)(max, value);
+});
+exports.maxSize = maxSize;
+var emailFormat = (0, _ramda.test)(/@/);
+exports.emailFormat = emailFormat;
+var onlyAlpha = (0, _ramda.test)(/^[a-zA-Z]*$/);
+exports.onlyAlpha = onlyAlpha;
+var onlyAlphaNumeric = (0, _ramda.test)(/^[a-zA-Z0-9]*$/);
+exports.onlyAlphaNumeric = onlyAlphaNumeric;
+var onlyAlphaNumericUnderscore = (0, _ramda.test)(/^[a-zA-Z0-9_]*$/);
+exports.onlyAlphaNumericUnderscore = onlyAlphaNumericUnderscore;
+var onlyAlphaNumericSpace = (0, _ramda.test)(/^[a-zA-Z0-9\s]*$/);
+exports.onlyAlphaNumericSpace = onlyAlphaNumericSpace;
+var onlyAlphaNumericSpaceUnderscore = (0, _ramda.test)(/^[a-zA-Z0-9_\s]*$/);
+exports.onlyAlphaNumericSpaceUnderscore = onlyAlphaNumericSpaceUnderscore;
+var onlyAlphaNumericSpaceSpecial = (0, _ramda.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+\s]*$/);
+exports.onlyAlphaNumericSpaceSpecial = onlyAlphaNumericSpaceSpecial;
+var phoneFormat = (0, _ramda.test)(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/);
+exports.phoneFormat = phoneFormat;
+var urlFormat = (0, _ramda.test)(/^[a-zA-Z0-9_.~!*''();:@&=+$,/?#[%-\]+]*$/);
+exports.urlFormat = urlFormat;
+var onlyNumeric = (0, _ramda.test)(/^[0-9]*$/);
+exports.onlyNumeric = onlyNumeric;
+
+var maxLengthNullable = function maxLengthNullable(max) {
+  return (0, _ramda.compose)(getOrElse(false), (0, _ramda.map)((0, _ramda.gte)(max)), (0, _ramda.map)(_ramda.length), _data2["default"].fromNullable);
+};
+
+exports.maxLengthNullable = maxLengthNullable;
+var unique = (0, _ramda.curry)(function (keys, value) {
+  var lookup = _data2["default"].fromNullable(keys);
+
+  return !(0, _ramda.contains)((0, _ramda.toUpper)(value.toString()), (0, _ramda.map)(function (y) {
+    return (0, _ramda.toUpper)(y.toString());
+  }, lookup.getOrElse([])));
+});
+exports.unique = unique;
+var inDateRange = (0, _ramda.curry)(function (start, end, value) {
+  if (value == null || value === '') {
+    return true;
+  }
+
+  return new Date(start) <= new Date(value) && new Date(value) < new Date(end);
+});
+exports.inDateRange = inDateRange;
+
+var allCaps = function allCaps(str) {
+  return str.toUpperCase() === str;
+};
+
+exports.allCaps = allCaps;
+
+var isNilOrEmptyOrAtom = function isNilOrEmptyOrAtom(item) {
+  return (0, _ramda.isNil)(item) || (0, _ramda.isEmpty)(item) || item === '{$type:atom}';
+};
+
+exports.isNilOrEmptyOrAtom = isNilOrEmptyOrAtom;
+});
+
+;require.register("app.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var toRoutes = function toRoutes(mdl) {
+  return function (acc, route) {
+    acc[route.route] = {
+      onmatch: function onmatch(args, path, fullroute) {
+        if (route.group.includes("authenticated") && !mdl.state.isAuth()) {
+          mdl.route.set(m.route.get());
+        }
+
+        mdl.state.route = route;
+        mdl.state.anchor = path.split("#")[1];
+        var isAnchor = Boolean(mdl.state.anchor);
+        route.onmatch(mdl, args, path, fullroute, isAnchor);
+      },
+      render: function render() {
+        return route.component(mdl);
+      }
+    };
+    return acc;
+  };
+};
+
+var App = function App(mdl) {
+  return mdl.Routes.reduce(toRoutes(mdl), {});
+};
+
+var _default = App;
+exports["default"] = _default;
+});
+
+;require.register("index.js", function(exports, require, module) {
+"use strict";
+
+var _app = _interopRequireDefault(require("./app.js"));
+
+var _index = _interopRequireDefault(require("Models/index.js"));
+
+var _funConfig = require("@boazblake/fun-config");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+_funConfig.FunConfig.configure();
+
+var root = document.body;
+var winW = window.innerWidth;
+
+if (module.hot) {
+  module.hot.accept();
+}
+
+if ('development' !== "production") {
+  console.log("Looks like we are in development mode!");
+} else {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./service-worker.js").then(function (registration) {
+        console.log("⚙️ SW registered: ", registration);
+      })["catch"](function (registrationError) {
+        console.log("🧟 SW registration failed: ", registrationError);
+      });
+    });
+  }
+} // set display profiles
+
+
+var getProfile = function getProfile(w) {
+  if (w < 668) return "phone";
+  if (w < 920) return "tablet";
+  return "desktop";
+};
+
+var checkWidth = function checkWidth(winW) {
+  var w = window.innerWidth;
+
+  if (winW !== w) {
+    winW = w;
+    var lastProfile = _index["default"].settings.screenSize;
+    _index["default"].settings.screenSize = getProfile(w);
+    if (lastProfile != _index["default"].settings.screenSize) m.redraw();
+  }
+
+  return requestAnimationFrame(checkWidth);
+};
+
+_index["default"].settings.screenSize = getProfile(winW);
+checkWidth(winW);
+
+if (sessionStorage.getItem("sb-user")) {
+  _index["default"].user = JSON.parse(sessionStorage.getItem("sb-user")); //fetch cart from db? do i really??
+
+  _index["default"].state.isAuth(true);
+}
+
+if (localStorage.getItem("sb-cart")) {
+  _index["default"].cart = JSON.parse(localStorage.getItem("sb-cart"));
+}
+
+m.route(root, "/", (0, _app["default"])(_index["default"]));
+});
+
+;require.register("initialize.js", function(exports, require, module) {
+"use strict";
+
+document.addEventListener("DOMContentLoaded", function () {
+  require("./index.js");
+});
+});
+
+;require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
+  
+
+// Auto-loaded modules from config.npm.globals.
+window.m = require("mithril");
+window.Stream = require("mithril-stream");
+
+
+});})();require('___globals___');
+
+
+//# sourceMappingURL=app.js.map
