@@ -158,7 +158,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/blankets/#wraps",
     isNav: false,
-    group: ["sub-navbar", "blankets"],
+    group: ["nav", "blankets"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -178,7 +178,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/blankets/#christening",
     isNav: false,
-    group: ["sub-navbar", "blankets"],
+    group: ["nav", "blankets"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -192,33 +192,33 @@ const Routes = [
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
   },
-  {
-    id: "blog",
-    name: "Blog",
-    // icon: Icons.home,
-    route: "/blog",
-    isNav: true,
-    group: ["footer", "menu"],
-    children: [],
-    options: [],
-    onmatch: (mdl, args, path, fullroute, isAnchor) => {
-      isAnchor
-        ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
-            top: 0,
-            left: 0,
-            behavior: "smooth",
-          })
-    },
-    component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
-  },
+  // {
+  //   id: "blog",
+  //   name: "Blog",
+  //   // icon: Icons.home,
+  //   route: "/blog",
+  //   isNav: true,
+  //   group: ["footer", "menu", "sub-navbar"],
+  //   children: [],
+  //   options: [],
+  //   onmatch: (mdl, args, path, fullroute, isAnchor) => {
+  //     isAnchor
+  //       ? scrollToAnchor(mdl.state.anchor)
+  //       : window.scroll({
+  //           top: 0,
+  //           left: 0,
+  //           behavior: "smooth",
+  //         })
+  //   },
+  //   component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
+  // },
   {
     id: "about-us",
     name: "About Us",
     // icon: Icons.home,
     route: "/about-us",
     isNav: true,
-    group: ["footer"],
+    group: ["footer", "sub-navbar"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -238,7 +238,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/contact-us",
     isNav: false,
-    group: ["footer"],
+    group: ["footer", "sub-navbar"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -358,7 +358,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/faq",
     isNav: false,
-    group: ["footer", "menu"],
+    group: ["footer", "menu", "sub-navbar"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {

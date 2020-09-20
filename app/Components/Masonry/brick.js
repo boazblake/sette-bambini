@@ -23,7 +23,7 @@ const Brick = () => {
                   redraw(parent)(dom)
                 }
               },
-              src: `https://via.placeholder.com/${data.imgSrc}`,
+              src: data.imgSrc, //`https://via.placeholder.com/${data.imgSrc}`,
             }),
 
             m("p", data.description),

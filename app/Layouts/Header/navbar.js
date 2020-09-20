@@ -2,10 +2,9 @@ import NavLink from "Components/nav-link.js"
 import { isActiveRoute } from "Utils/index.js"
 
 const NavBar = () => {
-  let ProductRoutes = (mdl) =>
-    mdl.Routes.filter((r) => r.group.includes("navbar"))
-  let SidebarRoutes = (mdl) =>
-    mdl.Routes.filter((r) => r.group.includes("menu"))
+  let NavRoutes = (mdl) => mdl.Routes.filter((r) => r.group.includes("navbar"))
+  let SubNavRoutes = (mdl) =>
+    mdl.Routes.filter((r) => r.group.includes("sub-navbar"))
   return {
     view: ({ attrs: { mdl } }) => [
       m(
@@ -14,7 +13,7 @@ const NavBar = () => {
 
         m(
           "nav.frow row-around",
-          ProductRoutes(mdl).map((r) => {
+          NavRoutes(mdl).map((r) => {
             return m(NavLink, {
               mdl,
               href: r.route,
@@ -28,7 +27,7 @@ const NavBar = () => {
         ".navbar.navbar2.hidden-xs",
         m(
           "nav.frow row-around",
-          SidebarRoutes(mdl).map((r) => {
+          SubNavRoutes(mdl).map((r) => {
             return m(NavLink, {
               mdl,
               href: r.route,

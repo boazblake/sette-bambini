@@ -86211,7 +86211,7 @@ var _assertPromise = /*#__PURE__*/require("./internal/_assertPromise");
  *
  * @func
  * @memberOf R
- * @since v0.27.0
+ * @since v0.27.1
  * @category Function
  * @sig (a -> b) -> (Promise e a) -> (Promise e b)
  * @sig (a -> (Promise e b)) -> (Promise e a) -> (Promise e b)
@@ -95292,7 +95292,7 @@ var _curry3 = /*#__PURE__*/require("./internal/_curry3");
  *
  * @func
  * @memberOf R
- * @since v0.27.0
+ * @since v0.27.1
  * @category List
  * @sig Number -> Number -> [a] -> [a]
  * @param {Number} from The source index
@@ -96312,7 +96312,7 @@ var nth = /*#__PURE__*/require("./nth");
  *
  * @func
  * @memberOf R
- * @since v0.27.0
+ * @since v0.27.1
  * @category Object
  * @typedefn Idx = [String | Int]
  * @sig [Idx] -> {a} -> [a | Undefined]
@@ -100115,7 +100115,7 @@ var _curry2 = /*#__PURE__*/require("./internal/_curry2");
  *
  * @func
  * @memberOf R
- * @since v0.27.0
+ * @since v0.27.1
  * @category Logic
  * @sig a -> b -> Boolean
  * @param {Any} a

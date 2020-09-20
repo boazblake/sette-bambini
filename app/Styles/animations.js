@@ -16,7 +16,7 @@ export const SlideOutRight = ({ dom }) => {
   return new Promise(function (resolve) {
     setTimeout(() => {
       resolve()
-    }, 500)
+    }, 300)
   })
 }
 
@@ -25,7 +25,7 @@ export const SlideOutLeft = ({ dom }) => {
   return new Promise(function (resolve) {
     setTimeout(() => {
       resolve()
-    }, 500)
+    }, 300)
   })
 }
 

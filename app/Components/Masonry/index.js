@@ -1,6 +1,7 @@
 import Brick from "./brick"
 
 const resizeGridItem = (dom) => (item) => {
+  console.log(item)
   let grid = dom
 
   let rowHeight = parseInt(
@@ -33,12 +34,13 @@ const Masonry = () => {
     },
     view: ({ attrs: { data } }) =>
       m(
-        ".grid",
-        data.map((brick) =>
+        ".masonry",
+        data.map((brick, idx) =>
           m(Brick, {
-            classList: "item",
+            classList: `item `,
             data: brick,
             parent: _dom,
+            idx,
             redraw: resizeGridItem,
           })
         )

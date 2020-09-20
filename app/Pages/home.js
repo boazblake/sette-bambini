@@ -1,15 +1,15 @@
 import Task from "data.task"
-import Masonry from "Components/Masonry"
+import Masonry from "Components/Masonry/index"
 
 const fetchBurpRagsTask = (mdl) =>
   Task.of([
-    { imgSrc: 320, title: "", description: "" },
-    { imgSrc: 250, title: "", description: "" },
-    { imgSrc: 220, title: "", description: "" },
-    { imgSrc: 200, title: "", description: "" },
-    { imgSrc: 250, title: "", description: "" },
-    { imgSrc: 320, title: "", description: "" },
-    { imgSrc: 320, title: "", description: "" },
+    { imgSrc: "/images/1.jpeg", title: "", description: "" },
+    { imgSrc: "/images/2.jpeg", title: "", description: "" },
+    { imgSrc: "/images/3.jpeg", title: "", description: "" },
+    { imgSrc: "/images/4.jpeg", title: "", description: "" },
+    { imgSrc: "/images/5.jpeg", title: "", description: "" },
+    { imgSrc: "/images/6.jpeg", title: "", description: "" },
+    { imgSrc: "/images/7.jpeg", title: "", description: "" },
   ])
 
 const onPageInit = (state) => ({ attrs: { mdl } }) => {
@@ -19,7 +19,7 @@ const onPageInit = (state) => ({ attrs: { mdl } }) => {
   }
 
   const onSuccess = (s) => (data) => {
-    s.data = data
+    s.images = data
   }
 
   fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state))
@@ -34,11 +34,11 @@ const Home = () => {
     oninit: onPageInit(state),
     onremove: () => {
       state.errors = {}
-      state.data = []
+      state.images = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", { id: "home-page" }, [
-        m(Masonry, { data: state.data }),
+      m(".frow-center", { id: "home-page" }, [
+        m(Masonry, { data: state.images }),
       ]),
   }
 }

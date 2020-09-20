@@ -34,28 +34,25 @@ const Body = () => {
           id: "body",
           style: getStyle(mdl),
         },
-        m(".frow column-center items-stretch", [
-          mdl.settings.screenSize !== "desktop" &&
-            mdl.state.showNavModal() &&
-            m(NavModal, {
-              oncreate: SlideInLeft,
-              onbeforeremove: SlideOutRight,
-              mdl,
-            }),
-          mdl.state.showCartModal() &&
-            m(CartModal, {
-              oncreate: SlideInRight,
-              onbeforeremove: SlideOutLeft,
-              mdl,
-            }),
-          [
-            m(
-              ".text-4x",
-              m("h1.title.mb-20.text-center", mdl.state.route.name)
-            ),
-            children,
-          ],
-        ])
+        // m(".frow centered-column items-stretch", [
+        mdl.settings.screenSize !== "desktop" &&
+          mdl.state.showNavModal() &&
+          m(NavModal, {
+            oncreate: SlideInLeft,
+            onbeforeremove: SlideOutRight,
+            mdl,
+          }),
+        mdl.state.showCartModal() &&
+          m(CartModal, {
+            oncreate: SlideInRight,
+            onbeforeremove: SlideOutLeft,
+            mdl,
+          }),
+        [
+          m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)),
+          children,
+        ]
+        // ])
       ),
   }
 }

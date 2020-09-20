@@ -304,7 +304,8 @@ var Brick = function Brick() {
             redraw(parent)(dom);
           }
         },
-        src: "https://via.placeholder.com/".concat(data.imgSrc)
+        src: data.imgSrc //`https://via.placeholder.com/${data.imgSrc}`,
+
       }), m("p", data.description)])]));
     }
   };
@@ -328,6 +329,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var resizeGridItem = function resizeGridItem(dom) {
   return function (item) {
+    console.log(item);
     var grid = dom;
     var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-auto-rows"));
     var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-row-gap"));
@@ -357,11 +359,12 @@ var Masonry = function Masonry() {
     },
     view: function view(_ref2) {
       var data = _ref2.attrs.data;
-      return m(".grid", data.map(function (brick) {
+      return m(".masonry", data.map(function (brick, idx) {
         return m(_brick["default"], {
-          classList: "item",
+          classList: "item ",
           data: brick,
           parent: _dom,
+          idx: idx,
           redraw: resizeGridItem
         });
       }));
@@ -915,7 +918,8 @@ var Body = function Body() {
       return m(".body", {
         id: "body",
         style: getStyle(mdl)
-      }, m(".frow column-center items-stretch", [mdl.settings.screenSize !== "desktop" && mdl.state.showNavModal() && m(_navModal["default"], {
+      }, // m(".frow centered-column items-stretch", [
+      mdl.settings.screenSize !== "desktop" && mdl.state.showNavModal() && m(_navModal["default"], {
         oncreate: _animations.SlideInLeft,
         onbeforeremove: _animations.SlideOutRight,
         mdl: mdl
@@ -923,7 +927,8 @@ var Body = function Body() {
         oncreate: _animations.SlideInRight,
         onbeforeremove: _animations.SlideOutLeft,
         mdl: mdl
-      }), [m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)), children]]));
+      }), [m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)), children] // ])
+      );
     }
   };
 };
@@ -1152,15 +1157,15 @@ var _index = require("Utils/index.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var NavBar = function NavBar() {
-  var ProductRoutes = function ProductRoutes(mdl) {
+  var NavRoutes = function NavRoutes(mdl) {
     return mdl.Routes.filter(function (r) {
       return r.group.includes("navbar");
     });
   };
 
-  var SidebarRoutes = function SidebarRoutes(mdl) {
+  var SubNavRoutes = function SubNavRoutes(mdl) {
     return mdl.Routes.filter(function (r) {
-      return r.group.includes("menu");
+      return r.group.includes("sub-navbar");
     });
   };
 
@@ -1169,14 +1174,14 @@ var NavBar = function NavBar() {
       var mdl = _ref.attrs.mdl;
       return [m(".navbar.navbar1", {
         id: "navbar"
-      }, m("nav.frow row-around", ProductRoutes(mdl).map(function (r) {
+      }, m("nav.frow row-around", NavRoutes(mdl).map(function (r) {
         return m(_navLink["default"], {
           mdl: mdl,
           href: r.route,
           link: r.name,
           classList: (0, _index.isActiveRoute)(r.route)
         });
-      }))), m(".navbar.navbar2.hidden-xs", m("nav.frow row-around", SidebarRoutes(mdl).map(function (r) {
+      }))), m(".navbar.navbar2.hidden-xs", m("nav.frow row-around", SubNavRoutes(mdl).map(function (r) {
         return m(_navLink["default"], {
           mdl: mdl,
           href: r.route,
@@ -2738,37 +2743,37 @@ exports["default"] = void 0;
 
 var _data = _interopRequireDefault(require("data.task"));
 
-var _Masonry = _interopRequireDefault(require("Components/Masonry"));
+var _index = _interopRequireDefault(require("Components/Masonry/index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
   return _data["default"].of([{
-    imgSrc: 320,
+    imgSrc: "/images/1.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 250,
+    imgSrc: "/images/2.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 220,
+    imgSrc: "/images/3.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 200,
+    imgSrc: "/images/4.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 250,
+    imgSrc: "/images/5.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 320,
+    imgSrc: "/images/6.jpeg",
     title: "",
     description: ""
   }, {
-    imgSrc: 320,
+    imgSrc: "/images/7.jpeg",
     title: "",
     description: ""
   }]);
@@ -2787,7 +2792,7 @@ var onPageInit = function onPageInit(state) {
 
     var onSuccess = function onSuccess(s) {
       return function (data) {
-        s.data = data;
+        s.images = data;
       };
     };
 
@@ -2804,14 +2809,14 @@ var Home = function Home() {
     oninit: onPageInit(state),
     onremove: function onremove() {
       state.errors = {};
-      state.data = [];
+      state.images = [];
     },
     view: function view(_ref2) {
       var mdl = _ref2.attrs.mdl;
-      return m(".frow-container frow-center", {
+      return m(".frow-center", {
         id: "home-page"
-      }, [m(_Masonry["default"], {
-        data: state.data
+      }, [m(_index["default"], {
+        data: state.images
       })]);
     }
   };
@@ -3181,7 +3186,7 @@ var Routes = [{
   // icon: Icons.search,
   route: "/blankets/#wraps",
   isNav: false,
-  group: ["sub-navbar", "blankets"],
+  group: ["nav", "blankets"],
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
@@ -3204,7 +3209,7 @@ var Routes = [{
   // icon: Icons.search,
   route: "/blankets/#christening",
   isNav: false,
-  group: ["sub-navbar", "blankets"],
+  group: ["nav", "blankets"],
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
@@ -3221,36 +3226,33 @@ var Routes = [{
       mdl: mdl
     }));
   }
-}, {
-  id: "blog",
-  name: "Blog",
-  // icon: Icons.home,
-  route: "/blog",
-  isNav: true,
-  group: ["footer", "menu"],
-  children: [],
-  options: [],
-  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
-    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  },
-  component: function component(mdl) {
-    return m(_index["default"], {
-      mdl: mdl
-    }, m(_blog["default"], {
-      mdl: mdl
-    }));
-  }
-}, {
+}, // {
+//   id: "blog",
+//   name: "Blog",
+//   // icon: Icons.home,
+//   route: "/blog",
+//   isNav: true,
+//   group: ["footer", "menu", "sub-navbar"],
+//   children: [],
+//   options: [],
+//   onmatch: (mdl, args, path, fullroute, isAnchor) => {
+//     isAnchor
+//       ? scrollToAnchor(mdl.state.anchor)
+//       : window.scroll({
+//           top: 0,
+//           left: 0,
+//           behavior: "smooth",
+//         })
+//   },
+//   component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
+// },
+{
   id: "about-us",
   name: "About Us",
   // icon: Icons.home,
   route: "/about-us",
   isNav: true,
-  group: ["footer"],
+  group: ["footer", "sub-navbar"],
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
@@ -3273,7 +3275,7 @@ var Routes = [{
   // icon: Icons.search,
   route: "/contact-us",
   isNav: false,
-  group: ["footer"],
+  group: ["footer", "sub-navbar"],
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
@@ -3411,7 +3413,7 @@ var Routes = [{
   // icon: Icons.search,
   route: "/faq",
   isNav: false,
-  group: ["footer", "menu"],
+  group: ["footer", "menu", "sub-navbar"],
   children: [],
   options: [],
   onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
@@ -3494,7 +3496,7 @@ var SlideOutRight = function SlideOutRight(_ref5) {
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve();
-    }, 500);
+    }, 300);
   });
 };
 
@@ -3506,7 +3508,7 @@ var SlideOutLeft = function SlideOutLeft(_ref6) {
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve();
-    }, 500);
+    }, 300);
   });
 };
 
