@@ -3,13 +3,13 @@ import Masonry from "Components/Masonry/index"
 
 const fetchBurpRagsTask = (mdl) =>
   Task.of([
-    { imgSrc: "/images/1.jpeg", title: "", description: "" },
-    { imgSrc: "/images/2.jpeg", title: "", description: "" },
-    { imgSrc: "/images/3.jpeg", title: "", description: "" },
-    { imgSrc: "/images/4.jpeg", title: "", description: "" },
-    { imgSrc: "/images/5.jpeg", title: "", description: "" },
-    { imgSrc: "/images/6.jpeg", title: "", description: "" },
-    { imgSrc: "/images/7.jpeg", title: "", description: "" },
+    { imgSrc: "images/1.jpeg", title: "", description: "" },
+    { imgSrc: "images/2.jpeg", title: "", description: "" },
+    { imgSrc: "images/3.jpeg", title: "", description: "" },
+    { imgSrc: "images/4.jpeg", title: "", description: "" },
+    { imgSrc: "images/5.jpeg", title: "", description: "" },
+    { imgSrc: "images/6.jpeg", title: "", description: "" },
+    { imgSrc: "images/7.jpeg", title: "", description: "" },
   ])
 
 const onPageInit = (state) => ({ attrs: { mdl } }) => {
