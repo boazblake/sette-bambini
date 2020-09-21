@@ -1,7 +1,6 @@
 import Brick from "./brick"
 
 const resizeGridItem = (dom) => (item) => {
-  console.log(item)
   let grid = dom
 
   let rowHeight = parseInt(
