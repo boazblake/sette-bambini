@@ -2,7 +2,7 @@ import Layout from "Layouts/index.js"
 import BurpRags from "Pages/burp-rags.js"
 import BabyBlankets from "Pages/blankets.js"
 import Default from "Pages/default.js"
-import Blog from "Pages/blog.js"
+import Collections from "Pages/Collections.js"
 import Home from "Pages/home.js"
 import Cart from "Pages/cart.js"
 import Checkout from "Pages/checkout.js"
@@ -151,6 +151,26 @@ const Routes = [
           })
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
+  },
+  {
+    id: "collections",
+    name: "Collections",
+    // icon: Icons.search,
+    route: "/collections",
+    isNav: false,
+    group: ["navbar", "collections"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Collections, { mdl })),
   },
   {
     id: "wraps-blankets",

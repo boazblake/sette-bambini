@@ -270,6 +270,12 @@ var configure = function configure(_) {
 
   Object.defineProperty(Array.prototype, "any", (0, _util.value)(_any));
 
+  var _insertAt = function _insertAt(idx, x) {
+    return this.splice(idx, 0, item);
+  };
+
+  Object.defineProperty(Array.prototype, "insertAt", (0, _util.value)(_insertAt));
+
   var _last = function _last() {
     return this[this.length - 1];
   };

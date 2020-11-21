@@ -2162,6 +2162,49 @@ var _default = Register;
 exports["default"] = _default;
 });
 
+;require.register("Pages/Collections.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Flicker = _interopRequireDefault(require("Components/Flicker.js"));
+
+var _Selector = _interopRequireDefault(require("Components/Selector.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var Collections = function Collections() {
+  var state = {
+    errors: {},
+    data: ["https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600", "https://source.unsplash.com/random/800x600"]
+  };
+  return {
+    onremove: function onremove() {
+      state.errors = {};
+      state.data = [];
+    },
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow-container frow-center", [m(".mb-30", {
+        id: "burps"
+      }, [m(_Flicker["default"], {
+        mdl: mdl,
+        data: state.data
+      }), m(".mt-20", m(_Selector["default"], {
+        mdl: mdl,
+        product: "Burp Rags"
+      })), m("ul", [m("li.pb-10", "Each Collection comprise of hand selected blankets and burp rags"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering.")])]);
+    }
+  };
+};
+
+var _default = Collections;
+exports["default"] = _default;
+});
+
 ;require.register("Pages/account.js", function(exports, require, module) {
 "use strict";
 
@@ -2347,99 +2390,6 @@ var Blankets = function Blankets() {
 };
 
 var _default = Blankets;
-exports["default"] = _default;
-});
-
-;require.register("Pages/blog.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _data = _interopRequireDefault(require("data.task"));
-
-var _Masonry = _interopRequireDefault(require("Components/Masonry"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var fetchBurpRagsTask = function fetchBurpRagsTask(mdl) {
-  return _data["default"].of([{
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 0,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 200,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 250,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 220,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }, {
-    imgSrc: 2,
-    title: "Title",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }]);
-};
-
-var onPageInit = function onPageInit(state) {
-  return function (_ref) {
-    var mdl = _ref.attrs.mdl;
-
-    var onError = function onError(s) {
-      return function (error) {
-        s.errors.init = error;
-        console.log("errror", error);
-      };
-    };
-
-    var onSuccess = function onSuccess(s) {
-      return function (data) {
-        s.data = data;
-      };
-    };
-
-    fetchBurpRagsTask(mdl).fork(onError(state), onSuccess(state));
-  };
-};
-
-var Blog = function Blog() {
-  var state = {
-    errors: {},
-    data: []
-  };
-  return {
-    oninit: onPageInit(state),
-    onremove: function onremove() {
-      state.errors = {};
-      state.data = [];
-    },
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return m(".frow-container frow-center", {
-        id: "blog-page"
-      }, [m(_Masonry["default"], {
-        data: state.data
-      })]);
-    }
-  };
-};
-
-var _default = Blog;
 exports["default"] = _default;
 });
 
@@ -3012,7 +2962,7 @@ var _blankets = _interopRequireDefault(require("Pages/blankets.js"));
 
 var _default2 = _interopRequireDefault(require("Pages/default.js"));
 
-var _blog = _interopRequireDefault(require("Pages/blog.js"));
+var _Collections = _interopRequireDefault(require("Pages/Collections.js"));
 
 var _home = _interopRequireDefault(require("Pages/home.js"));
 
@@ -3188,6 +3138,29 @@ var Routes = [{
     return m(_index["default"], {
       mdl: mdl
     }, m(_blankets["default"], {
+      mdl: mdl
+    }));
+  }
+}, {
+  id: "collections",
+  name: "Collections",
+  // icon: Icons.search,
+  route: "/collections",
+  isNav: false,
+  group: ["navbar", "collections"],
+  children: [],
+  options: [],
+  onmatch: function onmatch(mdl, args, path, fullroute, isAnchor) {
+    isAnchor ? (0, _index2.scrollToAnchor)(mdl.state.anchor) : window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  },
+  component: function component(mdl) {
+    return m(_index["default"], {
+      mdl: mdl
+    }, m(_Collections["default"], {
       mdl: mdl
     }));
   }

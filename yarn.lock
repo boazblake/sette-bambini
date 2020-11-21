@@ -828,10 +828,9 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@boazblake/fun-config@1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@boazblake/fun-config/1.0.0/87c735fc02a09808ba1ea027e993307e103320581a78ff087690ab5625b6d800#8fe988102375f7be7ec5317ad94bebb6354af741"
-  integrity sha512-ty/wDxfDT+m3SpwggVqR838cKcqhvBOMnD8bWWOzigxMmJeOMWLW4QldobM5BsDY1dL1wbMFVdLnsCyFlVokeg==
+"@boazblake/fun-config@git://github.com/boazblake/fun-config":
+  version "1.0.8"
+  resolved "git://github.com/boazblake/fun-config#8cdde722926c14a963ca431df7efce3c5920f0e1"
   dependencies:
     daggy "^1.4.0"
     data.either "^1.5.2"
