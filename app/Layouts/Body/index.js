@@ -49,7 +49,7 @@ const Body = () => {
             mdl,
           }),
         [
-          m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)),
+          m.route.get() !== '/' && m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)) ,
           children,
         ]
         // ])

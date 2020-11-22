@@ -153,7 +153,7 @@ export const Register = () => {
           "form.frow-container column-center",
           {
             role: "form",
-            id: "Register-form",
+            id: "register-form",
             onsubmit: (e) => e.preventDefault(),
           },
           [

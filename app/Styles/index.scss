@@ -501,6 +501,11 @@ img {
     max-width: 50%;
   }
 
+  #login-form,
+  #register-form {
+    max-width: 500px;
+  }
+
   .modal {
     width: 60vw;
     min-width: 60vw;
@@ -520,6 +525,11 @@ img {
 @media screen and (min-width: 920px) {
   img {
     max-width: 30%;
+  }
+
+  #login-form,
+  #register-form {
+    max-width: 500px;
   }
 
   .modal {
