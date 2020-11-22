@@ -1,5 +1,4 @@
 import Flickity from "flickity"
-
 const Flicker = () => {
   return {
     oncreate: ({ dom }) =>
@@ -10,9 +9,10 @@ const Flicker = () => {
       }),
     view: ({ attrs: { mdl, data } }) => {
       return m(".main-carousel.animated", [
-        data.map((src) => {
-          mdl.addToCart.id(src)
-          return m(".carousel-cell", m("img", { src }))
+        data.map((img) => {
+          console.log(img)
+          mdl.addToCart.id(img.src)
+          return m(".carousel-cell", m("img", img))
         }),
       ])
     },

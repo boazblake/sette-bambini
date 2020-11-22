@@ -1,16 +1,11 @@
 import Flicker from "Components/Flicker.js"
 import Selector from "Components/Selector.js"
-import { AddToCartOut } from "Styles/animations"
+import { blanketImgs } from "index.images.js"
 
 const Blankets = () => {
   const state = {
     errors: {},
-    data: [
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-    ],
+    data: blanketImgs,
   }
 
   return {

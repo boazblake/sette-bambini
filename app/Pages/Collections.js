@@ -1,15 +1,11 @@
 import Flicker from "Components/Flicker.js"
 import Selector from "Components/Selector.js"
+import { collectionImgs } from "index.images.js"
 
 const Collections = () => {
   const state = {
     errors: {},
-    data: [
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-      "https://source.unsplash.com/random/800x600",
-    ],
+    data: collectionImgs,
   }
   return {
     onremove: () => {

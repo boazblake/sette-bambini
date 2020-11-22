@@ -1,3 +1,4 @@
+export const SlideInUp = ({ dom }) => dom.classList.toggle("slideInUp")
 export const SlideInLeft = ({ dom }) => dom.classList.toggle("slideInLeft")
 export const SlideInRight = ({ dom }) => dom.classList.toggle("slideInRight")
 export const AddToCart = ({ dom }) => dom.classList.toggle("slide-out-tr")
