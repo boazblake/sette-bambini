@@ -10,7 +10,7 @@ const Brick = () => {
         m(".content", [
           data.title && m("h3.title", data.title),
           m(".description", [
-            m("img.animate", {
+            m("img", {
               onload: (x) => {
                 // console.log("brick image onload", x, _dom)
                 // m.redraw()
