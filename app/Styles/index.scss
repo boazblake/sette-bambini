@@ -85,21 +85,20 @@ a.button {
     border: 0.1em solid $color5;
     font-weight: 500;
 
-  > h1 {
-    color: $color5 !important;
-    font-weight: 500;
-  }
+    > h1 {
+      color: $color5 !important;
+      font-weight: 500;
+    }
   }
 }
 
 #add-to-cart-img {
-    position: absolute;
-    top:75%;
-    left:25%;
-    width: 200px;
-    height: 200px;
+  position: absolute;
+  top: 75%;
+  left: 25%;
+  width: 200px;
+  height: 200px;
 }
-
 
 .auth-btn {
   width: 100%;
@@ -125,7 +124,7 @@ a.button {
   font-weight: 900;
 }
 
-.cart-item{
+.cart-item {
   width: 100%;
 }
 
@@ -140,7 +139,7 @@ a.button {
     padding: 7%;
     width: 20px;
     height: 20px;
-    border-radius:50%;
+    border-radius: 50%;
     color: $color1;
     background-color: $color5;
     text-align: center;
@@ -175,7 +174,6 @@ a.button {
 }
 
 .logoLoader {
-
   .heartbeat {
     position: absolute;
     height: 100px;
@@ -217,6 +215,7 @@ h1 {
 
 img {
   object-fit: cover;
+  max-width: 100%;
 }
 
 .auth-input {
@@ -261,12 +260,15 @@ img {
 .masonry {
   display: grid;
   grid-gap: 1em; /* [1] Add some gap between rows and columns */
-  grid-template-columns: repeat( auto-fill, minmax( 350px, 1fr ) ); /* [2] Make columns adjust according to the available viewport */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(350px, 1fr)
+  ); /* [2] Make columns adjust according to the available viewport */
   grid-auto-rows: 350px; /* [3] Set the height for implicitly-created row track */
   grid-auto-flow: dense;
   grid-column-start: span 3;
 
- img {
+  img {
     max-width: 100%;
   }
 }
@@ -284,18 +286,20 @@ img {
   padding: 30px;
   overflow-y: auto;
 
-
-  > h1.title,h1.bold,h2,h3,h4,p {
+  > h1.title,
+  h1.bold,
+  h2,
+  h3,
+  h4,
+  p {
     color: $color1 !important;
   }
-
 
   > ul.nav {
     width: 70vw;
     list-style: none;
 
     > li {
-
       > a {
         text-decoration: none;
         color: $color1 !important;
@@ -344,14 +348,14 @@ img {
   padding-top: 0.5rem;
 }
 
-
 .navbar1 {
   background-color: $color4;
   > .frow {
     > a {
-    font-size: 1.2em;
-    color: $color1;
-  }}
+      font-size: 1.2em;
+      color: $color1;
+    }
+  }
 }
 
 .navbar2 {
@@ -364,7 +368,6 @@ img {
   height: 40px;
   padding-top: 0.5rem;
 }
-
 
 .para {
   border: 1px solid white;
@@ -478,12 +481,9 @@ img {
   font-size: 2rem;
 }
 
-
 .text-2x > * {
   font-size: 2rem;
 }
-
-
 
 .title {
   font-family: "SilverThreadJF";
@@ -497,6 +497,10 @@ img {
 }
 
 @media screen and (min-width: 668px) {
+  img {
+    max-width: 50%;
+  }
+
   .modal {
     width: 60vw;
     min-width: 60vw;
@@ -514,6 +518,10 @@ img {
 }
 
 @media screen and (min-width: 920px) {
+  img {
+    max-width: 30%;
+  }
+
   .modal {
     width: 40%;
     min-width: 40%;
