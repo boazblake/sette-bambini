@@ -2802,8 +2802,6 @@ var _indexImages = require("index.images.js");
 
 var _mithril = _interopRequireDefault(require("mithril"));
 
-var _animations = require("Styles/animations");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Home = function Home() {
@@ -2813,7 +2811,7 @@ var Home = function Home() {
       return (0, _mithril["default"])(".frow-container", {
         id: "home-page"
       }, _indexImages.frontImgs.map(function (img) {
-        return (0, _mithril["default"])('img.col-xs-1-3 col-sm-1-3 col-md-1-3', {
+        return (0, _mithril["default"])('img', {
           src: img.src
         });
       }));
