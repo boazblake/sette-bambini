@@ -34,7 +34,7 @@ const Body = () => {
           id: "body",
           style: getStyle(mdl),
         },
-        // m(".frow centered-column items-stretch", [
+        m(".frow centered-column items-stretch", [
         mdl.settings.screenSize !== "desktop" &&
           mdl.state.showNavModal() &&
           m(NavModal, {
@@ -52,7 +52,7 @@ const Body = () => {
           m.route.get() !== '/' && m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)) ,
           children,
         ]
-        // ])
+        ])
       ),
   }
 }

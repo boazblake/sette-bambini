@@ -10,9 +10,8 @@ const Flicker = () => {
     view: ({ attrs: { mdl, data } }) => {
       return m(".main-carousel.animated", [
         data.map((img) => {
-          console.log(img)
           mdl.addToCart.id(img.src)
-          return m(".carousel-cell", m("img", img))
+          return m(".carousel-cell", m("img.Sirv", {'data-src':img.src}))
         }),
       ])
     },
