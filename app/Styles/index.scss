@@ -219,8 +219,7 @@ h1 {
   z-index: 100;
 }
 
-img {
-  object-fit: cover;
+.img {
   max-width: 100%;
 }
 
@@ -503,7 +502,7 @@ img {
 }
 
 @media screen and (min-width: 668px) {
-  img {
+  .img {
     max-width: 50%;
   }
 
@@ -529,7 +528,7 @@ img {
 }
 
 @media screen and (min-width: 920px) {
-  img {
+  .img {
     max-width: 30%;
   }
 
