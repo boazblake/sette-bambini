@@ -25,6 +25,14 @@ const getStyle = (mdl) => ({
     : "100px",
 })
 
+const PageTitle = ( ) => {
+  return {
+    view: ({attrs:{show, name}}) =>
+     show && m(".text-4x", m("h1.title.mb-20.text-center", name))
+  }
+}
+
+
 const Body = () => {
   return {
     view: ({ attrs: { mdl, children } }) =>
@@ -48,8 +56,12 @@ const Body = () => {
             onbeforeremove: SlideOutLeft,
             mdl,
           }),
-        [
-          m.route.get() !== '/' && m(".text-4x", m("h1.title.mb-20.text-center", mdl.state.route.name)) ,
+          [
+          m(PageTitle,
+            {
+              show: ![undefined, '/'].includes(m.route.get()),
+              name: mdl.state.route.name
+            }),
           children,
         ]
         ])

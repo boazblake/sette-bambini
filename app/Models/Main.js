@@ -53,6 +53,7 @@ const Model = {
   data,
   errors,
   settings,
+  paypal: {},
   toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
   toggleCurrencies: (mdl) => (currency) => mdl.state.currency(currency),
 }

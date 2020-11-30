@@ -150,7 +150,7 @@ export const Register = () => {
       m(".frow centered pt-30", [
         state.showErrorMsg() && m("code.warning", state.errorMsg()),
         m(
-          "form.frow-container column-center",
+            "form.frow-container frow-center",
           {
             role: "form",
             id: "register-form",

@@ -18,6 +18,10 @@ exports.files = {
 }
 
 exports.plugins = {
+  eslint: {
+    pattern: /^app\/.*\.js?$/,
+    warnOnly: true,
+  },
   postcss: {
     processors: [require("autoprefixer")(["last 8 versions"])],
   },

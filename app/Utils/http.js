@@ -1,5 +1,7 @@
 import Task from "data.task"
-import { BackEnd } from "./.secrets.js"
+import { BackEnd, Paypal } from "../../.secrets.js"
+
+const updatePayPalAuth = (mdl) => (paypal) => (mdl.state.paypal = paypal)
 
 const onProgress = (mdl) => (e) => {
   if (e.lengthComputable) {
@@ -81,11 +83,6 @@ const lookupLocationTask = (query) => {
 
 const getTask = (mdl) => (url) => HttpTask({})("GET")(mdl)(url)(null)
 
-const nhtsaUrl = "http://localhost:3001/nhtsa/api/"
-const nhtsa = {
-  get: (mdl) => (url) => getTask(mdl)(nhtsaUrl + "/" + url),
-}
-
 const backEndUrl = `${BackEnd.baseUrl}/${BackEnd.APP_ID}/${BackEnd.API_KEY}/`
 const backEnd = {
   getTask: (mdl) => (url) =>
@@ -96,8 +93,24 @@ const backEnd = {
     HttpTask(BackEnd.headers())("PUT")(mdl)(backEndUrl + url)(dto),
 }
 
+const paypalUrl = `${Paypal.sandbox.baseUrl}/`
+
+const paypal = {
+  getTokenTask: (mdl) =>
+    HttpTask(Paypal.sandbox.headers())("POST")(mdl)(
+      paypalUrl + "v1/oauth2/token"
+    )("grant_type=client_credentials").map(updatePayPalAuth(mdl)),
+  getTask: (mdl) => (url) =>
+    HttpTask(Paypal.sandbox.headers(mdl))("GET")(mdl)(paypalUrl + url)(null),
+  postTask: (mdl) => (url) => (dto) =>
+    HttpTask(Paypal.sandbox.headers(mdl))("POST")(mdl)(paypalUrl + url)(dto),
+  putTask: (mdl) => (url) => (dto) =>
+    HttpTask(Paypal.sandbox.headers(mdl))("PUT")(mdl)(paypalUrl + url)(dto),
+}
+
 const http = {
   backEnd,
+  paypal,
   HttpTask,
   getTask,
   lookupLocationTask,

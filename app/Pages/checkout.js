@@ -7,19 +7,6 @@ import {
   toProducts,
 } from "Utils/helpers"
 
-const CheckoutButtons = () => {
-  return {
-    view: ({ attrs: { mdl } }) =>
-      m(".frow centered-column mt-30", [
-        m("h2.pb-10", "Select a Checkout Option"),
-        m("img", {
-          src:
-            "https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppcmcvdam.png",
-        }),
-      ]),
-  }
-}
-
 const Gender = () => {
   return {
     view: ({
@@ -74,7 +61,7 @@ const Product = ({
   }
 }
 
-const Cart = ({ attrs: { mdl } }) => {
+const Checkout = ({ attrs: { mdl } }) => {
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
@@ -100,7 +87,7 @@ const Cart = ({ attrs: { mdl } }) => {
                   classList: `${isActiveRoute(`/checkout`)} mt-50`,
                   link: [
                     m(
-                      "h1.bold text-center.mt-20",
+                      "h1.bold text-center.mt-20.mb-20",
                       `Total of ${getQuantity(
                         toProducts(mdl.cart)
                       )} for ${mdl.state.currency()}${getTotal(
@@ -109,13 +96,15 @@ const Cart = ({ attrs: { mdl } }) => {
                       )}`
                     ),
                   ],
+                }),
+                m(".", {
+                  oncreate: ({ dom }) => paypal.Buttons().render(dom),
                 })
               ),
-              m(CheckoutButtons, { mdl }),
             ]
           : m("h1.bold", "Your Cart is Empty"),
       ]),
   }
 }
 
-export default Cart
+export default Checkout

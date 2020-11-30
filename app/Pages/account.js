@@ -40,7 +40,7 @@ const Account = () => {
       }
     },
     view: ({ attrs: { mdl } }) => {
-      console.log('wtf',Object.keys(state.address).length)
+      console.log("wtf", Object.keys(state.address).length)
       return m(".frow-container frow-center", [
         m("h2", "Welcome ", mdl.user.name),
 
@@ -54,8 +54,13 @@ const Account = () => {
               width: "16px",
             }),
             Object.keys(state.address).length
-            ? m('pre', `${state.address.street1} ${state.address.street2||''} ${state.address.city} ${state.address.state} ${state.address.zip}`)
-            : m("h4", "No Address on File")
+              ? m(
+                  "pre",
+                  `${state.address.street1} ${state.address.street2 || ""} ${
+                    state.address.city
+                  } ${state.address.state} ${state.address.zip}`
+                )
+              : m("h4", "No Address on File")
           ),
           state.editAddress() &&
             m(
