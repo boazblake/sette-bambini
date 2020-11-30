@@ -1,3 +1,4 @@
+import autoprefixer from "autoprefixer"
 import { NavLink } from "Components/nav-link"
 import {
   isActiveRoute,
@@ -98,6 +99,10 @@ const Checkout = ({ attrs: { mdl } }) => {
                   ],
                 }),
                 m(".", {
+                  style: {
+                    maxHeight: "500px",
+                    overflowY: "auto",
+                  },
                   oncreate: ({ dom }) => paypal.Buttons().render(dom),
                 })
               ),
