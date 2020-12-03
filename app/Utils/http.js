@@ -85,6 +85,7 @@ const getTask = (mdl) => (url) => HttpTask({})("GET")(mdl)(url)(null)
 
 const backEndUrl = `${BackEnd.baseUrl}/${BackEnd.APP_ID}/${BackEnd.API_KEY}/`
 const backEnd = {
+  unregistered: BackEnd.unregistered,
   getTask: (mdl) => (url) =>
     HttpTask(BackEnd.headers())("GET")(mdl)(backEndUrl + url)(null),
   postTask: (mdl) => (url) => (dto) =>

@@ -26,16 +26,7 @@ const Gender = () => {
   }
 }
 
-const Product = ({
-  attrs: {
-    mdl,
-    p: [title, genders],
-  },
-}) => {
-  let amount = getQuantity(genders)
-
-  let price = getPrice(mdl, title, genders)
-
+const Product = () => {
   return {
     view: ({
       attrs: {
@@ -43,6 +34,9 @@ const Product = ({
         p: [title, genders],
       },
     }) => {
+      let amount = getQuantity(genders)
+
+      let price = getPrice(mdl, title, genders)
       return amount
         ? m(".frow column-start mt-10", [
             m(

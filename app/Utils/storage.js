@@ -18,7 +18,7 @@ const saveDbStorageTask = (mdl) => (cart) =>
   })
 
 const getDbStorageTask = (mdl) =>
-  mdl.http.backEnd.gettTask(mdl)(`data/Accounts/${mdl.account.objectId}`)
+  mdl.http.backEnd.gettTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)
 
 const saveStorageTask = (mdl) => (key) => (value) => {
   return mdl.state.isAuth()

@@ -766,7 +766,9 @@ exports.PayPal = void 0;
 
 var _data = _interopRequireDefault(require("data.task"));
 
-var _helpers = require("Utils/helpers");
+var _Utils = require("Utils");
+
+var _Models = require("Models");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -787,23 +789,52 @@ var formatInvoice = function formatInvoice(_ref) {
         payerID: payerID,
         purchaseTime: details.create_time,
         status: details.status,
-        customer: JSON.stringify(details.payer),
-        shipping: JSON.stringify(details.purchase_units[0].shipping),
-        cart: JSON.stringify(cart)
+        customer: details.payer,
+        shipping: details.purchase_units[0].shipping,
+        cart: cart,
+        pricing: mdl.state.prices
       };
     };
   };
 };
 
-var linkInvoiceTask = function linkInvoiceTask(mdl) {
-  return function (invoice) {
-    return mdl.http.backEnd.postTask(mdl)("data/Users/".concat(mdl.user.objectId, "/invoice%3AInvoices%3A1"))([invoice.objectId]);
+var setTempUser = function setTempUser(user) {
+  return sessionStorage.setItem("sb-user-token", user["user-token"]);
+};
+
+var unSetTempUser = function unSetTempUser() {
+  return sessionStorage.clear();
+};
+
+var updateCartTask = function updateCartTask(mdl) {
+  return function (_) {
+    mdl.cart = (0, _Utils.jsonCopy)(_Models.newCart);
+    return (0, _Utils.saveStorageTask)(mdl)("sb-cart")(mdl.cart);
   };
 };
 
-var tolinkInvoiceTask = function tolinkInvoiceTask(mdl) {
+var linkInvoiceUserTask = function linkInvoiceUserTask(mdl) {
+  return function (user) {
+    return function (invoice) {
+      return mdl.http.backEnd.postTask(mdl)("data/Users/".concat(user.objectId, "/invoices%3AInvoices%3A1"))([invoice.objectId]);
+    };
+  };
+};
+
+var linkInvoiceUnregisteredTask = function linkInvoiceUnregisteredTask(mdl) {
   return function (invoice) {
-    return mdl.state.isAuth() ? linkInvoiceTask(mdl)(invoice) : _data["default"].of(invoice);
+    return mdl.http.backEnd.postTask(mdl)("users/login")({
+      login: mdl.http.backEnd.unregistered.email,
+      password: btoa(mdl.http.backEnd.unregistered.password)
+    }).map(setTempUser).chain(function (_) {
+      return saveInvoiceTask(mdl)(invoice);
+    }).chain(linkInvoiceUserTask(mdl)(mdl.http.backEnd.unregistered)).map(unSetTempUser);
+  };
+};
+
+var addInvoiceTask = function addInvoiceTask(mdl) {
+  return function (invoice) {
+    return mdl.state.isAuth() ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user)) : linkInvoiceUnregisteredTask(mdl)(invoice);
   };
 };
 
@@ -814,8 +845,8 @@ var saveInvoiceTask = function saveInvoiceTask(mdl) {
 };
 
 var onSuccess = function onSuccess(mdl) {
-  return function (details) {
-    console.log("actiosn capture details", purchase);
+  return function (_) {
+    console.log("succc", _);
   };
 };
 
@@ -840,16 +871,13 @@ var PayPal = function PayPal() {
               return actions.order.create({
                 purchase_units: [{
                   amount: {
-                    value: (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))
+                    value: (0, _Utils.getTotal)(mdl, (0, _Utils.toProducts)(mdl.cart))
                   }
                 }]
               });
             },
             onApprove: function onApprove(data, actions) {
-              console.log("onapprove - data", data);
-              console.log("onapprove - actions", actions); // This function captures the funds from the transaction.
-
-              return makePaymentTask(actions).map(formatInvoice(mdl)(data)).chain(saveInvoiceTask(mdl)).chain(tolinkInvoiceTask(mdl)).fork(onError, onSuccess(mdl));
+              return makePaymentTask(actions).map(formatInvoice(mdl)(data)).chain(addInvoiceTask(mdl)).chain(updateCartTask(mdl)).fork(onError, onSuccess(mdl));
             }
           }).render(dom);
         }
@@ -1867,8 +1895,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.linkAccountTask = exports.createAccountTask = exports.registerUserTask = exports.loginTask = exports.loginUserTask = void 0;
 
-var _index = require("Utils/index");
-
 var _storage = require("Utils/storage");
 
 var _ramda = require("ramda");
@@ -1888,6 +1914,7 @@ var toAccountVM = function toAccountVM(mdl) {
     };
     mdl.user.address = JSON.parse(accnts[0].address);
     mdl.cart = cart;
+    setUserToken(mdl)(mdl.user);
     return cart;
   };
 };
@@ -1908,7 +1935,7 @@ var loginUserTask = function loginUserTask(mdl) {
         password = _ref.password;
     return mdl.http.backEnd.postTask(mdl)("users/login")({
       login: email,
-      password: password
+      password: btoa(password)
     }).map(setUserToken(mdl));
   };
 };
@@ -1943,7 +1970,7 @@ var registerUserTask = function registerUserTask(mdl) {
     return mdl.http.backEnd.postTask(mdl)("users/register")({
       name: name,
       email: email,
-      password: password,
+      password: btoa(password),
       isAdmin: isAdmin
     });
   };
@@ -2333,20 +2360,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
+var _Utils = require("Utils");
+
 var _cjs = require("@mithril-icons/clarity/cjs");
 
 var _Models = require("Models");
 
 var submitAddressTask = function submitAddressTask(mdl) {
   return function (data) {
-    console.log(data);
     return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
       address: JSON.stringify(data)
     });
   };
 };
 
-var Account = function Account() {
+var AccountAddress = function AccountAddress(_ref) {
+  var mdl = _ref.attrs.mdl;
   var state = {
     address: {
       street1: "",
@@ -2380,24 +2409,21 @@ var Account = function Account() {
     };
   };
 
-  return {
-    oninit: function oninit(_ref) {
-      var mdl = _ref.attrs.mdl;
-      state.address = mdl.user.address;
+  state.address = mdl.user.address;
 
-      if (state.address) {
-        state.showAddress(true);
-        state.editAddress(false);
-      } else {
-        state.address = {};
-        state.showAddress(false);
-        state.editAddress(false);
-      }
-    },
+  if (state.address) {
+    state.showAddress(true);
+    state.editAddress(false);
+  } else {
+    state.address = {};
+    state.showAddress(false);
+    state.editAddress(false);
+  }
+
+  return {
     view: function view(_ref2) {
       var mdl = _ref2.attrs.mdl;
-      console.log("wtf", Object.keys(state.address).length);
-      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
+      return m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
         "class": "clickable",
         onclick: function onclick() {
           return toggleEditAddress(state);
@@ -2449,7 +2475,58 @@ var Account = function Account() {
         onclick: function onclick() {
           return submitAddress(mdl)(state);
         }
-      }, "Submit")])]), m("section", [m("h3", "Past Orders")]), m("section"), m("section")]);
+      }, "Submit")])]);
+    }
+  };
+};
+
+var fetchInvoicesTask = function fetchInvoicesTask(mdl) {
+  return mdl.http.backEnd.getTask(mdl)("data/Invoices?where=ownerId%3D'".concat(mdl.user.objectId, "'"));
+};
+
+var PastOrders = function PastOrders() {
+  var state = {
+    invoices: []
+  };
+
+  var onError = function onError(mdl) {
+    return function (e) {
+      return console.log("e", e, mdl);
+    };
+  };
+
+  var onSuccess = function onSuccess(mdl) {
+    return function (invoices) {
+      console.log(mdl);
+      state.invoices = invoices;
+    };
+  };
+
+  var fetchInvoices = function fetchInvoices(_ref3) {
+    var mdl = _ref3.attrs.mdl;
+    return fetchInvoicesTask(mdl).fork(onError(mdl), onSuccess(mdl));
+  };
+
+  return {
+    oninit: fetchInvoices,
+    view: function view(_ref4) {
+      var mdl = _ref4.attrs.mdl;
+      return m("section", [m("h3", "Past Orders"), m("table", [m("thead", m("tr", [m("th", "Date"), m("th", "order Id"), m("th", "line items"), m("th", "shipping"), m("th", "payment status")])), state.invoices.map(function (invoice) {
+        return m("tbody", m("tr", [m("td", invoice.purchaseTime), m("td", invoice.orderID), m("td", JSON.stringify(invoice.cart)), m("td", JSON.stringify(invoice.shipping)), m("td", invoice.status)]));
+      })])]);
+    }
+  };
+};
+
+var Account = function Account() {
+  return {
+    view: function view(_ref5) {
+      var mdl = _ref5.attrs.mdl;
+      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m(AccountAddress, {
+        mdl: mdl
+      }), m(PastOrders, {
+        mdl: mdl
+      }), m("section"), m("section")]);
     }
   };
 };
@@ -2661,9 +2738,7 @@ exports["default"] = void 0;
 
 var _navLink = require("Components/nav-link");
 
-var _helpers = require("Utils/helpers");
-
-var _storage = require("Utils/storage");
+var _Utils = require("Utils");
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -2686,7 +2761,7 @@ var saveToStorage = function saveToStorage(mdl) {
     console.log("success saving", s);
   };
 
-  (0, _storage.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
+  (0, _Utils.saveStorageTask)(mdl)("sb-cart")(mdl.cart).fork(onError, onSuccess);
 };
 
 var addToCart = function addToCart(mdl) {
@@ -2736,7 +2811,7 @@ var Product = function Product() {
           title = _ref2$attrs$p[0],
           genders = _ref2$attrs$p[1];
 
-      return (0, _helpers.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "(".concat(mdl.state.currency()).concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
+      return (0, _Utils.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "(".concat(mdl.state.currency()).concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
           gender: gender,
@@ -2756,16 +2831,16 @@ var Cart = function Cart(_ref3) {
     },
     view: function view(_ref5) {
       var mdl = _ref5.attrs.mdl;
-      return m(".animated.frow-container frow-center", [(0, _helpers.toProducts)(mdl.cart).map(function (p) {
+      return m(".animated.frow-container frow-center", [(0, _Utils.toProducts)(mdl.cart).map(function (p) {
         return m(Product, {
           mdl: mdl,
           p: p
         });
-      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(".frow centered-column", m(_navLink.NavLink, {
+      }), (0, _Utils.getTotal)(mdl, (0, _Utils.toProducts)(mdl.cart)) ? m(".frow centered-column", m(_navLink.NavLink, {
         mdl: mdl,
         href: "/checkout",
-        classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " button para mt-20"),
-        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart))))]
+        classList: "".concat((0, _Utils.isActiveRoute)("/checkout"), " button para mt-20"),
+        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _Utils.getQuantity)((0, _Utils.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _Utils.getTotal)(mdl, (0, _Utils.toProducts)(mdl.cart))))]
       })) : m("h1.bold", "Your Cart is Empty")]);
     }
   };
@@ -2817,23 +2892,17 @@ var Gender = function Gender() {
   };
 };
 
-var Product = function Product(_ref2) {
-  var _ref2$attrs = _ref2.attrs,
-      mdl = _ref2$attrs.mdl,
-      _ref2$attrs$p = _slicedToArray(_ref2$attrs.p, 2),
-      title = _ref2$attrs$p[0],
-      genders = _ref2$attrs$p[1];
-
-  var amount = (0, _helpers.getQuantity)(genders);
-  var price = (0, _helpers.getPrice)(mdl, title, genders);
+var Product = function Product() {
   return {
-    view: function view(_ref3) {
-      var _ref3$attrs = _ref3.attrs,
-          mdl = _ref3$attrs.mdl,
-          _ref3$attrs$p = _slicedToArray(_ref3$attrs.p, 2),
-          title = _ref3$attrs$p[0],
-          genders = _ref3$attrs$p[1];
+    view: function view(_ref2) {
+      var _ref2$attrs = _ref2.attrs,
+          mdl = _ref2$attrs.mdl,
+          _ref2$attrs$p = _slicedToArray(_ref2$attrs.p, 2),
+          title = _ref2$attrs$p[0],
+          genders = _ref2$attrs$p[1];
 
+      var amount = (0, _helpers.getQuantity)(genders);
+      var price = (0, _helpers.getPrice)(mdl, title, genders);
       return amount ? m(".frow column-start mt-10", [m("span.underline", m("h3.mb-10", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price))), m(".frow cart-item row-around", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
@@ -2844,15 +2913,15 @@ var Product = function Product(_ref2) {
   };
 };
 
-var Checkout = function Checkout(_ref4) {
-  var mdl = _ref4.attrs.mdl;
+var Checkout = function Checkout(_ref3) {
+  var mdl = _ref3.attrs.mdl;
   return {
-    oninit: function oninit(_ref5) {
-      var mdl = _ref5.attrs.mdl;
+    oninit: function oninit(_ref4) {
+      var mdl = _ref4.attrs.mdl;
       return mdl.state.showNavModal(false);
     },
-    view: function view(_ref6) {
-      var mdl = _ref6.attrs.mdl;
+    view: function view(_ref5) {
+      var mdl = _ref5.attrs.mdl;
       return m(".frow-container frow-center", [(0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(_navLink.NavLink, {
         mdl: mdl,
         href: "/cart",
@@ -4092,6 +4161,7 @@ var getTask = function getTask(mdl) {
 
 var backEndUrl = "".concat(_secrets.BackEnd.baseUrl, "/").concat(_secrets.BackEnd.APP_ID, "/").concat(_secrets.BackEnd.API_KEY, "/");
 var backEnd = {
+  unregistered: _secrets.BackEnd.unregistered,
   getTask: function getTask(mdl) {
     return function (url) {
       return HttpTask(_secrets.BackEnd.headers())("GET")(mdl)(backEndUrl + url)(null);
@@ -4328,7 +4398,7 @@ var saveDbStorageTask = function saveDbStorageTask(mdl) {
 exports.saveDbStorageTask = saveDbStorageTask;
 
 var getDbStorageTask = function getDbStorageTask(mdl) {
-  return mdl.http.backEnd.gettTask(mdl)("data/Accounts/".concat(mdl.account.objectId));
+  return mdl.http.backEnd.gettTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId));
 };
 
 exports.getDbStorageTask = getDbStorageTask;

@@ -1,5 +1,6 @@
 import Task from "data.task"
-import { getTotal, toProducts } from "Utils/helpers"
+import { getTotal, toProducts, jsonCopy, saveStorageTask } from "Utils"
+import { newCart } from "Models"
 
 const makePaymentTask = (actions) =>
   new Task((rej, res) => actions.order.capture().then(res, rej))
@@ -9,24 +10,49 @@ const formatInvoice = ({ cart }) => ({ orderID, payerID }) => (details) => ({
   payerID,
   purchaseTime: details.create_time,
   status: details.status,
-  customer: JSON.stringify(details.payer),
-  shipping: JSON.stringify(details.purchase_units[0].shipping),
-  cart: JSON.stringify(cart),
+  customer: details.payer,
+  shipping: details.purchase_units[0].shipping,
+  cart: cart,
+  pricing: mdl.state.prices,
 })
 
-const linkInvoiceTask = (mdl) => (invoice) =>
+const setTempUser = (user) =>
+  sessionStorage.setItem("sb-user-token", user["user-token"])
+
+const unSetTempUser = () => sessionStorage.clear()
+
+const updateCartTask = (mdl) => (_) => {
+  mdl.cart = jsonCopy(newCart)
+  return saveStorageTask(mdl)("sb-cart")(mdl.cart)
+}
+
+const linkInvoiceUserTask = (mdl) => (user) => (invoice) =>
   mdl.http.backEnd.postTask(mdl)(
-    `data/Users/${mdl.user.objectId}/invoice%3AInvoices%3A1`
+    `data/Users/${user.objectId}/invoices%3AInvoices%3A1`
   )([invoice.objectId])
 
-const tolinkInvoiceTask = (mdl) => (invoice) =>
-  mdl.state.isAuth() ? linkInvoiceTask(mdl)(invoice) : Task.of(invoice)
+const linkInvoiceUnregisteredTask = (mdl) => (invoice) =>
+  mdl.http.backEnd
+    .postTask(mdl)("users/login")({
+      login: mdl.http.backEnd.unregistered.email,
+      password: btoa(mdl.http.backEnd.unregistered.password),
+    })
+    .map(setTempUser)
+    .chain((_) => saveInvoiceTask(mdl)(invoice))
+    .chain(linkInvoiceUserTask(mdl)(mdl.http.backEnd.unregistered))
+    .map(unSetTempUser)
+
+const addInvoiceTask = (mdl) => (invoice) => {
+  return mdl.state.isAuth()
+    ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user))
+    : linkInvoiceUnregisteredTask(mdl)(invoice)
+}
 
 const saveInvoiceTask = (mdl) => (invoice) =>
   mdl.http.backEnd.postTask(mdl)("data/Invoices")(invoice)
 
-const onSuccess = (mdl) => (details) => {
-  console.log("actiosn capture details", purchase)
+const onSuccess = (mdl) => (_) => {
+  console.log("succc", _)
 }
 
 const onError = (error) => console.log("error", error)
@@ -54,16 +80,12 @@ export const PayPal = () => {
                   ],
                 })
               },
-              onApprove: (data, actions) => {
-                console.log("onapprove - data", data)
-                console.log("onapprove - actions", actions)
-                // This function captures the funds from the transaction.
-                return makePaymentTask(actions)
+              onApprove: (data, actions) =>
+                makePaymentTask(actions)
                   .map(formatInvoice(mdl)(data))
-                  .chain(saveInvoiceTask(mdl))
-                  .chain(tolinkInvoiceTask(mdl))
-                  .fork(onError, onSuccess(mdl))
-              },
+                  .chain(addInvoiceTask(mdl))
+                  .chain(updateCartTask(mdl))
+                  .fork(onError, onSuccess(mdl)),
             })
             .render(dom),
       }),

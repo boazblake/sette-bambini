@@ -1,6 +1,12 @@
 import { NavLink } from "Components/nav-link"
-import { isActiveRoute, getTotal, getQuantity, toProducts } from "Utils/helpers"
-import { saveStorageTask } from "Utils/storage"
+import {
+  isActiveRoute,
+  getTotal,
+  getQuantity,
+  toProducts,
+  saveStorageTask,
+} from "Utils"
+
 const saveToStorage = (mdl) => {
   const onError = (e) => console.log("Error saving", e)
   const onSuccess = (s) => {

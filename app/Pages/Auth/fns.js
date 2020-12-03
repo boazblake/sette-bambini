@@ -1,4 +1,3 @@
-import { log } from "Utils/index"
 import { saveStorageTask } from "Utils/storage"
 import { mergeDeepWith, add } from "ramda"
 
@@ -9,6 +8,7 @@ const toAccountVM = (mdl) => (accnts) => {
   mdl.user.account = { objectId: accnts[0].objectId, cart }
   mdl.user.address = JSON.parse(accnts[0].address)
   mdl.cart = cart
+  setUserToken(mdl)(mdl.user)
   return cart
 }
 
@@ -24,7 +24,7 @@ export const loginUserTask = (mdl) => ({ email, password }) =>
   mdl.http.backEnd
     .postTask(mdl)("users/login")({
       login: email,
-      password: password,
+      password: btoa(password),
     })
     .map(setUserToken(mdl))
 
@@ -42,7 +42,7 @@ export const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
   mdl.http.backEnd.postTask(mdl)("users/register")({
     name,
     email,
-    password,
+    password: btoa(password),
     isAdmin,
   })
 
