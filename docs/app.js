@@ -779,7 +779,8 @@ var makePaymentTask = function makePaymentTask(actions) {
 };
 
 var formatInvoice = function formatInvoice(_ref) {
-  var cart = _ref.cart;
+  var cart = _ref.cart,
+      prices = _ref.state.prices;
   return function (_ref2) {
     var orderID = _ref2.orderID,
         payerID = _ref2.payerID;
@@ -792,7 +793,7 @@ var formatInvoice = function formatInvoice(_ref) {
         customer: details.payer,
         shipping: details.purchase_units[0].shipping,
         cart: cart,
-        pricing: mdl.state.prices
+        prices: prices
       };
     };
   };
@@ -2366,6 +2367,8 @@ var _cjs = require("@mithril-icons/clarity/cjs");
 
 var _Models = require("Models");
 
+var _ramda = require("ramda");
+
 var submitAddressTask = function submitAddressTask(mdl) {
   return function (data) {
     return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
@@ -2512,7 +2515,13 @@ var PastOrders = function PastOrders() {
     view: function view(_ref4) {
       var mdl = _ref4.attrs.mdl;
       return m("section", [m("h3", "Past Orders"), m("table", [m("thead", m("tr", [m("th", "Date"), m("th", "order Id"), m("th", "line items"), m("th", "shipping"), m("th", "payment status")])), state.invoices.map(function (invoice) {
-        return m("tbody", m("tr", [m("td", invoice.purchaseTime), m("td", invoice.orderID), m("td", JSON.stringify(invoice.cart)), m("td", JSON.stringify(invoice.shipping)), m("td", invoice.status)]));
+        return m("tbody", m("tr", [m("td", invoice.purchaseTime), m("td", invoice.orderID), JSON.stringify((0, _ramda.toPairs)(invoice.cart).map(function (category) {
+          console.log(category, invoice.prices[category[0]]);
+          category.price = invoice.prices[category[0]];
+          invoice.prices[category[0]];
+          Object.values(category);
+          console.log(category);
+        })), m("td", "".concat(invoice.shipping.name.full_name, " ").concat(invoice.shipping.address.address_line_1, " ").concat(invoice.shipping.address.admin_area_2, " ").concat(invoice.shipping.address.admin_area_1, " ").concat(invoice.shipping.address.postal_code)), m("td", invoice.status)]));
       })])]);
     }
   };

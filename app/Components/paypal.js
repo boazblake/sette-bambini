@@ -5,7 +5,10 @@ import { newCart } from "Models"
 const makePaymentTask = (actions) =>
   new Task((rej, res) => actions.order.capture().then(res, rej))
 
-const formatInvoice = ({ cart }) => ({ orderID, payerID }) => (details) => ({
+const formatInvoice = ({ cart, state: { prices } }) => ({
+  orderID,
+  payerID,
+}) => (details) => ({
   orderID,
   payerID,
   purchaseTime: details.create_time,
@@ -13,7 +16,7 @@ const formatInvoice = ({ cart }) => ({ orderID, payerID }) => (details) => ({
   customer: details.payer,
   shipping: details.purchase_units[0].shipping,
   cart: cart,
-  pricing: mdl.state.prices,
+  prices,
 })
 
 const setTempUser = (user) =>

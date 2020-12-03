@@ -1,6 +1,7 @@
 import { log } from "Utils"
 import { PencilLine } from "@mithril-icons/clarity/cjs"
 import { states, stateDict } from "Models"
+import { toPairs } from "ramda"
 
 const submitAddressTask = (mdl) => (data) =>
   mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
@@ -176,8 +177,20 @@ const PastOrders = () => {
               m("tr", [
                 m("td", invoice.purchaseTime),
                 m("td", invoice.orderID),
-                m("td", JSON.stringify(invoice.cart)),
-                m("td", JSON.stringify(invoice.shipping)),
+                JSON.stringify(
+                  toPairs(invoice.cart).map((category) => {
+                    console.log(category, invoice.prices[category[0]])
+                    category.price = invoice.prices[category[0]]
+                    invoice.prices[category[0]]
+                    Object.values(category)
+                    console.log(category)
+                  })
+                ),
+
+                m(
+                  "td",
+                  `${invoice.shipping.name.full_name} ${invoice.shipping.address.address_line_1} ${invoice.shipping.address.admin_area_2} ${invoice.shipping.address.admin_area_1} ${invoice.shipping.address.postal_code}`
+                ),
                 m("td", invoice.status),
               ])
             )
