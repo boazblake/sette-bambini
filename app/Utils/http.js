@@ -98,8 +98,8 @@ const paypalUrl = `${Paypal.sandbox.baseUrl}/`
 const paypal = {
   getTokenTask: (mdl) =>
     HttpTask(Paypal.sandbox.headers())("POST")(mdl)(
-      paypalUrl + "v1/oauth2/token"
-    )("grant_type=client_credentials").map(updatePayPalAuth(mdl)),
+      paypalUrl + "v1/oauth2/token/"
+    )(`grant_type=client_credentials`).map(updatePayPalAuth(mdl)),
   getTask: (mdl) => (url) =>
     HttpTask(Paypal.sandbox.headers(mdl))("GET")(mdl)(paypalUrl + url)(null),
   postTask: (mdl) => (url) => (dto) =>

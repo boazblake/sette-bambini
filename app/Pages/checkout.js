@@ -1,5 +1,5 @@
-import autoprefixer from "autoprefixer"
 import { NavLink } from "Components/nav-link"
+import { PayPal } from "Components/paypal"
 import {
   isActiveRoute,
   getTotal,
@@ -82,29 +82,17 @@ const Checkout = ({ attrs: { mdl } }) => {
           ? [
               m(
                 ".frow centered-column",
-                m(NavLink, {
-                  mdl,
-                  href: `/checkout`,
-                  classList: `${isActiveRoute(`/checkout`)} mt-50`,
-                  link: [
-                    m(
-                      "h1.bold text-center.mt-20.mb-20",
-                      `Total of ${getQuantity(
-                        toProducts(mdl.cart)
-                      )} for ${mdl.state.currency()}${getTotal(
-                        mdl,
-                        toProducts(mdl.cart)
-                      )}`
-                    ),
-                  ],
-                }),
-                m(".", {
-                  style: {
-                    maxHeight: "500px",
-                    overflowY: "auto",
-                  },
-                  oncreate: ({ dom }) => paypal.Buttons().render(dom),
-                })
+
+                m(
+                  "h1.bold text-center.mt-20.mb-20",
+                  `Total of ${getQuantity(
+                    toProducts(mdl.cart)
+                  )} for ${mdl.state.currency()}${getTotal(
+                    mdl,
+                    toProducts(mdl.cart)
+                  )}`
+                ),
+                m(PayPal, { mdl })
               ),
             ]
           : m("h1.bold", "Your Cart is Empty"),

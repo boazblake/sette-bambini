@@ -15,32 +15,28 @@ const BackEnd = {
 
 const Paypal = {
   sandbox: {
-    account: "sb-r4cz03908927@business.example.com",
+    account: "sb-mivlh3949976@business.example.com",
     secret:
-      "EMdqbGMRiR0scvGjxw4Axc2JxEfmot3USd0sVxZ3Hd4si8DztSwGi-QH7h9dt7vAiEjez-tnLBr393k9",
+      "EBhgUUMx_lQ-A7uCpuf8Qfu-u2SU0Da7x2GtlOADoJcg0nS52au2gtFHap-NvexKmvFzT6zqwmZMIGd",
     clientId:
-      "AaFOPqfJCxSbcFIlTxEI2Lo7E7WE6bJ35RiKwNwFLSAc5mlGmeyJPeYSZH4W380jqXOzCf2z6zUMAV4P",
-    baseUrl: "https://api-m.sandbox.paypal.com",
+      "AQm8WLZb23iISBj89RJMe2e7JKbUOyvShFQ62WyHonmdanUzbHVQyFS7C_JznQZj8_HbkbXY_VYGTMmx",
+    baseUrl: "https://api.sandbox.paypal.com",
     headers: () => ({
-      Accept: "application/x-www-form-urlencoded",
-      "Accept-Language": "en_US",
-      "content-type": "x-www-form-urlencoded",
+      Accept: "application/json",
       Authorization: `Basic ${makePaypalAuth(
         Paypal.sandbox.clientId,
         Paypal.sandbox.secret
       )}`,
     }),
   },
-  account: "sb-r4cz03908927@business.example.com",
+  account: "settebambini@gmail.com",
   secret:
-    "EMdqbGMRiR0scvGjxw4Axc2JxEfmot3USd0sVxZ3Hd4si8DztSwGi-QH7h9dt7vAiEjez-tnLBr393k9",
+    "EOv4OU0F-QOxT3TN3ZE8_L4lDSTzz5AeKGaBWSvWzPBC7Z_qldPhBUs-nmxANd5WmIN3DIjxo642DM21",
   clientId:
-    "AaFOPqfJCxSbcFIlTxEI2Lo7E7WE6bJ35RiKwNwFLSAc5mlGmeyJPeYSZH4W380jqXOzCf2z6zUMAV4P",
+    "Af350t_1-6Ml2ZiAkYgg1kZcn-LVFV1JTtyAVkT_XWI97U4uUpYVmQHFsV9NPLBAGlDqbZsJhT02ATd_",
   baseUrl: "https://api.paypal.com",
   headers: (mdl) => ({
     Accept: "application/json",
-    "Accept-Language": "en_US",
-    "Content-Type": "application/json",
     Authorization: `Bearer ${mdl.paypal.access_token}`,
   }),
 }
