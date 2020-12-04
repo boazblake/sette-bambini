@@ -14,11 +14,14 @@ const Collections = () => {
     },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
-        m(".mb-30", { id: "burps" }, [
+        m(".mb-30", { id: "collections" }, [
           m(Flicker, { mdl, data: state.data }),
-          m(".mt-20", m(Selector, { mdl, product: "Burp Rags" })),
+          m(".mt-20", m(Selector, { mdl, product: "Collections" })),
           m("ul", [
-            m("li.pb-10", "Each Collection comprise of hand selected blankets and burp rags"),
+            m(
+              "li.pb-10",
+              "Each Collection comprise of hand selected blankets and burp rags"
+            ),
             m("li.pb-10", "Each guranteed to be one of a kind"),
             m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'),
             m("li.pb-10", "Thick and absorbent!"),

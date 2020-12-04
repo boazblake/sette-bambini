@@ -400,6 +400,11 @@ h1 {
   }
 }
 
+.point-down {
+  transform: rotate(180deg);
+}
+
+
 .products {
   .product {
     margin: 2px;

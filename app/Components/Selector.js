@@ -28,10 +28,7 @@ const Selector = () => {
       return m(
         ".frow",
         m(".frow content-center gutters row-between pt-20", [
-          m(
-            ".col-sm-1-4",
-            m("h2.pb-10", `${mdl.state.currency()}${mdl.state.prices[product]}`)
-          ),
+          m(".col-sm-1-4", m("h2.pb-10", `$${mdl.state.prices[product]}`)),
           m(
             ".col-sm-1-4",
             m(

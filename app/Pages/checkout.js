@@ -7,6 +7,7 @@ import {
   getPrice,
   toProducts,
 } from "Utils/helpers"
+import { productImages } from "index.images.js"
 
 const Gender = () => {
   return {
@@ -14,11 +15,15 @@ const Gender = () => {
       attrs: {
         mdl,
         gender: [sex, quantity],
+        title,
       },
     }) => {
       return quantity
         ? m(".", [
-            m("img", { src: "https://via.placeholder.com/80" }),
+            m("img", {
+              style: { width: "100px" },
+              ...productImages[title][0],
+            }),
             m("h4", `${sex} : ${quantity}`),
           ])
         : null
@@ -41,14 +46,11 @@ const Product = () => {
         ? m(".frow column-start mt-10", [
             m(
               "span.underline",
-              m(
-                "h3.mb-10",
-                `${amount} ${title} for ${mdl.state.currency()}${price}`
-              )
+              m("h3.mb-10", `${amount} ${title} for $${price}`)
             ),
             m(
               ".frow cart-item row-around",
-              genders.map((gender) => m(Gender, { mdl, gender }))
+              genders.map((gender) => m(Gender, { mdl, gender, title }))
             ),
           ])
         : null
@@ -75,19 +77,13 @@ const Checkout = ({ attrs: { mdl } }) => {
         getTotal(mdl, toProducts(mdl.cart))
           ? [
               m(
-                ".frow centered-column",
-
-                m(
-                  "h1.bold text-center.mt-20.mb-20",
-                  `Total of ${getQuantity(
-                    toProducts(mdl.cart)
-                  )} for ${mdl.state.currency()}${getTotal(
-                    mdl,
-                    toProducts(mdl.cart)
-                  )}`
-                ),
-                m(PayPal, { mdl })
+                "h1.bold text-center.mt-20.mb-20",
+                `Total of ${getQuantity(toProducts(mdl.cart))} for $${getTotal(
+                  mdl,
+                  toProducts(mdl.cart)
+                )}`
               ),
+              m(PayPal, { mdl }),
             ]
           : m("h1.bold", "Your Cart is Empty"),
       ]),

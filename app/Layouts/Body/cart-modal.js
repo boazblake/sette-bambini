@@ -1,6 +1,7 @@
 import { NavLink } from "Components/nav-link"
 import { isActiveRoute, getQuantity, getPrice } from "Utils/helpers"
 import { toPairs } from "ramda"
+import { productImages } from "index.images.js"
 
 const products = (cart) =>
   toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
@@ -11,11 +12,15 @@ const Gender = () => {
       attrs: {
         mdl,
         gender: [sex, quantity],
+        title,
       },
     }) => {
       return quantity
         ? m(".", [
-            m("img", { src: "https://via.placeholder.com/80" }),
+            m("img", {
+              style: { width: "100px" },
+              ...productImages[title][0],
+            }),
             m("h4", `${sex} : ${quantity}`),
           ])
         : null
@@ -42,10 +47,10 @@ const Product = ({
     }) => {
       return amount
         ? m(".frow column-start", [
-            m("h3", `${amount} ${title} for ${mdl.state.currency()}${price}`),
+            m("h3", `${amount} ${title} for $${price}`),
             m(
               ".frow cart-item row-around",
-              genders.map((gender) => m(Gender, { mdl, gender }))
+              genders.map((gender) => m(Gender, { mdl, gender, title }))
             ),
           ])
         : null
@@ -104,10 +109,7 @@ const CartModal = ({ attrs: { mdl } }) => {
                         "h1.bold text-center",
                         `Total of ${getQuantity(
                           products(mdl.cart)
-                        )} for ${mdl.state.currency()}${getTotal(
-                          mdl,
-                          products(mdl.cart)
-                        )}`
+                        )} for $${getTotal(mdl, products(mdl.cart))}`
                       ),
                     ],
                   })

@@ -7,11 +7,11 @@ import { newCart } from "./cart"
 const currencies = { $: "US Dollar", "£": "British Pound" }
 
 const state = {
-  currency: Stream("$"),
   prices: {
-    Wraps: 35,
-    "Christening Blankets": 55,
-    "Burp Rags": 15,
+    Wraps: 60,
+    "Christening Blankets": 100,
+    "Burp Rags": 60,
+    Collections: 85,
   },
   showAuthModal: Stream(false),
   showNavModal: Stream(false),

@@ -10665,6 +10665,10 @@ h1 {
   transform: rotate(90deg);
 }
 
+.point-down {
+  transform: rotate(180deg);
+}
+
 .products .product {
   margin: 2px;
 }

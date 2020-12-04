@@ -470,7 +470,7 @@ var Selector = function Selector() {
       var _ref$attrs = _ref.attrs,
           mdl = _ref$attrs.mdl,
           product = _ref$attrs.product;
-      return m(".frow", m(".frow content-center gutters row-between pt-20", [m(".col-sm-1-4", m("h2.pb-10", "".concat(mdl.state.currency()).concat(mdl.state.prices[product]))), m(".col-sm-1-4", m("label", m("input", {
+      return m(".frow", m(".frow content-center gutters row-between pt-20", [m(".col-sm-1-4", m("h2.pb-10", "$".concat(mdl.state.prices[product]))), m(".col-sm-1-4", m("label", m("input", {
         type: "number",
         inputmode: "numeric",
         pattern: "[0-9]*",
@@ -904,6 +904,14 @@ var _helpers = require("Utils/helpers");
 
 var _ramda = require("ramda");
 
+var _indexImages = require("index.images.js");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -933,11 +941,14 @@ var Gender = function Gender() {
           mdl = _ref3$attrs.mdl,
           _ref3$attrs$gender = _slicedToArray(_ref3$attrs.gender, 2),
           sex = _ref3$attrs$gender[0],
-          quantity = _ref3$attrs$gender[1];
+          quantity = _ref3$attrs$gender[1],
+          title = _ref3$attrs.title;
 
-      return quantity ? m(".", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
+      return quantity ? m(".", [m("img", _objectSpread({
+        style: {
+          width: "100px"
+        }
+      }, _indexImages.productImages[title][0])), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
     }
   };
 };
@@ -959,10 +970,11 @@ var Product = function Product(_ref4) {
           title = _ref5$attrs$p[0],
           genders = _ref5$attrs$p[1];
 
-      return amount ? m(".frow column-start", [m("h3", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price)), m(".frow cart-item row-around", genders.map(function (gender) {
+      return amount ? m(".frow column-start", [m("h3", "".concat(amount, " ").concat(title, " for $").concat(price)), m(".frow cart-item row-around", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
-          gender: gender
+          gender: gender,
+          title: title
         });
       }))]) : null;
     }
@@ -1008,7 +1020,7 @@ var CartModal = function CartModal(_ref6) {
         mdl: mdl,
         href: "/checkout",
         classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " para button m-0"),
-        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(products(mdl.cart)), " for ").concat(mdl.state.currency()).concat(getTotal(mdl, products(mdl.cart))))]
+        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(products(mdl.cart)), " for $").concat(getTotal(mdl, products(mdl.cart))))]
       })) : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),,]));
     }
   };
@@ -1571,11 +1583,11 @@ var currencies = {
   "£": "British Pound"
 };
 var state = {
-  currency: Stream("$"),
   prices: {
-    Wraps: 35,
-    "Christening Blankets": 55,
-    "Burp Rags": 15
+    Wraps: 60,
+    "Christening Blankets": 100,
+    "Burp Rags": 60,
+    Collections: 85
   },
   showAuthModal: Stream(false),
   showNavModal: Stream(false),
@@ -1648,6 +1660,11 @@ var newCart = {
     Unisex: 0
   },
   "Burp Rags": {
+    Male: 0,
+    Female: 0,
+    Unisex: 0
+  },
+  Collections: {
     Male: 0,
     Female: 0,
     Unisex: 0
@@ -1819,6 +1836,243 @@ var stateDict = function stateDict(state) {
 };
 
 exports.stateDict = stateDict;
+});
+
+;require.register("Pages/Account/Address.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AccountAddress = void 0;
+
+var _Models = require("Models");
+
+var _cjs = require("@mithril-icons/clarity/cjs");
+
+var submitAddressTask = function submitAddressTask(mdl) {
+  return function (data) {
+    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
+      address: JSON.stringify(data)
+    });
+  };
+};
+
+var AccountAddress = function AccountAddress(_ref) {
+  var mdl = _ref.attrs.mdl;
+  var state = {
+    address: {
+      street1: "",
+      street2: "",
+      city: "",
+      state: "",
+      zip: ""
+    },
+    editAddress: Stream(false),
+    showAddress: Stream(false),
+    errors: {}
+  };
+
+  var toggleEditAddress = function toggleEditAddress(state) {
+    return state.editAddress(!state.editAddress());
+  };
+
+  var submitAddress = function submitAddress(mdl) {
+    return function (state) {
+      var onError = function onError(errors) {
+        return console.log("e", e);
+      };
+
+      var onSuccess = function onSuccess(mdl) {
+        return function (s) {
+          mdl.user.address = JSON.parse(s.address);
+        };
+      };
+
+      submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl));
+    };
+  };
+
+  state.address = mdl.user.address;
+
+  if (state.address) {
+    state.showAddress(true);
+    state.editAddress(false);
+  } else {
+    state.address = {};
+    state.showAddress(false);
+    state.editAddress(false);
+  }
+
+  return {
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
+        "class": "clickable",
+        onclick: function onclick() {
+          return toggleEditAddress(state);
+        },
+        width: "16px"
+      }), Object.keys(state.address).length ? m("pre", "".concat(state.address.street1, " ").concat(state.address.street2 || "", " ").concat(state.address.city, " ").concat(state.address.state, " ").concat(state.address.zip)) : m("h4", "No Address on File")), state.editAddress() && m("form.frow column-start m-5 px-20", {
+        oninput: function oninput(e) {
+          console.log(mdl, state);
+          state.address[e.target.id] = e.target.value;
+        }
+      }, [m("input.col-xs-1-2", {
+        type: "text",
+        id: "street1",
+        placeholder: "street1",
+        value: state.address.street1
+      }), m("input.col-xs-1-2", {
+        type: "text",
+        id: "street2",
+        placeholder: "street2",
+        value: state.address.street2
+      }), m(".frow row", [m("input.col-xs-1-3", {
+        type: "text",
+        id: "city",
+        placeholder: "city",
+        value: state.address.city
+      }), m(".col-xs-1-3", m("select", {
+        id: "state",
+        placeholder: "state",
+        value: state.address.state || "state"
+      }, Object.keys(_Models.states).map(function (state) {
+        return [m("option", {
+          key: "placeholder",
+          value: "state"
+        }, "state"), m("option", {
+          key: state,
+          placeholder: "state",
+          value: (0, _Models.stateDict)(state)
+        }, "".concat((0, _Models.stateDict)(state)))];
+      }), state.address.state || "state")), m("input.col-xs-1-3", {
+        type: "number",
+        inputmode: "numeric",
+        pattern: "[0-9]*",
+        id: "zip",
+        value: state.address.zip,
+        placeholder: "zip"
+      })]), m("a.button", {
+        type: "submit",
+        "class": "clickable",
+        onclick: function onclick() {
+          return submitAddress(mdl)(state);
+        }
+      }, "Submit")])]);
+    }
+  };
+};
+
+exports.AccountAddress = AccountAddress;
+});
+
+;require.register("Pages/Account/index.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Address = require("./Address.js");
+
+var _orders = require("./orders.js");
+
+var Account = function Account() {
+  return {
+    view: function view(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m(_Address.AccountAddress, {
+        mdl: mdl
+      }), m(_orders.PastOrders, {
+        mdl: mdl
+      }), m("section"), m("section")]);
+    }
+  };
+};
+
+var _default = Account;
+exports["default"] = _default;
+});
+
+;require.register("Pages/Account/orders.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PastOrders = void 0;
+
+var _Utils = require("Utils");
+
+var _cjs = require("@mithril-icons/clarity/cjs");
+
+var _ramda = require("ramda");
+
+var state = {
+  invoices: []
+};
+
+var calcProductPrice = function calcProductPrice(_ref, product) {
+  var prices = _ref.prices,
+      cart = _ref.cart;
+  return parseInt(prices[product]) * Object.values(cart[product]).reduce(_ramda.add, 0);
+};
+
+var calcTotalPrice = function calcTotalPrice(invoice) {
+  return Object.keys(invoice.cart).map(function (product) {
+    return calcProductPrice(invoice, product);
+  }).reduce(_ramda.add, 0);
+};
+
+var invoiceUrl = function invoiceUrl(mdl) {
+  (0, _Utils.log)("mdl")(mdl);
+  return mdl.user.isAdmin ? "data/Invoices" : "data/Invoices?where=ownerId%3D'".concat(mdl.user.objectId, "'");
+};
+
+var fetchInvoicesTask = function fetchInvoicesTask(mdl) {
+  return mdl.http.backEnd.getTask(mdl)(invoiceUrl(mdl)).map((0, _ramda.map)((0, _ramda.assoc)("isSelected", false)));
+};
+
+var onFetchInvoiceError = function onFetchInvoiceError(mdl) {
+  return function (e) {
+    return console.log("e", e, mdl);
+  };
+};
+
+var onFetchInvoiceSuccess = function onFetchInvoiceSuccess(_) {
+  return function (invoices) {
+    return state.invoices = invoices;
+  };
+};
+
+var fetchInvoices = function fetchInvoices(_ref2) {
+  var mdl = _ref2.attrs.mdl;
+  return fetchInvoicesTask(mdl).fork(onFetchInvoiceError(mdl), onFetchInvoiceSuccess(mdl));
+};
+
+var PastOrders = function PastOrders() {
+  return {
+    oninit: fetchInvoices,
+    view: function view(_ref3) {
+      var mdl = _ref3.attrs.mdl;
+      return m("section", [m("h3", "Past Orders"), m("table", [m("thead", m("tr", [m("th", "Date"), m("th", "order Id"), m("th", "shipping"), m("th", "payment status"), m("th")])), state.invoices.map(function (invoice) {
+        return m("tbody", [m("tr", [m("td", invoice.purchaseTime), m("td", invoice.orderID), m("td", "".concat(invoice.shipping.name.full_name, " ").concat(invoice.shipping.address.address_line_1, " ").concat(invoice.shipping.address.admin_area_2, " ").concat(invoice.shipping.address.admin_area_1, " ").concat(invoice.shipping.address.postal_code)), m("td", invoice.status), m("td", m(_cjs.AngleLine, {
+          "class": "clickable ".concat(!invoice.isSelected && "point-down"),
+          onclick: function onclick() {
+            return invoice.isSelected = !invoice.isSelected;
+          },
+          width: "16px"
+        }))]), invoice.isSelected && m("table", [m("thead", [m("th", "product"), m("th", "quantities"), m("th", "unit price"), m("th", "unit total")]), m("tbody", Object.keys(invoice.cart).map(function (product) {
+          return m("tr", [m("td", product), m("td", JSON.stringify(invoice.cart[product])), m("td", invoice.prices[product]), m("td", calcProductPrice(invoice, product))]);
+        }), m("tr", m("th", "Order Total"), m("th", calcTotalPrice(invoice))))])]);
+      })])]);
+    }
+  };
+};
+
+exports.PastOrders = PastOrders;
 });
 
 ;require.register("Pages/Auth/Validations.js", function(exports, require, module) {
@@ -2337,210 +2591,19 @@ var Collections = function Collections() {
     view: function view(_ref) {
       var mdl = _ref.attrs.mdl;
       return m(".frow-container frow-center", [m(".mb-30", {
-        id: "burps"
+        id: "collections"
       }, [m(_Flicker["default"], {
         mdl: mdl,
         data: state.data
       }), m(".mt-20", m(_Selector["default"], {
         mdl: mdl,
-        product: "Burp Rags"
+        product: "Collections"
       })), m("ul", [m("li.pb-10", "Each Collection comprise of hand selected blankets and burp rags"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering.")])]);
     }
   };
 };
 
 var _default = Collections;
-exports["default"] = _default;
-});
-
-;require.register("Pages/account.js", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _Utils = require("Utils");
-
-var _cjs = require("@mithril-icons/clarity/cjs");
-
-var _Models = require("Models");
-
-var _ramda = require("ramda");
-
-var submitAddressTask = function submitAddressTask(mdl) {
-  return function (data) {
-    return mdl.http.backEnd.putTask(mdl)("data/Accounts/".concat(mdl.user.account.objectId))({
-      address: JSON.stringify(data)
-    });
-  };
-};
-
-var AccountAddress = function AccountAddress(_ref) {
-  var mdl = _ref.attrs.mdl;
-  var state = {
-    address: {
-      street1: "",
-      street2: "",
-      city: "",
-      state: "",
-      zip: ""
-    },
-    editAddress: Stream(false),
-    showAddress: Stream(false),
-    errors: {}
-  };
-
-  var toggleEditAddress = function toggleEditAddress(state) {
-    return state.editAddress(!state.editAddress());
-  };
-
-  var submitAddress = function submitAddress(mdl) {
-    return function (state) {
-      var onError = function onError(errors) {
-        return console.log("e", e);
-      };
-
-      var onSuccess = function onSuccess(mdl) {
-        return function (s) {
-          mdl.user.address = JSON.parse(s.address);
-        };
-      };
-
-      submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl));
-    };
-  };
-
-  state.address = mdl.user.address;
-
-  if (state.address) {
-    state.showAddress(true);
-    state.editAddress(false);
-  } else {
-    state.address = {};
-    state.showAddress(false);
-    state.editAddress(false);
-  }
-
-  return {
-    view: function view(_ref2) {
-      var mdl = _ref2.attrs.mdl;
-      return m("section.m-5", [m("span.frow row-start", m("h3.pr-10", "Shipping Address"), m(_cjs.PencilLine, {
-        "class": "clickable",
-        onclick: function onclick() {
-          return toggleEditAddress(state);
-        },
-        width: "16px"
-      }), Object.keys(state.address).length ? m("pre", "".concat(state.address.street1, " ").concat(state.address.street2 || "", " ").concat(state.address.city, " ").concat(state.address.state, " ").concat(state.address.zip)) : m("h4", "No Address on File")), state.editAddress() && m("form.frow column-start m-5 px-20", {
-        oninput: function oninput(e) {
-          console.log(mdl, state);
-          state.address[e.target.id] = e.target.value;
-        }
-      }, [m("input.col-xs-1-2", {
-        type: "text",
-        id: "street1",
-        placeholder: "street1",
-        value: state.address.street1
-      }), m("input.col-xs-1-2", {
-        type: "text",
-        id: "street2",
-        placeholder: "street2",
-        value: state.address.street2
-      }), m(".frow row", [m("input.col-xs-1-3", {
-        type: "text",
-        id: "city",
-        placeholder: "city",
-        value: state.address.city
-      }), m(".col-xs-1-3", m("select", {
-        id: "state",
-        placeholder: "state",
-        value: state.address.state || "state"
-      }, Object.keys(_Models.states).map(function (state) {
-        return [m("option", {
-          key: "placeholder",
-          value: "state"
-        }, "state"), m("option", {
-          key: state,
-          placeholder: "state",
-          value: (0, _Models.stateDict)(state)
-        }, "".concat((0, _Models.stateDict)(state)))];
-      }), state.address.state || "state")), m("input.col-xs-1-3", {
-        type: "number",
-        inputmode: "numeric",
-        pattern: "[0-9]*",
-        id: "zip",
-        value: state.address.zip,
-        placeholder: "zip"
-      })]), m("a.button", {
-        type: "submit",
-        "class": "clickable",
-        onclick: function onclick() {
-          return submitAddress(mdl)(state);
-        }
-      }, "Submit")])]);
-    }
-  };
-};
-
-var fetchInvoicesTask = function fetchInvoicesTask(mdl) {
-  return mdl.http.backEnd.getTask(mdl)("data/Invoices?where=ownerId%3D'".concat(mdl.user.objectId, "'"));
-};
-
-var PastOrders = function PastOrders() {
-  var state = {
-    invoices: []
-  };
-
-  var onError = function onError(mdl) {
-    return function (e) {
-      return console.log("e", e, mdl);
-    };
-  };
-
-  var onSuccess = function onSuccess(mdl) {
-    return function (invoices) {
-      console.log(mdl);
-      state.invoices = invoices;
-    };
-  };
-
-  var fetchInvoices = function fetchInvoices(_ref3) {
-    var mdl = _ref3.attrs.mdl;
-    return fetchInvoicesTask(mdl).fork(onError(mdl), onSuccess(mdl));
-  };
-
-  return {
-    oninit: fetchInvoices,
-    view: function view(_ref4) {
-      var mdl = _ref4.attrs.mdl;
-      return m("section", [m("h3", "Past Orders"), m("table", [m("thead", m("tr", [m("th", "Date"), m("th", "order Id"), m("th", "line items"), m("th", "shipping"), m("th", "payment status")])), state.invoices.map(function (invoice) {
-        return m("tbody", m("tr", [m("td", invoice.purchaseTime), m("td", invoice.orderID), JSON.stringify((0, _ramda.toPairs)(invoice.cart).map(function (category) {
-          console.log(category, invoice.prices[category[0]]);
-          category.price = invoice.prices[category[0]];
-          invoice.prices[category[0]];
-          Object.values(category);
-          console.log(category);
-        })), m("td", "".concat(invoice.shipping.name.full_name, " ").concat(invoice.shipping.address.address_line_1, " ").concat(invoice.shipping.address.admin_area_2, " ").concat(invoice.shipping.address.admin_area_1, " ").concat(invoice.shipping.address.postal_code)), m("td", invoice.status)]));
-      })])]);
-    }
-  };
-};
-
-var Account = function Account() {
-  return {
-    view: function view(_ref5) {
-      var mdl = _ref5.attrs.mdl;
-      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m(AccountAddress, {
-        mdl: mdl
-      }), m(PastOrders, {
-        mdl: mdl
-      }), m("section"), m("section")]);
-    }
-  };
-};
-
-var _default = Account;
 exports["default"] = _default;
 });
 
@@ -2749,6 +2812,14 @@ var _navLink = require("Components/nav-link");
 
 var _Utils = require("Utils");
 
+var _indexImages = require("index.images.js");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2791,9 +2862,12 @@ var Gender = function Gender() {
           sex = _ref$attrs$gender[0],
           quantity = _ref$attrs$gender[1];
 
-      return quantity ? m(".animated.frow row-around mt-10", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), // m(
+      console.log("pp", (0, _Utils.randomEl)(_indexImages.productImages[product]));
+      return quantity ? m(".animated.frow row-around mt-10", [m("img", _objectSpread({
+        style: {
+          width: "100px"
+        }
+      }, _indexImages.productImages[product][0])), // m(
       // ".col-xs-1-4",
       m("label.col-xs-1-4", m("h4", "".concat(sex)), m("input", {
         type: "number",
@@ -2820,7 +2894,7 @@ var Product = function Product() {
           title = _ref2$attrs$p[0],
           genders = _ref2$attrs$p[1];
 
-      return (0, _Utils.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "(".concat(mdl.state.currency()).concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
+      return (0, _Utils.getQuantity)(genders) ? m(".frow mt-10 items-baseline justify-evenly", [m("h2", "".concat(title, "  ")), m("h4", "($".concat(mdl.state.prices[title], ")")), m(".animated.frow cart-item column-start", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
           gender: gender,
@@ -2849,7 +2923,7 @@ var Cart = function Cart(_ref3) {
         mdl: mdl,
         href: "/checkout",
         classList: "".concat((0, _Utils.isActiveRoute)("/checkout"), " button para mt-20"),
-        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _Utils.getQuantity)((0, _Utils.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _Utils.getTotal)(mdl, (0, _Utils.toProducts)(mdl.cart))))]
+        link: ["Proceed to Checkout", m("h1.bold text-center white", "Total of ".concat((0, _Utils.getQuantity)((0, _Utils.toProducts)(mdl.cart)), " for $").concat((0, _Utils.getTotal)(mdl, (0, _Utils.toProducts)(mdl.cart))))]
       })) : m("h1.bold", "Your Cart is Empty")]);
     }
   };
@@ -2873,6 +2947,14 @@ var _paypal = require("Components/paypal");
 
 var _helpers = require("Utils/helpers");
 
+var _indexImages = require("index.images.js");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2892,11 +2974,14 @@ var Gender = function Gender() {
           mdl = _ref$attrs.mdl,
           _ref$attrs$gender = _slicedToArray(_ref$attrs.gender, 2),
           sex = _ref$attrs$gender[0],
-          quantity = _ref$attrs$gender[1];
+          quantity = _ref$attrs$gender[1],
+          title = _ref$attrs.title;
 
-      return quantity ? m(".", [m("img", {
-        src: "https://via.placeholder.com/80"
-      }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
+      return quantity ? m(".", [m("img", _objectSpread({
+        style: {
+          width: "100px"
+        }
+      }, _indexImages.productImages[title][0])), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
     }
   };
 };
@@ -2912,10 +2997,11 @@ var Product = function Product() {
 
       var amount = (0, _helpers.getQuantity)(genders);
       var price = (0, _helpers.getPrice)(mdl, title, genders);
-      return amount ? m(".frow column-start mt-10", [m("span.underline", m("h3.mb-10", "".concat(amount, " ").concat(title, " for ").concat(mdl.state.currency()).concat(price))), m(".frow cart-item row-around", genders.map(function (gender) {
+      return amount ? m(".frow column-start mt-10", [m("span.underline", m("h3.mb-10", "".concat(amount, " ").concat(title, " for $").concat(price))), m(".frow cart-item row-around", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
-          gender: gender
+          gender: gender,
+          title: title
         });
       }))]) : null;
     }
@@ -2941,9 +3027,9 @@ var Checkout = function Checkout(_ref3) {
           mdl: mdl,
           p: p
         });
-      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m(".frow centered-column", m("h1.bold text-center.mt-20.mb-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for ").concat(mdl.state.currency()).concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)))), m(_paypal.PayPal, {
+      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m("h1.bold text-center.mt-20.mb-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for $").concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)))), m(_paypal.PayPal, {
         mdl: mdl
-      }))] : m("h1.bold", "Your Cart is Empty")]);
+      })] : m("h1.bold", "Your Cart is Empty")]);
     }
   };
 };
@@ -3017,9 +3103,9 @@ var _default2 = _interopRequireDefault(require("Pages/default.js"));
 
 var _home = _interopRequireDefault(require("Pages/home.js"));
 
-var _account = _interopRequireDefault(require("Pages/account.js"));
+var _index = _interopRequireDefault(require("Pages/Account/index.js"));
 
-var _index = _interopRequireDefault(require("Layouts/index.js"));
+var _index2 = _interopRequireDefault(require("Layouts/index.js"));
 
 var _Utils = require("Utils");
 
@@ -3044,9 +3130,9 @@ var AuthenticatedRoutes = [{
     });
   },
   component: function component(mdl) {
-    return m(_index["default"], {
+    return m(_index2["default"], {
       mdl: mdl
-    }, m(_account["default"], {
+    }, m(_index["default"], {
       mdl: mdl
     }));
   }
@@ -3068,7 +3154,7 @@ var AuthenticatedRoutes = [{
     });
   },
   component: function component(mdl) {
-    return m(_index["default"], {
+    return m(_index2["default"], {
       mdl: mdl
     }, m(_default2["default"], {
       mdl: mdl
@@ -3102,7 +3188,7 @@ var AuthenticatedRoutes = [{
     });
   },
   component: function component(mdl) {
-    return m(_index["default"], {
+    return m(_index2["default"], {
       mdl: mdl
     }, m(_default2["default"], {
       mdl: mdl
@@ -3132,7 +3218,7 @@ var AuthenticatedRoutes = [{
     console.log("loggout", mdl);
   },
   component: function component(mdl) {
-    return m(_index["default"], {
+    return m(_index2["default"], {
       mdl: mdl
     }, m(_home["default"], {
       mdl: mdl
@@ -3821,7 +3907,7 @@ exports.RemoveChildrenOut = RemoveChildrenOut;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getTotal = exports.getQuantity = exports.getPrice = exports.toProducts = exports.uuid = exports.isActiveRoute = exports.jsonCopy = exports.scrollToAnchor = exports.getRoute = exports.debounce = exports.filterTask = exports._paginate = exports._direction = exports._sort = exports._search = exports.addTerms = exports.infiniteScroll = exports.isEmpty = exports.log = exports.makeRoute = void 0;
+exports.getTotal = exports.getQuantity = exports.getPrice = exports.toProducts = exports.uuid = exports.isActiveRoute = exports.jsonCopy = exports.randomEl = exports.scrollToAnchor = exports.getRoute = exports.debounce = exports.filterTask = exports._paginate = exports._direction = exports._sort = exports._search = exports.addTerms = exports.infiniteScroll = exports.isEmpty = exports.log = exports.makeRoute = void 0;
 
 var _ramda = require("ramda");
 
@@ -3973,6 +4059,12 @@ var scrollToAnchor = function scrollToAnchor(anchor) {
 
 exports.scrollToAnchor = scrollToAnchor;
 
+var randomEl = function randomEl(list) {
+  return list[Math.floor(Math.random() * list.length)];
+};
+
+exports.randomEl = randomEl;
+
 var jsonCopy = function jsonCopy(src) {
   return JSON.parse(JSON.stringify(src));
 };
@@ -4008,16 +4100,7 @@ var toProducts = function toProducts(cart) {
 exports.toProducts = toProducts;
 
 var getPrice = function getPrice(mdl, title, genders) {
-  /*
-  get realprice from mdl.state.currency, title, getQuantity(title, genders)
-  */
-  // console.log("wtf", title, genders)
-  var price = mdl.state.prices[title] * getQuantity(genders);
-
-  if (mdl.state.currency() !== "$") {//price = convertPriceToCurrency(mdl.state.currency(), price)
-  }
-
-  return price;
+  return mdl.state.prices[title] * getQuantity(genders);
 };
 
 exports.getPrice = getPrice;
@@ -4575,49 +4658,56 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.frontImgs = exports.burpImgs = exports.blanketImgs = exports.collectionImgs = void 0;
+exports.frontImgs = exports.productImages = exports.burpImgs = exports.blanketImgs = exports.collectionImgs = void 0;
 var collectionImgs = [{
-  src: 'https://sette-bambini.sirv.com/Images/collection1.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection1.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection2.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection2.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection3.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection3.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection4.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection4.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection5.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection5.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection6.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection6.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection7.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection7.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection8.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection8.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection9.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection9.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/collection10.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/collection10.jpg?scale.option=fill&format=webp"
 }];
 exports.collectionImgs = collectionImgs;
 var blanketImgs = [{
-  src: 'https://sette-bambini.sirv.com/Images/blankets1.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/blankets1.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/blankets2.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/blankets2.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/blankets3.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/blankets3.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/blankets4.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/blankets4.jpg?scale.option=fill&format=webp"
 }];
 exports.blanketImgs = blanketImgs;
 var burpImgs = [{
-  src: 'https://sette-bambini.sirv.com/Images/burp1.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/burp1.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/burp2.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/burp2.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/burp3.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/burp3.jpg?scale.option=fill&format=webp"
 }, {
-  src: 'https://sette-bambini.sirv.com/Images/burp4.jpg?scale.option=fill&format=webp'
+  src: "https://sette-bambini.sirv.com/Images/burp4.jpg?scale.option=fill&format=webp"
 }];
 exports.burpImgs = burpImgs;
+var productImages = {
+  Wraps: blanketImgs,
+  "Christening Blankets": blanketImgs,
+  "Burp Rags": burpImgs,
+  Collections: collectionImgs
+};
+exports.productImages = productImages;
 var frontImgs = [].concat(burpImgs, blanketImgs, collectionImgs);
 exports.frontImgs = frontImgs;
 });
@@ -4689,6 +4779,27 @@ if (localStorage.getItem("sb-cart")) {
   _index["default"].cart = JSON.parse(localStorage.getItem("sb-cart"));
 }
 
+m.request({
+  method: "POST",
+  url: "https://sette-bambini.herokuapp.com/prices",
+  data: {
+    prices: {
+      "Burp Rags": 60,
+      "Christening Blankets": 100,
+      Collections: 85,
+      Wraps: 60
+    }
+  }
+}).then(function (s) {
+  return console.log("s", s);
+}, function (e) {
+  return console.log("e", e);
+});
+m.request("https://sette-bambini.herokuapp.com").then(function (s) {
+  return console.log("s", s);
+}, function (e) {
+  return console.log("e", e);
+});
 m.route(root, "/", (0, _app["default"])(_index["default"]));
 });
 

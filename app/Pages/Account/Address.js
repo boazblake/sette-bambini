@@ -1,14 +1,12 @@
-import { log } from "Utils"
-import { PencilLine } from "@mithril-icons/clarity/cjs"
 import { states, stateDict } from "Models"
-import { toPairs } from "ramda"
+import { PencilLine } from "@mithril-icons/clarity/cjs"
 
 const submitAddressTask = (mdl) => (data) =>
   mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
     address: JSON.stringify(data),
   })
 
-const AccountAddress = ({ attrs: { mdl } }) => {
+export const AccountAddress = ({ attrs: { mdl } }) => {
   const state = {
     address: { street1: "", street2: "", city: "", state: "", zip: "" },
     editAddress: Stream(false),
@@ -136,82 +134,3 @@ const AccountAddress = ({ attrs: { mdl } }) => {
       ]),
   }
 }
-
-const fetchInvoicesTask = (mdl) =>
-  mdl.http.backEnd.getTask(mdl)(
-    `data/Invoices?where=ownerId%3D'${mdl.user.objectId}'`
-  )
-
-const PastOrders = () => {
-  const state = {
-    invoices: [],
-  }
-  const onError = (mdl) => (e) => console.log("e", e, mdl)
-  const onSuccess = (mdl) => (invoices) => {
-    console.log(mdl)
-    state.invoices = invoices
-  }
-
-  const fetchInvoices = ({ attrs: { mdl } }) =>
-    fetchInvoicesTask(mdl).fork(onError(mdl), onSuccess(mdl))
-  return {
-    oninit: fetchInvoices,
-    view: ({ attrs: { mdl } }) =>
-      m("section", [
-        m("h3", "Past Orders"),
-        m("table", [
-          m(
-            "thead",
-            m("tr", [
-              m("th", "Date"),
-              m("th", "order Id"),
-              m("th", "line items"),
-              m("th", "shipping"),
-              m("th", "payment status"),
-            ])
-          ),
-
-          state.invoices.map((invoice) =>
-            m(
-              "tbody",
-              m("tr", [
-                m("td", invoice.purchaseTime),
-                m("td", invoice.orderID),
-                JSON.stringify(
-                  toPairs(invoice.cart).map((category) => {
-                    console.log(category, invoice.prices[category[0]])
-                    category.price = invoice.prices[category[0]]
-                    invoice.prices[category[0]]
-                    Object.values(category)
-                    console.log(category)
-                  })
-                ),
-
-                m(
-                  "td",
-                  `${invoice.shipping.name.full_name} ${invoice.shipping.address.address_line_1} ${invoice.shipping.address.admin_area_2} ${invoice.shipping.address.admin_area_1} ${invoice.shipping.address.postal_code}`
-                ),
-                m("td", invoice.status),
-              ])
-            )
-          ),
-        ]),
-      ]),
-  }
-}
-
-const Account = () => {
-  return {
-    view: ({ attrs: { mdl } }) => {
-      return m(".frow-container frow-center", [
-        m("h2", "Welcome ", mdl.user.name),
-        m(AccountAddress, { mdl }),
-        m(PastOrders, { mdl }),
-        m("section"),
-        m("section"),
-      ])
-    },
-  }
-}
-
-export default Account

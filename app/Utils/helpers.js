@@ -109,6 +109,8 @@ export const scrollToAnchor = (anchor) => {
   })
 }
 
+export const randomEl = (list) => list[Math.floor(Math.random() * list.length)]
+
 export const jsonCopy = (src) => JSON.parse(JSON.stringify(src))
 
 export const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
@@ -124,19 +126,8 @@ export const uuid = () => {
 export const toProducts = (cart) =>
   toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
 
-export const getPrice = (mdl, title, genders) => {
-  /*
-  get realprice from mdl.state.currency, title, getQuantity(title, genders)
-*/
-  // console.log("wtf", title, genders)
-
-  let price = mdl.state.prices[title] * getQuantity(genders)
-  if (mdl.state.currency() !== "$") {
-    //price = convertPriceToCurrency(mdl.state.currency(), price)
-  }
-
-  return price
-}
+export const getPrice = (mdl, title, genders) =>
+  mdl.state.prices[title] * getQuantity(genders)
 
 export const getQuantity = (xs) =>
   reduce(add, 0, filter(compose(equals("Number"), type), flatten(xs)))

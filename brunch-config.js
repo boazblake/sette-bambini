@@ -82,3 +82,7 @@ exports.npm = {
   compilers: ["babel-brunch"],
   globals: { m: "mithril", Stream: "mithril-stream" },
 }
+
+exports.server = {
+  run: true,
+}

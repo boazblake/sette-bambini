@@ -5,7 +5,9 @@ import {
   getQuantity,
   toProducts,
   saveStorageTask,
+  randomEl,
 } from "Utils"
+import { productImages } from "index.images.js"
 
 const saveToStorage = (mdl) => {
   const onError = (e) => console.log("Error saving", e)
@@ -31,9 +33,14 @@ const Gender = () => {
         gender: [sex, quantity],
       },
     }) => {
+      console.log("pp", randomEl(productImages[product]))
+
       return quantity
         ? m(".animated.frow row-around mt-10", [
-            m("img", { src: "https://via.placeholder.com/80" }),
+            m("img", {
+              style: { width: "100px" },
+              ...productImages[product][0],
+            }),
 
             // m(
             // ".col-xs-1-4",
@@ -68,7 +75,7 @@ const Product = () => {
       return getQuantity(genders)
         ? m(".frow mt-10 items-baseline justify-evenly", [
             m("h2", `${title}  `),
-            m("h4", `(${mdl.state.currency()}${mdl.state.prices[title]})`),
+            m("h4", `($${mdl.state.prices[title]})`),
             m(
               ".animated.frow cart-item column-start",
               genders.map((gender) =>
@@ -110,10 +117,7 @@ const Cart = ({ attrs: { mdl } }) => {
                     "h1.bold text-center white",
                     `Total of ${getQuantity(
                       toProducts(mdl.cart)
-                    )} for ${mdl.state.currency()}${getTotal(
-                      mdl,
-                      toProducts(mdl.cart)
-                    )}`
+                    )} for $${getTotal(mdl, toProducts(mdl.cart))}`
                   ),
                 ],
               })

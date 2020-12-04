@@ -1,6 +1,6 @@
 import Default from "Pages/default.js"
 import Home from "Pages/home.js"
-import Account from "Pages/account.js"
+import Account from "Pages/Account/index.js"
 import Layout from "Layouts/index.js"
 import { scrollToAnchor, jsonCopy } from "Utils"
 import { newCart } from "Models/cart"
