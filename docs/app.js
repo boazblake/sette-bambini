@@ -1838,7 +1838,32 @@ var stateDict = function stateDict(state) {
 exports.stateDict = stateDict;
 });
 
-;require.register("Pages/Account/Address.js", function(exports, require, module) {
+;require.register("Pages/Account/Prices.js", function(exports, require, module) {
+"use strict";
+
+var _Utils = require("Utils");
+
+var PriceAdjustment = function PriceAdjustment() {
+  var state = {};
+
+  var getPrices = function getPrices(_ref) {
+    var mdl = _ref.attrs.mdl;
+    return mdl.http.store.getTask(mdl)("prices").fork((0, _Utils.log)("error"), function (prices) {
+      return mdl.state.prices;
+    });
+  };
+
+  return {
+    oninit: getPrices,
+    view: function view(_ref2) {
+      var mdl = _ref2.attrs.mdl;
+      return m("section", [m("h3", "Prices"), Object.keys(mdl.state.prices).map]);
+    }
+  };
+};
+});
+
+;require.register("Pages/Account/address.js", function(exports, require, module) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1975,17 +2000,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _Address = require("./Address.js");
+var _address = require("./address.js");
 
 var _orders = require("./orders.js");
+
+var _prices = require("./prices.js");
 
 var Account = function Account() {
   return {
     view: function view(_ref) {
       var mdl = _ref.attrs.mdl;
-      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m(_Address.AccountAddress, {
+      return m(".frow-container frow-center", [m("h2", "Welcome ", mdl.user.name), m(_address.AccountAddress, {
         mdl: mdl
       }), m(_orders.PastOrders, {
+        mdl: mdl
+      }), m(_prices.PriceAdjustment, {
         mdl: mdl
       }), m("section"), m("section")]);
     }
@@ -2073,6 +2102,63 @@ var PastOrders = function PastOrders() {
 };
 
 exports.PastOrders = PastOrders;
+});
+
+;require.register("Pages/Account/prices.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PriceAdjustment = void 0;
+
+var _Utils = require("Utils");
+
+var Prices = function Prices(mdl) {
+  (0, _Utils.log)("priies")(mdl);
+  return Object.keys(mdl.state.prices).map(function (product) {
+    return m("label", product, m("input", {
+      type: "number",
+      value: mdl.state.prices[product],
+      onchange: function onchange(e) {
+        return mdl.state.prices[product] = e.target.value;
+      }
+    }));
+  });
+};
+
+var PriceAdjustment = function PriceAdjustment() {
+  var getPrices = function getPrices(_ref) {
+    var mdl = _ref.attrs.mdl;
+    return mdl.http.store.getTask(mdl)("prices").fork((0, _Utils.log)("error"), function (_ref2) {
+      var prices = _ref2.prices;
+      return mdl.state.prices = prices;
+    });
+  };
+
+  var updatePrices = function updatePrices(mdl) {
+    return mdl.http.store.putTask(mdl)("prices")({
+      prices: mdl.state.prices
+    }).fork((0, _Utils.log)("error"), function (_ref3) {
+      var prices = _ref3.prices;
+      return mdl.state.prices = prices;
+    });
+  };
+
+  return {
+    oninit: getPrices,
+    view: function view(_ref4) {
+      var mdl = _ref4.attrs.mdl;
+      return m("section", [m("h3", "Prices"), Prices(mdl), m("button", {
+        onclick: function onclick(e) {
+          return updatePrices(mdl);
+        }
+      }, "update prices")]);
+    }
+  };
+};
+
+exports.PriceAdjustment = PriceAdjustment;
 });
 
 ;require.register("Pages/Auth/Validations.js", function(exports, require, module) {
@@ -4299,7 +4385,30 @@ var paypal = {
     };
   }
 };
+var store = {
+  baseurl: "https://sette-bambini.herokuapp.com/",
+  getTask: function getTask(mdl) {
+    return function (url) {
+      return HttpTask()("GET")(mdl)(store.baseurl + url)(null);
+    };
+  },
+  postTask: function postTask(mdl) {
+    return function (url) {
+      return function (dto) {
+        return HttpTask()("POST")(mdl)(store.baseurl + url)(dto);
+      };
+    };
+  },
+  putTask: function putTask(mdl) {
+    return function (url) {
+      return function (dto) {
+        return HttpTask()("PUT")(mdl)(store.baseurl + url)(dto);
+      };
+    };
+  }
+};
 var http = {
+  store: store,
   backEnd: backEnd,
   paypal: paypal,
   HttpTask: HttpTask,
@@ -4625,6 +4734,14 @@ exports["default"] = void 0;
 
 var toRoutes = function toRoutes(mdl) {
   return function (acc, route) {
+    var getPrices = function getPrices(_ref) {
+      var mdl = _ref.attrs.mdl;
+      return mdl.http.store.getTask(mdl)("prices").fork(log("error"), function (_ref2) {
+        var prices = _ref2.prices;
+        return mdl.state.prices = prices;
+      });
+    };
+
     acc[route.route] = {
       onmatch: function onmatch(args, path, fullroute) {
         if (route.group.includes("authenticated") && !mdl.state.isAuth()) {
@@ -4779,27 +4896,6 @@ if (localStorage.getItem("sb-cart")) {
   _index["default"].cart = JSON.parse(localStorage.getItem("sb-cart"));
 }
 
-m.request({
-  method: "POST",
-  url: "https://sette-bambini.herokuapp.com/prices",
-  data: {
-    prices: {
-      "Burp Rags": 60,
-      "Christening Blankets": 100,
-      Collections: 85,
-      Wraps: 60
-    }
-  }
-}).then(function (s) {
-  return console.log("s", s);
-}, function (e) {
-  return console.log("e", e);
-});
-m.request("https://sette-bambini.herokuapp.com").then(function (s) {
-  return console.log("s", s);
-}, function (e) {
-  return console.log("e", e);
-});
 m.route(root, "/", (0, _app["default"])(_index["default"]));
 });
 

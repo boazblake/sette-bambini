@@ -58,24 +58,4 @@ if (localStorage.getItem("sb-cart")) {
   Model.cart = JSON.parse(localStorage.getItem("sb-cart"))
 }
 
-m.request({
-  method: "POST",
-  url: "https://sette-bambini.herokuapp.com/prices",
-  data: {
-    prices: {
-      "Burp Rags": 60,
-      "Christening Blankets": 100,
-      Collections: 85,
-      Wraps: 60,
-    },
-  },
-}).then(
-  (s) => console.log("s", s),
-  (e) => console.log("e", e)
-)
-m.request("https://sette-bambini.herokuapp.com").then(
-  (s) => console.log("s", s),
-  (e) => console.log("e", e)
-)
-
 m.route(root, "/", App(Model))

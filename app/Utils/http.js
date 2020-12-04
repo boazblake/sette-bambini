@@ -109,7 +109,17 @@ const paypal = {
     HttpTask(Paypal.sandbox.headers(mdl))("PUT")(mdl)(paypalUrl + url)(dto),
 }
 
+const store = {
+  baseurl: "https://sette-bambini.herokuapp.com/",
+  getTask: (mdl) => (url) => HttpTask()("GET")(mdl)(store.baseurl + url)(null),
+  postTask: (mdl) => (url) => (dto) =>
+    HttpTask()("POST")(mdl)(store.baseurl + url)(dto),
+  putTask: (mdl) => (url) => (dto) =>
+    HttpTask()("PUT")(mdl)(store.baseurl + url)(dto),
+}
+
 const http = {
+  store,
   backEnd,
   paypal,
   HttpTask,

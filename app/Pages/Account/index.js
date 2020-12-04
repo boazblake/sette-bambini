@@ -1,5 +1,6 @@
-import { AccountAddress } from "./Address.js"
+import { AccountAddress } from "./address.js"
 import { PastOrders } from "./orders.js"
+import { PriceAdjustment } from "./prices.js"
 
 const Account = () => {
   return {
@@ -8,6 +9,7 @@ const Account = () => {
         m("h2", "Welcome ", mdl.user.name),
         m(AccountAddress, { mdl }),
         m(PastOrders, { mdl }),
+        m(PriceAdjustment, { mdl }),
         m("section"),
         m("section"),
       ])
