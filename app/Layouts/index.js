@@ -6,7 +6,10 @@ import { log } from "Utils"
 import Task from "data.task"
 
 const initApp = ({ attrs: { mdl } }) =>
-  Task.of((token) => (prices) => (mdl.state.prices = prices))
+  Task.of((token) => (prices) => {
+    mdl.state.prices = prices
+    return token
+  })
     .ap(
       mdl.http.backEnd.getTask(mdl)(
         `users/isvalidusertoken/${sessionStorage.getItem("sb-user-token")}`
@@ -14,7 +17,8 @@ const initApp = ({ attrs: { mdl } }) =>
     )
     .ap(mdl.http.store.getTask(mdl)("prices"))
     .fork(log("e"), (isValid) => {
-      !isValid ? () => {} : m.route.set("/logout")
+      log("isValid")(mdl, isValid)
+      isValid ? () => {} : m.route.set("/logout")
     })
 
 const Layout = () => {

@@ -6635,7 +6635,85 @@ textarea:disabled {
 /* RGB */
 /* HEX */
 /* GRADIENT */
+/* HSL */
+/* RGB */
+/* HEX */
+/* GRADIENT */
 @import "./animations.css";
+.toggle_radio {
+  position: relative;
+  background: #c2dfe3ff;
+  margin: 4px auto;
+  overflow: hidden;
+  padding: 0 !important;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  position: relative;
+  height: 26px;
+  width: 318px;
+}
+
+.toggle_radio > * {
+  float: left;
+}
+
+.toggle_radio input[type=radio] {
+  display: none;
+  /*position: fixed;*/
+}
+
+.toggle_radio label {
+  color: #9db4c0ff;
+  z-index: 0;
+  display: block;
+  width: 100px;
+  height: 20px;
+  margin: 3px 3px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 1;
+  /*background: rgba(0,0,0,.1);*/
+  text-align: center;
+  /*margin: 0 2px;*/
+  /*background: blue;*/
+  /*make it blue*/
+}
+
+.toggle_option_slider {
+  /*display: none;*/
+  /*background: red;*/
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  top: 3px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+#first_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 3px;
+}
+
+#second_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 109px;
+}
+
+#third_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 215px;
+}
+
 .holder {
   position: absolute;
   top: 0;
@@ -10320,6 +10398,8 @@ textarea:disabled {
   }
 }
 * {
+  margin: 0px;
+  padding: 0px;
   font-family: "Roboto", sans-serif;
   color: #253237ff;
 }
@@ -11136,6 +11216,84 @@ h1 {
     opacity: 1;
     transform: translateX(-50%);
   }
+}
+
+/* HSL */
+/* RGB */
+/* HEX */
+/* GRADIENT */
+.toggle_radio {
+  position: relative;
+  background: #c2dfe3ff;
+  margin: 4px auto;
+  overflow: hidden;
+  padding: 0 !important;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  position: relative;
+  height: 26px;
+  width: 318px;
+}
+
+.toggle_radio > * {
+  float: left;
+}
+
+.toggle_radio input[type=radio] {
+  display: none;
+  /*position: fixed;*/
+}
+
+.toggle_radio label {
+  color: #9db4c0ff;
+  z-index: 0;
+  display: block;
+  width: 100px;
+  height: 20px;
+  margin: 3px 3px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 1;
+  /*background: rgba(0,0,0,.1);*/
+  text-align: center;
+  /*margin: 0 2px;*/
+  /*background: blue;*/
+  /*make it blue*/
+}
+
+.toggle_option_slider {
+  /*display: none;*/
+  /*background: red;*/
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  top: 3px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+#first_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 3px;
+}
+
+#second_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 109px;
+}
+
+#third_toggle:checked ~ .toggle_option_slider {
+  background: #e0fbfcff;
+  left: 215px;
 }
 
 /*! Flickity v2.2.1

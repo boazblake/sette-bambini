@@ -1,4 +1,5 @@
 @import "./colors.scss";
+@import "./toggles.scss";
 @import "./animations.css";
 @import "./loader.scss";
 @import "./frow/frow.sass";
@@ -34,6 +35,8 @@
 // }
 
 * {
+  margin:0px;
+  padding:0px;
   font-family: "Roboto", sans-serif;
   color: $color5;
   > p {

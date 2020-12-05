@@ -2,13 +2,16 @@ import Task from "data.task"
 import { log, getTotal, toProducts, jsonCopy, saveStorageTask } from "Utils"
 import { newCart } from "Models"
 
-const makePaymentTask = (actions) =>
-  new Task((rej, res) => actions.order.capture().then(res, rej))
+const makePaymentTask = (actions) => {
+  log("makePaymentTask")()
+  return new Task((rej, res) => actions.order.capture().then(res, rej))
+}
 
 const formatInvoice = ({ cart, state: { prices } }) => ({
   orderID,
   payerID,
 }) => (details) => {
+  log("formatInvoice")()
   return {
     orderID,
     payerID,
@@ -27,6 +30,8 @@ const setTempUser = (user) =>
 const unSetTempUser = () => sessionStorage.clear()
 
 const updateCartTask = (mdl) => (_) => {
+  log("formatInvoice")()
+
   mdl.cart = jsonCopy(newCart)
   return saveStorageTask(mdl)("sb-cart")(mdl.cart)
 }
@@ -48,6 +53,7 @@ const linkInvoiceUnregisteredTask = (mdl) => (invoice) =>
     .map(unSetTempUser)
 
 const addInvoiceTask = (mdl) => (invoice) => {
+  log("formatInvoice")()
   return mdl.state.isAuth()
     ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user))
     : linkInvoiceUnregisteredTask(mdl)(invoice)
@@ -56,9 +62,9 @@ const addInvoiceTask = (mdl) => (invoice) => {
 const saveInvoiceTask = (mdl) => (invoice) =>
   mdl.http.backEnd.postTask(mdl)("data/Invoices")(invoice)
 
-const onSuccess = (mdl) => (_) => {
+const onSuccess = (mdl, state) => (_) => {
+  console.log("succc", state, _)
   state.isPaying = "success"
-  console.log("succc", _)
 }
 
 const onError = (state) => (error) => {
@@ -93,11 +99,12 @@ export const PayPal = () => {
               },
               onApprove: (data, actions) => {
                 state.isPaying = "start"
+                log("onapprove")(JSON.stringify(state))
                 return makePaymentTask(actions)
                   .map(formatInvoice(mdl)(data))
                   .chain(addInvoiceTask(mdl))
                   .chain(updateCartTask(mdl))
-                  .fork(onError(state), onSuccess(mdl))
+                  .fork(onError(state), onSuccess(mdl, state))
               },
             })
             .render(dom),

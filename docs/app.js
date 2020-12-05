@@ -773,6 +773,7 @@ var _Models = require("Models");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var makePaymentTask = function makePaymentTask(actions) {
+  (0, _Utils.log)("makePaymentTask")();
   return new _data["default"](function (rej, res) {
     return actions.order.capture().then(res, rej);
   });
@@ -785,6 +786,7 @@ var formatInvoice = function formatInvoice(_ref) {
     var orderID = _ref2.orderID,
         payerID = _ref2.payerID;
     return function (details) {
+      (0, _Utils.log)("formatInvoice")();
       return {
         orderID: orderID,
         payerID: payerID,
@@ -809,6 +811,7 @@ var unSetTempUser = function unSetTempUser() {
 
 var updateCartTask = function updateCartTask(mdl) {
   return function (_) {
+    (0, _Utils.log)("formatInvoice")();
     mdl.cart = (0, _Utils.jsonCopy)(_Models.newCart);
     return (0, _Utils.saveStorageTask)(mdl)("sb-cart")(mdl.cart);
   };
@@ -835,6 +838,7 @@ var linkInvoiceUnregisteredTask = function linkInvoiceUnregisteredTask(mdl) {
 
 var addInvoiceTask = function addInvoiceTask(mdl) {
   return function (invoice) {
+    (0, _Utils.log)("formatInvoice")();
     return mdl.state.isAuth() ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user)) : linkInvoiceUnregisteredTask(mdl)(invoice);
   };
 };
@@ -845,10 +849,10 @@ var saveInvoiceTask = function saveInvoiceTask(mdl) {
   };
 };
 
-var onSuccess = function onSuccess(mdl) {
+var onSuccess = function onSuccess(mdl, state) {
   return function (_) {
+    console.log("succc", state, _);
     state.isPaying = "success";
-    console.log("succc", _);
   };
 };
 
@@ -887,7 +891,8 @@ var PayPal = function PayPal() {
             },
             onApprove: function onApprove(data, actions) {
               state.isPaying = "start";
-              return makePaymentTask(actions).map(formatInvoice(mdl)(data)).chain(addInvoiceTask(mdl)).chain(updateCartTask(mdl)).fork(onError(state), onSuccess(mdl));
+              (0, _Utils.log)("onapprove")(JSON.stringify(state));
+              return makePaymentTask(actions).map(formatInvoice(mdl)(data)).chain(addInvoiceTask(mdl)).chain(updateCartTask(mdl)).fork(onError(state), onSuccess(mdl, state));
             }
           }).render(dom);
         }
@@ -1551,10 +1556,12 @@ var initApp = function initApp(_ref) {
   var mdl = _ref.attrs.mdl;
   return _data["default"].of(function (token) {
     return function (prices) {
-      return mdl.state.prices = prices;
+      mdl.state.prices = prices;
+      return token;
     };
   }).ap(mdl.http.backEnd.getTask(mdl)("users/isvalidusertoken/".concat(sessionStorage.getItem("sb-user-token")))).ap(mdl.http.store.getTask(mdl)("prices")).fork((0, _Utils.log)("e"), function (isValid) {
-    !isValid ? function () {} : m.route.set("/logout");
+    (0, _Utils.log)("isValid")(mdl, isValid);
+    isValid ? function () {} : m.route.set("/logout");
   });
 };
 
@@ -3111,7 +3118,7 @@ var Checkout = function Checkout(_ref3) {
     },
     view: function view(_ref5) {
       var mdl = _ref5.attrs.mdl;
-      return m(".frow-container frow-center", state.isPaying === "start" ? m(_LogoLoader["default"]) : [(0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(_navLink.NavLink, {
+      return m(".frow-container frow-center", [(0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? m(_navLink.NavLink, {
         mdl: mdl,
         href: "/cart",
         classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
@@ -3121,7 +3128,7 @@ var Checkout = function Checkout(_ref3) {
           mdl: mdl,
           p: p
         });
-      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m("h1.bold text-center.mt-20.mb-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for $").concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)))), m(_paypal.PayPal, {
+      }), (0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)) ? [m("h1.bold text-center.mt-20.mb-20", "Total of ".concat((0, _helpers.getQuantity)((0, _helpers.toProducts)(mdl.cart)), " for $").concat((0, _helpers.getTotal)(mdl, (0, _helpers.toProducts)(mdl.cart)))), state.isPaying == "start" && m(_LogoLoader["default"]), m(_paypal.PayPal, {
         mdl: mdl,
         state: state
       })] : m("h1.bold", "Your Cart is Empty")]);
