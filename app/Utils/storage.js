@@ -7,6 +7,13 @@ const getLocalStorageTask = (key) =>
       : res(localStorage.getItem(key))
   )
 
+const getSessionStorageTask = (key) =>
+  new Task((rej, res) =>
+    sessionStorage.getItem(key)
+      ? rej("nothing here")
+      : res(sessionStorage.getItem(key))
+  )
+
 const saveLocalStorageTask = (key) => (value) => {
   localStorage.setItem(key, JSON.stringify(value))
   return Task.of(localStorage.getItem(key))
@@ -28,6 +35,7 @@ const saveStorageTask = (mdl) => (key) => (value) => {
 
 export {
   getLocalStorageTask,
+  getSessionStorageTask,
   saveLocalStorageTask,
   saveDbStorageTask,
   getDbStorageTask,

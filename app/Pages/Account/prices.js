@@ -27,7 +27,7 @@ export const PriceAdjustment = () => {
       .fork(log("error"), ({ prices }) => (mdl.state.prices = prices))
 
   return {
-    oninit: getPrices,
+    // oninit: getPrices,
     view: ({ attrs: { mdl } }) =>
       m("section", [
         m("h3", "Prices"),

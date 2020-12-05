@@ -1,8 +1,4 @@
 const toRoutes = (mdl) => (acc, route) => {
-  const getPrices = ({ attrs: { mdl } }) =>
-    mdl.http.store
-      .getTask(mdl)("prices")
-      .fork(log("error"), ({ prices }) => (mdl.state.prices = prices))
   acc[route.route] = {
     onmatch: (args, path, fullroute) => {
       if (route.group.includes("authenticated") && !mdl.state.isAuth()) {

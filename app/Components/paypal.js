@@ -1,5 +1,5 @@
 import Task from "data.task"
-import { getTotal, toProducts, jsonCopy, saveStorageTask } from "Utils"
+import { log, getTotal, toProducts, jsonCopy, saveStorageTask } from "Utils"
 import { newCart } from "Models"
 
 const makePaymentTask = (actions) =>
@@ -8,16 +8,18 @@ const makePaymentTask = (actions) =>
 const formatInvoice = ({ cart, state: { prices } }) => ({
   orderID,
   payerID,
-}) => (details) => ({
-  orderID,
-  payerID,
-  purchaseTime: details.create_time,
-  status: details.status,
-  customer: details.payer,
-  shipping: details.purchase_units[0].shipping,
-  cart: cart,
-  prices,
-})
+}) => (details) => {
+  return {
+    orderID,
+    payerID,
+    purchaseTime: details.create_time,
+    status: details.status,
+    customer: details.payer,
+    shipping: details.purchase_units[0].shipping,
+    cart: cart,
+    prices,
+  }
+}
 
 const setTempUser = (user) =>
   sessionStorage.setItem("sb-user-token", user["user-token"])
@@ -55,14 +57,20 @@ const saveInvoiceTask = (mdl) => (invoice) =>
   mdl.http.backEnd.postTask(mdl)("data/Invoices")(invoice)
 
 const onSuccess = (mdl) => (_) => {
+  state.isPaying = "success"
   console.log("succc", _)
 }
 
-const onError = (error) => console.log("error", error)
+const onError = (state) => (error) => {
+  log("state")(state)
+  state.error = error
+  state.isPaying = "failed"
+  console.log("error", error)
+}
 
 export const PayPal = () => {
   return {
-    view: ({ attrs: { mdl } }) =>
+    view: ({ attrs: { mdl, state } }) =>
       m(".", {
         style: {
           maxHeight: "500px",
@@ -83,12 +91,14 @@ export const PayPal = () => {
                   ],
                 })
               },
-              onApprove: (data, actions) =>
-                makePaymentTask(actions)
+              onApprove: (data, actions) => {
+                state.isPaying = "start"
+                return makePaymentTask(actions)
                   .map(formatInvoice(mdl)(data))
                   .chain(addInvoiceTask(mdl))
                   .chain(updateCartTask(mdl))
-                  .fork(onError, onSuccess(mdl)),
+                  .fork(onError(state), onSuccess(mdl))
+              },
             })
             .render(dom),
       }),

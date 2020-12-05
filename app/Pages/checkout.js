@@ -8,6 +8,7 @@ import {
   toProducts,
 } from "Utils/helpers"
 import { productImages } from "index.images.js"
+import LogoLoader from "Components/LogoLoader"
 
 const Gender = () => {
   return {
@@ -59,34 +60,41 @@ const Product = () => {
 }
 
 const Checkout = ({ attrs: { mdl } }) => {
+  const state = {
+    isPaying: null,
+  }
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
-      m(`.frow-container frow-center`, [
-        getTotal(mdl, toProducts(mdl.cart))
-          ? m(NavLink, {
-              mdl,
-              href: `/cart`,
-              classList: `${isActiveRoute(`/cart`)} para button m-0`,
-              link: "Update Cart",
-            })
-          : null,
+      m(
+        `.frow-container frow-center`,
+        state.isPaying === "start"
+          ? m(LogoLoader)
+          : [
+              getTotal(mdl, toProducts(mdl.cart))
+                ? m(NavLink, {
+                    mdl,
+                    href: `/cart`,
+                    classList: `${isActiveRoute(`/cart`)} para button m-0`,
+                    link: "Update Cart",
+                  })
+                : null,
 
-        toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
+              toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
 
-        getTotal(mdl, toProducts(mdl.cart))
-          ? [
-              m(
-                "h1.bold text-center.mt-20.mb-20",
-                `Total of ${getQuantity(toProducts(mdl.cart))} for $${getTotal(
-                  mdl,
-                  toProducts(mdl.cart)
-                )}`
-              ),
-              m(PayPal, { mdl }),
+              getTotal(mdl, toProducts(mdl.cart))
+                ? [
+                    m(
+                      "h1.bold text-center.mt-20.mb-20",
+                      `Total of ${getQuantity(
+                        toProducts(mdl.cart)
+                      )} for $${getTotal(mdl, toProducts(mdl.cart))}`
+                    ),
+                    m(PayPal, { mdl, state }),
+                  ]
+                : m("h1.bold", "Your Cart is Empty"),
             ]
-          : m("h1.bold", "Your Cart is Empty"),
-      ]),
+      ),
   }
 }
 

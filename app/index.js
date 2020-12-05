@@ -51,7 +51,6 @@ checkWidth(winW)
 
 if (sessionStorage.getItem("sb-user")) {
   Model.user = JSON.parse(sessionStorage.getItem("sb-user"))
-  //fetch cart from db? do i really??
   Model.state.isAuth(true)
 }
 if (localStorage.getItem("sb-cart")) {
