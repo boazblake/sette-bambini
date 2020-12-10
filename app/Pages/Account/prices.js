@@ -1,10 +1,9 @@
 import { log } from "Utils"
 
-const Prices = (mdl) => {
-  log("priies")(mdl)
-  return Object.keys(mdl.state.prices).map((product) =>
+const Prices = (mdl) =>
+  Object.keys(mdl.state.prices).map((product) =>
     m(
-      "label",
+      "label.col-xs-1-3",
       product,
       m("input", {
         type: "number",
@@ -13,7 +12,6 @@ const Prices = (mdl) => {
       })
     )
   )
-}
 
 export const PriceAdjustment = () => {
   const getPrices = ({ attrs: { mdl } }) =>
@@ -30,7 +28,7 @@ export const PriceAdjustment = () => {
     // oninit: getPrices,
     view: ({ attrs: { mdl } }) =>
       m("section", [
-        m("h3", "Prices"),
+        m("h3", "Update Prices"),
         Prices(mdl),
         m("button", { onclick: (e) => updatePrices(mdl) }, "update prices"),
       ]),

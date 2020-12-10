@@ -475,6 +475,11 @@ h1 {
   padding: 4px;
 }
 
+.Sirv {
+  max-width:100%;
+  height:auto;
+}
+
 .shadow {
   &::hover {
     -webkit-filter: drop-shadow(2px 2px 1px $color5);

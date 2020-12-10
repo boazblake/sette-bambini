@@ -2,14 +2,20 @@ import { saveStorageTask } from "Utils/storage"
 import { AddToCartOut } from "Styles/animations"
 
 const Selector = () => {
-  const state = {}
+  const state = {
+    error: Stream(null),
+  }
+
   const ResetState = () => {
     state.quantity = null
     state.gender = "Select a Gender"
   }
 
   const saveToStorage = (mdl) => {
-    const onError = (e) => console.log("Error saving", e)
+    const onError = (e) => {
+      console.log("Error saving", e.message)
+      state.error(e.message)
+    }
     const onSuccess = (s) => {
       ResetState()
     }
@@ -28,6 +34,7 @@ const Selector = () => {
       return m(
         ".frow",
         m(".frow content-center gutters row-between pt-20", [
+          state.error() && m("code.warning", state.error()),
           m(".col-sm-1-4", m("h2.pb-10", `$${mdl.state.prices[product]}`)),
           m(
             ".col-sm-1-4",

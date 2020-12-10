@@ -30,7 +30,7 @@ const setTempUser = (user) =>
 const unSetTempUser = () => sessionStorage.clear()
 
 const updateCartTask = (mdl) => (_) => {
-  log("formatInvoice")()
+  log("updateCartTask")()
 
   mdl.cart = jsonCopy(newCart)
   return saveStorageTask(mdl)("sb-cart")(mdl.cart)
@@ -53,7 +53,7 @@ const linkInvoiceUnregisteredTask = (mdl) => (invoice) =>
     .map(unSetTempUser)
 
 const addInvoiceTask = (mdl) => (invoice) => {
-  log("formatInvoice")()
+  log("addInvoiceTask")()
   return mdl.state.isAuth()
     ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user))
     : linkInvoiceUnregisteredTask(mdl)(invoice)
@@ -64,13 +64,13 @@ const saveInvoiceTask = (mdl) => (invoice) =>
 
 const onSuccess = (mdl, state) => (_) => {
   console.log("succc", state, _)
-  state.isPaying = "success"
+  setTimeout(() => (state.isPaying = "success"))
 }
 
 const onError = (state) => (error) => {
   log("state")(state)
   state.error = error
-  state.isPaying = "failed"
+  setTimeout(() => (state.isPaying = "failed"))
   console.log("error", error)
 }
 
