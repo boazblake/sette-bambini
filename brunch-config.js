@@ -62,6 +62,14 @@ exports.plugins = {
     },
   },
   "@babel": { presets: ["env"] },
+  terser: {
+    mangle: false,
+    compress: {
+      global_defs: {
+        DEBUG: false,
+      },
+    },
+  },
 }
 
 exports.paths = {
