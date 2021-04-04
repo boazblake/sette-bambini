@@ -1,21 +1,13 @@
-import Flicker from "Components/Flicker.js"
+import Carousel from "Components/Carousel.js"
 import Selector from "Components/Selector.js"
-import { burpImgs } from "index.images.js"
+import { burpWrags } from "index.images.js"
 
 const BurpRags = () => {
-  const state = {
-    errors: {},
-    data: burpImgs,
-  }
   return {
-    onremove: () => {
-      state.errors = {}
-      state.data = []
-    },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".mb-30", { id: "burps" }, [
-          m(Flicker, { mdl, data: state.data }),
+          m(Carousel, { mdl, data: burpWrags }),
           m(".mt-20", m(Selector, { mdl, product: "Burp Rags" })),
           m("ul", [
             m("li.pb-10", "Set of 7 handcrafted burp rags"),

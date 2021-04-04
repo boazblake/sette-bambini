@@ -1,87 +1,34 @@
-export const collectionImgs = [
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection1.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection2.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection3.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection4.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection5.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection6.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection7.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection8.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection9.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/collection10.jpg?scale.option=fill&format=webp&h=275",
-  },
+export const collections = [
+  "https://sette-bambini.sirv.com/Images/collections/collection1.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection2.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection3.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection4.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection5.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection6.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection7.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection8.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection9.jpg",
+  "https://sette-bambini.sirv.com/Images/collections/collection10.jpg",
 ]
-export const blanketImgs = [
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/blankets1.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/blankets2.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/blankets3.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/blankets4.jpg?scale.option=fill&format=webp&h=275",
-  },
+export const blankets = [
+  "https://sette-bambini.sirv.com/Images/blankets/blankets1.jpg",
+  "https://sette-bambini.sirv.com/Images/blankets/blankets2.jpg",
+  "https://sette-bambini.sirv.com/Images/blankets/blankets3.jpg",
+  "https://sette-bambini.sirv.com/Images/blankets/blankets4.jpg",
 ]
-export const burpImgs = [
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/burp1.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/burp2.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/burp3.jpg?scale.option=fill&format=webp&h=275",
-  },
-  {
-    src:
-      "https://sette-bambini.sirv.com/Images/burp4.jpg?scale.option=fill&format=webp&h=275",
-  },
+
+export const burpWrags = [
+  "https://sette-bambini.sirv.com/Images/burp/burp1.jpg",
+  "https://sette-bambini.sirv.com/Images/burp/burp2.jpg",
+  "https://sette-bambini.sirv.com/Images/burp/burp3.jpg",
+  "https://sette-bambini.sirv.com/Images/burp/burp4.jpg",
 ]
 
 export const productImages = {
-  Wraps: blanketImgs,
-  "Christening Blankets": blanketImgs,
-  "Burp Rags": burpImgs,
-  Collections: collectionImgs,
+  Wraps: blankets,
+  "Christening Blankets": blankets,
+  "Burp Rags": burpWrags,
+  Collections: collections,
 }
 
-export const frontImgs = [...burpImgs, ...blanketImgs, ...collectionImgs]
+export const frontImgs = [...burpWrags, ...blankets, ...collections]

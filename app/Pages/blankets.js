@@ -1,26 +1,17 @@
 import Flicker from "Components/Flicker.js"
+import Carousel from "Components/Carousel.js"
 import Selector from "Components/Selector.js"
-import { blanketImgs } from "index.images.js"
+import { blankets } from "index.images.js"
+
+console.log(blankets.gallery)
 
 const Blankets = () => {
-  const state = {
-    errors: {},
-    data: blanketImgs,
-  }
-
   return {
-    oninit: () => {
-      // console.log("init blankets")
-    },
-    onremove: () => {
-      state.errors = {}
-      state.data = []
-    },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".mb-30", { id: "wraps" }, [
           m(".text-2halfx", m("h2.pb-10", "Wraps")),
-          m(Flicker, { mdl, data: state.data }),
+          m(Carousel, { mdl, data: blankets }),
           m(".mt-20", m(Selector, { mdl, product: "Wraps" })),
           m("ul", [
             m(
@@ -35,7 +26,7 @@ const Blankets = () => {
           ".mb-30",
           { id: "christening" },
           m(".text-2halfx", m("h2.pb-10", "Christening Blankets")),
-          m(Flicker, { mdl, data: state.data }),
+          m(Carousel, { mdl, data: blankets }),
           m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" })),
           m("ul", [
             m(

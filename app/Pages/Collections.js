@@ -1,21 +1,13 @@
-import Flicker from "Components/Flicker.js"
+import Carousel from "Components/Carousel.js"
 import Selector from "Components/Selector.js"
-import { collectionImgs } from "index.images.js"
+import { collections } from "index.images.js"
 
 const Collections = () => {
-  const state = {
-    errors: {},
-    data: collectionImgs,
-  }
   return {
-    onremove: () => {
-      state.errors = {}
-      state.data = []
-    },
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".mb-30", { id: "collections" }, [
-          m(Flicker, { mdl, data: state.data }),
+          m(Carousel, { mdl, data: collections }),
           m(".mt-20", m(Selector, { mdl, product: "Collections" })),
           m("ul", [
             m(
