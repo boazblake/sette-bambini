@@ -8,7 +8,10 @@ const Home = () => {
         ".frow frow-center justify-evenly",
         { id: "home-page" },
         frontImgs.map((img) =>
-          m("img.Sirv", { oncreate: SlideUp, "data-src": img })
+          m("img.Sirv", {
+            oncreate: SlideUp,
+            "data-src": `${img}?w=500&scale.option=fill`,
+          })
         )
       ),
   }

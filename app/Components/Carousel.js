@@ -3,10 +3,19 @@ const Carousel = () => {
     oncreate: ({ dom }) => Sirv.viewer.getInstance(dom),
     view: ({ attrs: { mdl, data } }) => {
       return m(
-        ".Sirv",
+        "#carousel.Sirv",
+        {
+          "data-options": `thumbnails.position:${
+            mdl.settings.screenSize == "phone" ? "bottom" : "left"
+          };
+            orientation:vertical;viewer.quality:100;
+            viewer.hdQuality:100;`,
+        },
         data.map((img) => {
-          mdl.addToCart.id(img.src)
-          return m("", { "data-type": "zoom", "data-src": img })
+          mdl.addToCart.id(img)
+          return m("#carousel-img", {
+            "data-src": `${img}`,
+          })
         })
       )
     },
