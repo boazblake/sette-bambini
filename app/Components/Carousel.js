@@ -8,7 +8,7 @@ const Carousel = () => {
           "data-options": `thumbnails.position:${
             mdl.settings.screenSize == "phone" ? "bottom" : "left"
           };
-            orientation:vertical;viewer.quality:100;
+            orientation:horizontal;viewer.quality:100;
             viewer.hdQuality:100;`,
         },
         data.map((img) => {

@@ -1,5 +1,5 @@
 import Task from "data.task"
-import Masonry from "Components/Masonry"
+import m from "mithril"
 
 const fetchBurpRagsTask = (mdl) =>
   Task.of([
@@ -72,8 +72,13 @@ const Blog = () => {
       state.data = []
     },
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", { id: "blog-page" }, [
-        m(Masonry, { data: state.data }),
+      m(".frow-container frow-center", { id: "masonry" }, [
+        state.data.map((img) =>
+          m("img.Sirv", {
+            oncreate: SlideUp,
+            "data-src": `${img}?w=500&scale.option=fill`,
+          })
+        ),
       ]),
   }
 }

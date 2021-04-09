@@ -6,11 +6,11 @@ const Home = () => {
     view: ({ attrs: { mdl } }) =>
       m(
         ".frow frow-center justify-evenly",
-        { id: "home-page" },
-        frontImgs.map((img) =>
+        { id: "masonry" },
+        frontImgs.map((src) =>
           m("img.Sirv", {
             oncreate: SlideUp,
-            "data-src": `${img}?w=500&scale.option=fill`,
+            src,
           })
         )
       ),
