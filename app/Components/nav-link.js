@@ -1,3 +1,5 @@
+import m from "mithril"
+
 const handlers = (types, fn) =>
   types.reduce((acc, type) => Object.assign(acc, { [type]: fn }), {})
 
@@ -13,8 +15,9 @@ const hideBorderStyle = (style) => {
 
 export const NavLink = () => {
   return {
-    view: ({ attrs: { mdl, href, link, classList, ...rest } }) =>
-      m(
+    view: ({ attrs: { mdl, href, link, classList, ...rest } }) => {
+      console.log(m.route.get(), `nav-link ${classList} `)
+      return m(
         m.route.Link,
         {
           style: {
@@ -27,12 +30,13 @@ export const NavLink = () => {
           },
           href,
           class: `nav-link ${classList} ${
-            mdl.state.navSelected() == link && "shadow"
+            mdl.state.navSelected() == link ? "is-active" : ""
           }`,
           ...rest,
         },
         link
-      ),
+      )
+    },
   }
 }
 

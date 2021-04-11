@@ -113,7 +113,8 @@ export const randomEl = (list) => list[Math.floor(Math.random() * list.length)]
 
 export const jsonCopy = (src) => JSON.parse(JSON.stringify(src))
 
-export const isActiveRoute = (route) => (m.route.get() == route ? "bold" : "")
+export const isActiveRoute = (route) =>
+  m.route.get() == route ? "is-active" : ""
 
 export const uuid = () => {
   return "xxxxxxxx".replace(/[xy]/g, function (c) {

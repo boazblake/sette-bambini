@@ -25,13 +25,12 @@ const getStyle = (mdl) => ({
     : "100px",
 })
 
-const PageTitle = ( ) => {
+const PageTitle = () => {
   return {
-    view: ({attrs:{show, name}}) =>
-     show && m(".text-4x", m("h1.title.mb-20.text-center", name))
+    view: ({ attrs: { show, name } }) =>
+      show && m(".text-4x", m("h1.title.mb-20.text-center", name)),
   }
 }
-
 
 const Body = () => {
   return {
@@ -42,7 +41,7 @@ const Body = () => {
           id: "body",
           style: getStyle(mdl),
         },
-        m(".frow centered-column items-stretch", [
+
         mdl.settings.screenSize !== "desktop" &&
           mdl.state.showNavModal() &&
           m(NavModal, {
@@ -56,15 +55,11 @@ const Body = () => {
             onbeforeremove: SlideOutLeft,
             mdl,
           }),
-          [
-          m(PageTitle,
-            {
-              show: ![undefined, '/'].includes(m.route.get()),
-              name: mdl.state.route.name
-            }),
-          children,
-        ]
-        ])
+        m(PageTitle, {
+          show: ![undefined, "/"].includes(m.route.get()),
+          name: mdl.state.route.name,
+        }),
+        m(".frow centered-column items-stretch", children)
       ),
   }
 }

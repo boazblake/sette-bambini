@@ -5,9 +5,7 @@ const Carousel = () => {
       return m(
         "#carousel.Sirv",
         {
-          "data-options": `thumbnails.position:${
-            mdl.settings.screenSize == "phone" ? "bottom" : "left"
-          };
+          "data-options": `thumbnails.position: left;
             orientation:horizontal;viewer.quality:100;
             viewer.hdQuality:100;`,
         },

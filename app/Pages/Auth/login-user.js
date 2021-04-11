@@ -68,7 +68,7 @@ export const Login = () => {
         [
           state.showErrorMsg() && m("code.warning", state.errorMsg()),
           m(
-            "form.frow-container frow-center",
+            "form.frow",
             {
               role: "form",
               id: "login-form",

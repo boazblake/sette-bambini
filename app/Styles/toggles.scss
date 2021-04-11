@@ -2,7 +2,7 @@
 
 .toggle_radio{
   position: relative;
-  background: $color2;
+  // background: $color2;
   margin: 4px auto;
   overflow: hidden;
   padding: 0 !important;
@@ -21,7 +21,7 @@
   /*position: fixed;*/
 }
 .toggle_radio label{
-  color: $color3;
+  // color: $color3;
   z-index: 0;
   display: block;
   width: 100px;
@@ -55,14 +55,14 @@
 }
 
 #first_toggle:checked ~ .toggle_option_slider{
-  background:$color1;
+  // background:$color1;
   left: 3px;
 }
 #second_toggle:checked ~ .toggle_option_slider{
-  background:$color1;
+  // background:$color1;
   left: 109px;
 }
 #third_toggle:checked ~ .toggle_option_slider{
-  background:$color1;
+  // background:$color1;
   left: 215px;
 }

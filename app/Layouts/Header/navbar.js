@@ -8,12 +8,10 @@ const NavBar = () => {
   return {
     view: ({ attrs: { mdl } }) => [
       m(
-        ".navbar.navbar1",
-        { id: "navbar" },
-
+        ".navbar.navbar2.hidden-xs",
         m(
           "nav.frow row-around",
-          NavRoutes(mdl).map((r) => {
+          SubNavRoutes(mdl).map((r) => {
             return m(NavLink, {
               mdl,
               href: r.route,
@@ -24,10 +22,12 @@ const NavBar = () => {
         )
       ),
       m(
-        ".navbar.navbar2.hidden-xs",
+        ".navbar.navbar1",
+        { id: "navbar" },
+
         m(
           "nav.frow row-around",
-          SubNavRoutes(mdl).map((r) => {
+          NavRoutes(mdl).map((r) => {
             return m(NavLink, {
               mdl,
               href: r.route,

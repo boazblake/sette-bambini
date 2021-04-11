@@ -1,8 +1,8 @@
+@import "./frow/frow.sass";
 @import "./colors.scss";
 @import "./toggles.scss";
 @import "./animations.css";
 @import "./loader.scss";
-@import "./frow/frow.sass";
 
 
 :root {
@@ -38,11 +38,11 @@
   margin:0px;
   padding:0px;
   font-family: "Roboto", sans-serif;
-  color: $color5;
-  > p {
+  color: $oxford-blue;
+  p {
     font-size: 16px;
   }
-  > h1,
+   h1,
   h2,
   h3,
   h4,
@@ -61,7 +61,6 @@
 body,
 html {
   scroll-behavior: smooth;
-  color: $color5;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -71,7 +70,7 @@ body {
 
 a.button {
   line-height: initial;
-  background-color: $color5;
+  background-color: $white;
   display: inline-block;
   padding: 0.35em 1.2em;
   margin: 0 0.3em 0.3em 0;
@@ -79,17 +78,17 @@ a.button {
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  color: $color1;
+  color: $oxford-blue;
   text-align: center;
   transition: all 0.2s;
   &:hover {
-    color: $color5;
-    background-color: $color1;
-    border: 0.1em solid $color5;
+    color: $gold;
+    background-color: $oxford-blue;
+    border: 0.1em solid $oxford-blue;
     font-weight: 500;
 
-    > h1 {
-      color: $color5 !important;
+    h1 {
+      color: $oxford-blue !important;
       font-weight: 500;
     }
   }
@@ -107,13 +106,20 @@ a.button {
   width: 100%;
 }
 
+.nav-link, .auth-link {
+  // color: $oxford-blue;
+  &:hover {
+    color: $gold;
+  }
+}
+
 .auth-link {
-  color: $color4;
   margin-top: 10px;
 
   &:hover,
   &:active {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-tap-highlight-color: $gold;
     -webkit-user-select: none;
     -webkit-touch-callout: none; /*only to disable context menu on long press*/
   }
@@ -125,6 +131,11 @@ a.button {
 
 .bold {
   font-weight: 900;
+}
+
+.is-active {
+  font-weight: 900;
+  color: $gold !important;
 }
 
 .cart-item {
@@ -149,8 +160,8 @@ a.button {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    color: $color1;
-    background-color: $color5;
+    color: $oxford-blue;
+    border: 1px solid $gold;
     text-align: center;
   }
 }
@@ -170,6 +181,7 @@ a.button {
 
   > * a {
     margin: 4px;
+    color: $oxford-blue;
   }
 }
 
@@ -179,7 +191,7 @@ a.button {
 
 .label {
   font-weight: bold;
-  color: $color5;
+  // color: $color5;
 }
 
 .logoLoader {
@@ -227,7 +239,7 @@ h1 {
 }
 
 .auth-input {
-  border: 2px solid $color3;
+  border: 2px solid $oxford-blue;
   border-radius: 20px;
   margin-bottom: 20px;
   padding: 10px;
@@ -290,7 +302,7 @@ h1 {
   height: 100vh;
   min-width: 90vw;
   min-height: 100vh;
-  background-color: $color5;
+  background-color: $white;
   padding: 30px;
   overflow-y: auto;
 
@@ -300,7 +312,7 @@ h1 {
   h3,
   h4,
   p {
-    color: $color1 !important;
+    color: $oxford-blue !important;
   }
 
   > ul.nav {
@@ -310,7 +322,7 @@ h1 {
     > li {
       > a {
         text-decoration: none;
-        color: $color1 !important;
+        // color: $gold !important;
       }
     }
   }
@@ -351,30 +363,36 @@ h1 {
 
 .navbar {
   order: 1;
-  background-color: $color3;
+  // background-color: $color3;
   height: 40px;
   padding-top: 0.5rem;
 }
 
 .navbar1 {
-  background-color: $color4;
-  > .frow {
-    > a {
+  // background-color: $color4;
+  .frow {
+    a {
       font-size: 1.2em;
-      color: $color1;
+      // color: $color1;
     }
   }
 }
 
 .navbar2 {
-  background-color: $color3;
+  background-color: $oxford-blue;
+  a {
+    color: $platinum ;
+  }
 }
 
 .sub-navbar {
   order: 2;
-  background-color: $color2;
+  background-color: $oxford-blue;
   height: 40px;
   padding-top: 0.5rem;
+  a {
+    color: $platinum ;
+  }
 }
 
 .para {
@@ -386,7 +404,7 @@ h1 {
 }
 
 .underline {
-  text-decoration: underline $color5;
+  text-decoration: underline $oxford-blue;
 }
 
 .point-left {
@@ -426,37 +444,37 @@ h1 {
   border-radius: 9px;
 }
 .progress-bar progress::-webkit-progress-value {
-  background: $color5;
-  background: -moz-linear-gradient(top, $color5 0%, $color4 100%);
+  background: $oxford-blue;
+  background: -moz-linear-gradient(top, $oxford-blue 0%, $gold 100%);
   background: -webkit-gradient(
     linear,
     left top,
     left bottom,
-    color-stop(0%, $color5),
-    color-stop(100%, $color4)
+    color-stop(0%, $oxford-blue),
+    color-stop(100%, $gold)
   );
-  background: -webkit-linear-gradient(top, $color5 0%, $color4 100%);
-  background: -o-linear-gradient(top, $color5 0%, $color4 100%);
-  background: -ms-linear-gradient(top, $color5 0%, $color4 100%);
-  background: linear-gradient(to bottom, $color5 0%, $color4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color5', endColorstr='$color4',GradientType=0 );
+  background: -webkit-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: -o-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: -ms-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: linear-gradient(to bottom, $oxford-blue 0%, $gold 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$blue', endColorstr='$gold',GradientType=0 );
   border-radius: 9px;
 }
 .progress-bar progress::-moz-progress-bar {
-  background: $color5;
-  background: -moz-linear-gradient(top, $color5 0%, $color4 100%);
+  background: $oxford-blue;
+  background: -moz-linear-gradient(top, $oxford-blue 0%, $gold 100%);
   background: -webkit-gradient(
     linear,
     left top,
     left bottom,
-    color-stop(0%, $color5),
-    color-stop(100%, $color4)
+    color-stop(0%, $oxford-blue),
+    color-stop(100%, $gold)
   );
-  background: -webkit-linear-gradient(top, $color5 0%, $color4 100%);
-  background: -o-linear-gradient(top, $color5 0%, $color4 100%);
-  background: -ms-linear-gradient(top, $color5 0%, $color4 100%);
-  background: linear-gradient(to bottom, $color5 0%, $color4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color5', endColorstr='$color4',GradientType=0 );
+  background: -webkit-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: -o-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: -ms-linear-gradient(top, $oxford-blue 0%, $gold 100%);
+  background: linear-gradient(to bottom, $oxford-blue 0%, $gold 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$blue', endColorstr='$gold',GradientType=0 );
   border-radius: 9px;
 }
 .progress-bar .progress-value {
@@ -466,7 +484,7 @@ h1 {
   line-height: 10px;
   margin-left: 5px;
   font-size: 0.8em;
-  color: $color1;
+  color: $oxford-blue;
   height: 8px;
   float: right;
 }
@@ -482,8 +500,8 @@ h1 {
 
 .shadow {
   &::hover {
-    -webkit-filter: drop-shadow(2px 2px 1px $color5);
-    filter: drop-shadow(2px 2px 1px $color5);
+    -webkit-filter: drop-shadow(2px 2px 1px $oxford-blue);
+    filter: drop-shadow(2px 2px 1px $oxford-blue);
   }
 }
 

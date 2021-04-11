@@ -2,7 +2,7 @@ import Layout from "Layouts/index.js"
 import BurpRags from "Pages/burp-rags.js"
 import BabyBlankets from "Pages/blankets.js"
 import Default from "Pages/default.js"
-import Collections from "Pages/Collections.js"
+import Collections from "Pages/collections.js"
 import Home from "Pages/home.js"
 import Cart from "Pages/cart.js"
 import Checkout from "Pages/checkout.js"
@@ -238,7 +238,7 @@ const Routes = [
     // icon: Icons.home,
     route: "/about-us",
     isNav: true,
-    group: ["footer", "sub-navbar"],
+    group: ["footer", "sub-navbar", "menu"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -258,7 +258,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/contact-us",
     isNav: false,
-    group: ["footer", "sub-navbar"],
+    group: ["footer", "sub-navbar", "menu"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
@@ -378,7 +378,7 @@ const Routes = [
     // icon: Icons.search,
     route: "/faq",
     isNav: false,
-    group: ["footer", "menu", "sub-navbar"],
+    group: ["footer", "menu", "sub-navbar", "menu"],
     children: [],
     options: [],
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
