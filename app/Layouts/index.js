@@ -17,7 +17,7 @@ const initApp = ({ attrs: { mdl } }) =>
     )
     .ap(mdl.http.store.getTask(mdl)("prices"))
     .fork(log("e"), (isValid) => {
-      log("isValid")(mdl, isValid)
+      log("isValid")({ mdl, isValid })
       isValid ? () => {} : m.route.set("/logout")
     })
 

@@ -3,8 +3,6 @@ import Carousel from "Components/Carousel.js"
 import Selector from "Components/Selector.js"
 import { blankets } from "index.images.js"
 
-console.log(blankets.gallery)
-
 const Blankets = () => {
   return {
     view: ({ attrs: { mdl } }) =>

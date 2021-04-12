@@ -33,13 +33,11 @@ const Gender = () => {
         gender: [sex, quantity],
       },
     }) => {
-      console.log("pp", randomEl(productImages[product]))
-
       return quantity
         ? m(".animated.frow row-around mt-10", [
             m("img", {
               style: { width: "100px" },
-              ...productImages[product][0],
+              src: productImages[product][0],
             }),
 
             // m(

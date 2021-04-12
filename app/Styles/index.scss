@@ -83,7 +83,6 @@ a.button {
   transition: all 0.2s;
   &:hover {
     color: $gold;
-    background-color: $oxford-blue;
     border: 0.1em solid $oxford-blue;
     font-weight: 500;
 
@@ -369,7 +368,7 @@ h1 {
 }
 
 .navbar1 {
-  // background-color: $color4;
+  background-color: $white;
   .frow {
     a {
       font-size: 1.2em;
