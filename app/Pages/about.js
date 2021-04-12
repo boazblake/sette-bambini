@@ -5,12 +5,12 @@ const About = (mdl) => {
         ".frow-container frow-center",
 
         m("img", {
-          dataSrc:
+          srcSet:
             "https://m.media-amazon.com/images/I/81dk5K365jL.RM_SS200_.jpg",
         }),
 
         m("img", {
-          dataSrc:
+          srcSet:
             "https://m.media-amazon.com/images/I/21fsf1BwlkL._RI_AL_FMPNG_SS100_.png",
         })
       ),
