@@ -1,7 +1,7 @@
 @import "./frow/frow.sass";
 @import "./colors.scss";
 @import "./toggles.scss";
-@import "./animations.css";
+@import "./animations.scss";
 @import "./loader.scss";
 
 
@@ -38,7 +38,7 @@
   margin:0px;
   padding:0px;
   font-family: "Roboto", sans-serif;
-  color: $oxford-blue;
+  color: $black;
   p {
     font-size: 16px;
   }
@@ -149,6 +149,7 @@ a.button {
 
 #cart-icon {
   position: relative;
+  fill: $oxford-blue;
 
   .cart-pill {
     position: absolute;
@@ -378,19 +379,21 @@ h1 {
 }
 
 .navbar2 {
-  background-color: $oxford-blue;
+  //background-color: $oxford-blue;
+  border-bottom: 1px solid $oxford-blue;
   a {
-    color: $platinum ;
+    color: $oxford-blue;
   }
 }
 
 .sub-navbar {
   order: 2;
-  background-color: $oxford-blue;
+  background-color: $gradient-top;
+  border-top: 1px solid $oxford-blue;
   height: 40px;
   padding-top: 0.5rem;
   a {
-    color: $platinum ;
+    color: $oxford-blue ;
   }
 }
 

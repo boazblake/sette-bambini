@@ -47,6 +47,24 @@
     <meta name="theme-color" content="#ffffff" />
     <link rel="manifest" href="./manifest.json" />
     <link rel="preconnect" href="https://api.backendless.com" />
+    <script type="text/javascript">
+      window.GUMLET_CONFIG = {
+        hosts: [
+          {
+            current: "https://my.sirv.com",
+            gumlet: "sette-bambini.gumlet.io",
+          },
+        ],
+        lazy_load: true,
+      }
+      ;(function () {
+        d = document
+        s = d.createElement("script")
+        s.src = "https://cdn.gumlet.com/gumlet.js/2.0/gumlet.min.js"
+        s.async = 1
+        d.getElementsByTagName("head")[0].appendChild(s)
+      })()
+    </script>
     <link
       rel="preconnect"
       href="https://sette-bambini.sirv.com/Images/sette-bambini"

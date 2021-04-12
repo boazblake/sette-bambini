@@ -3356,8 +3356,8 @@
 
 @-webkit-keyframes slideInLeft {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
+    -webkit-transform: translate3d(-100vw, 0, 0);
+    transform: translate3d(-100vw, 0, 0);
     visibility: visible;
   }
 
@@ -3369,8 +3369,8 @@
 
 @keyframes slideInLeft {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
+    -webkit-transform: translate3d(-100vw, 0, 0);
+    transform: translate3d(-100vw, 0, 0);
     visibility: visible;
   }
 
@@ -3381,8 +3381,9 @@
 }
 
 .slideInLeft {
-  -webkit-animation-name: slideInLeft;
-  animation-name: slideInLeft;
+  -webkit-animation: ease-in 1s normal none running slideInLeft;
+  animation: ease-in 1s normal none running slideInLeft;
+
 }
 
 .slide-left {
@@ -3422,8 +3423,8 @@
 }
 
 .slideInRight {
-  -webkit-animation-name: slideInRight;
-  animation-name: slideInRight;
+  -webkit-animation: ease-in 1s normal none running slideInRight;
+  animation:  ease-in 1s normal none running slideInRight;
 }
 
 @-webkit-keyframes slideInUp {

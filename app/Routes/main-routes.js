@@ -4,6 +4,8 @@ import BabyBlankets from "Pages/blankets.js"
 import Default from "Pages/default.js"
 import Collections from "Pages/collections.js"
 import Home from "Pages/home.js"
+import About from "Pages/about.js"
+import Faq from "Pages/faq.js"
 import Cart from "Pages/cart.js"
 import Checkout from "Pages/checkout.js"
 import Logo from "Components/Logo"
@@ -250,7 +252,7 @@ const Routes = [
             behavior: "smooth",
           })
     },
-    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(About, { mdl })),
   },
   {
     id: "Contact Us",
@@ -390,7 +392,7 @@ const Routes = [
             behavior: "smooth",
           })
     },
-    component: (mdl) => m(Layout, { mdl }, m(Default, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(Faq, { mdl })),
   },
 ]
 

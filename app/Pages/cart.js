@@ -37,7 +37,7 @@ const Gender = () => {
         ? m(".animated.frow row-around mt-10", [
             m("img", {
               style: { width: "100px" },
-              src: productImages[product][0],
+              dataSrc: productImages[product][0],
             }),
 
             // m(
