@@ -68,6 +68,10 @@ body {
   max-height: 100vh;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 a.button {
   line-height: initial;
   background-color: $white;
@@ -75,7 +79,6 @@ a.button {
   padding: 0.35em 1.2em;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
-  text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: $oxford-blue;
@@ -262,6 +265,10 @@ h1 {
   grid-template-areas: "header" "body" "footer";
 }
 
+.cover {
+  background-color: $oxford-blue;
+}
+
 .loader {
   height: 80vh;
   width: 80vw;
@@ -377,10 +384,15 @@ h1#title.logo-text {
 
 .navbar1 {
   background-color:  $oxford-blue;
+  position: relative;
+  z-index: 100;
   .frow {
     a {
       font-size: 1.2em;
       color: $platinum;
+      &:hover {
+        color: $white;
+      }
     }
   }
 }
@@ -395,7 +407,7 @@ h1#title.logo-text {
 
 .sub-navbar {
   order: 2;
-  background-color: $gradient-top;
+  background: $gradient-top;
   border-top: 1px solid $oxford-blue;
   height: 40px;
   padding-top: 0.5rem;
@@ -412,9 +424,9 @@ h1#title.logo-text {
   color: white;
 }
 
-.underline {
-  text-decoration: underline $oxford-blue;
-}
+// .underline {
+//   text-decoration: underline $oxford-blue;
+// }
 
 .point-left {
   width: 40px;
@@ -636,4 +648,12 @@ h1#title.logo-text {
     width: 100%;
     min-width: 100%;
   }
+}
+
+#nav-modal {
+  box-shadow: 1px 7px 6px $oxford-blue;
+}
+
+#cart-modal {
+  box-shadow: 1px 7px 6px $oxford-blue;
 }

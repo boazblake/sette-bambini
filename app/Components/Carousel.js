@@ -5,7 +5,9 @@ const Carousel = () => {
       return m(
         "#carousel.Sirv",
         {
-          "data-options": `thumbnails.position: left;
+          "data-options": `thumbnails.position: ${
+            data.length > 5 ? "bottom" : "left"
+          };
             orientation:horizontal;viewer.quality:100;
             viewer.hdQuality:100;`,
         },

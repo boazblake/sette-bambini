@@ -3325,8 +3325,8 @@
 
 @-webkit-keyframes slideInDown {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translate3d(0, -3vw, 0);
+    transform: translate3d(0, -3vw, 0);
     visibility: visible;
     opacity: 0;
   }
@@ -3340,8 +3340,8 @@
 
 @keyframes slideInDown {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translate3d(0, -3vw, 0);
+    transform: translate3d(0, -3vw, 0);
     visibility: visible;
     opacity: 0;
   }
@@ -3354,8 +3354,8 @@
 }
 
 .slideInDown {
-  -webkit-animation: ease-in 0.1s normal none running slideInDown;
-  animation:  ease-in 0.1s normal none running slideInDown;
+  -webkit-animation: running slideInDown;
+  animation:  running slideInDown;
 }
 
 @-webkit-keyframes slideInLeft {
@@ -3441,8 +3441,8 @@
 
 @-webkit-keyframes slideInUp {
   from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 3vw, 0);
+    transform: translate3d(0, 3vw, 0);
     visibility: visible;
   }
 
@@ -3454,8 +3454,8 @@
 
 @keyframes slideInUp {
   from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 3vw, 0);
+    transform: translate3d(0, 3vw, 0);
     visibility: visible;
   }
 
