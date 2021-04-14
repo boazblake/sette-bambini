@@ -6,9 +6,9 @@ const Hamburger = () => {
       mdl.state.isAuth()
         ? m("span", [
             m("span", `Welcome ${mdl.user.name.split(" ")[0]}`),
-            m(BarsLine),
+            m(".icon-click", m(BarsLine)),
           ])
-        : m(BarsLine),
+        : m(".icon-click", m(BarsLine)),
   }
 }
 

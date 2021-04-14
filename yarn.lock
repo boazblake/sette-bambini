@@ -2231,11 +2231,6 @@ des.js@^1.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
 
-desandro-matches-selector@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz#717beed4dc13e7d8f3762f707a6d58a6774218e1"
-  integrity sha1-cXvu1NwT59jzdi9wem1YpndCGOE=
-
 detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
@@ -2506,11 +2501,6 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
-
-ev-emitter@^1.0.1, ev-emitter@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
-  integrity sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==
 
 events@^3.0.0:
   version "3.2.0"
@@ -2803,25 +2793,6 @@ first-chunk-stream@^1.0.0:
   resolved "https://registry.npmjs.org/first-chunk-stream/-/first-chunk-stream-1.0.0.tgz#59bfb50cd905f60d7c394cd3d9acaab4e6ad934e"
   integrity sha1-Wb+1DNkF9g18OUzT2ayqtOatk04=
 
-fizzy-ui-utils@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.npmjs.org/fizzy-ui-utils/-/fizzy-ui-utils-2.0.7.tgz#7df45dcc4eb374a08b65d39bb9a4beedf7330505"
-  integrity sha512-CZXDVXQ1If3/r8s0T+v+qVeMshhfcuq0rqIFgJnrtd+Bu8GmDmqMjntjUePypVtjHXKJ6V4sw9zeyox34n9aCg==
-  dependencies:
-    desandro-matches-selector "^2.0.0"
-
-flickity@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/flickity/-/flickity-2.2.1.tgz#81126e3d656cb54577358a5f959ffdbda088e670"
-  integrity sha512-fCZJGNqabgDrIhaUBqt2ydE8c5V6iiB3KQAf6dH3Z45MoDUm7g6+uZmteN0aLV9pzVItNqCbfOJQjsJM/rHuSA==
-  dependencies:
-    desandro-matches-selector "^2.0.0"
-    ev-emitter "^1.1.1"
-    fizzy-ui-utils "^2.0.7"
-    get-size "^2.0.3"
-    unidragger "^2.3.0"
-    unipointer "^2.3.0"
-
 fn-args@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fn-args/-/fn-args-1.0.0.tgz#974dafa1aeac4ac7c21fa09cc3b80f650106ed32"
@@ -2912,11 +2883,6 @@ get-proxy@^1.0.1:
   integrity sha1-iUhUSRvFkbDxR9euVw9cZ4tyVus=
   dependencies:
     rc "^1.1.2"
-
-get-size@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/get-size/-/get-size-2.0.3.tgz#54a1d0256b20ea7ac646516756202769941ad2ef"
-  integrity sha512-lXNzT/h/dTjTxRbm9BXb+SGxxzkm97h/PCIKtlN/CBCxxmkkIVV21udumMS93MuVTDX583gqc94v3RjuHmI+2Q==
 
 get-stdin@^4.0.1:
   version "4.0.1"
@@ -6345,13 +6311,6 @@ unicode-property-aliases-ecmascript@^1.0.4:
   resolved "https://registry.npmjs.org/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.1.0.tgz#dd57a99f6207bedff4628abefb94c50db941c8f4"
   integrity sha512-PqSoPh/pWetQ2phoj5RLiaqIk4kCNwoV3CI+LfGmWLKI3rE3kl1h59XpX2BjgDrmbxD9ARtQobPGU1SguCYuQg==
 
-unidragger@^2.3.0:
-  version "2.3.1"
-  resolved "https://registry.npmjs.org/unidragger/-/unidragger-2.3.1.tgz#2e8c34feff61affa96dc895234ddfc1ea4ec7515"
-  integrity sha512-u+IgG7AG0MXJTKcdzAIYxCm+W5FcnA9M28203Awl6jIcE3/+9OtEyUX4Wv64y7XNKEVRKPot52IV4V6x7FlF5Q==
-  dependencies:
-    unipointer "^2.3.0"
-
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -6361,13 +6320,6 @@ union-value@^1.0.0:
     get-value "^2.0.6"
     is-extendable "^0.1.1"
     set-value "^2.0.1"
-
-unipointer@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/unipointer/-/unipointer-2.3.0.tgz#ba0dc462ce31c2a88e80810e19c3bae0ce47ed9f"
-  integrity sha512-m85sAoELCZhogI1owtJV3Dva7GxkHk2lI7A0otw3o0OwCuC/Q9gi7ehddigEYIAYbhkqNdri+dU1QQkrcBvirQ==
-  dependencies:
-    ev-emitter "^1.0.1"
 
 unique-stream@^2.0.2:
   version "2.3.1"

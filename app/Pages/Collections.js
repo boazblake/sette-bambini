@@ -1,13 +1,15 @@
-import Carousel from "Components/Carousel.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { collections } from "index.images.js"
+
+let imgs = collections.map((src, id) => m("img.carousel-slide", { id, src }))
 
 const Collections = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".frow.gutters.mb-30", { id: "collections" }, [
-          m(".col-md-1-2", m(Carousel, { mdl, data: collections })),
+          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
           m(
             ".col-md-1-2",
             m("ul", [

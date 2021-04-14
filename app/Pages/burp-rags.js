@@ -1,13 +1,14 @@
-import Carousel from "Components/Carousel.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { burpWrags } from "index.images.js"
 
 const BurpRags = () => {
+  let imgs = burpWrags.map((src, id) => m("img.carousel-slide", { id, src }))
   return {
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".frow.gutters.mb-30", { id: "burps" }, [
-          m(".col-md-1-2", m(Carousel, { mdl, data: burpWrags })),
+          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
           m(
             ".col-md-1-2",
             m("ul", [

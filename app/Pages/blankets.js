@@ -1,7 +1,8 @@
-import Flicker from "Components/Flicker.js"
-import Carousel from "Components/Carousel.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { blankets } from "index.images.js"
+
+let imgs = blankets.map((src, id) => m("img.carousel-slide", { id, src }))
 
 const Blankets = () => {
   return {
@@ -9,7 +10,7 @@ const Blankets = () => {
       m(".frow-container frow-center", [
         m(".text-2halfx", m("h2.pb-10", "Wraps")),
         m(".frow.gutters.mb-30", { id: "wraps" }, [
-          m(".col-md-1-2", m(Carousel, { mdl, data: blankets })),
+          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
           m(
             ".col-md-1-2",
             m("ul", [
@@ -27,7 +28,7 @@ const Blankets = () => {
         m(
           ".frow.gutters.mb-30",
           { id: "christening" },
-          m(".col-md-1-2", m(Carousel, { mdl, data: blankets })),
+          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
           m(
             ".col-md-1-2",
             m("ul", [

@@ -8,7 +8,7 @@ const Home = () => {
         ".frow frow-center justify-evenly",
         { id: "masonry" },
         frontImgs.map((src) =>
-          m("img.Sirv", {
+          m("img", {
             oncreate: SlideUp,
             src,
           })

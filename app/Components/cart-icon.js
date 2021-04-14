@@ -29,10 +29,13 @@ const CartIcon = () => {
           onclick: () => mdl.state.showCartModal(true),
         },
         [
-          m(ShoppingBagLine, {
-            width: "45px",
-            height: "45px",
-          }),
+          m(
+            ".icon-click",
+            m(ShoppingBagLine, {
+              width: "45px",
+              height: "45px",
+            })
+          ),
 
           getQuantity(toProducts(mdl.cart))
             ? m(".cart-pill", getQuantity(toProducts(mdl.cart)))

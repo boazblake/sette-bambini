@@ -40,7 +40,7 @@ exports.plugins = {
       "imagemin-optipng": true,
       "imagemin-svgo": true,
     },
-    pattern: /\.(gif|jpg|jpeg|jpe|jif|jfif|jfi|png|svg|svgz)$/,
+    pattern: /\.(gif|jpg|jpeg|jpe|jif|jfif|jfi|png|svg|svgz|webp)$/,
   },
   copycat: {
     fonts: ["app/assets/fonts"],
