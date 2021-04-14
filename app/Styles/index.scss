@@ -694,7 +694,7 @@ icon.icon#logo-svg {
     max-width: 60vw;
     margin: 0 auto;
     scroll-snap-type: x mandatory;
-    overflow-x: auto;
+    overflow-x: hidden;
     display:flex;
     flex-flow: row;
     scrollbar-width: none;
