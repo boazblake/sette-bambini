@@ -1,9 +1,9 @@
-import Carousel from "Components/carousel.js"
+import Grid from "Components/grid.js"
 import Selector from "Components/Selector.js"
 import { burpWrags } from "index.images.js"
 import { SlideUp } from "Styles/animations"
 
-let imgs = burpWrags.map((src, id) => m("img.carousel-slide", { id, src }))
+// let imgs = burpWrags.map((src, id) => m("img.carousel-slide", { id, src }))
 
 const BurpRags = () => {
   return {
@@ -13,7 +13,7 @@ const BurpRags = () => {
         m(
           ".frow.mb-30",
           { id: "burps" },
-          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
+          m(".col-md-1-2", m(Grid, { mdl }, burpWrags)),
           m(
             ".col-md-1-2",
             m("ul", [
