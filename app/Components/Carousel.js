@@ -72,7 +72,7 @@ const Carousel = () => {
               observer.observe(currentEl())
               currentEl().scrollIntoView({
                 behavior: "smooth",
-                block: "center",
+                block: "end",
                 inline: "nearest",
               })
             },

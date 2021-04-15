@@ -1,13 +1,18 @@
 import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { burpWrags } from "index.images.js"
+import { SlideUp } from "Styles/animations"
+
+let imgs = burpWrags.map((src, id) => m("img.carousel-slide", { id, src }))
 
 const BurpRags = () => {
-  let imgs = burpWrags.map((src, id) => m("img.carousel-slide", { id, src }))
   return {
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", [
-        m(".frow.gutters.mb-30", { id: "burps" }, [
+      m(
+        ".frow-container frow-center",
+        m(
+          ".frow.mb-30",
+          { id: "burps" },
           m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
           m(
             ".col-md-1-2",
@@ -24,9 +29,9 @@ const BurpRags = () => {
               "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."
             ),
             m(".mt-20", m(Selector, { mdl, product: "Burp Rags" }))
-          ),
-        ]),
-      ]),
+          )
+        )
+      ),
   }
 }
 

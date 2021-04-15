@@ -3,6 +3,7 @@
 @import "./toggles.scss";
 @import "./animations.scss";
 @import "./loader.scss";
+@import "./masonry.sass";
 
 
 :root {
@@ -217,6 +218,8 @@ a.button {
   grid-auto-rows: 200px;
 }
 
+
+
 h1 {
   font-size: 2rem;
 }
@@ -298,21 +301,33 @@ icon.icon#logo-svg {
   }
 }
 
-.masonry {
-  display: grid;
-  grid-gap: 1em; /* [1] Add some gap between rows and columns */
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(350px, 1fr)
-  ); /* [2] Make columns adjust according to the available viewport */
-  grid-auto-rows: 350px; /* [3] Set the height for implicitly-created row track */
-  grid-auto-flow: dense;
-  grid-column-start: span 3;
+// .masonry {
+//   display: grid;
+//   grid-gap: 1em; /* [1] Add some gap between rows and columns */
+//   grid-template-columns: repeat(
+//     auto-fill,
+//     minmax(350px, 1fr)
+//   ); /* [2] Make columns adjust according to the available viewport */
+//   grid-auto-rows: 350px; /* [3] Set the height for implicitly-created row track */
+//   grid-auto-flow: dense;
+//   grid-column-start: span 3;
 
-  img {
-    max-width: 100%;
-  }
-}
+//   img {
+//     max-width: 100%;
+//   }
+// }
+
+// .masonry { /* Masonry container */
+//   column-count: 4;
+//   column-gap: 1em;
+//   img { /* Masonry bricks or child elements */
+//     background-color: #eee;
+//     display: inline-block;
+//     margin: 0 0 1em;
+//     width: 100%;
+// }
+
+// }
 
 .modal {
   animation: ease-in-out 1s;
@@ -475,12 +490,6 @@ icon.icon#logo-svg {
 }
 
 
-.products {
-  .product {
-    margin: 2px;
-  }
-}
-
 .progress-bar progress {
   position: relative;
   border: 0;
@@ -581,23 +590,52 @@ icon.icon#logo-svg {
   padding: 4px;
 }
 
-#masonry {
-	display: -ms-flexbox;
-	-ms-flex-direction: column;
-	-ms-flex-wrap: wrap;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	height: 100vw;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-	font-size: 0;
+// #masonry {
+// 	display: -ms-flexbox;
+// 	-ms-flex-direction: column;
+// 	-ms-flex-wrap: wrap;
+// 	display: flex;
+// 	flex-direction: column;
+// 	flex-wrap: wrap;
+//   width: 100%;
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// 	font-size: 0;
 
-   img {
-      width: 33.3%;
-    }
+//   &.product-img {
+//     height: 400px !important;
+//   }
+
+//    img {
+//       width: 33.3%;
+//     }
+//   }
+
+#masonry {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;
+  /* Your container needs a fixed height, and it
+   * needs to be taller than your tallest column. */
+
+  .item {
+    width:24%;
+    margin-bottom: 2%; /* Optional */
   }
+
+  /* Re-order items into 4 rows */
+  .item:nth-of-type(4n+1) { order: 1; }
+  .item:nth-of-type(4n+2) { order: 2; }
+  .item:nth-of-type(4n+3) { order: 3; }
+  .item:nth-of-type(4n)   { order: 4; }
+
+  /* Force new columns */
+  .break {
+    flex-basis: 100%;
+    width: 0;
+    margin: 0;
+  }
+}
 
   @media screen and (min-width: 668px) {
   #masonry{
@@ -696,6 +734,8 @@ icon.icon#logo-svg {
     overflow-x: auto;
     display:flex;
     flex-flow: row;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
       display: none;

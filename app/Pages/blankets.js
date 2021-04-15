@@ -1,6 +1,7 @@
 import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { blankets } from "index.images.js"
+import { SlideUp } from "Styles/animations"
 
 let imgs = blankets.map((src, id) => m("img.carousel-slide", { id, src }))
 
@@ -11,6 +12,20 @@ const Blankets = () => {
         m(".text-2halfx", m("h2.pb-10", "Wraps")),
         m(".frow.gutters.mb-30", { id: "wraps" }, [
           m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
+
+          // m(
+          //   ".col-md-1-2",
+          //   m(
+          //     Grid,
+          //     blankets.map((src) =>
+          //       m("img.frow-img", {
+          //         style: { height: "10vh", width: "10vw" },
+          //         oncreate: SlideUp,
+          //         src,
+          //       })
+          //     )
+          //   )
+          // ),
           m(
             ".col-md-1-2",
             m("ul", [
@@ -29,6 +44,16 @@ const Blankets = () => {
           ".frow.gutters.mb-30",
           { id: "christening" },
           m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
+          // m(
+          //   Grid,
+          //   blankets.map((src) =>
+          //     m("img.frow-img", {
+          //       style: { height: "10vh", width: "10vw" },
+          //       oncreate: SlideUp,
+          //       src,
+          //     })
+          //   )
+          // )
           m(
             ".col-md-1-2",
             m("ul", [
