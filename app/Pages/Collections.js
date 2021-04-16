@@ -1,21 +1,28 @@
-import Carousel from "Components/carousel.js"
+import Carousel from "Components/grid.js"
 import Selector from "Components/Selector.js"
 import { collections } from "index.images.js"
 
-let imgs = collections.map((src, id) => m("img.carousel-slide", { id, src }))
+let imgs = collections.map((srcSet, id) => m("img.slidy-img", { id, srcSet }))
 
 const Collections = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".frow.gutters.mb-30", { id: "collections" }, [
-          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
+          m(
+            ".col-md-1-2",
+            m(
+              Carousel,
+              { id: "collections", height: "400px", overflow: "hidden" },
+              imgs
+            )
+          ),
           m(
             ".col-md-1-2",
             m("ul", [
               m(
                 "li.pb-10",
-                "Each Collection comprise of hand selected blankets and burp rags"
+                "Each Collection comprise of hand selected blankets and Burpies"
               ),
               m("li.pb-10", "Perfect for stroller, or car seat"),
               m("li.pb-10", '3 Double sided Flannel burp cloths 21" x 12"'),

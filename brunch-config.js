@@ -39,6 +39,7 @@ exports.plugins = {
       "imagemin-jpegtran": true,
       "imagemin-optipng": true,
       "imagemin-svgo": true,
+      "imagemin-webp": true,
     },
     pattern: /\.(gif|jpg|jpeg|jpe|jif|jfif|jfi|png|svg|svgz|webp)$/,
   },
@@ -70,6 +71,22 @@ exports.plugins = {
       },
     },
   },
+  // sharp: {
+  //   src: "app/assets/images",
+  //   dest: "docs/images",
+  //   imageExt: ["jpg"],
+  //   tasks: [
+  //     [
+  //       { resize: [1200, 1200] },
+  //       // { toFormat: "webp" },
+  //       { withoutEnlargement: true },
+  //       { quality: 95 },
+  //       { withoutAdaptiveFiltering: true },
+  //       { optimiseScans: true },
+  //       { rename: "{base}-1200.{ext}" },
+  //     ],
+  //   ],
+  // },
 }
 
 exports.paths = {

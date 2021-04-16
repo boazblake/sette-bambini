@@ -1,31 +1,24 @@
-import Carousel from "Components/carousel.js"
+import Carousel from "Components/grid.js"
 import Selector from "Components/Selector.js"
 import { blankets } from "index.images.js"
-import { SlideUp } from "Styles/animations"
 
-let imgs = blankets.map((src, id) => m("img.carousel-slide", { id, src }))
+let imgs = blankets.map((srcSet, id) => m("img.slidy-img", { id, srcSet }))
 
 const Blankets = () => {
   return {
     view: ({ attrs: { mdl } }) =>
-      m(".frow-container frow-center", [
+      m(
+        ".frow-container frow-center",
         m(".text-2halfx", m("h2.pb-10", "Wraps")),
         m(".frow.gutters.mb-30", { id: "wraps" }, [
-          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
-
-          // m(
-          //   ".col-md-1-2",
-          //   m(
-          //     Grid,
-          //     blankets.map((src) =>
-          //       m("img.frow-img", {
-          //         style: { height: "10vh", width: "10vw" },
-          //         oncreate: SlideUp,
-          //         src,
-          //       })
-          //     )
-          //   )
-          // ),
+          m(
+            ".col-md-1-2",
+            m(
+              Carousel,
+              { id: "wraps", height: "400px", overflow: "hidden" },
+              imgs
+            )
+          ),
           m(
             ".col-md-1-2",
             m("ul", [
@@ -39,21 +32,18 @@ const Blankets = () => {
             m(".mt-20", m(Selector, { mdl, product: "Wraps" }))
           ),
         ]),
-        m(".text-2halfx", m("h2.pb-10", "Christening Blankets")),
+        m(".text-2halfx", m("h2.pb-10", "Blankets")),
         m(
           ".frow.gutters.mb-30",
           { id: "christening" },
-          m(".col-md-1-2", m(Carousel, { mdl }, imgs)),
-          // m(
-          //   Grid,
-          //   blankets.map((src) =>
-          //     m("img.frow-img", {
-          //       style: { height: "10vh", width: "10vw" },
-          //       oncreate: SlideUp,
-          //       src,
-          //     })
-          //   )
-          // )
+          m(
+            ".col-md-1-2",
+            m(
+              Carousel,
+              { id: "blankets", height: "400px", overflow: "hidden" },
+              imgs
+            )
+          ),
           m(
             ".col-md-1-2",
             m("ul", [
@@ -71,10 +61,10 @@ const Blankets = () => {
               ),
               m("li.pb-10", "Proudly made in Houston Texas USA"),
             ]),
-            m(".mt-20", m(Selector, { mdl, product: "Christening Blankets" }))
+            m(".mt-20", m(Selector, { mdl, product: "Blankets" }))
           )
-        ),
-      ]),
+        )
+      ),
   }
 }
 

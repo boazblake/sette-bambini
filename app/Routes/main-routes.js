@@ -1,5 +1,5 @@
 import Layout from "Layouts/index.js"
-import BurpRags from "Pages/burp-rags.js"
+import Burpies from "Pages/burpies.js"
 import BabyBlankets from "Pages/blankets.js"
 import Default from "Pages/default.js"
 import Collections from "Pages/collections.js"
@@ -115,10 +115,10 @@ const Routes = [
     component: (mdl) => m(Layout, { mdl }, m(Checkout, { mdl })),
   },
   {
-    id: "burp-rags",
-    name: "Burp Rags",
+    id: "Burpies",
+    name: "Burpies",
     // icon: Icons.search,
-    route: "/burp-rags",
+    route: "/Burpies",
     isNav: true,
     group: ["navbar"],
     children: [],
@@ -132,7 +132,7 @@ const Routes = [
             behavior: "smooth",
           })
     },
-    component: (mdl) => m(Layout, { mdl }, m(BurpRags, { mdl })),
+    component: (mdl) => m(Layout, { mdl }, m(Burpies, { mdl })),
   },
   {
     id: "blankets",
@@ -196,7 +196,7 @@ const Routes = [
   },
   {
     id: "christ-blankets",
-    name: "Christening Blankets",
+    name: "Blankets",
     // icon: Icons.search,
     route: "/blankets/#christening",
     isNav: false,

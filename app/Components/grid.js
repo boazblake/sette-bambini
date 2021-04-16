@@ -1,28 +1,18 @@
-const getRatio = (dom) => {} //dom.style.naturalWidth / dom.style.naturalHeight / 100
+import cssSlidy from "Utils/slider"
 
-const Image = () => {
-  let _dom
-  return {
-    oncreate: ({ dom }) => {
-      console.log(dom, dom.style.naturalWidth / dom.style.naturalHeight / 100)
-      _dom = dom
-    },
-    view: ({ attrs: { src } }) =>
-      m("img", {
-        src,
-        style: { aspectRatio: getRatio() },
-      }),
-  }
+const Fig = {
+  view: ({ children, attrs: { id } }) => m(`figure#${id}-slidy`, children),
 }
 
-const Grid = () => {
-  return {
-    view: ({ children }) =>
-      m(
-        ".mason-grid",
-        children.map((src) => m(Image, { src }))
-      ),
-  }
+const Grid = {
+  oncreate: ({ dom, attrs: { id } }) =>
+    cssSlidy({ slidyContainerSelector: dom, slidySelector: `#${id}-slidy` }),
+  view: ({ children, attrs: { id, maxheight, height, overflow } }) =>
+    m(
+      `#${id}`,
+      { style: { overflow, maxHeight: maxheight, height } },
+      m(Fig, { id }, children)
+    ),
 }
 
 export default Grid

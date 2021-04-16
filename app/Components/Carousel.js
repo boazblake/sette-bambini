@@ -25,26 +25,20 @@ const Carousel = () => {
   let currentEl = Stream(null)
   let indicators = Stream([])
 
-  let observer = new IntersectionObserver(
-    (entries, _) => {
-      entries.forEach((entry) => {
-        const { target } = entry
-        const indicatorId = target.getAttribute("id")
-        let indicator = indicators()[indicatorId]
-        if (entry.intersectionRatio >= 0.25) {
-          target.classList.add("is-active")
-          indicator.classList.add("is-active")
-        } else {
-          target.classList.remove("is-active")
-          indicator.classList.remove("is-active")
-        }
-      })
-    },
-    {
-      rootMargin: "0px",
-      threshold: 0.25,
-    }
-  )
+  let observer = new IntersectionObserver((entries, _) => {
+    entries.forEach((entry) => {
+      const { target } = entry
+      const indicatorId = target.getAttribute("id")
+      let indicator = indicators()[indicatorId]
+      if (entry.intersectionRatio >= 0.25) {
+        target.classList.add("is-active")
+        indicator.classList.add("is-active")
+      } else {
+        target.classList.remove("is-active")
+        indicator.classList.remove("is-active")
+      }
+    })
+  })
 
   return {
     view: ({ children, attrs: { mdl } }) =>

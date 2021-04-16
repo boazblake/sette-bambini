@@ -1,4 +1,4 @@
-import { frontImgs } from "index.images.js"
+import { AllImages } from "index.images.js"
 
 const Home = () => {
   return {
@@ -8,12 +8,12 @@ const Home = () => {
         {
           style: { height: "100vh", width: "100vw" },
         },
-        frontImgs.map((src) =>
+        AllImages.map((srcSet) =>
           m(
             ".masonry-item",
             m("img.masonry-image", {
               style: { height: "100%", width: "100%" },
-              src,
+              srcSet,
             })
           )
         )

@@ -23,7 +23,7 @@ const Gender = () => {
         ? m(".", [
             m("img", {
               style: { width: "100px" },
-              dataSrc: productImages[title][0],
+              serSet: productImages[title][0],
             }),
             m("h4", `${sex} : ${quantity}`),
           ])

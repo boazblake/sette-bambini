@@ -9,8 +9,8 @@ const currencies = { $: "US Dollar", "£": "British Pound" }
 const state = {
   prices: {
     Wraps: 60,
-    "Christening Blankets": 100,
-    "Burp Rags": 60,
+    Blankets: 100,
+    Burpies: 60,
     Collections: 85,
   },
   showAuthModal: Stream(false),
