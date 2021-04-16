@@ -3,18 +3,20 @@ import { isActiveRoute, getQuantity, getPrice } from "Utils/helpers"
 import { toPairs } from "ramda"
 import { productImages } from "index.images.js"
 
-const products = (cart) =>
-  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
+const makeProducts = (cart) => {
+  console.log(cart)
+  return toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
+}
 
 const Gender = () => {
   return {
     view: ({
       attrs: {
-        mdl,
         gender: [sex, quantity],
         title,
       },
     }) => {
+      console.log(title, productImages)
       return quantity
         ? m(".", [
             m("img", {
@@ -45,6 +47,7 @@ const Product = ({
         p: [title, genders],
       },
     }) => {
+      console.log(title, genders)
       return amount
         ? m(".frow column-start", [
             m("h3", `${amount} ${title} for $${price}`),
@@ -66,6 +69,7 @@ const getTotal = (mdl, products) => {
 }
 
 const CartModal = ({ attrs: { mdl } }) => {
+  console.log(mdl)
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
@@ -85,7 +89,7 @@ const CartModal = ({ attrs: { mdl } }) => {
 
           [
             m("h1.title text-center", "Shopping Cart"),
-            getTotal(mdl, products(mdl.cart))
+            getTotal(mdl, makeProducts(mdl.cart))
               ? m(NavLink, {
                   mdl,
                   href: `/cart`,
@@ -94,9 +98,9 @@ const CartModal = ({ attrs: { mdl } }) => {
                 })
               : null,
 
-            products(mdl.cart).map((p) => m(Product, { mdl, p })),
+            makeProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
 
-            getTotal(mdl, products(mdl.cart))
+            getTotal(mdl, makeProducts(mdl.cart))
               ? m(
                   ".frow ",
                   m(NavLink, {
@@ -108,8 +112,8 @@ const CartModal = ({ attrs: { mdl } }) => {
                       m(
                         "h1.bold text-center",
                         `Total of ${getQuantity(
-                          products(mdl.cart)
-                        )} for $${getTotal(mdl, products(mdl.cart))}`
+                          makeProducts(mdl.cart)
+                        )} for $${getTotal(mdl, makeProducts(mdl.cart))}`
                       ),
                     ],
                   })

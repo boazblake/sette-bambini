@@ -18,7 +18,7 @@ const Collections = () => {
             )
           ),
           m(
-            ".col-md-1-2",
+            ".m-15.col-md-1-2",
             m("ul", [
               m(
                 "li.pb-10",

@@ -71,6 +71,10 @@ body {
 
 a {
   text-decoration: none !important;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-0.5px);
+  }
 }
 
 a.button {
@@ -399,7 +403,7 @@ icon.icon#logo-svg {
   order: 2;
   height: 40px;
   padding-top: 0.5rem;
-  background: rgba(255, 255, 255, .0);
+  background: $white;
 
   a {
     color: $oxford-blue ;

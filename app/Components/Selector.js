@@ -31,6 +31,7 @@ const Selector = () => {
   return {
     oninit: () => ResetState(),
     view: ({ attrs: { mdl, product } }) => {
+      console.log(product)
       return m(
         ".frow",
         m(".frow content-center gutters row-between pt-20", [

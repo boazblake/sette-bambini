@@ -14,7 +14,6 @@ const SubNavBar = () => {
             onbeforeremove: SlideUp,
             id: "sub-navbar",
           },
-          m(".sub-navbar-backdrop"),
           m("nav.frow row-around", [
             subRoutes(mdl).map((r) =>
               m(NavLink, {

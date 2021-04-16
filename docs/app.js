@@ -330,6 +330,7 @@ var Selector = function Selector() {
       var _ref$attrs = _ref.attrs,
           mdl = _ref$attrs.mdl,
           product = _ref$attrs.product;
+      console.log(product);
       return m(".frow", m(".frow content-center gutters row-between pt-20", [state.error() && m("code.warning", state.error()), m(".col-sm-1-4", m("h2.pb-10", "$".concat(mdl.state.prices[product]))), m(".col-sm-1-4", m("label", m("input", {
         type: "number",
         inputmode: "numeric",
@@ -369,6 +370,90 @@ var Selector = function Selector() {
 };
 
 var _default = Selector;
+exports["default"] = _default;
+});
+
+;require.register("Components/carousel.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _clarity = require("@mithril-icons/clarity");
+
+var Indicators = {
+  view: function view(_ref) {
+    var currentIdx = _ref.attrs.currentIdx,
+        children = _ref.children;
+    return m(".frow", children.map(function (_, idx) {
+      return m(".clickable.carousel-indicator", {
+        "class": function _class() {
+          console.log(idx, currentIdx());
+          return currentIdx() == idx ? "is-active" : "";
+        },
+        onclick: function onclick(e) {
+          return currentIdx(idx);
+        }
+      }, m(_clarity.DotCircleLine));
+    }));
+  }
+};
+
+var Carousel = function Carousel() {
+  var currentIdx = Stream(0);
+  var currentEl = Stream(null);
+  var indicators = Stream([]);
+  var observer = new IntersectionObserver(function (entries, _) {
+    entries.forEach(function (entry) {
+      var target = entry.target;
+      var indicatorId = target.getAttribute("id");
+      var indicator = indicators()[indicatorId];
+
+      if (entry.intersectionRatio >= 0.25) {
+        target.classList.add("is-active");
+        indicator.classList.add("is-active");
+      } else {
+        target.classList.remove("is-active");
+        indicator.classList.remove("is-active");
+      }
+    });
+  });
+  return {
+    view: function view(_ref2) {
+      var children = _ref2.children,
+          mdl = _ref2.attrs.mdl;
+      return m(".carousel-container", {
+        oncreate: function oncreate(_ref3) {
+          var dom = _ref3.dom;
+          indicators(dom.children[1].children);
+          currentEl(dom.children[0].children[currentIdx()]);
+          observer.observe(currentEl());
+        }
+      }, m(".carousel-wrapper", {
+        ontouch: function ontouch(_ref4) {
+          var target = _ref4.target;
+          currentIdx(Math.round(target.scrollLeft / target.scrollWidth * children.length));
+        },
+        onupdate: function onupdate(_ref5) {
+          var dom = _ref5.dom;
+          currentEl(dom.children[currentIdx()]);
+          observer.observe(currentEl());
+          currentEl().scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest"
+          });
+        }
+      }, children), m(Indicators, {
+        currentIdx: currentIdx
+      }, children));
+    }
+  };
+};
+
+var _default = Carousel;
 exports["default"] = _default;
 });
 
@@ -784,7 +869,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var products = function products(cart) {
+var makeProducts = function makeProducts(cart) {
+  console.log(cart);
   return (0, _ramda.toPairs)(cart).map(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         product = _ref2[0],
@@ -798,12 +884,12 @@ var Gender = function Gender() {
   return {
     view: function view(_ref3) {
       var _ref3$attrs = _ref3.attrs,
-          mdl = _ref3$attrs.mdl,
           _ref3$attrs$gender = _slicedToArray(_ref3$attrs.gender, 2),
           sex = _ref3$attrs$gender[0],
           quantity = _ref3$attrs$gender[1],
           title = _ref3$attrs.title;
 
+      console.log(title, _indexImages.productImages);
       return quantity ? m(".", [m("img", {
         style: {
           width: "100px"
@@ -831,6 +917,7 @@ var Product = function Product(_ref4) {
           title = _ref5$attrs$p[0],
           genders = _ref5$attrs$p[1];
 
+      console.log(title, genders);
       return amount ? m(".frow column-start", [m("h3", "".concat(amount, " ").concat(title, " for $").concat(price)), m(".frow cart-item row-around", genders.map(function (gender) {
         return m(Gender, {
           mdl: mdl,
@@ -851,6 +938,7 @@ var getTotal = function getTotal(mdl, products) {
 
 var CartModal = function CartModal(_ref6) {
   var mdl = _ref6.attrs.mdl;
+  console.log(mdl);
   return {
     oninit: function oninit(_ref7) {
       var mdl = _ref7.attrs.mdl;
@@ -867,21 +955,21 @@ var CartModal = function CartModal(_ref6) {
           right: 0
         },
         id: "cart-modal"
-      }, [m("h1.title text-center", "Shopping Cart"), getTotal(mdl, products(mdl.cart)) ? m(_navLink.NavLink, {
+      }, [m("h1.title text-center", "Shopping Cart"), getTotal(mdl, makeProducts(mdl.cart)) ? m(_navLink.NavLink, {
         mdl: mdl,
         href: "/cart",
         classList: "".concat((0, _helpers.isActiveRoute)("/cart"), " para button m-0"),
         link: "Update Cart"
-      }) : null, products(mdl.cart).map(function (p) {
+      }) : null, makeProducts(mdl.cart).map(function (p) {
         return m(Product, {
           mdl: mdl,
           p: p
         });
-      }), getTotal(mdl, products(mdl.cart)) ? m(".frow ", m(_navLink.NavLink, {
+      }), getTotal(mdl, makeProducts(mdl.cart)) ? m(".frow ", m(_navLink.NavLink, {
         mdl: mdl,
         href: "/checkout",
         classList: "".concat((0, _helpers.isActiveRoute)("/checkout"), " para button m-0"),
-        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(products(mdl.cart)), " for $").concat(getTotal(mdl, products(mdl.cart))))]
+        link: ["Proceed to Checkout", m("h1.bold text-center", "Total of ".concat((0, _helpers.getQuantity)(makeProducts(mdl.cart)), " for $").concat(getTotal(mdl, makeProducts(mdl.cart))))]
       })) : m(".frow centered-column", m("h1.bold", "Your Cart is Empty")),,]));
     }
   };
@@ -1236,7 +1324,7 @@ var SubNavBar = function SubNavBar() {
         oncreate: _animations.SlideDown,
         onbeforeremove: _animations.SlideUp,
         id: "sub-navbar"
-      }, m(".sub-navbar-backdrop"), m("nav.frow row-around", [subRoutes(mdl).map(function (r) {
+      }, m("nav.frow row-around", [subRoutes(mdl).map(function (r) {
         return m(_navLink["default"], {
           mdl: mdl,
           href: r.route,
@@ -2547,7 +2635,7 @@ var Blankets = function Blankets() {
         id: "wraps",
         height: "400px",
         overflow: "hidden"
-      }, imgs)), m(".col-md-1-2", m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'), m("li.pb-10", "Machine wash and tumble dry."), m("li.pb-10", "Proudly made in Houston Texas USA")]), m(".mt-20", m(_Selector["default"], {
+      }, imgs)), m(".m-15.col-md-1-2", m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'), m("li.pb-10", "Machine wash and tumble dry."), m("li.pb-10", "Proudly made in Houston Texas USA")]), m(".mt-20", m(_Selector["default"], {
         mdl: mdl,
         product: "Wraps"
       })))]), m(".text-2halfx", m("h2.pb-10", "Blankets")), m(".frow.gutters.mb-30", {
@@ -2556,7 +2644,7 @@ var Blankets = function Blankets() {
         id: "blankets",
         height: "400px",
         overflow: "hidden"
-      }, imgs)), m(".col-md-1-2", m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'), m("li.pb-10", "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."), m("li.pb-10", "babies should be supervised at all times when this blanket is in use."), m("li.pb-10", "Proudly made in Houston Texas USA")]), m(".mt-20", m(_Selector["default"], {
+      }, imgs)), m(".m-15.col-md-1-2", m("ul", [m("li.pb-10", 'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'), m("li.pb-10", "This is a specialty blanket not for general use. Care has been taken to secure the pearls and crystals."), m("li.pb-10", "babies should be supervised at all times when this blanket is in use."), m("li.pb-10", "Proudly made in Houston Texas USA")]), m(".mt-20", m(_Selector["default"], {
         mdl: mdl,
         product: "Blankets"
       })))));
@@ -2694,10 +2782,10 @@ var Burpies = function Burpies() {
       return m(".frow-container frow-center", m(".mb-30 frow gutters justify-between", {
         id: "Burpies"
       }, m(".col-md-1-2", m(_grid["default"], {
-        id: "burp",
+        id: "burpies",
         height: "400px",
         overflow: "hidden"
-      }, imgs)), m(".col-md-1-2", m("ul", [m("li.pb-10", "Set of 7 handcrafted Burpies"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."), m(".mt-20", m(_Selector["default"], {
+      }, imgs)), m(".m-15.col-md-1-2", m("ul", [m("li.pb-10", "Set of 7 handcrafted Burpies"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "No two cloths are the same!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."), m(".mt-20", m(_Selector["default"], {
         mdl: mdl,
         product: "Burpies"
       })))));
@@ -2882,7 +2970,7 @@ var Gender = function Gender() {
         style: {
           width: "100px"
         },
-        serSet: _indexImages.productImages[title][0]
+        srcSet: _indexImages.productImages[title][0]
       }), m("h4", "".concat(sex, " : ").concat(quantity))]) : null;
     }
   };
@@ -2977,7 +3065,7 @@ var Collections = function Collections() {
         id: "collections",
         height: "400px",
         overflow: "hidden"
-      }, imgs)), m(".col-md-1-2", m("ul", [m("li.pb-10", "Each Collection comprise of hand selected blankets and Burpies"), m("li.pb-10", "Perfect for stroller, or car seat"), m("li.pb-10", '3 Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "The coordinating crocheted blanket is a small coverup approximately 22 by 27 inches"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."), m(".mt-20", m(_Selector["default"], {
+      }, imgs)), m(".m-15.col-md-1-2", m("ul", [m("li.pb-10", "Each Collection comprise of hand selected blankets and Burpies"), m("li.pb-10", "Perfect for stroller, or car seat"), m("li.pb-10", '3 Double sided Flannel burp cloths 21" x 12"'), m("li.pb-10", "The coordinating crocheted blanket is a small coverup approximately 22 by 27 inches"), m("li.pb-10", "Each guranteed to be one of a kind"), m("li.pb-10", "Thick and absorbent!"), m("li.pb-10", "Proudly made in Houston Texas USA")]), m("p.pb-10", "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."), m(".mt-20", m(_Selector["default"], {
         mdl: mdl,
         product: "Collections"
       })))])]);
@@ -4910,7 +4998,7 @@ exports.burpies = burpies;
 var productImages = {
   Wraps: blankets,
   Blankets: blankets,
-  burpies: burpies,
+  Burpies: burpies,
   Collections: collections
 };
 exports.productImages = productImages;

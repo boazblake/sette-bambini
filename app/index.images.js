@@ -27,7 +27,7 @@ export const burpies = [
 export const productImages = {
   Wraps: blankets,
   Blankets: blankets,
-  burpies: burpies,
+  Burpies: burpies,
   Collections: collections,
 }
 

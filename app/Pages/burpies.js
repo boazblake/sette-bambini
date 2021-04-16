@@ -16,12 +16,12 @@ const Burpies = () => {
             ".col-md-1-2",
             m(
               Carousel,
-              { id: "burp", height: "400px", overflow: "hidden" },
+              { id: "burpies", height: "400px", overflow: "hidden" },
               imgs
             )
           ),
           m(
-            ".col-md-1-2",
+            ".m-15.col-md-1-2",
             m("ul", [
               m("li.pb-10", "Set of 7 handcrafted Burpies"),
               m("li.pb-10", "Each guranteed to be one of a kind"),
