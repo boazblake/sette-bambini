@@ -6,12 +6,14 @@ const Blankets = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        ".frow-container frow-center",
-        m(".text-2halfx", m("h2.pb-10", "Wraps")),
+        ".",
+        {
+          class: mdl.settings.screenSize != "phone" && "px-10",
+        },
+        m(".text-2halfx#wraps", m("h2.pb-10", "Wraps")),
         m(
           ".frow.gutters.mb-30",
-          { id: "wraps" },
-          m(".col-sm-1-2", m(Carousel, blankets)),
+          m(".col-sm-1-2", m(Carousel, { ident: "wraps" }, blankets)),
           m(
             ".mtl-15.col-sm-1-2",
             m("ul", [
@@ -25,11 +27,10 @@ const Blankets = () => {
             m(".mt-20", m(Selector, { mdl, product: "Wraps" }))
           )
         ),
-        m(".text-2halfx", m("h2.pb-10", "Blankets")),
+        m(".text-2halfx#christening", m("h2.pb-10", "Blankets")),
         m(
           ".frow.gutters.mb-30",
-          { id: "christening" },
-          m(".col-sm-1-2", m(Carousel, blankets)),
+          m(".col-sm-1-2", m(Carousel, { ident: "christ" }, blankets)),
           m(
             ".mtl-15.col-sm-1-2",
             m("ul", [

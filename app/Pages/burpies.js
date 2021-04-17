@@ -6,11 +6,14 @@ const Burpies = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(
-        ".frow-container frow-center",
+        ".",
+        {
+          class: mdl.settings.screenSize != "phone" && "px-10",
+        },
         m(
           ".mb-30 frow gutters justify-between",
           { id: "Burpies" },
-          m(".col-sm-1-2", m(Carousel, burpies)),
+          m(".col-sm-1-2", m(Carousel, { ident: "burpies" }, burpies)),
           m(
             ".mtl-15.col-sm-1-2",
             m("ul", [
