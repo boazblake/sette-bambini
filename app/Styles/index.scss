@@ -5,7 +5,6 @@
 @import "./loader.scss";
 @import "./masonry.sass";
 
-
 :root {
   --modile-area: "header" "body" "footer";
   --area: "header" "body" "footer";
@@ -36,14 +35,14 @@
 // }
 
 * {
-  margin:0px;
-  padding:0px;
+  margin: 0px;
+  padding: 0px;
   font-family: "Roboto", sans-serif;
   color: $black;
   p {
     font-size: 16px;
   }
-   h1,
+  h1,
   h2,
   h3,
   h4,
@@ -56,7 +55,7 @@
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 body,
@@ -113,7 +112,8 @@ a.button {
   width: 100%;
 }
 
-.nav-link, .auth-link {
+.nav-link,
+.auth-link {
   &:hover {
     color: $gold;
   }
@@ -221,8 +221,6 @@ a.button {
   grid-auto-rows: 200px;
 }
 
-
-
 h1 {
   font-size: 2rem;
 }
@@ -284,13 +282,12 @@ icon.icon#logo-svg {
   fill: $gold;
 }
 
-.icon-click{
-  &:hover{
-    transition:translate3d(0, 10px, 0 );
+.icon-click {
+  &:hover {
+    transition: translate3d(0, 10px, 0);
     fill: $gold;
   }
 }
-
 
 #toolbar-logo > {
   .logo {
@@ -302,7 +299,6 @@ icon.icon#logo-svg {
     }
   }
 }
-
 
 .modal {
   animation: ease-in-out 1s;
@@ -378,7 +374,7 @@ icon.icon#logo-svg {
 }
 
 .navbar1 {
-  background-color:  $oxford-blue;
+  background-color: $oxford-blue;
   position: relative;
   z-index: 100;
   .frow {
@@ -406,12 +402,10 @@ icon.icon#logo-svg {
   background: $white;
 
   a {
-    color: $oxford-blue ;
+    color: $oxford-blue;
     background-color: inherit;
     backdrop-filter: none;
-
   }
-
 }
 
 .sub-navbar-backdrop {
@@ -424,12 +418,11 @@ icon.icon#logo-svg {
   bottom: 0;
   background: inherit;
   padding-top: 0.5rem;
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
-  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
   filter: blur(10px);
 }
-
 
 .para {
   border: 1px solid white;
@@ -456,7 +449,6 @@ icon.icon#logo-svg {
 .point-down {
   transform: rotate(180deg);
 }
-
 
 .progress-bar progress {
   position: relative;
@@ -520,8 +512,8 @@ icon.icon#logo-svg {
 }
 
 .Sirv {
-  max-width:100%;
-  height:auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .shadow {
@@ -585,41 +577,41 @@ icon.icon#logo-svg {
   object-fit: cover;
 }
 
-// .carousel-container {
+.carousel-container {
+  .carousel-wrapper {
+    max-height: 400px;
+    max-width: 60vw;
+    margin: 0 auto;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    display: flex;
+    flex-flow: row;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
-//     .carousel-wrapper {
-//       max-height: 400px;
-//       max-width: 60vw;
-//       margin: 0 auto;
-//       scroll-snap-type: x mandatory;
-//       overflow-x: auto;
-//       display:flex;
-//       flex-flow: row;
-//       scrollbar-width: none;
-//       -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-//       &::-webkit-scrollbar {
-//         display: none;
-//       }
+    .carousel-slide {
+      max-width: 100%;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+    }
+  }
 
-//       .carousel-slide {
-//         max-width: 100%;
-//         scroll-snap-align: center;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//         scroll-snap-align: start;
-//       }
-//     }
-
-//     .carousel-indicator {
-//       fill: $oxford-blue;
-//       &:hover {
-//         fill: $gold;
-//       }
-//     }
-//   }
-
+  .carousel-indicator {
+    &:hover {
+      border: 2px solid $gold;
+    }
+    img {
+      width: 100px;
+    }
+  }
+}
 
 // .masonry {
 //   display: grid;
@@ -696,8 +688,8 @@ icon.icon#logo-svg {
 //   }
 // }
 
-  @media screen and (min-width: 668px) {
-  #masonry{
+@media screen and (min-width: 668px) {
+  #masonry {
     img {
       width: 33.3%;
       // transition: .8s opacity;
@@ -736,19 +728,18 @@ icon.icon#logo-svg {
 }
 
 @media screen and (min-width: 920px) {
-
-#masonry{
-  #masonry img {
-    width: 33.3%;
-    // transition: .8s opacity;
+  #masonry {
+    #masonry img {
+      width: 33.3%;
+      // transition: .8s opacity;
+    }
+    #masonry:hover img {
+      opacity: 0.3;
+    }
+    #masonry:hover img:hover {
+      opacity: 1;
+    }
   }
-  #masonry:hover img {
-    opacity: 0.3;
-  }
-  #masonry:hover img:hover {
-    opacity: 1;
-  }
-}
 
   .img {
     max-width: 30%;

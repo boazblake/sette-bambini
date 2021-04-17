@@ -1,8 +1,6 @@
-import Carousel from "Components/grid.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { blankets } from "index.images.js"
-
-let imgs = blankets.map((srcSet, id) => m("img.slidy-img", { id, srcSet }))
 
 const Blankets = () => {
   return {
@@ -10,17 +8,12 @@ const Blankets = () => {
       m(
         ".frow-container frow-center",
         m(".text-2halfx", m("h2.pb-10", "Wraps")),
-        m(".frow.gutters.mb-30", { id: "wraps" }, [
+        m(
+          ".frow.gutters.mb-30",
+          { id: "wraps" },
+          m(".col-sm-1-2", m(Carousel, blankets)),
           m(
-            ".col-md-1-2",
-            m(
-              Carousel,
-              { id: "wraps", height: "400px", overflow: "hidden" },
-              imgs
-            )
-          ),
-          m(
-            ".m-15.col-md-1-2",
+            ".mtl-15.col-sm-1-2",
             m("ul", [
               m(
                 "li.pb-10",
@@ -30,22 +23,15 @@ const Blankets = () => {
               m("li.pb-10", "Proudly made in Houston Texas USA"),
             ]),
             m(".mt-20", m(Selector, { mdl, product: "Wraps" }))
-          ),
-        ]),
+          )
+        ),
         m(".text-2halfx", m("h2.pb-10", "Blankets")),
         m(
           ".frow.gutters.mb-30",
           { id: "christening" },
+          m(".col-sm-1-2", m(Carousel, blankets)),
           m(
-            ".col-md-1-2",
-            m(
-              Carousel,
-              { id: "blankets", height: "400px", overflow: "hidden" },
-              imgs
-            )
-          ),
-          m(
-            ".m-15.col-md-1-2",
+            ".mtl-15.col-sm-1-2",
             m("ul", [
               m(
                 "li.pb-10",

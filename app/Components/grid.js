@@ -1,17 +1,38 @@
-import cssSlidy from "Utils/slider"
+const getOverFlow = (mdl, overflow) => {
+  console.log(
+    mdl.settings.screenSize,
+    mdl.settings.screenSize == "phone" ? "none" : overflow
+  )
+  return mdl.settings.screenSize == "phone" ? "none" : overflow
+}
 
 const Fig = {
-  view: ({ children, attrs: { id } }) => m(`figure#${id}-slidy`, children),
+  view: ({ children, attrs: { id } }) =>
+    m(
+      `figure#${id}-slidy`,
+      {
+        "flex-direction": "column",
+        "justify-content": "center",
+        "scroll-snap-align": "start",
+      },
+      children
+    ),
 }
 
 const Grid = {
-  oncreate: ({ dom, attrs: { id } }) =>
-    cssSlidy({ slidyContainerSelector: dom, slidySelector: `#${id}-slidy` }),
-  view: ({ children, attrs: { id, maxheight, height, overflow } }) =>
+  onremove: () => {},
+  view: ({ children, attrs: { id, maxheight, height, overflow, mdl } }) =>
     m(
-      `#${id}`,
-      { style: { overflow, maxHeight: maxheight, height } },
-      m(Fig, { id }, children)
+      `frow-row`,
+      {
+        style: {
+          width: "80%",
+          "scroll-snap-type": " mandatory",
+          "scroll-snap-points-y": " repeat(3rem)",
+          "scroll-snap-type": " x mandatory",
+        },
+      },
+      children.map((child) => m(Fig, { id }, child))
     ),
 }
 

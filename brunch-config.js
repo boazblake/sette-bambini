@@ -71,22 +71,22 @@ exports.plugins = {
       },
     },
   },
-  sharp: {
-    src: "app/assets/images",
-    dest: "docs/images",
-    imageExt: ["jpg"],
-    tasks: [
-      [
-        { resize: [1200, 1200] },
-        // { toFormat: "webp" },
-        { withoutEnlargement: true },
-        { quality: 95 },
-        { withoutAdaptiveFiltering: true },
-        { optimiseScans: true },
-        { rename: "{base}-1200.{ext}" },
-      ],
-    ],
-  },
+  // sharp: {
+  //   src: "app/assets/images",
+  //   dest: "docs/images",
+  //   imageExt: ["jpg"],
+  //   tasks: [
+  //     [
+  //       { resize: [1200, 1200] },
+  //       // { toFormat: "webp" },
+  //       { withoutEnlargement: true },
+  //       { quality: 95 },
+  //       { withoutAdaptiveFiltering: true },
+  //       { optimiseScans: true },
+  //       { rename: "{base}-1200.{ext}" },
+  //     ],
+  //   ],
+  // },
 }
 
 exports.paths = {

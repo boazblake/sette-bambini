@@ -31,14 +31,13 @@ const Selector = () => {
   return {
     oninit: () => ResetState(),
     view: ({ attrs: { mdl, product } }) => {
-      console.log(product)
       return m(
         ".frow",
-        m(".frow content-center gutters row-between pt-20", [
+        m(".frow content-center gutters row-between pt-20 md-columns", [
           state.error() && m("code.warning", state.error()),
-          m(".col-sm-1-4", m("h2.pb-10", `$${mdl.state.prices[product]}`)),
+          m(".col-md-1-4", m("h2.pb-10", `$${mdl.state.prices[product]}`)),
           m(
-            ".col-sm-1-4",
+            ".col-md-1-4",
             m(
               "label",
               m("input", {
@@ -52,7 +51,7 @@ const Selector = () => {
             )
           ),
           m(
-            ".col-sm-1-4",
+            ".col-md-1-4",
             m(
               "label",
 
@@ -80,7 +79,7 @@ const Selector = () => {
               },
             }),
           m(
-            ".col-sm-1-4",
+            ".col-md-1-4",
             m(
               "button",
               {

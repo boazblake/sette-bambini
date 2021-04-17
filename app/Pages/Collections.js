@@ -1,24 +1,15 @@
-import Carousel from "Components/grid.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { collections } from "index.images.js"
-
-let imgs = collections.map((srcSet, id) => m("img.slidy-img", { id, srcSet }))
 
 const Collections = () => {
   return {
     view: ({ attrs: { mdl } }) =>
       m(".frow-container frow-center", [
         m(".frow.gutters.mb-30", { id: "collections" }, [
+          m(".col-sm-1-2", m(Carousel, collections)),
           m(
-            ".col-md-1-2",
-            m(
-              Carousel,
-              { id: "collections", height: "400px", overflow: "hidden" },
-              imgs
-            )
-          ),
-          m(
-            ".m-15.col-md-1-2",
+            ".mtl-15.col-sm-1-2",
             m("ul", [
               m(
                 "li.pb-10",

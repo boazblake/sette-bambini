@@ -1,8 +1,6 @@
-import Carousel from "Components/grid.js"
+import Carousel from "Components/carousel.js"
 import Selector from "Components/Selector.js"
 import { burpies } from "index.images.js"
-
-let imgs = burpies.map((srcSet, id) => m("img.slidy-img", { id, srcSet }))
 
 const Burpies = () => {
   return {
@@ -12,16 +10,9 @@ const Burpies = () => {
         m(
           ".mb-30 frow gutters justify-between",
           { id: "Burpies" },
+          m(".col-sm-1-2", m(Carousel, burpies)),
           m(
-            ".col-md-1-2",
-            m(
-              Carousel,
-              { id: "burpies", height: "400px", overflow: "hidden" },
-              imgs
-            )
-          ),
-          m(
-            ".m-15.col-md-1-2",
+            ".mtl-15.col-sm-1-2",
             m("ul", [
               m("li.pb-10", "Set of 7 handcrafted Burpies"),
               m("li.pb-10", "Each guranteed to be one of a kind"),

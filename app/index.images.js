@@ -8,7 +8,6 @@ export const collections = [
   "images/collections/collection7-1200.webp",
   "images/collections/collection8-1200.webp",
   "images/collections/collection9-1200.webp",
-  "images/collections/collection10-1200.webp",
 ]
 export const blankets = [
   "images/blankets/blankets1-1200.webp",

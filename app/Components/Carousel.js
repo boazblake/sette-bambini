@@ -3,18 +3,18 @@ import { DotCircleLine } from "@mithril-icons/clarity"
 const Indicators = {
   view: ({ attrs: { currentIdx }, children }) =>
     m(
-      ".frow",
-      children.map((_, idx) =>
+      ".frow row-between",
+      children.map((src, idx) =>
         m(
           ".clickable.carousel-indicator",
           {
-            class: () => {
-              console.log(idx, currentIdx())
-              return currentIdx() == idx ? "is-active" : ""
-            },
             onclick: (e) => currentIdx(idx),
           },
-          m(DotCircleLine)
+          m("img.carousel-slide", {
+            class: currentIdx() == idx ? "is-active" : "",
+            src,
+            id: idx,
+          })
         )
       )
     ),
@@ -32,10 +32,10 @@ const Carousel = () => {
       let indicator = indicators()[indicatorId]
       if (entry.intersectionRatio >= 0.25) {
         target.classList.add("is-active")
-        indicator.classList.add("is-active")
+        indicator?.classList.add("is-active")
       } else {
         target.classList.remove("is-active")
-        indicator.classList.remove("is-active")
+        indicator?.classList.remove("is-active")
       }
     })
   })
@@ -63,15 +63,17 @@ const Carousel = () => {
             },
             onupdate: ({ dom }) => {
               currentEl(dom.children[currentIdx()])
+              console.log(currentEl())
               observer.observe(currentEl())
-              currentEl().scrollIntoView({
-                behavior: "smooth",
-                block: "end",
-                inline: "nearest",
+              currentEl().scrollTo({
+                top: 0,
+                get behavior() {
+                  return "smooth"
+                },
               })
             },
           },
-          children
+          children.map((src, idx) => m("img.carousel-slide", { src, id: idx }))
         ),
         m(Indicators, { currentIdx }, children)
       ),
