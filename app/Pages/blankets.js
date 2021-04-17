@@ -16,7 +16,7 @@ const Blankets = () => {
           m(".col-sm-1-2", m(Carousel, { ident: "wraps" }, blankets)),
           m(
             ".mtl-15.col-sm-1-2",
-            m("ul", [
+            m("ul.frow-container px-30", [
               m(
                 "li.pb-10",
                 'Handcrafted 100% Pure Wool Carriage style Blanket 21" x 18"'
@@ -33,7 +33,7 @@ const Blankets = () => {
           m(".col-sm-1-2", m(Carousel, { ident: "christ" }, blankets)),
           m(
             ".mtl-15.col-sm-1-2",
-            m("ul", [
+            m("ul.frow-container px-30", [
               m(
                 "li.pb-10",
                 'Handcrafted 100% Pure Wool Christening style Blanket 21" x 18"'

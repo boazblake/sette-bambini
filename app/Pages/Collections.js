@@ -18,7 +18,7 @@ const Collections = () => {
             ),
             m(
               ".mtl-15.col-sm-1-2",
-              m("ul", [
+              m("ul.frow-container px-30", [
                 m(
                   "li.pb-10",
                   "Each Collection comprise of hand selected blankets and Burpies"
