@@ -45,7 +45,7 @@ exports.plugins = {
   },
   copycat: {
     fonts: ["app/assets/fonts"],
-    images: ["app/assets/images"],
+    // images: ["app/assets/images"],
     verbose: true, //shows each file that is copied to the destination directory
     onlyChanged: true, //only copy a file if it's modified time has changed (only effective when using brunch watch)
   },
@@ -73,7 +73,7 @@ exports.plugins = {
   },
   sharp: {
     src: "app/assets/images",
-    dest: "docs",
+    dest: "docs/images",
     imageExt: ["jpg", "png", "svg"],
     tasks: [
       [
@@ -84,7 +84,7 @@ exports.plugins = {
         { quality: 95 },
         { withoutAdaptiveFiltering: true },
         { optimiseScans: true },
-        { rename: "{base}-1200.{ext}" },
+        // { rename: "{base}-1200.{ext}" },
       ],
     ],
   },
