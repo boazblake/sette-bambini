@@ -266,6 +266,7 @@ h1 {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 2fr 1fr; //120px 58vh 100px;
   grid-template-areas: "header" "body" "footer";
+  overflow-x: hidden;
 }
 
 .cover {
