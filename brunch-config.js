@@ -73,12 +73,13 @@ exports.plugins = {
   },
   // sharp: {
   //   src: "app/assets/images",
-  //   dest: "docs/images",
-  //   imageExt: ["jpg"],
+  //   dest: "docs",
+  //   imageExt: ["jpg", "png", "svg"],
   //   tasks: [
   //     [
-  //       { resize: [1200, 1200] },
-  //       // { toFormat: "webp" },
+  //       { resize: [1200] },
+  //       { ignoreAspectRatio: true },
+  //       { toFormat: "webp" },
   //       { withoutEnlargement: true },
   //       { quality: 95 },
   //       { withoutAdaptiveFiltering: true },

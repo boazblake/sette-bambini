@@ -14135,6 +14135,7 @@ icon.icon#logo-svg {
   display: flex;
   flex-flow: row;
   scrollbar-width: none;
+  padding-bottom: 2px;
   -ms-overflow-style: none;
 }
 .carousel-container .carousel-wrapper::-webkit-scrollbar {
@@ -14148,11 +14149,11 @@ icon.icon#logo-svg {
   justify-content: center;
   scroll-snap-align: start;
 }
-.carousel-container .carousel-indicator:hover {
-  border: 2px solid #fca311;
-}
 .carousel-container .carousel-indicator img {
   width: 100px;
+}
+.carousel-container .carousel-indicator img.is-active, .carousel-container .carousel-indicator img:hover {
+  border: 2px solid #fca311;
 }
 
 @media screen and (min-width: 668px) {

@@ -1,4 +1,35 @@
-import { DotCircleLine } from "@mithril-icons/clarity"
+let currentIdx = Stream(0)
+let currentEl = Stream(null)
+let prevIdx = Stream(currentIdx())
+let indicators = Stream([])
+
+const distanceToNext = (dom) => {
+  let res =
+    currentIdx() - prevIdx() >= 0
+      ? Array.from(dom.children)
+          .slice(prevIdx(), currentIdx())
+          .reduce((acc, c) => acc + c.clientWidth, 0)
+      : ~Array.from(dom.children)
+          .slice(currentIdx(), prevIdx())
+          .reduce((acc, c) => acc + c.clientWidth, 0) + 1
+
+  return res
+}
+
+let observer = new IntersectionObserver((entries, _) => {
+  entries.forEach((entry) => {
+    const { target } = entry
+    const indicatorId = target.getAttribute("id")
+    let indicator = indicators()[indicatorId]
+    if (entry.intersectionRatio >= 0.25) {
+      target.classList.add("is-active")
+      indicator?.classList.add("is-active")
+    } else {
+      target.classList.remove("is-active")
+      indicator?.classList.remove("is-active")
+    }
+  })
+})
 
 const Indicators = {
   view: ({ attrs: { currentIdx }, children }) =>
@@ -8,7 +39,11 @@ const Indicators = {
         m(
           ".clickable.carousel-indicator",
           {
-            onclick: (e) => currentIdx(idx),
+            onclick: (e) => {
+              prevIdx(currentIdx())
+              currentIdx(idx)
+              currentEl(e.path[3].children[0].children[currentIdx()])
+            },
           },
           m("img.carousel-slide", {
             class: currentIdx() == idx ? "is-active" : "",
@@ -21,25 +56,6 @@ const Indicators = {
 }
 
 const Carousel = () => {
-  let currentIdx = Stream(0)
-  let currentEl = Stream(null)
-  let indicators = Stream([])
-
-  let observer = new IntersectionObserver((entries, _) => {
-    entries.forEach((entry) => {
-      const { target } = entry
-      const indicatorId = target.getAttribute("id")
-      let indicator = indicators()[indicatorId]
-      if (entry.intersectionRatio >= 0.25) {
-        target.classList.add("is-active")
-        indicator?.classList.add("is-active")
-      } else {
-        target.classList.remove("is-active")
-        indicator?.classList.remove("is-active")
-      }
-    })
-  })
-
   return {
     view: ({ children, attrs: { mdl } }) =>
       m(
@@ -63,13 +79,10 @@ const Carousel = () => {
             },
             onupdate: ({ dom }) => {
               currentEl(dom.children[currentIdx()])
-              console.log(currentEl())
               observer.observe(currentEl())
-              currentEl().scrollTo({
-                top: 0,
-                get behavior() {
-                  return "smooth"
-                },
+              dom.scrollTo({
+                left: dom.scrollLeft + distanceToNext(dom),
+                behavior: "smooth",
               })
             },
           },

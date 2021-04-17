@@ -587,6 +587,7 @@ icon.icon#logo-svg {
     display: flex;
     flex-flow: row;
     scrollbar-width: none;
+    padding-bottom: 2px;
     -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
@@ -604,11 +605,12 @@ icon.icon#logo-svg {
   }
 
   .carousel-indicator {
-    &:hover {
-      border: 2px solid $gold;
-    }
     img {
       width: 100px;
+      &.is-active,
+      &:hover {
+        border: 2px solid $gold;
+      }
     }
   }
 }

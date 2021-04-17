@@ -379,9 +379,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+var currentIdx = Stream(0);
+var currentEl = Stream(null);
+var prevIdx = Stream(currentIdx());
+var indicators = Stream([]);
 
-var _clarity = require("@mithril-icons/clarity");
+var distanceToNext = function distanceToNext(dom) {
+  var res = currentIdx() - prevIdx() >= 0 ? Array.from(dom.children).slice(prevIdx(), currentIdx()).reduce(function (acc, c) {
+    return acc + c.clientWidth;
+  }, 0) : ~Array.from(dom.children).slice(currentIdx(), prevIdx()).reduce(function (acc, c) {
+    return acc + c.clientWidth;
+  }, 0) + 1;
+  return res;
+};
 
+var observer = new IntersectionObserver(function (entries, _) {
+  entries.forEach(function (entry) {
+    var target = entry.target;
+    var indicatorId = target.getAttribute("id");
+    var indicator = indicators()[indicatorId];
+
+    if (entry.intersectionRatio >= 0.25) {
+      target.classList.add("is-active");
+      indicator === null || indicator === void 0 ? void 0 : indicator.classList.add("is-active");
+    } else {
+      target.classList.remove("is-active");
+      indicator === null || indicator === void 0 ? void 0 : indicator.classList.remove("is-active");
+    }
+  });
+});
 var Indicators = {
   view: function view(_ref) {
     var currentIdx = _ref.attrs.currentIdx,
@@ -389,7 +415,9 @@ var Indicators = {
     return m(".frow row-between", children.map(function (src, idx) {
       return m(".clickable.carousel-indicator", {
         onclick: function onclick(e) {
-          return currentIdx(idx);
+          prevIdx(currentIdx());
+          currentIdx(idx);
+          currentEl(e.path[3].children[0].children[currentIdx()]);
         }
       }, m("img.carousel-slide", {
         "class": currentIdx() == idx ? "is-active" : "",
@@ -401,24 +429,6 @@ var Indicators = {
 };
 
 var Carousel = function Carousel() {
-  var currentIdx = Stream(0);
-  var currentEl = Stream(null);
-  var indicators = Stream([]);
-  var observer = new IntersectionObserver(function (entries, _) {
-    entries.forEach(function (entry) {
-      var target = entry.target;
-      var indicatorId = target.getAttribute("id");
-      var indicator = indicators()[indicatorId];
-
-      if (entry.intersectionRatio >= 0.25) {
-        target.classList.add("is-active");
-        indicator === null || indicator === void 0 ? void 0 : indicator.classList.add("is-active");
-      } else {
-        target.classList.remove("is-active");
-        indicator === null || indicator === void 0 ? void 0 : indicator.classList.remove("is-active");
-      }
-    });
-  });
   return {
     view: function view(_ref2) {
       var children = _ref2.children,
@@ -438,15 +448,10 @@ var Carousel = function Carousel() {
         onupdate: function onupdate(_ref5) {
           var dom = _ref5.dom;
           currentEl(dom.children[currentIdx()]);
-          console.log(currentEl());
           observer.observe(currentEl());
-          currentEl().scrollTo({
-            top: 0,
-
-            get behavior() {
-              return "smooth";
-            }
-
+          dom.scrollTo({
+            left: dom.scrollLeft + distanceToNext(dom),
+            behavior: "smooth"
           });
         }
       }, children.map(function (src, idx) {
@@ -515,6 +520,59 @@ var CartIcon = function CartIcon() {
 };
 
 var _default = CartIcon;
+exports["default"] = _default;
+});
+
+;require.register("Components/grid.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var getOverFlow = function getOverFlow(mdl, overflow) {
+  console.log(mdl.settings.screenSize, mdl.settings.screenSize == "phone" ? "none" : overflow);
+  return mdl.settings.screenSize == "phone" ? "none" : overflow;
+};
+
+var Fig = {
+  view: function view(_ref) {
+    var children = _ref.children,
+        id = _ref.attrs.id;
+    return m("figure#".concat(id, "-slidy"), {
+      "flex-direction": "column",
+      "justify-content": "center",
+      "scroll-snap-align": "start"
+    }, children);
+  }
+};
+var Grid = {
+  onremove: function onremove() {},
+  view: function view(_ref2) {
+    var children = _ref2.children,
+        _ref2$attrs = _ref2.attrs,
+        id = _ref2$attrs.id,
+        maxheight = _ref2$attrs.maxheight,
+        height = _ref2$attrs.height,
+        overflow = _ref2$attrs.overflow,
+        mdl = _ref2$attrs.mdl;
+    return m("frow-row", {
+      style: _defineProperty({
+        width: "80%",
+        "scroll-snap-type": " mandatory",
+        "scroll-snap-points-y": " repeat(3rem)"
+      }, "scroll-snap-type", " x mandatory")
+    }, children.map(function (child) {
+      return m(Fig, {
+        id: id
+      }, child);
+    }));
+  }
+};
+var _default = Grid;
 exports["default"] = _default;
 });
 
