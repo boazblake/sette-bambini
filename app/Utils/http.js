@@ -59,7 +59,6 @@ const HttpTask = (_headers) => (method) => (mdl) => (url) => (body) => {
         method,
         url,
         headers: {
-          "content-type": "application/json",
           ..._headers,
         },
         body,
@@ -120,15 +119,17 @@ const store = {
 
 const back4App = {
   getTask: (mdl) => (url) =>
-    HttpTask(Back4App.headers())("GET")(mdl)(`${Back4App.baseUrl}/${url}`)(
-      null
-    ),
+    HttpTask(Back4App.headers(Back4App))("GET")(mdl)(
+      `${Back4App.baseUrl}/${url}`
+    )(null),
   postTask: (mdl) => (url) => (dto) =>
-    HttpTask(Back4App.headers())("POST")(mdl)(`${Back4App.baseUrl}/${url}`)(
-      dto
-    ),
+    HttpTask(Back4App.headers(Back4App))("POST")(mdl)(
+      `${Back4App.baseUrl}/${url}`
+    )(dto),
   putTask: (mdl) => (url) => (dto) =>
-    HttpTask(Back4App.headers())("PUT")(mdl)(`${Back4App.baseUrl}/${url}`)(dto),
+    HttpTask(Back4App.headers(Back4App))("PUT")(mdl)(
+      `${Back4App.baseUrl}/${url}`
+    )(dto),
 }
 
 const http = {

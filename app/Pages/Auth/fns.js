@@ -1,12 +1,13 @@
-import { saveStorageTask, log } from "Utils"
-import { mergeDeepWith, add } from "ramda"
+import { saveStorageTask } from "Utils"
+import { mergeDeepWith, add, prop } from "ramda"
 
 const mergeCarts = (accnt) => (cart) => mergeDeepWith(add, cart, accnt)
 
 const toAccountVM = (mdl) => (accnts) => {
-  let cart = mergeCarts(JSON.parse(accnts[0].cart))(mdl.cart)
+  console.log(mdl, accnts)
+  let cart = mergeCarts(accnts[0].cart)(mdl.cart)
   mdl.user.account = { objectId: accnts[0].objectId, cart }
-  mdl.user.address = JSON.parse(accnts[0].address)
+  mdl.user.address = accnts[0].address
   mdl.cart = cart
   setUserToken(mdl)(mdl.user)
   return cart
@@ -14,24 +15,24 @@ const toAccountVM = (mdl) => (accnts) => {
 
 const setUserToken = (mdl) => (user) => {
   sessionStorage.setItem("sb-user", JSON.stringify(user))
-  sessionStorage.setItem("sb-user-token", user["user-token"])
+  sessionStorage.setItem("sb-user-token", user["sessionToken"])
   mdl.state.isAuth(true)
   mdl.user = user
-  return user
+  return mdl
 }
 
-export const loginUserTask = (mdl) => ({ email, password }) =>
-  mdl.http.backEnd
-    .postTask(mdl)("users/login")({
-      login: email,
-      password: btoa(password),
-    })
-    .map(setUserToken(mdl))
+export const loginUserTask = (mdl) => ({ email, password }) => {
+  let login = encodeURI(`username=${email}&password=${btoa(password)}`)
+  return mdl.http.back4App.getTask(mdl)(`login?${login}`).map(setUserToken(mdl))
+}
 
-const getUserAccountTask = (mdl) => (_) =>
-  mdl.http.backEnd
-    .getTask(mdl)(`data/Accounts?where=userId%3D'${mdl.user.objectId}'`)
+const getUserAccountTask = (mdl) => (_) => {
+  let userAccount = encodeURI(`where={"userId":"${mdl.user.objectId}"}`)
+  return mdl.http.back4App
+    .getTask(mdl)(`classes/Accounts?${userAccount}`)
+    .map(prop("results"))
     .map(toAccountVM(mdl))
+}
 
 export const loginTask = (mdl) => ({ email, password }) =>
   loginUserTask(mdl)({ email, password })
@@ -41,20 +42,29 @@ export const loginTask = (mdl) => ({ email, password }) =>
 export const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
   mdl.http.back4App
     .postTask(mdl)("users")({
+      username: email,
       name,
       email,
       password: btoa(password),
       isAdmin,
     })
-    .map(log("regiser user"))
+    .map((user) =>
+      setUserToken(mdl)({ name, email, password, isAdmin, ...user })
+    )
 
-export const createAccountTask = (mdl) =>
-  mdl.http.backEnd.postTask(mdl)("data/Accounts")({
-    cart: JSON.stringify(mdl.cart),
-    userId: mdl.user.objectId,
-  })
-
-export const linkAccountTask = (mdl) =>
-  mdl.http.backEnd.postTask(mdl)(
-    `data/Users/${mdl.user.objectId}/account%3AAccounts%3A1`
-  )([mdl.user.account.objectId])
+export const createAccountTask = (mdl) => {
+  mdl.user.account = {
+    cart: mdl.cart,
+    address: {},
+  }
+  return mdl.http.back4App
+    .postTask(mdl)("classes/Accounts")({
+      cart: mdl.cart,
+      userId: mdl.user.objectId,
+      address: {},
+    })
+    .map(({ objectId }) => {
+      mdl.user.account.objectId = objectId
+      return mdl
+    })
+}

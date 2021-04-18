@@ -21,17 +21,15 @@ const BackEndLess = {
 }
 
 const Back4App = {
-  unregistered: {
-    email: "unregistered@sette-bambini.com",
-    password: "sette-bambini-bryn",
-    objectId: "C1DD7B25-721B-4E51-BA7E-86B91611608A",
-  },
   baseUrl: "https://sette-bambini.b4a.io",
-  headers: () => ({
-    "X-Parse-Application-Id": "Lm887wjn77WnIXtb2zDyqwzhn5WguNZRv0Pt3pMg",
-    "X-Parse-REST-API-Key": "dJhZZhP9wD7YtdnaAZBn8kIBJRuO8m6Je7Hnh1Pd",
+  appId: "Lm887wjn77WnIXtb2zDyqwzhn5WguNZRv0Pt3pMg",
+  apiKey: "dJhZZhP9wD7YtdnaAZBn8kIBJRuO8m6Je7Hnh1Pd",
+  headers: ({ appId, apiKey }) => ({
+    "X-Parse-Application-Id": appId,
+    "X-Parse-REST-API-Key": apiKey,
     "X-Parse-Revocable-Session": 1,
-    "Content-Type": "application/json",
+    "content-type": "application/json",
+    "X-Parse-Session-Token": getUserToken(),
   }),
 }
 

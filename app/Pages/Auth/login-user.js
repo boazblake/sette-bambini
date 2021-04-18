@@ -17,9 +17,8 @@ const validateForm = (mdl) => (data) => {
     }
   }
 
-  const onSuccess = (mdl) => (account) => {
+  const onSuccess = (mdl) => (_) => {
     state.errors = {}
-    mdl.user.account = account
     m.route.set("/")
   }
 

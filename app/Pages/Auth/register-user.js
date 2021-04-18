@@ -1,12 +1,7 @@
 import NavLink from "Components/nav-link"
-import { jsonCopy, log } from "Utils"
+import { jsonCopy } from "Utils"
 import { validateUserRegistrationTask } from "./Validations"
-import {
-  loginUserTask,
-  registerUserTask,
-  createAccountTask,
-  linkAccountTask,
-} from "./fns.js"
+import { registerUserTask, createAccountTask } from "./fns.js"
 
 const userModel = {
   name: "",
@@ -51,9 +46,9 @@ export const validateForm = (mdl) => (data) => {
     }
   }
 
-  const onSuccess = (mdl) => (data) => {
+  const onSuccess = (mdl) => {
     state.errors = {}
-    sessionStorage.setItem("sb-user-token", mdl.user["user-token"])
+    sessionStorage.setItem("sb-user-token", mdl.user["sessionToken"])
     sessionStorage.setItem("sb-user", JSON.stringify(mdl.user))
     m.route.set("/")
   }
@@ -61,18 +56,8 @@ export const validateForm = (mdl) => (data) => {
   state.isSubmitted = true
   validateUserRegistrationTask(data.userModel)
     .chain(registerUserTask(mdl))
-    .chain((_) =>
-      loginUserTask(mdl)({
-        email: data.userModel.email,
-        password: data.userModel.password,
-      })
-    )
-    .chain((_) => createAccountTask(mdl))
-    .chain((accnt) => {
-      mdl.user.account = accnt
-      return linkAccountTask(mdl)
-    })
-    .fork(onError, onSuccess(mdl))
+    .chain(createAccountTask)
+    .fork(onError, onSuccess)
 }
 
 const RegisterUser = () => {

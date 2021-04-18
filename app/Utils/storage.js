@@ -20,12 +20,16 @@ const saveLocalStorageTask = (key) => (value) => {
 }
 
 const saveDbStorageTask = (mdl) => (cart) =>
-  mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
-    cart,
+  mdl.http.back4App.putTask(mdl)(
+    `classes/Accounts/${mdl.user.account.objectId}`
+  )({
+    cart: JSON.parse(cart),
   })
 
 const getDbStorageTask = (mdl) =>
-  mdl.http.backEnd.gettTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)
+  mdl.http.back4App.gettTask(mdl)(
+    `classes/Accounts/${mdl.user.account.objectId}`
+  )
 
 const saveStorageTask = (mdl) => (key) => (value) => {
   return mdl.state.isAuth()

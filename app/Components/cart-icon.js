@@ -1,5 +1,4 @@
 import { ShoppingBagLine } from "@mithril-icons/clarity/cjs"
-import { toPairs } from "ramda"
 import { toProducts, getQuantity } from "Utils/helpers"
 
 const itemAddedToCart = (mdl) => {
