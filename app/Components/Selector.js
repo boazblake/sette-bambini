@@ -8,7 +8,7 @@ const Selector = () => {
 
   const ResetState = () => {
     state.quantity = null
-    state.gender = "Select a Gender"
+    state.gender = "Gender"
   }
 
   const saveToStorage = (mdl) => {
@@ -62,7 +62,7 @@ const Selector = () => {
                   onchange: (e) => (state.gender = e.target.value),
                 },
                 [
-                  m("option", { value: null }, "Select a Gender"),
+                  m("option", { value: null }, "Gender"),
                   m("option", { value: "Male" }, "Male"),
                   m("option", { value: "Female" }, "Female"),
                   m("option", { value: "Unisex" }, "Unisex"),
@@ -84,8 +84,7 @@ const Selector = () => {
               "button",
               {
                 disabled:
-                  state.quantity == undefined ||
-                  state.gender == "Select a Gender",
+                  state.quantity == undefined || state.gender == "Gender",
                 onclick: () => addToCart(mdl)(product)(state),
               },
 
