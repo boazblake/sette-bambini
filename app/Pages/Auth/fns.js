@@ -1,4 +1,4 @@
-import { saveStorageTask } from "Utils/storage"
+import { saveStorageTask, log } from "Utils"
 import { mergeDeepWith, add } from "ramda"
 
 const mergeCarts = (accnt) => (cart) => mergeDeepWith(add, cart, accnt)
@@ -39,12 +39,14 @@ export const loginTask = (mdl) => ({ email, password }) =>
     .chain(saveStorageTask(mdl)("sb-cart"))
 
 export const registerUserTask = (mdl) => ({ name, email, password, isAdmin }) =>
-  mdl.http.backEnd.postTask(mdl)("users/register")({
-    name,
-    email,
-    password: btoa(password),
-    isAdmin,
-  })
+  mdl.http.back4App
+    .postTask(mdl)("users")({
+      name,
+      email,
+      password: btoa(password),
+      isAdmin,
+    })
+    .map(log("regiser user"))
 
 export const createAccountTask = (mdl) =>
   mdl.http.backEnd.postTask(mdl)("data/Accounts")({

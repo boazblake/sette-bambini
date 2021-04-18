@@ -26,7 +26,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -46,7 +46,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -66,7 +66,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -86,7 +86,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -106,7 +106,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -126,7 +126,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -146,7 +146,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -166,7 +166,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -186,7 +186,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -206,7 +206,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -226,7 +226,7 @@ const Routes = [
   //   onmatch: (mdl, args, path, fullroute, isAnchor) => {
   //     isAnchor
   //       ? scrollToAnchor(mdl.state.anchor)
-  //       : window.scroll({
+  //       : window.scrollTo({
   //           top: 0,
   //           left: 0,
   //           behavior: "smooth",
@@ -246,7 +246,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -266,7 +266,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -286,7 +286,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -306,7 +306,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -326,7 +326,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -346,7 +346,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -366,7 +366,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
@@ -386,7 +386,7 @@ const Routes = [
     onmatch: (mdl, args, path, fullroute, isAnchor) => {
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
-        : window.scroll({
+        : window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",

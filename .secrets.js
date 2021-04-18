@@ -8,7 +8,7 @@ const getUserToken = () =>
 
 const makePaypalAuth = (clientId, secret) => btoa(`${clientId}:${secret}`)
 
-const BackEnd = {
+const BackEndLess = {
   unregistered: {
     email: "unregistered@sette-bambini.com",
     password: "sette-bambini-bryn",
@@ -18,6 +18,21 @@ const BackEnd = {
   APP_ID: "7A0EDE25-0509-5305-FFA3-0FA3A11BEF00",
   baseUrl: "https://api.backendless.com",
   headers: () => ({ "user-token": getUserToken() }),
+}
+
+const Back4App = {
+  unregistered: {
+    email: "unregistered@sette-bambini.com",
+    password: "sette-bambini-bryn",
+    objectId: "C1DD7B25-721B-4E51-BA7E-86B91611608A",
+  },
+  baseUrl: "https://sette-bambini.b4a.io",
+  headers: () => ({
+    "X-Parse-Application-Id": "Lm887wjn77WnIXtb2zDyqwzhn5WguNZRv0Pt3pMg",
+    "X-Parse-REST-API-Key": "dJhZZhP9wD7YtdnaAZBn8kIBJRuO8m6Je7Hnh1Pd",
+    "X-Parse-Revocable-Session": 1,
+    "Content-Type": "application/json",
+  }),
 }
 
 const Paypal = {
@@ -48,4 +63,4 @@ const Paypal = {
   }),
 }
 
-export { BackEnd, Paypal }
+export { BackEndLess, Paypal, Back4App }

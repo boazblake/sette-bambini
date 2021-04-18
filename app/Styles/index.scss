@@ -66,6 +66,9 @@ html {
 
 body {
   max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
 }
 
 a {
@@ -276,9 +279,6 @@ h1 {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 2fr 1fr; //120px 58vh 100px;
   grid-template-areas: "header" "body" "footer";
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
 }
 
 .cover {
@@ -523,11 +523,6 @@ icon.icon#logo-svg {
   padding: 4px;
 }
 
-.Sirv {
-  max-width: 100%;
-  height: auto;
-}
-
 .shadow {
   &::hover {
     -webkit-filter: drop-shadow(2px 2px 1px $oxford-blue);
@@ -562,11 +557,6 @@ icon.icon#logo-svg {
   padding: 4px;
 }
 
-// .mason-grid {
-//   display: grid;
-//   grid-template-columns: repeat(4, 1fr);
-//   grid-template-rows: masonry;
-
 .mason-grid {
   display: flex;
   flex-flow: row wrap;
@@ -581,12 +571,6 @@ icon.icon#logo-svg {
       height: auto;
     }
   }
-}
-
-// }
-
-.slidy-img {
-  object-fit: cover;
 }
 
 .carousel-container {
@@ -619,6 +603,7 @@ icon.icon#logo-svg {
 
   .carousel-indicator {
     img {
+      object-fit: cover;
       width: 100px;
       &.is-active,
       &:hover {
