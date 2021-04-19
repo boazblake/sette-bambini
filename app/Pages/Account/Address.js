@@ -2,8 +2,10 @@ import { states, stateDict } from "Models"
 import { PencilLine } from "@mithril-icons/clarity/cjs"
 
 const submitAddressTask = (mdl) => (data) =>
-  mdl.http.backEnd.putTask(mdl)(`data/Accounts/${mdl.user.account.objectId}`)({
-    address: JSON.stringify(data),
+  mdl.http.back4App.putTask(mdl)(
+    `classes/Accounts/${mdl.user.account.objectId}`
+  )({
+    address: data,
   })
 
 export const AccountAddress = ({ attrs: { mdl } }) => {
@@ -18,10 +20,9 @@ export const AccountAddress = ({ attrs: { mdl } }) => {
 
   const submitAddress = (mdl) => (state) => {
     const onError = (errors) => console.log("e", e)
-    const onSuccess = (mdl) => (s) => {
-      mdl.user.address = JSON.parse(s.address)
-    }
-    submitAddressTask(mdl)(state.address).fork(onError, onSuccess(mdl))
+    const onSuccess = (_) => (mdl.user.address = state.address)
+
+    submitAddressTask(mdl)(state.address).fork(onError, onSuccess)
   }
 
   state.address = mdl.user.address

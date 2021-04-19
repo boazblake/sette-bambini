@@ -4,6 +4,8 @@ import Account from "Pages/Account/index.js"
 import Layout from "Layouts/index.js"
 import { scrollToAnchor, jsonCopy } from "Utils"
 import { newCart } from "Models/cart"
+import { includes } from "ramda"
+import m from "mithril"
 
 const AuthenticatedRoutes = [
   {
@@ -107,8 +109,16 @@ const AuthenticatedRoutes = [
       mdl.cart = jsonCopy(newCart)
       mdl.state.isAuth(false)
       mdl.user = {}
-      m.route.set(m.route.get())
       console.log("loggout", mdl)
+
+      let routes = ["account", "checkout", "cart"]
+      let currentRoute = m.route.get()
+      routes
+        .map((r) => currentRoute.includes(r))
+        .map(log("???"))
+        .contains(true)
+        ? m.route.set("/")
+        : m.route.set(currentRoute)
     },
     component: (mdl) => m(Layout, { mdl }, m(Home, { mdl })),
   },

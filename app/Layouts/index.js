@@ -10,16 +10,12 @@ const initApp = ({ attrs: { mdl } }) =>
     mdl.state.prices = prices
     return token
   })
-    .ap(
-      mdl.http.backEnd.getTask(mdl)(
-        `users/isvalidusertoken/${sessionStorage.getItem("sb-user-token")}`
-      )
-    )
+    .ap(mdl.http.back4App.getTask(mdl)(`users/me`))
     .ap(mdl.http.store.getTask(mdl)("prices"))
-    .fork(log("e"), (isValid) => {
-      log("isValid")({ mdl, isValid })
-      isValid ? () => {} : m.route.set("/logout")
-    })
+    .fork(
+      (_) => m.route.set("/logout"),
+      (isValid) => {}
+    )
 
 const Layout = () => {
   return {

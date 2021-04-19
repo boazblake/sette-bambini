@@ -1,6 +1,6 @@
 import { log } from "Utils"
 import { AngleLine } from "@mithril-icons/clarity/cjs"
-import { assoc, map, add } from "ramda"
+import { assoc, map, add, prop } from "ramda"
 
 const state = {
   invoices: [],
@@ -16,15 +16,17 @@ const calcTotalPrice = (invoice) =>
     .reduce(add, 0)
 
 const invoiceUrl = (mdl) => {
-  log("mdl")(mdl)
+  let userInvoices = `{"userId": "${mdl.user.objectId}"}`
   return mdl.user.isAdmin
-    ? "data/Invoices"
-    : `data/Invoices?where=ownerId%3D'${mdl.user.objectId}'`
+    ? "classes/Invoices"
+    : `classes/Invoices?where=${userInvoices}`
 }
 
 const fetchInvoicesTask = (mdl) =>
-  mdl.http.backEnd
+  mdl.http.back4App
     .getTask(mdl)(invoiceUrl(mdl))
+    .map(prop("results"))
+    .map(log("invoices"))
     .map(map(assoc("isSelected", false)))
 
 const onFetchInvoiceError = (mdl) => (e) => console.log("e", e, mdl)

@@ -16,7 +16,6 @@ const Gender = () => {
         title,
       },
     }) => {
-      console.log(title, productImages)
       return quantity
         ? m(".", [
             m("img", {
@@ -47,7 +46,6 @@ const Product = ({
         p: [title, genders],
       },
     }) => {
-      console.log(title, genders)
       return amount
         ? m(".frow column-start", [
             m("h3", `${amount} ${title} for $${price}`),
@@ -69,7 +67,6 @@ const getTotal = (mdl, products) => {
 }
 
 const CartModal = ({ attrs: { mdl } }) => {
-  console.log(mdl)
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>

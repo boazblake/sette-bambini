@@ -4,7 +4,6 @@ import { mergeDeepWith, add, prop } from "ramda"
 const mergeCarts = (accnt) => (cart) => mergeDeepWith(add, cart, accnt)
 
 const toAccountVM = (mdl) => (accnts) => {
-  console.log(mdl, accnts)
   let cart = mergeCarts(accnts[0].cart)(mdl.cart)
   mdl.user.account = { objectId: accnts[0].objectId, cart }
   mdl.user.address = accnts[0].address

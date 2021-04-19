@@ -9,7 +9,7 @@ const Account = () => {
         m("h2", "Welcome ", mdl.user.name),
         m(AccountAddress, { mdl }),
         m(PastOrders, { mdl }),
-        m(PriceAdjustment, { mdl }),
+        mdl.user.isAdmin && m(PriceAdjustment, { mdl }),
         m("section"),
         m("section"),
       ])
