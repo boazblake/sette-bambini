@@ -40,8 +40,6 @@ const fetchInvoices = ({ attrs: { mdl } }) =>
     onFetchInvoiceSuccess(mdl)
   )
 
-const gettCellLabel = (children) => [m("td", children[0].key), children]
-
 const InvoiceCell = () => {
   return {
     view: ({
@@ -51,7 +49,10 @@ const InvoiceCell = () => {
         },
       },
       children,
-    }) => (screenSize == "phone" ? m("tr", gettCellLabel(children)) : children),
+    }) =>
+      screenSize == "phone"
+        ? m("tr", [m("td", children[0].key), children])
+        : children,
   }
 }
 
@@ -156,28 +157,36 @@ export const Orders = () => {
     onremove: (state = STATE()),
     oninit: fetchInvoices,
     view: ({ attrs: { mdl } }) =>
-      m("section", [
-        m("h3", "Orders"),
-        state.invoices.any()
-          ? m("table", { style: { width: "100%" } }, [
-              mdl.settings.screenSize != "phone" &&
+      m(
+        "section.overflow-auto",
+        {
+          style: {
+            height: "400px",
+          },
+        },
+        [
+          m("h3", "Orders"),
+          state.invoices.any()
+            ? m("table", { style: { width: "100%" } }, [
+                mdl.settings.screenSize != "phone" &&
+                  m(
+                    "thead",
+                    m("tr", [
+                      m("th", "Date"),
+                      m("th", "order Id"),
+                      m("th", "shipping Destination"),
+                      m("th", "payment status"),
+                      m("th", "shipping status"),
+                      m("th"),
+                    ])
+                  ),
                 m(
-                  "thead",
-                  m("tr", [
-                    m("th", "Date"),
-                    m("th", "order Id"),
-                    m("th", "shipping Destination"),
-                    m("th", "payment status"),
-                    m("th", "shipping status"),
-                    m("th"),
-                  ])
+                  "tbody",
+                  state.invoices.map((invoice) => m(Invoice, { mdl, invoice }))
                 ),
-              m(
-                "tbody",
-                state.invoices.map((invoice) => m(Invoice, { mdl, invoice }))
-              ),
-            ])
-          : m("h2", "No Orders"),
-      ]),
+              ])
+            : m("h2", "No Orders"),
+        ]
+      ),
   }
 }
