@@ -9,7 +9,7 @@ const ToolBar = () => {
     view: ({ attrs: { mdl } }) =>
       m(
         ".toolbar.my-5",
-        m(".frow row-between row-center", [
+        m(".frow row-between nowrap", [
           m(".frow", [
             m(
               ".navMenuButton visible-xs",

@@ -1,7 +1,6 @@
-import { log } from "Utils"
+import { formatDate } from "Utils"
 import { AngleLine } from "@mithril-icons/clarity/cjs"
 import { assoc, map, add, prop } from "ramda"
-import m from "mithril"
 
 const STATE = () => ({
   invoices: [],
@@ -41,35 +40,74 @@ const fetchInvoices = ({ attrs: { mdl } }) =>
     onFetchInvoiceSuccess(mdl)
   )
 
-const Invoice = ({ attrs: { mdl } }) => {
-  const rowOrTd = (mdl) => (mdl.settings.screenSize == "phone" ? "tr" : "td")
+const gettCellLabel = (children) => [m("td", children[0].key), children]
 
+const InvoiceCell = () => {
+  return {
+    view: ({
+      attrs: {
+        mdl: {
+          settings: { screenSize },
+        },
+      },
+      children,
+    }) => (screenSize == "phone" ? m("tr", gettCellLabel(children)) : children),
+  }
+}
+
+const Invoice = ({ attrs: { mdl } }) => {
   return {
     view: ({ attrs: { invoice } }) => {
       console.log(invoice)
       return [
         m(
           "tr.invoice",
-          m(rowOrTd(mdl), invoice.purchaseTime),
-          m(rowOrTd(mdl), invoice.orderID),
           m(
-            rowOrTd(mdl),
-            `${invoice.shippingDestination.name.full_name} ${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
-          ),
-          m(rowOrTd(mdl), invoice.status),
-          m(
-            rowOrTd(mdl),
-            invoice.shippingStatus
-              ? m("a", { href: invoice.shippingStatus }, "Shipping Status")
-              : m("p", "Prepparing your order")
+            InvoiceCell,
+            { mdl },
+            m("td", { key: "Date" }, formatDate(invoice.purchaseTime))
           ),
           m(
-            rowOrTd(mdl),
-            m(AngleLine, {
-              class: `clickable ${!invoice.isSelected && "point-down"}`,
-              onclick: () => (invoice.isSelected = !invoice.isSelected),
-              width: "16px",
-            })
+            InvoiceCell,
+            { mdl },
+            m("td", { key: "order Id" }, invoice.orderID)
+          ),
+          m(
+            InvoiceCell,
+            { mdl },
+            m(
+              "td",
+              { key: "shipping Destination" },
+              `${invoice.shippingDestination.name.full_name} ${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
+            )
+          ),
+          m(
+            InvoiceCell,
+            { mdl },
+            m("td", { key: "payment status" }, invoice.status)
+          ),
+          m(
+            InvoiceCell,
+            { mdl },
+            m(
+              "td",
+              { key: "Shipping Status" },
+              invoice.shippingStatus
+                ? m("a", { href: invoice.shippingStatus }, "Shipping Status")
+                : m("p", "Prepparing your order")
+            )
+          ),
+          m(
+            InvoiceCell,
+            { mdl },
+            m(
+              "td",
+              m(AngleLine, {
+                class: `clickable ${!invoice.isSelected && "point-down"}`,
+                onclick: () => (invoice.isSelected = !invoice.isSelected),
+                width: "16px",
+              })
+            )
           )
         ),
         invoice.isSelected &&
@@ -122,17 +160,18 @@ export const Orders = () => {
         m("h3", "Orders"),
         state.invoices.any()
           ? m("table", { style: { width: "100%" } }, [
-              m(
-                "thead",
-                m("tr", [
-                  m("th", "Date"),
-                  m("th", "order Id"),
-                  m("th", "shipping Destination"),
-                  m("th", "payment status"),
-                  m("th", "shipping status"),
-                  m("th"),
-                ])
-              ),
+              mdl.settings.screenSize != "phone" &&
+                m(
+                  "thead",
+                  m("tr", [
+                    m("th", "Date"),
+                    m("th", "order Id"),
+                    m("th", "shipping Destination"),
+                    m("th", "payment status"),
+                    m("th", "shipping status"),
+                    m("th"),
+                  ])
+                ),
               m(
                 "tbody",
                 state.invoices.map((invoice) => m(Invoice, { mdl, invoice }))

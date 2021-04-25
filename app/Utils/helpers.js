@@ -144,3 +144,5 @@ const toPriceModel = ({ Burpies, Wraps, Blankets, Collections }) => ({
 })
 
 export const parsePrices = compose(toPriceModel, last, prop("results"))
+
+export const formatDate = (date) => date.split("T")[0]
