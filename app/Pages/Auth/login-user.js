@@ -63,7 +63,7 @@ export const Login = () => {
     onremove: () => resetState(),
     view: ({ attrs: { mdl } }) =>
       m(
-        ".frow centered pt-30",
+        ".frow ",
         [
           state.showErrorMsg() && m("code.warning", state.errorMsg()),
           m(

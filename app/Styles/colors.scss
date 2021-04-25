@@ -1,17 +1,17 @@
 :root {
-/* CSS HEX */
---black: #000000ff;
---oxford-blue: #14213dff;
---gold: #fca311ff;
---platinum: #e5e5e5ff;
---white: #ffffffff;
+  /* CSS HEX */
+  --black: #000000ff;
+  --oxford-blue: #14213dff;
+  --gold: #fca311ff;
+  --platinum: #e5e5e5ff;
+  --white: #ffffffff;
 
-/* CSS HSL */
---black: hsla(0, 0%, 0%, 1);
---oxford-blue: hsla(221, 51%, 16%, 1);
---gold: hsla(37, 98%, 53%, 1);
---platinum: hsla(0, 0%, 90%, 1);
---white: hsla(0, 0%, 100%, 1);
+  /* CSS HSL */
+  --black: hsla(0, 0%, 0%, 1);
+  --oxford-blue: hsla(221, 51%, 16%, 1);
+  --gold: hsla(37, 98%, 53%, 1);
+  --platinum: hsla(0, 0%, 90%, 1);
+  --white: hsla(0, 0%, 100%, 1);
 }
 
 /* SCSS HEX */
@@ -38,20 +38,74 @@ $white: rgba(255, 255, 255, 1);
 /* SCSS Gradient */
 $gradient-top: linear-gradient(0deg, transparent, $white, $platinum);
 // $gradient-top: linear-gradient(0deg, transparent, $white, $platinum);
-$gradient-right: linear-gradient(90deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-bottom: linear-gradient(180deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-left: linear-gradient(270deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-top-right: linear-gradient(45deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-bottom-right: linear-gradient(135deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-top-left: linear-gradient(225deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-bottom-left: linear-gradient(315deg, $black, $oxford-blue, $gold, $platinum, $white);
-$gradient-radial: radial-gradient($black, $oxford-blue, $gold, $platinum, $white);
+$gradient-right: linear-gradient(
+  90deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-bottom: linear-gradient(
+  180deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-left: linear-gradient(
+  270deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-top-right: linear-gradient(
+  45deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-bottom-right: linear-gradient(
+  135deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-top-left: linear-gradient(
+  225deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-bottom-left: linear-gradient(
+  315deg,
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
+$gradient-radial: radial-gradient(
+  $black,
+  $oxford-blue,
+  $gold,
+  $platinum,
+  $white
+);
 
 $gradient-top-nav: linear-gradient(0deg, $oxford-blue, $white);
 
-/* HEX */
-// $color1: #e0fbfcff;
-// $color2: #c2dfe3ff;
-// $color3: #9db4c0ff;
-// $color4: #5c6b73ff;
-// $color5: #253237ff;
+$background-fancy: #c850c0;
+$background-fancy: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+$background-fancy: -o-linear-gradient(45deg, #4158d0, #c850c0);
+$background-fancy: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+$background-fancy: linear-gradient(45deg, #4158d0, #c850c0);

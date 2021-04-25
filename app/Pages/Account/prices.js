@@ -1,34 +1,35 @@
-import { log } from "Utils"
+import { without } from "ramda"
+import { log, parsePrices } from "Utils"
 
 const Prices = (mdl) =>
-  Object.keys(mdl.state.prices).map((product) =>
+  without("id", Object.keys(mdl.state.prices)).map((product) =>
     m(
       "label.col-xs-1-3",
       product,
       m("input", {
         type: "number",
         value: mdl.state.prices[product],
-        onchange: (e) => (mdl.state.prices[product] = e.target.value),
+        onkeyup: (e) => (mdl.state.prices[product] = parseInt(e.target.value)),
       })
     )
   )
 
 export const PriceAdjustment = () => {
   const getPrices = ({ attrs: { mdl } }) =>
-    mdl.http.store
-      .getTask(mdl)("prices")
-      .fork(log("error"), ({ prices }) => (mdl.state.prices = prices))
+    mdl.http.back4App
+      .getTask(mdl)("classes/Prices")
+      .map(parsePrices)
+      .fork(log("error"), (prices) => (mdl.state.prices = prices))
 
   const updatePrices = (mdl) =>
-    mdl.http.store
-      .putTask(mdl)("prices")({ prices: mdl.state.prices })
-      .fork(log("error"), ({ prices }) => (mdl.state.prices = prices))
+    mdl.http.back4App
+      .postTask(mdl)("classes/Prices")(mdl.state.prices)
+      .fork(log("error"), log("succes"))
 
   return {
-    // oninit: getPrices,
     view: ({ attrs: { mdl } }) =>
       m("section", [
-        m("h3", "Update Prices"),
+        m("h3", "Prices"),
         Prices(mdl),
         m("button", { onclick: (e) => updatePrices(mdl) }, "update prices"),
       ]),

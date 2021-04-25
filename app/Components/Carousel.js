@@ -1,5 +1,3 @@
-import m from "mithril"
-
 const Indicators = {
   view: ({ attrs: { ident, state }, children }) =>
     m(

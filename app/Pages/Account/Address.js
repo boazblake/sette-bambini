@@ -1,6 +1,13 @@
 import { states, stateDict } from "Models"
 import { PencilLine } from "@mithril-icons/clarity/cjs"
 
+const STATE = () => ({
+  address: { street1: "", street2: "", city: "", state: "", zip: "" },
+  editAddress: Stream(false),
+  showAddress: Stream(false),
+  errors: {},
+})
+
 const submitAddressTask = (mdl) => (data) =>
   mdl.http.back4App.putTask(mdl)(
     `classes/Accounts/${mdl.user.account.objectId}`
@@ -9,12 +16,7 @@ const submitAddressTask = (mdl) => (data) =>
   })
 
 export const AccountAddress = ({ attrs: { mdl } }) => {
-  const state = {
-    address: { street1: "", street2: "", city: "", state: "", zip: "" },
-    editAddress: Stream(false),
-    showAddress: Stream(false),
-    errors: {},
-  }
+  let state = STATE()
 
   const toggleEditAddress = (state) => state.editAddress(!state.editAddress())
 
@@ -35,6 +37,7 @@ export const AccountAddress = ({ attrs: { mdl } }) => {
     state.editAddress(false)
   }
   return {
+    onremove: () => (state = STATE()),
     view: ({ attrs: { mdl } }) =>
       m("section.m-5", [
         m(

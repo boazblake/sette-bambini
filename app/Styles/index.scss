@@ -613,6 +613,26 @@ icon.icon#logo-svg {
   }
 }
 
+$table-header: $oxford-blue;
+$table-header-border: $gold;
+$table-border: $platinum;
+
+.flex-table {
+  display: flex;
+  flex-flow: row wrap;
+  border-left: solid 1px $table-border;
+  transition: 0.5s;
+  &:first-of-type {
+    border-top: solid 1px $table-header-border;
+    border-left: solid 1px $table-header-border;
+  }
+  &:first-of-type .flex-row {
+    background: $table-header;
+    color: white;
+    border-color: $table-header-border;
+  }
+}
+
 // .masonry {
 //   display: grid;
 //   grid-gap: 1em; /* [1] Add some gap between rows and columns */

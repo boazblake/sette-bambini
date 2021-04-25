@@ -115,7 +115,7 @@ const Cart = ({ attrs: { mdl } }) => {
                     "h1.bold text-center white",
                     `Total of ${getQuantity(
                       toProducts(mdl.cart)
-                    )} for $${getTotal(mdl, toProducts(mdl.cart))}`
+                    )} for ${getTotal(mdl, toProducts(mdl.cart))}`
                   ),
                 ],
               })

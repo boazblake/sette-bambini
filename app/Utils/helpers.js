@@ -135,3 +135,12 @@ export const getQuantity = (xs) =>
 
 export const getTotal = (mdl, products) =>
   getQuantity(products.map((p) => getPrice(mdl, p[0], p[1])))
+
+const toPriceModel = ({ Burpies, Wraps, Blankets, Collections }) => ({
+  Burpies,
+  Wraps,
+  Blankets,
+  Collections,
+})
+
+export const parsePrices = compose(toPriceModel, last, prop("results"))

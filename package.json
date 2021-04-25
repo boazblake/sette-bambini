@@ -15,6 +15,8 @@
   "dependencies": {
     "@boazblake/fun-config": "git://github.com/boazblake/fun-config",
     "@mithril-icons/clarity": "^1.2.0",
+    "clean-css-brunch": "^3.0.0",
+    "daggy": "^1.4.0",
     "data.either": "^1.5.2",
     "data.maybe": "^1.2.3",
     "data.task": "^3.1.2",
@@ -29,7 +31,6 @@
     "autoprefixer": "^9.7.6",
     "babel-brunch": "7.0.1",
     "brunch": "3.0.0",
-    "clean-css-brunch": "3.0.0",
     "copycat-brunch": "1.1.1",
     "gzip-brunch": "^2.0.0",
     "imagemin-brunch": "^1.1.0",
@@ -37,9 +38,9 @@
     "postcss-brunch": "^3.0.0",
     "postcss-scss": "^2.0.0",
     "sass-brunch": "3.0.0",
+    "sharp-brunch": "^1.0.6",
     "size-limit": "^4.5.0",
     "sw-precache-brunch": "^2.0.1",
-    "terser-brunch": "^4.0.0",
-    "sharp-brunch": "^1.0.6"
+    "terser-brunch": "^4.0.0"
   }
 }

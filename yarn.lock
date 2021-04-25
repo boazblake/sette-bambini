@@ -1825,7 +1825,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-clean-css-brunch@3.0.0:
+clean-css-brunch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/clean-css-brunch/-/clean-css-brunch-3.0.0.tgz#0b6c40543cad6fcef61bf32e9292ce9394dd5d0b"
   integrity sha512-gbkVut0IXCyMjOMETb2pbe+klsMB4WAebWmeA39G9479D4CJN7+4ggF+MpdSordHm/DWKywzgC7IvJVkPW0kRA==

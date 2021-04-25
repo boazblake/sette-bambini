@@ -3,29 +3,30 @@ import { log, getTotal, toProducts, jsonCopy, saveStorageTask } from "Utils"
 import { newCart } from "Models"
 
 const makePaymentTask = (actions) => {
-  log("makePaymentTask")()
+  log("makePaymentTask")(actions)
   return new Task((rej, res) => actions.order.capture().then(res, rej))
 }
 
-const formatInvoice = ({ cart, state: { prices } }) => ({
+const formatInvoice = ({ user, cart, state: { prices } }) => ({
   orderID,
   payerID,
 }) => (details) => {
-  log("formatInvoice")()
+  log("formatInvoice")(user)
   return {
+    userId: user.objectId,
     orderID,
     payerID,
     purchaseTime: details.create_time,
     status: details.status,
     customer: details.payer,
-    shipping: details.purchase_units[0].shipping,
+    shippingDestination: details.purchase_units[0].shipping,
     cart: cart,
     prices,
   }
 }
 
 const setTempUser = (user) =>
-  sessionStorage.setItem("sb-user-token", user["user-token"])
+  sessionStorage.setItem("sb-user-token", user["sessionToken"])
 
 const unSetTempUser = () => sessionStorage.clear()
 
@@ -36,31 +37,25 @@ const updateCartTask = (mdl) => (_) => {
   return saveStorageTask(mdl)("sb-cart")(mdl.cart)
 }
 
-const linkInvoiceUserTask = (mdl) => (user) => (invoice) =>
-  mdl.http.backEnd.postTask(mdl)(
-    `data/Users/${user.objectId}/invoices%3AInvoices%3A1`
-  )([invoice.objectId])
-
-const linkInvoiceUnregisteredTask = (mdl) => (invoice) =>
-  mdl.http.backEnd
-    .postTask(mdl)("users/login")({
-      login: mdl.http.backEnd.unregistered.email,
-      password: btoa(mdl.http.backEnd.unregistered.password),
+const saveUnregisteredInvoiceTask = (mdl) => (invoice) =>
+  mdl.http.back4App
+    .postTask(mdl)("login")({
+      username: mdl.http.back4App.unregistered.email,
+      password: btoa(mdl.http.back4App.unregistered.password),
     })
     .map(setTempUser)
     .chain((_) => saveInvoiceTask(mdl)(invoice))
-    .chain(linkInvoiceUserTask(mdl)(mdl.http.backEnd.unregistered))
     .map(unSetTempUser)
 
 const addInvoiceTask = (mdl) => (invoice) => {
-  log("addInvoiceTask")()
+  log("addInvoiceTask")(invoice)
   return mdl.state.isAuth()
-    ? saveInvoiceTask(mdl)(invoice).chain(linkInvoiceUserTask(mdl)(mdl.user))
-    : linkInvoiceUnregisteredTask(mdl)(invoice)
+    ? saveInvoiceTask(mdl)(invoice)
+    : saveUnregisteredInvoiceTask(mdl)(invoice)
 }
 
 const saveInvoiceTask = (mdl) => (invoice) =>
-  mdl.http.backEnd.postTask(mdl)("data/Invoices")(invoice)
+  mdl.http.back4App.postTask(mdl)("classes/Invoices")(invoice)
 
 const onSuccess = (mdl, state) => (_) => {
   console.log("succc", state, _)

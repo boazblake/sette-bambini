@@ -132,7 +132,7 @@ export const Register = () => {
   return {
     onremove: () => resetState(),
     view: ({ attrs: { mdl } }) => [
-      m(".frow centered pt-30", [
+      m(".frow", [
         state.showErrorMsg() && m("code.warning", state.errorMsg()),
         m(
           "form.frow",

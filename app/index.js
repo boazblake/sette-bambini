@@ -3,6 +3,7 @@ import Model from "Models/index.js"
 import { FunConfig } from "@boazblake/fun-config"
 
 FunConfig.configure()
+
 const root = document.body
 let winW = window.innerWidth
 
