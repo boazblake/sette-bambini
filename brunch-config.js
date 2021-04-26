@@ -49,18 +49,10 @@ exports.plugins = {
     verbose: true, //shows each file that is copied to the destination directory
     onlyChanged: true, //only copy a file if it's modified time has changed (only effective when using brunch watch)
   },
-  swPrecache: {
-    swFileName: "service-worker.js",
-    options: {
-      autorequire: ["app/assets/index.html"],
-      staticFileGlobs: [
-        "docs/app.css",
-        "docs/app.js",
-        "docs/vendor.js",
-        "docs/index.html",
-      ],
-      stripPrefix: "docs/",
-    },
+  workbox: {
+    globDirectory: "docs/",
+    globPatterns: ["**/*.*"],
+    swDest: "docs/sw.js",
   },
   "@babel": { presets: ["env"] },
   terser: {
@@ -71,23 +63,22 @@ exports.plugins = {
       },
     },
   },
-  // sharp: {
-  //   src: "app/assets/images",
-  //   dest: "docs/images",
-  //   imageExt: ["jpg", "png", "svg"],
-  //   tasks: [
-  //     [
-  //       { resize: [1200] },
-  //       { ignoreAspectRatio: true },
-  //       { toFormat: "webp" },
-  //       { withoutEnlargement: true },
-  //       { quality: 95 },
-  //       { withoutAdaptiveFiltering: true },
-  //       { optimiseScans: true },
-  //       // { rename: "{base}-1200.{ext}" },
-  //     ],
-  //   ],
-  // },
+  sharp: {
+    src: "app/assets/images",
+    dest: "docs/images",
+    imageExt: ["jpg", "png", "svg"],
+    tasks: [
+      [
+        { resize: [1200] },
+        { ignoreAspectRatio: true },
+        { toFormat: "webp" },
+        { withoutEnlargement: true },
+        { quality: 95 },
+        { withoutAdaptiveFiltering: true },
+        { optimiseScans: true },
+      ],
+    ],
+  },
 }
 
 exports.paths = {
