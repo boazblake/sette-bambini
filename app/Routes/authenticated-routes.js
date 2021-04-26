@@ -1,11 +1,11 @@
 import Default from "Pages/default.js"
 import Home from "Pages/home.js"
 import Account from "Pages/Account/index.js"
+import Dashboard from "Pages/Dashboard"
 import Layout from "Layouts/index.js"
 import { scrollToAnchor, jsonCopy } from "Utils"
 import { newCart } from "Models/cart"
 import { includes } from "ramda"
-import m from "mithril"
 
 const AuthenticatedRoutes = [
   {
@@ -27,6 +27,26 @@ const AuthenticatedRoutes = [
           })
     },
     component: (mdl) => m(Layout, { mdl }, m(Account, { mdl })),
+  },
+  {
+    id: "dashboard",
+    name: "Dashboard",
+    // icon: Icons.logo,
+    route: "/dashboard/:name",
+    position: ["toolbar"],
+    group: ["authenticated"],
+    children: [],
+    options: [],
+    onmatch: (mdl, args, path, fullroute, isAnchor) => {
+      isAnchor
+        ? scrollToAnchor(mdl.state.anchor)
+        : window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          })
+    },
+    component: (mdl) => m(Layout, { mdl }, m(Dashboard, { mdl })),
   },
   {
     id: "profile-page",

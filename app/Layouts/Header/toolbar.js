@@ -20,6 +20,15 @@ const ToolBar = () => {
             ),
             mdl.state.isAuth()
               ? [
+                  mdl.user.isAdmin &&
+                    m(NavLink, {
+                      mdl,
+                      href: `/dashboard/${mdl.user.name}`,
+                      link: "Dashboard",
+                      classList: `${isActiveRoute(
+                        `/dashboard/${mdl.user.name}`
+                      )} button hidden-xs`,
+                    }),
                   m(NavLink, {
                     mdl,
                     href: `/account/${mdl.user.name}`,

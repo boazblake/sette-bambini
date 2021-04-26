@@ -46,11 +46,6 @@ export const parseHttpSuccess = (mdl) => (res) => (data) => {
   return res(data)
 }
 
-// const getUserToken = () =>
-//   window.sessionStorage.getItem("user-token")
-//     ? window.sessionStorage.getItem("user-token")
-//     : ""
-
 const HttpTask = (_headers) => (method) => (mdl) => (url) => (body) => {
   mdl.state.isLoading(true)
   return new Task((rej, res) =>
@@ -119,15 +114,15 @@ const store = {
 
 const back4App = {
   getTask: (mdl) => (url) =>
-    HttpTask(Back4App.headers(Back4App))("GET")(mdl)(
+    HttpTask(Back4App.headers(mdl, Back4App))("GET")(mdl)(
       `${Back4App.baseUrl}/${url}`
     )(null),
   postTask: (mdl) => (url) => (dto) =>
-    HttpTask(Back4App.headers(Back4App))("POST")(mdl)(
+    HttpTask(Back4App.headers(mdl, Back4App))("POST")(mdl)(
       `${Back4App.baseUrl}/${url}`
     )(dto),
   putTask: (mdl) => (url) => (dto) =>
-    HttpTask(Back4App.headers(Back4App))("PUT")(mdl)(
+    HttpTask(Back4App.headers(mdl, Back4App))("PUT")(mdl)(
       `${Back4App.baseUrl}/${url}`
     )(dto),
 }
@@ -143,94 +138,3 @@ const http = {
 }
 
 export default http
-
-// const makeQuery = (string) => JSON.parse(JSON.stringify(string))
-
-// const parseQLResponse = (mdl) => ({ data, errors }) => {
-//   mdl.state.isLoading(false)
-//   return errors ? Promise.reject(errors) : Promise.resolve(data)
-// }
-
-// const postQl = (mdl) => (query) => {
-//   mdl.state.isLoading(true)
-//   return new Task((rej, res) =>
-//     m
-//       .request({
-//         method: 'POST',
-//         // url: graphQl,
-//         withCredentials: false,
-//         ...xhrProgress,
-//         data: makeQuery(query),
-//         headers: {
-//           Authorization: `Bearer ${mdl.state.token}`,
-//           'cache-control': 'no-cache',
-//           'x-apikey': '64fecd3f0cbb54d46d7f7260b86b8ad45d31b',
-//           'content-type': 'application/json',
-//         },
-//       })
-//       .then(parseQLResponse(mdl))
-//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
-//   )
-// }
-
-// const postTask = (mdl) => (url) => ({ dto }) => {
-//   mdl.state.isLoading(true)
-//   return new Task((rej, res) =>
-//     m
-//       .request({
-//         method: 'POST',
-//         url: `${url}`,
-//         body: dto,
-//         headers: { 'user-token': getUserToken() },
-//         withCredentials: false,
-//         ...xhrProgress,
-//       })
-//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
-//   )
-// }
-
-// const putTask = (mdl) => (url) => ({ dto }) => {
-//   mdl.state.isLoading(true)
-//   return new Task((rej, res) =>
-//     m
-//       .request({
-//         method: 'PUT',
-//         url: `${url}`,
-//         body: dto,
-//         headers: { 'user-token': getUserToken() },
-//         withCredentials: false,
-//         ...xhrProgress,
-//       })
-//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
-//   )
-// }
-
-// const getTask = (mdl) => (url) => {
-//   mdl.state.isLoading(true)
-//   return new Task((rej, res) =>
-//     m
-//       .request({
-//         method: 'GET',
-//         url: `${url}`,
-//         headers: { 'user-token': getUserToken() },
-//         withCredentials: false,
-//         ...xhrProgress,
-//       })
-//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
-//   )
-// }
-
-// const deleteTask = (mdl) => (url) => (id) => {
-//   mdl.state.isLoading(true)
-//   return new Task((rej, res) =>
-//     m
-//       .request({
-//         method: 'DELETE',
-//         url: `${url}/${id}`,
-//         headers: { 'user-token': getUserToken() },
-//         withCredentials: false,
-//         ...xhrProgress,
-//       })
-//       .then(parseHttpSuccess(mdl)(res), parseHttpError(mdl)(rej))
-//   )
-// }

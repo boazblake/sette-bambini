@@ -1,5 +1,4 @@
 import Task from "data.task"
-import m from "mithril"
 
 const fetchBurpRagsTask = (mdl) =>
   Task.of([

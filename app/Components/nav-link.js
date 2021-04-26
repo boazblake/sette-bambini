@@ -1,5 +1,3 @@
-import m from "mithril"
-
 const handlers = (types, fn) =>
   types.reduce((acc, type) => Object.assign(acc, { [type]: fn }), {})
 

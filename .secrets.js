@@ -24,12 +24,16 @@ const Back4App = {
   baseUrl: "https://sette-bambini.b4a.io",
   appId: "Lm887wjn77WnIXtb2zDyqwzhn5WguNZRv0Pt3pMg",
   apiKey: "dJhZZhP9wD7YtdnaAZBn8kIBJRuO8m6Je7Hnh1Pd",
-  headers: ({ appId, apiKey }) => ({
+  masterKey: "Mb1BVav7vqUBVtwDS8Dlt31JR2bWRqbAz1JKooC5",
+  headers: (mdl, { masterKey, appId, apiKey }) => ({
     "X-Parse-Application-Id": appId,
     "X-Parse-REST-API-Key": apiKey,
     "X-Parse-Revocable-Session": 1,
     "content-type": "application/json",
     "X-Parse-Session-Token": getUserToken(),
+    ...(mdl.user.isAdmin && {
+      "X-Parse-Master-Key": masterKey,
+    }),
   }),
 }
 

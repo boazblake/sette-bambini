@@ -13,6 +13,7 @@ const state = {
     Burpies: 60,
     Collections: 85,
   },
+  showUserModal: Stream(false),
   showPriceModal: Stream(false),
   showAuthModal: Stream(false),
   showNavModal: Stream(false),
@@ -55,6 +56,7 @@ const Model = {
   errors,
   settings,
   paypal: {},
+  toggleUserModal: (mdl) => mdl.state.showUserModal(!mdl.state.showUserModal()),
   togglePriceModal: (mdl) =>
     mdl.state.showPriceModal(!mdl.state.showPriceModal()),
   toggleAuthModal: (mdl) => mdl.state.showAuthModal(!mdl.state.showAuthModal()),
