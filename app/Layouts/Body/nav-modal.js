@@ -9,7 +9,7 @@ let state = {
 const NavItem = () => {
   return {
     view: ({ attrs: { mdl, href, link, classList } }) =>
-      m(`li.nav-item`, m(NavLink, { mdl, state, href, link, classList })),
+      m(`li.nav-item`, m(NavLink, { mdl, ...state, href, link, classList })),
   }
 }
 
@@ -36,6 +36,15 @@ const NavModal = () => {
           m(`ul.nav`, { id: "" }, [
             mdl.state.isAuth()
               ? [
+                  mdl.user.isAdmin &&
+                    m(NavLink, {
+                      mdl,
+                      href: `/dashboard/${mdl.user.name}`,
+                      link: "Dashboard",
+                      classList: `${isActiveRoute(
+                        `/dashboard/${mdl.user.name}`
+                      )} button`,
+                    }),
                   m(NavLink, {
                     state,
                     mdl,
