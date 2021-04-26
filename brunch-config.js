@@ -51,7 +51,7 @@ exports.plugins = {
   },
   workbox: {
     globDirectory: "docs/",
-    globPatterns: ["**/*.*"],
+    globPatterns: ["**/*.{html,json,js,css}"],
     swDest: "docs/sw.js",
   },
   "@babel": { presets: ["env"] },
