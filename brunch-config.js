@@ -49,10 +49,18 @@ exports.plugins = {
     verbose: true, //shows each file that is copied to the destination directory
     onlyChanged: true, //only copy a file if it's modified time has changed (only effective when using brunch watch)
   },
-  workbox: {
-    globDirectory: "docs/",
-    globPatterns: ["**/*.{html,json,js,css,webp}"],
-    swDest: "docs/sw.js",
+  swPrecache: {
+    swFileName: "service-worker.js",
+    options: {
+      autorequire: ["app/assets/index.html"],
+      staticFileGlobs: [
+        "docs/app.css",
+        "docs/app.js",
+        "docs/vendor.js",
+        "docs/index.html",
+      ],
+      stripPrefix: "docs/",
+    },
   },
   "@babel": { presets: ["env"] },
   terser: {
@@ -76,6 +84,7 @@ exports.plugins = {
         { quality: 95 },
         { withoutAdaptiveFiltering: true },
         { optimiseScans: true },
+        // { rename: "{base}-1200.{ext}" },
       ],
     ],
   },
