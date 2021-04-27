@@ -13,7 +13,6 @@
     "build": "yarn run build:pre && brunch build --production"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-0",
     "@boazblake/fun-config": "git://github.com/boazblake/fun-config",
     "@mithril-icons/clarity": "^1.2.0",
     "clean-css-brunch": "^3.0.0",
@@ -27,6 +26,7 @@
     "ramda": "^0.27.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
     "@babel/plugin-transform-spread": "^7.7.4",
     "auto-reload-brunch": "^2.7.1",
     "autoprefixer": "^9.7.6",
