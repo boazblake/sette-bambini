@@ -7,5 +7,7 @@
 		"path": "../sette-bambini-proxy"
 	}
 ],
-  "settings": {}
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
 }
