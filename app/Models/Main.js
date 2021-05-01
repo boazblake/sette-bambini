@@ -43,7 +43,14 @@ const addToCart = {
   show: Stream(null),
 }
 
+const dash = {
+  state: {
+    show: "prices",
+  },
+}
+
 const Model = {
+  dash,
   currencies,
   addToCart,
   http,

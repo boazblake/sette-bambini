@@ -65,7 +65,7 @@ html {
 }
 
 body {
-  max-height: 100vh;
+  max-height: 90vh;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -283,6 +283,10 @@ h1 {
 
 .cover {
   background-color: $oxford-blue;
+}
+
+.dash-table {
+  width: 100%;
 }
 
 .loader {
@@ -612,101 +616,6 @@ icon.icon#logo-svg {
     }
   }
 }
-
-$table-header: $oxford-blue;
-$table-header-border: $gold;
-$table-border: $platinum;
-
-.flex-table {
-  display: flex;
-  flex-flow: row wrap;
-  border-left: solid 1px $table-border;
-  transition: 0.5s;
-  &:first-of-type {
-    border-top: solid 1px $table-header-border;
-    border-left: solid 1px $table-header-border;
-  }
-  &:first-of-type .flex-row {
-    background: $table-header;
-    color: white;
-    border-color: $table-header-border;
-  }
-}
-
-// .masonry {
-//   display: grid;
-//   grid-gap: 1em; /* [1] Add some gap between rows and columns */
-//   grid-template-columns: repeat(
-//     auto-fill,
-//     minmax(350px, 1fr)
-//   ); /* [2] Make columns adjust according to the available viewport */
-//   grid-auto-rows: 350px; /* [3] Set the height for implicitly-created row track */
-//   grid-auto-flow: dense;
-//   grid-column-start: span 3;
-
-//   img {
-//     max-width: 100%;
-//   }
-// }
-
-// .masonry { /* Masonry container */
-//   column-count: 4;
-//   column-gap: 1em;
-//   img { /* Masonry bricks or child elements */
-//     background-color: #eee;
-//     display: inline-block;
-//     margin: 0 0 1em;
-//     width: 100%;
-// }
-
-// }
-
-// #masonry {
-// 	display: -ms-flexbox;
-// 	-ms-flex-direction: column;
-// 	-ms-flex-wrap: wrap;
-// 	display: flex;
-// 	flex-direction: column;
-// 	flex-wrap: wrap;
-//   width: 100%;
-//   overflow-x: hidden;
-//   overflow-y: auto;
-// 	font-size: 0;
-
-//   &.product-img {
-//     height: 400px !important;
-//   }
-
-//    img {
-//       width: 33.3%;
-//     }
-//   }
-
-// #masonry {
-//   display: flex;
-//   flex-flow: column wrap;
-//   align-content: space-between;
-//   /* Your container needs a fixed height, and it
-//    * needs to be taller than your tallest column. */
-
-//   .item {
-//     width:24%;
-//     margin-bottom: 2%; /* Optional */
-//   }
-
-//   /* Re-order items into 4 rows */
-//   .item:nth-of-type(4n+1) { order: 1; }
-//   .item:nth-of-type(4n+2) { order: 2; }
-//   .item:nth-of-type(4n+3) { order: 3; }
-//   .item:nth-of-type(4n)   { order: 4; }
-
-//   /* Force new columns */
-//   .break {
-//     flex-basis: 100%;
-//     width: 0;
-//     margin: 0;
-//   }
-// }
 
 @media screen and (min-width: 668px) {
   #masonry {

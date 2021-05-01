@@ -51,7 +51,10 @@ const InvoiceCell = () => {
       children,
     }) =>
       screenSize == "phone"
-        ? m("tr", [m("td", children[0].key), children])
+        ? m("tr", [
+            m("td", { style: { width: "25%" } }, m("label", children[0].key)),
+            children,
+          ])
         : children,
   }
 }
@@ -61,7 +64,7 @@ const Invoice = ({ attrs: { mdl } }) => {
     view: ({ attrs: { invoice } }) => {
       return [
         m(
-          "tr.invoice",
+          "tr",
           m(
             InvoiceCell,
             { mdl },
@@ -70,28 +73,31 @@ const Invoice = ({ attrs: { mdl } }) => {
           m(
             InvoiceCell,
             { mdl },
-            m("td", { key: "order Id" }, invoice.orderID)
+            m("td", { key: "Order Id" }, invoice.orderID)
           ),
           m(
             InvoiceCell,
             { mdl },
             m(
               "td",
-              { key: "shipping Destination" },
+              { key: "Shipping Destination" },
               `${invoice.shippingDestination.name.full_name} ${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
             )
           ),
           m(
             InvoiceCell,
             { mdl },
-            m("td", { key: "payment status" }, invoice.status)
+            m("td", { key: "Payment Status" }, invoice.status)
           ),
           m(
             InvoiceCell,
             { mdl },
             m(
               "td",
-              { key: "Shipping Status" },
+              {
+                key: "Shipping Status",
+                style: { width: "100%", borderBottom: "1px solid gold" },
+              },
               invoice.shippingStatus
                 ? m("a", { href: invoice.shippingStatus }, "Shipping Status")
                 : m("p", "Prepparing your order")
@@ -118,10 +124,10 @@ const Invoice = ({ attrs: { mdl } }) => {
                 m(
                   "thead",
                   m("tr", [
-                    m("th", "product"),
-                    m("th", "quantities"),
-                    m("th", "unit price"),
-                    m("th", "unit total"),
+                    m("th", "Product"),
+                    m("th", "Quantities"),
+                    m("th", "Unit Price"),
+                    m("th", "Unit Total"),
                   ])
                 ),
                 m(
@@ -157,32 +163,31 @@ export const Orders = () => {
         "section.overflow-auto",
         {
           style: {
-            height: "400px",
+            minWidth: "100%",
+            height: "80vh",
           },
         },
-        [
-          m("h3", "Orders"),
-          state.invoices.any()
-            ? m("table", { style: { width: "100%" } }, [
-                mdl.settings.screenSize != "phone" &&
-                  m(
-                    "thead",
-                    m("tr", [
-                      m("th", "Date"),
-                      m("th", "order Id"),
-                      m("th", "shipping Destination"),
-                      m("th", "payment status"),
-                      m("th", "shipping status"),
-                      m("th"),
-                    ])
-                  ),
+        state.invoices.any()
+          ? m(
+              "table.dash-table",
+              mdl.settings.screenSize != "phone" &&
                 m(
-                  "tbody",
-                  state.invoices.map((invoice) => m(Invoice, { mdl, invoice }))
+                  "thead",
+                  m("tr.mb-5", [
+                    m("th", "Date"),
+                    m("th", "Order Id"),
+                    m("th", "Shipping Destination"),
+                    m("th", "Payment Status"),
+                    m("th", "Shipping Status"),
+                    m("th"),
+                  ])
                 ),
-              ])
-            : m("h2", "No Orders"),
-        ]
+              m(
+                "tbody",
+                state.invoices.map((invoice) => m(Invoice, { mdl, invoice }))
+              )
+            )
+          : m("h2", "No Orders")
       ),
   }
 }

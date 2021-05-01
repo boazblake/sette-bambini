@@ -1,26 +1,35 @@
 import { Orders } from "Components/orders.js"
-import { PriceAdjustment } from "./prices.js"
+import { Prices } from "./prices.js"
 import { Users } from "./users.js"
 
 const Dashboard = () => {
+  const components = {
+    prices: Prices,
+    users: Users,
+    orders: Orders,
+  }
+
+  const navi = ["prices", "users", "orders"]
+
   return {
     view: ({ attrs: { mdl } }) => {
       return m(
-        ".frow-container",
-        m("h2", "Welcome ", mdl.user.name),
+        ".",
+        { style: { minWidth: "100%" } },
         m(
-          "Button",
-          { onclick: (e) => mdl.togglePriceModal(mdl) },
-          mdl.state.showPriceModal() ? "Hide Prices" : "Show Prices"
+          "section.frow row-around",
+          navi.map((nav) =>
+            m(
+              "button",
+              {
+                class: mdl.dash.state.show == nav ? "is-active" : "",
+                onclick: (e) => (mdl.dash.state.show = nav),
+              },
+              nav.toUpperCase()
+            )
+          )
         ),
-        m(
-          "Button",
-          { onclick: (e) => mdl.toggleUserModal(mdl) },
-          mdl.state.showUserModal() ? "Hide Users" : "Show Users"
-        ),
-        mdl.state.showPriceModal() && m(PriceAdjustment, { mdl }),
-        mdl.state.showUserModal() && m(Users, { mdl }),
-        m(Orders, { mdl })
+        m("section.frow mt-10", m(components[mdl.dash.state.show], { mdl }))
       )
     },
   }

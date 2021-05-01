@@ -1,20 +1,8 @@
+import m from "mithril"
 import { without } from "ramda"
 import { log, parsePrices } from "Utils"
 
-const Prices = (mdl) =>
-  without("id", Object.keys(mdl.state.prices)).map((product) =>
-    m(
-      "label.col-xs-1-3",
-      product,
-      m("input", {
-        type: "number",
-        value: mdl.state.prices[product],
-        onkeyup: (e) => (mdl.state.prices[product] = parseInt(e.target.value)),
-      })
-    )
-  )
-
-export const PriceAdjustment = () => {
+export const Prices = () => {
   const getPrices = ({ attrs: { mdl } }) =>
     mdl.http.back4App
       .getTask(mdl)("classes/Prices")
@@ -28,10 +16,24 @@ export const PriceAdjustment = () => {
 
   return {
     view: ({ attrs: { mdl } }) =>
-      m("section", [
-        m("h3", "Prices"),
-        Prices(mdl),
-        m("button", { onclick: (e) => updatePrices(mdl) }, "update prices"),
-      ]),
+      m(
+        "table.dash-table",
+        without("id", Object.keys(mdl.state.prices)).map((product) =>
+          m(
+            "tr",
+            m("td", m("label.col-xs-1-3", product)),
+            m(
+              "td",
+              m("input", {
+                type: "number",
+                value: mdl.state.prices[product],
+                onkeyup: (e) =>
+                  (mdl.state.prices[product] = parseInt(e.target.value)),
+              })
+            )
+          )
+        ),
+        m("button", { onclick: (e) => updatePrices(mdl) }, "update prices")
+      ),
   }
 }

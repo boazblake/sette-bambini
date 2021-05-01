@@ -24,14 +24,15 @@ export const Users = () => {
   return {
     oninit: getUsers,
     view: ({ attrs: { mdl } }) =>
-      m("section", [
-        m("h3", "Users"),
-        m(
-          "ul",
-          state.users.map((user) =>
+      m(
+        "table.dash-table",
+        m("thead", m("th"), m("th", "is Admin")),
+        state.users.map((user) =>
+          m(
+            "tr.mt-5",
+            m("td", m("label", user.name)),
             m(
-              ".frow input",
-              m("label", user.name),
+              "td.frow.text-center",
               m("input", {
                 type: "checkbox",
                 checked: user.isAdmin,
@@ -42,7 +43,7 @@ export const Users = () => {
               })
             )
           )
-        ),
-      ]),
+        )
+      ),
   }
 }

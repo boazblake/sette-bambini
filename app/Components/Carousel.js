@@ -97,7 +97,9 @@ const Carousel = () => {
                   state.coords().x,
                   state.coords().y
                 )
-                let idx = parseInt(el.getAttribute("id").split("-")[1])
+                let idx =
+                  el.getAttribute("id") &&
+                  parseInt(el.getAttribute("id").split("-")[1])
                 state.currentIdx(idx)
                 state.currentId(`${ident}-${idx}`)
                 state.currentEl(el)
@@ -106,7 +108,8 @@ const Carousel = () => {
             },
             onupdate: ({ dom }) => {
               state.currentEl(dom.children[state.currentIdx()])
-              intersectionObserver.observe(state.currentEl())
+              state.currentEl() instanceof Element &&
+                intersectionObserver.observe(state.currentEl())
               if (dom.id == state.currentId())
                 dom.scrollTo({
                   left: dom.scrollLeft + distanceToNext(dom),
