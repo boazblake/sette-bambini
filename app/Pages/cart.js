@@ -5,7 +5,6 @@ import {
   getQuantity,
   toProducts,
   saveStorageTask,
-  randomEl,
 } from "Utils"
 import { productImages } from "index.images.js"
 

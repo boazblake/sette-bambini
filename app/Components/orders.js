@@ -55,7 +55,7 @@ const InvoiceCell = () => {
             m("td", { style: { width: "25%" } }, m("label", children[0].key)),
             children,
           ])
-        : children,
+        : m("td", { style: { width: "20%" } }, children),
   }
 }
 
@@ -68,32 +68,29 @@ const Invoice = ({ attrs: { mdl } }) => {
           m(
             InvoiceCell,
             { mdl },
-            m("td", { key: "Date" }, formatDate(invoice.purchaseTime))
+            m("", { key: "Date" }, formatDate(invoice.purchaseTime))
           ),
-          m(
-            InvoiceCell,
-            { mdl },
-            m("td", { key: "Order Id" }, invoice.orderID)
-          ),
+          m(InvoiceCell, { mdl }, m("", { key: "Order Id" }, invoice.orderID)),
           m(
             InvoiceCell,
             { mdl },
             m(
-              "td",
-              { key: "Shipping Destination" },
-              `${invoice.shippingDestination.name.full_name} ${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
+              "",
+              { key: "Name" },
+              `${invoice.shippingDestination.name.full_name} `
             )
           ),
           m(
             InvoiceCell,
             { mdl },
-            m("td", { key: "Payment Status" }, invoice.status)
+            m("", { key: "Payment Status" }, invoice.status)
           ),
           m(
             InvoiceCell,
             { mdl },
             m(
-              "td",
+              "",
+
               {
                 key: "Shipping Status",
                 style: { width: "100%", borderBottom: "1px solid gold" },
@@ -117,6 +114,15 @@ const Invoice = ({ attrs: { mdl } }) => {
           m(
             "td",
             { colspan: 5, style: { width: "100%" } },
+            m(
+              "tr",
+              m(
+                "td",
+                m("label", "Shipping Destination"),
+                `${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
+              ),
+              m("td", m("button", "Update Shipping Status"))
+            ),
             m(
               "table",
               { style: { width: "100%", borderBottom: "1px solid gold" } },
@@ -164,7 +170,7 @@ export const Orders = () => {
         {
           style: {
             minWidth: "100%",
-            height: "80vh",
+            height: "75vh",
           },
         },
         state.invoices.any()
@@ -172,11 +178,11 @@ export const Orders = () => {
               "table.dash-table",
               mdl.settings.screenSize != "phone" &&
                 m(
-                  "thead",
+                  "thead.dash-nav",
                   m("tr.mb-5", [
                     m("th", "Date"),
                     m("th", "Order Id"),
-                    m("th", "Shipping Destination"),
+                    m("th", "Name"),
                     m("th", "Payment Status"),
                     m("th", "Shipping Status"),
                     m("th"),

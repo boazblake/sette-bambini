@@ -15,9 +15,9 @@ const Dashboard = () => {
     view: ({ attrs: { mdl } }) => {
       return m(
         ".",
-        { style: { minWidth: "100%" } },
+        { style: { minWidth: "100%", minHeight: "100%" } },
         m(
-          "section.frow row-around",
+          "section.dash-nav.frow row-around",
           navi.map((nav) =>
             m(
               "button",

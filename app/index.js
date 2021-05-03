@@ -2,6 +2,11 @@ import App from "./app.js"
 import Model from "Models/index.js"
 import { FunConfig } from "@boazblake/fun-config"
 
+window.onstorage = () => {
+  console.log("location", JSON.parse(window.localStorage.getItem("sb-cart")))
+  console.log("session", JSON.parse(window.sessionStorage.getItem("sb-user")))
+}
+
 FunConfig.configure()
 
 const root = document.body

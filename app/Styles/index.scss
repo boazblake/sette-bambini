@@ -289,6 +289,11 @@ h1 {
   width: 100%;
 }
 
+.dash-nav {
+  position: sticky;
+  top: 0;
+}
+
 .loader {
   height: 80vh;
   width: 80vw;
