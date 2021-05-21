@@ -19,15 +19,7 @@ const Gender = () => {
         title,
       },
     }) => {
-      return quantity
-        ? m(".", [
-            m("img", {
-              style: { width: "100px" },
-              srcSet: productImages[title][0],
-            }),
-            m("h4", `${sex} : ${quantity}`),
-          ])
-        : null
+      return quantity ? m(".", [, m("h4", `${sex} : ${quantity}`)]) : null
     },
   }
 }
@@ -50,8 +42,51 @@ const Product = () => {
               m("h3.mb-10", `${amount} ${title} for $${price}`)
             ),
             m(
-              ".frow cart-item row-around",
-              genders.map((gender) => m(Gender, { mdl, gender, title }))
+              "table",
+              {
+                "table-layout": "fixed",
+                style: { width: "100%" },
+              },
+              m(
+                "tr",
+                { style: {} },
+
+                m(
+                  "td",
+                  {
+                    style: {
+                      width:
+                        mdl.settings.screenSize == "desktop" ? "25%" : "50%",
+                    },
+                  },
+
+                  m("img", {
+                    style: {
+                      width:
+                        mdl.settings.screenSize == "desktop" ? "100%" : "50%",
+                    },
+                    srcSet: productImages[title][0],
+                  })
+                ),
+
+                m(
+                  "td",
+                  m(
+                    "table",
+                    {
+                      "table-layout": "fixed",
+                      style: { width: "100%" },
+                    },
+                    genders.map(([sex, quantity]) =>
+                      m(
+                        "tr",
+                        m("th", m("h4", { style: {} }, sex)),
+                        m("td", m("h4", { style: {} }, quantity))
+                      )
+                    )
+                  )
+                )
+              )
             ),
           ])
         : null

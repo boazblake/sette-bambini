@@ -101,25 +101,25 @@ const Cart = ({ attrs: { mdl } }) => {
           })
         ),
 
-        getTotal(mdl, toProducts(mdl.cart))
-          ? m(
-              ".frow centered-column",
-              m(NavLink, {
+        m(
+          ".frow-center",
+          getTotal(mdl, toProducts(mdl.cart))
+            ? m(NavLink, {
                 mdl,
                 href: `/checkout`,
-                classList: `${isActiveRoute(`/checkout`)} button para mt-20`,
+                classList: `${isActiveRoute(`/checkout`)} para button mt-20`,
                 link: [
                   "Proceed to Checkout",
                   m(
-                    "h1.bold text-center white",
+                    "h1.bold text-center",
                     `Total of ${getQuantity(
                       toProducts(mdl.cart)
                     )} for ${getTotal(mdl, toProducts(mdl.cart))}`
                   ),
                 ],
               })
-            )
-          : m("h1.bold", "Your Cart is Empty"),
+            : m("h1.bold", "Your Cart is Empty")
+        ),
       ]),
   }
 }

@@ -8,27 +8,6 @@ const makeProducts = (cart) => {
   return toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
 }
 
-const Gender = () => {
-  return {
-    view: ({
-      attrs: {
-        gender: [sex, quantity],
-        title,
-      },
-    }) => {
-      return quantity
-        ? m(".", [
-            m("img", {
-              style: { width: "100px" },
-              srcSet: productImages[title][0],
-            }),
-            m("h4", `${sex} : ${quantity}`),
-          ])
-        : null
-    },
-  }
-}
-
 const Product = ({
   attrs: {
     mdl,
@@ -51,7 +30,10 @@ const Product = ({
             m("h3", `${amount} ${title} for $${price}`),
             m(
               ".frow cart-item row-around",
-              genders.map((gender) => m(Gender, { mdl, gender, title }))
+              m("img", {
+                srcSet: productImages[title][0],
+              }),
+              genders.map(([sex, quantity]) => m(".", `${sex} : ${quantity}`))
             ),
           ])
         : null

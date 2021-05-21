@@ -1,7 +1,6 @@
 import NavBar from "./navbar.js"
 import SubNavBar from "./sub-nav.js"
 import ToolBar from "./toolbar.js"
-import ProgressBar from "./ProgressBar.js"
 import { propEq } from "ramda"
 
 const Header = ({ attrs: { mdl } }) => {
@@ -19,7 +18,6 @@ const Header = ({ attrs: { mdl } }) => {
           style: { maxHeight: subRoutes(mdl).any() ? "140px" : "100px" },
         },
         [
-          mdl.state.isLoading() && m(ProgressBar, { mdl }),
           m(ToolBar, { mdl }),
           m(NavBar, { mdl }),
           m(SubNavBar, {
