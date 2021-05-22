@@ -36,7 +36,7 @@ const Product = () => {
 
       let price = getPrice(mdl, title, genders)
       return amount
-        ? m(".frow column-start mt-10", [
+        ? m(".frow mt-10", [
             m(
               "span.underline",
               m("h3.mb-10", `${amount} ${title} for $${price}`)
@@ -49,7 +49,6 @@ const Product = () => {
               },
               m(
                 "tr",
-                { style: {} },
 
                 m(
                   "td",
@@ -75,7 +74,6 @@ const Product = () => {
                     "table",
                     {
                       "table-layout": "fixed",
-                      style: { width: "100%" },
                     },
                     genders.map(([sex, quantity]) =>
                       m(
@@ -114,7 +112,10 @@ const Checkout = ({ attrs: { mdl } }) => {
               })
             : null,
 
-          toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
+          m(
+            ".frow-centered",
+            toProducts(mdl.cart).map((p) => m(Product, { mdl, p }))
+          ),
 
           getTotal(mdl, toProducts(mdl.cart))
             ? [

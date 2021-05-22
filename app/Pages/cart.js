@@ -32,15 +32,11 @@ const Gender = () => {
         gender: [sex, quantity],
       },
     }) => {
+      let selector = (mdl) =>
+        mdl.settings.screenSize == "desktop" ? "td" : "tr"
       return quantity
-        ? m(".animated.frow row-around mt-10", [
-            m("img", {
-              style: { width: "100px" },
-              srcSet: productImages[product][0],
-            }),
-
-            // m(
-            // ".col-xs-1-4",
+        ? m(
+            `${selector(mdl)}.animated.frow row-around mt-10`,
             m(
               "label.col-xs-1-4",
               m("h4", `${sex}`),
@@ -53,9 +49,8 @@ const Gender = () => {
                 onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
                 pattern: "[0-9]*",
               })
-              // )
-            ),
-          ])
+            )
+          )
         : null
     },
   }
@@ -73,14 +68,27 @@ const Product = () => {
         ? m(".frow mt-10 items-baseline justify-evenly", [
             m("h2", `${title}  `),
             m("h4", `($${mdl.state.prices[title]})`),
+
             m(
-              ".animated.frow cart-item column-start",
-              genders.map((gender) =>
-                m(Gender, {
-                  mdl,
-                  gender,
-                  product: title,
-                })
+              "table",
+              m(
+                "tr.animated.frow cart-item",
+
+                m("img", {
+                  style: { width: "40%" },
+                  srcSet: productImages[title][0],
+                }),
+
+                m(
+                  "table",
+                  genders.map((gender) =>
+                    m(Gender, {
+                      mdl,
+                      gender,
+                      product: title,
+                    })
+                  )
+                )
               )
             ),
           ])
