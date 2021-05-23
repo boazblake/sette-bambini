@@ -23,7 +23,7 @@ const Product = () => {
       let price = getPrice(mdl, title, genders)
       return amount
         ? m(
-            ".frow m-10",
+            ".frow m-10 row-start",
             {
               style: {
                 width: mdl.settings.screenSize == "phone" ? "80%" : "40%",
@@ -33,6 +33,7 @@ const Product = () => {
             m("h2.mb-10", `${amount} ${title} for $${price}`),
             m("img", {
               style: {
+                style: { objectFit: "contain" },
                 width: "100%",
               },
               srcSet: productImages[title][0],
@@ -61,7 +62,7 @@ const Checkout = ({ attrs: { mdl } }) => {
     view: ({ attrs: { mdl } }) =>
       m(
         `.checkout`,
-
+        { style: { height: "100%" } },
         getTotal(mdl, toProducts(mdl.cart))
           ? m(NavLink, {
               mdl,

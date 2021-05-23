@@ -2,6 +2,7 @@ import NavLink from "Components/nav-link"
 import { jsonCopy } from "Utils"
 import { validateUserRegistrationTask } from "./Validations"
 import { registerUserTask, createAccountTask } from "./fns.js"
+import LogoLoader from "Components/LogoLoader"
 
 const userModel = {
   name: "",
@@ -63,14 +64,20 @@ export const validateForm = (mdl) => (data) => {
 const RegisterUser = () => {
   return {
     view: ({ attrs: { data, errors, isSubmitted } }) => [
-      m("input.auth-input", {
-        class: isSubmitted ? (errors.name ? "has-error" : "has-success") : "",
-        id: "reg-name",
-        type: "text",
-        placeholder: "Full Name",
-        onkeyup: (e) => (data.name = e.target.value),
-        value: data.name,
-      }),
+      mdl.state.isLoading()
+        ? m(LogoLoader, { mdl })
+        : m("input.auth-input", {
+            class: isSubmitted
+              ? errors.name
+                ? "has-error"
+                : "has-success"
+              : "",
+            id: "reg-name",
+            type: "text",
+            placeholder: "Full Name",
+            onkeyup: (e) => (data.name = e.target.value),
+            value: data.name,
+          }),
       errors.name && m("p.auth-input-hint", errors.name),
 
       m("input.auth-input", {

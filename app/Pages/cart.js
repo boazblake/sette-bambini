@@ -61,7 +61,7 @@ const Product = () => {
     }) => {
       return getQuantity(genders)
         ? m(
-            ".frow m-10",
+            ".frow m-10 row-start",
             {
               style: {
                 width: mdl.settings.screenSize == "phone" ? "80%" : "40%",
@@ -70,7 +70,7 @@ const Product = () => {
             m("h2", `${title}: $${mdl.state.prices[title]}`),
 
             m("img", {
-              style: { width: "100%" },
+              style: { objectFit: "contain" },
               srcSet: productImages[title][0],
             }),
 
@@ -93,6 +93,7 @@ const Cart = ({ attrs: { mdl } }) => {
     view: ({ attrs: { mdl } }) =>
       m(
         ".frow-container",
+        { style: { height: "100%" } },
         m(
           "animated.frow.row-start",
           toProducts(mdl.cart).map((p) =>
