@@ -121,7 +121,8 @@ const Invoice = ({ attrs: { mdl } }) => {
                 m("label", "Shipping Destination"),
                 `${invoice.shippingDestination.address.address_line_1} ${invoice.shippingDestination.address.admin_area_2} ${invoice.shippingDestination.address.admin_area_1} ${invoice.shippingDestination.address.postal_code}`
               ),
-              m("td", m("button", "Update Shipping Status"))
+              mdl.state.route.id == "dashboard" &&
+                m("td", m("button", "Update Shipping Status"))
             ),
             m(
               "table",

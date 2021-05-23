@@ -32,24 +32,19 @@ const Gender = () => {
         gender: [sex, quantity],
       },
     }) => {
-      let selector = (mdl) =>
-        mdl.settings.screenSize == "desktop" ? "td" : "tr"
       return quantity
         ? m(
-            `${selector(mdl)}.animated.frow row-around mt-10`,
-            m(
-              "label.col-xs-1-4",
-              m("h4", `${sex}`),
-              m("input", {
-                type: "number",
-                inputmode: "numeric",
-                min: 0,
-                placeholder: "quantity",
-                value: quantity,
-                onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
-                pattern: "[0-9]*",
-              })
-            )
+            "p.animated.frow row-start col-xs-1-4 ml-10",
+            m("h4", `${sex}`),
+            m("input", {
+              type: "number",
+              inputmode: "numeric",
+              min: 0,
+              placeholder: "quantity",
+              value: quantity,
+              onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
+              pattern: "[0-9]*",
+            })
           )
         : null
     },
@@ -65,33 +60,28 @@ const Product = () => {
       },
     }) => {
       return getQuantity(genders)
-        ? m(".frow mt-10 items-baseline justify-evenly", [
-            m("h2", `${title}  `),
-            m("h4", `($${mdl.state.prices[title]})`),
+        ? m(
+            ".frow m-10",
+            {
+              style: {
+                width: mdl.settings.screenSize == "phone" ? "80%" : "40%",
+              },
+            },
+            m("h2", `${title}: $${mdl.state.prices[title]}`),
 
-            m(
-              "table",
-              m(
-                "tr.animated.frow cart-item",
+            m("img", {
+              style: { width: "100%" },
+              srcSet: productImages[title][0],
+            }),
 
-                m("img", {
-                  style: { width: "40%" },
-                  srcSet: productImages[title][0],
-                }),
-
-                m(
-                  "table",
-                  genders.map((gender) =>
-                    m(Gender, {
-                      mdl,
-                      gender,
-                      product: title,
-                    })
-                  )
-                )
-              )
-            ),
-          ])
+            genders.map((gender) =>
+              m(Gender, {
+                mdl,
+                gender,
+                product: title,
+              })
+            )
+          )
         : null
     },
   }
@@ -101,34 +91,34 @@ const Cart = ({ attrs: { mdl } }) => {
   return {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
-      m(`.animated.frow-container frow-center`, [
-        toProducts(mdl.cart).map((p) =>
-          m(Product, {
-            mdl,
-            p,
-          })
-        ),
-
+      m(
+        ".frow-container",
         m(
-          ".frow-center",
-          getTotal(mdl, toProducts(mdl.cart))
-            ? m(NavLink, {
-                mdl,
-                href: `/checkout`,
-                classList: `${isActiveRoute(`/checkout`)} para button mt-20`,
-                link: [
-                  "Proceed to Checkout",
-                  m(
-                    "h1.bold text-center",
-                    `Total of ${getQuantity(
-                      toProducts(mdl.cart)
-                    )} for ${getTotal(mdl, toProducts(mdl.cart))}`
-                  ),
-                ],
-              })
-            : m("h1.bold", "Your Cart is Empty")
+          "animated.frow.row-start",
+          toProducts(mdl.cart).map((p) =>
+            m(Product, {
+              mdl,
+              p,
+            })
+          )
         ),
-      ]),
+        getTotal(mdl, toProducts(mdl.cart))
+          ? m(NavLink, {
+              mdl,
+              href: `/checkout`,
+              classList: `${isActiveRoute(`/checkout`)} para button mt-20`,
+              link: [
+                "Proceed to Checkout",
+                m(
+                  "h1.bold text-center",
+                  `Total of ${getQuantity(
+                    toProducts(mdl.cart)
+                  )} for $${getTotal(mdl, toProducts(mdl.cart))}`
+                ),
+              ],
+            })
+          : m("h1.bold", "Your Cart is Empty")
+      ),
   }
 }
 

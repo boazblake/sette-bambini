@@ -207,33 +207,13 @@ const Routes = [
       isAnchor
         ? scrollToAnchor(mdl.state.anchor)
         : window.scrollTo({
-            top: 0,
+            top: 100,
             left: 0,
             behavior: "smooth",
           })
     },
     component: (mdl) => m(Layout, { mdl }, m(BabyBlankets, { mdl })),
   },
-  // {
-  //   id: "blog",
-  //   name: "Blog",
-  //   // icon: Icons.home,
-  //   route: "/blog",
-  //   isNav: true,
-  //   group: ["footer", "menu", "sub-navbar"],
-  //   children: [],
-  //   options: [],
-  //   onmatch: (mdl, args, path, fullroute, isAnchor) => {
-  //     isAnchor
-  //       ? scrollToAnchor(mdl.state.anchor)
-  //       : window.scrollTo({
-  //           top: 0,
-  //           left: 0,
-  //           behavior: "smooth",
-  //         })
-  //   },
-  //   component: (mdl) => m(Layout, { mdl }, m(Blog, { mdl })),
-  // },
   {
     id: "about-us",
     name: "About Us",

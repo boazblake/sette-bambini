@@ -1,6 +1,7 @@
 import { Orders } from "Components/orders.js"
 import { Prices } from "./prices.js"
 import { Users } from "./users.js"
+import LogoLoader from "Components/LogoLoader"
 
 const Dashboard = () => {
   const components = {
@@ -13,24 +14,26 @@ const Dashboard = () => {
 
   return {
     view: ({ attrs: { mdl } }) => {
-      return m(
-        ".",
-        { style: { minWidth: "100%", minHeight: "100%" } },
-        m(
-          "section.dash-nav.frow row-around",
-          navi.map((nav) =>
+      return mdl.state.isLoading()
+        ? m(LogoLoader)
+        : m(
+            ".",
+            { style: { minWidth: "100%", minHeight: "100%" } },
             m(
-              "button",
-              {
-                class: mdl.dash.state.show == nav ? "is-active" : "",
-                onclick: (e) => (mdl.dash.state.show = nav),
-              },
-              nav.toUpperCase()
-            )
+              "section.dash-nav.frow row-around",
+              navi.map((nav) =>
+                m(
+                  "button",
+                  {
+                    class: mdl.dash.state.show == nav ? "is-active" : "",
+                    onclick: (e) => (mdl.dash.state.show = nav),
+                  },
+                  nav.toUpperCase()
+                )
+              )
+            ),
+            m("section.frow mt-10", m(components[mdl.dash.state.show], { mdl }))
           )
-        ),
-        m("section.frow mt-10", m(components[mdl.dash.state.show], { mdl }))
-      )
     },
   }
 }

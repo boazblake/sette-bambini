@@ -1,7 +1,6 @@
 import Header from "./Header/index.js"
 import Body from "./Body/index.js"
 import Footer from "./footer.js"
-import LogoLoader from "Components/LogoLoader"
 import { parsePrices, log } from "Utils"
 import Task from "data.task"
 
@@ -26,7 +25,7 @@ const Layout = () => {
         ".layout",
         { id: "layout", role: "main" },
         m(Header, { mdl }),
-        mdl.state.isLoading() ? m(LogoLoader) : m(Body, { mdl, children }),
+        m(Body, { mdl, children }),
         m(Footer, { mdl })
       ),
   }

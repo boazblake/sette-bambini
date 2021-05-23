@@ -33,7 +33,9 @@ const Product = ({
               m("img", {
                 srcSet: productImages[title][0],
               }),
-              genders.map(([sex, quantity]) => m(".", `${sex} : ${quantity}`))
+              genders.map(([sex, quantity]) =>
+                quantity ? m(".", `${sex} : ${quantity}`) : null
+              )
             ),
           ])
         : null
