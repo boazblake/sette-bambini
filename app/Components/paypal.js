@@ -7,23 +7,23 @@ const makePaymentTask = (actions) => {
   return new Task((rej, res) => actions.order.capture().then(res, rej))
 }
 
-const formatInvoice = ({ user, cart, state: { prices } }) => ({
-  orderID,
-  payerID,
-}) => (details) => {
-  log("formatInvoice")(user)
-  return {
-    userId: user.objectId,
-    orderID,
-    payerID,
-    purchaseTime: details.create_time,
-    status: details.status,
-    customer: details.payer,
-    shippingDestination: details.purchase_units[0].shipping,
-    cart: cart,
-    prices,
+const formatInvoice =
+  ({ user, cart, state: { prices } }) =>
+  ({ orderID, payerID }) =>
+  (details) => {
+    log("formatInvoice")(user)
+    return {
+      userId: user.objectId,
+      orderID,
+      payerID,
+      purchaseTime: details.create_time,
+      status: details.status,
+      customer: details.payer,
+      shippingDestination: details.purchase_units[0].shipping,
+      cart: cart,
+      prices,
+    }
   }
-}
 
 const setTempUser = (user) =>
   sessionStorage.setItem("sb-user-token", user["sessionToken"])
@@ -76,7 +76,7 @@ export const PayPal = () => {
         style: {
           maxHeight: "500px",
           overflowY: "auto",
-          minWidth: "80vw",
+          minWidth: "400px",
         },
         oncreate: ({ dom }) =>
           paypal

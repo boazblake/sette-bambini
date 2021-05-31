@@ -92,10 +92,10 @@ const Cart = ({ attrs: { mdl } }) => {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
       m(
-        ".frow-container",
+        ".frow.column-center",
         { style: { height: "100%" } },
         m(
-          "animated.frow.row-start",
+          ".animated.frow.row-start.justify-center.column-center",
           toProducts(mdl.cart).map((p) =>
             m(Product, {
               mdl,

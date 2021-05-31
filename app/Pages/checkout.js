@@ -26,7 +26,7 @@ const Product = () => {
             ".frow m-10 row-start",
             {
               style: {
-                width: mdl.settings.screenSize == "phone" ? "80%" : "40%",
+                width: mdl.settings.screenSize == "phone" ? "80%" : "20%",
               },
             },
 
@@ -61,7 +61,7 @@ const Checkout = ({ attrs: { mdl } }) => {
     oninit: ({ attrs: { mdl } }) => mdl.state.showNavModal(false),
     view: ({ attrs: { mdl } }) =>
       m(
-        `.checkout`,
+        ".frow.column-center",
         { style: { height: "100%" } },
         getTotal(mdl, toProducts(mdl.cart))
           ? m(NavLink, {
@@ -73,23 +73,21 @@ const Checkout = ({ attrs: { mdl } }) => {
           : null,
 
         m(
-          ".frow-container.frow.row-start",
-          toProducts(mdl.cart).map((p) => m(Product, { mdl, p }))
-        ),
-
-        getTotal(mdl, toProducts(mdl.cart))
-          ? [
-              m(
-                "h1.bold text-center.mt-20.mb-20",
-                `Total of ${getQuantity(toProducts(mdl.cart))} for $${getTotal(
-                  mdl,
-                  toProducts(mdl.cart)
-                )}`
-              ),
-              state.isPaying == "start" && m(LogoLoader),
-              m(PayPal, { mdl, state }),
-            ]
-          : m("h1.bold", "Your Cart is Empty")
+          ".frow.row-start.justify-center",
+          toProducts(mdl.cart).map((p) => m(Product, { mdl, p })),
+          getTotal(mdl, toProducts(mdl.cart))
+            ? [
+                m(
+                  "h1.bold text-center.mt-20.mb-20",
+                  `Total of ${getQuantity(
+                    toProducts(mdl.cart)
+                  )} for $${getTotal(mdl, toProducts(mdl.cart))}`
+                ),
+                state.isPaying == "start" && m(LogoLoader),
+                m(PayPal, { mdl, state }),
+              ]
+            : m("h1.bold", "Your Cart is Empty")
+        )
       ),
   }
 }

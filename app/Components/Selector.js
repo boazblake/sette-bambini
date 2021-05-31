@@ -35,9 +35,12 @@ const Selector = () => {
         ".frow",
         m(".frow content-center gutters row-between pt-20 md-columns", [
           state.error() && m("code.warning", state.error()),
-          m(".col-md-1-4", m("h2.pb-10", `$${mdl.state.prices[product]}`)),
           m(
-            ".col-md-1-4",
+            ".col-xs-1-3.col-md-1-4",
+            m("h2.pb-10", `$${mdl.state.prices[product]}`)
+          ),
+          m(
+            ".col-xs-1-3.col-md-1-4",
             m(
               "label",
               m("input", {
@@ -51,7 +54,7 @@ const Selector = () => {
             )
           ),
           m(
-            ".col-md-1-4",
+            ".col-xs-1-3.col-md-1-4",
             m(
               "label",
 
@@ -79,9 +82,9 @@ const Selector = () => {
               },
             }),
           m(
-            ".col-md-1-4",
+            ".col-xs-1",
             m(
-              "button",
+              "button.width-100",
               {
                 disabled:
                   state.quantity == undefined || state.gender == "Gender",
