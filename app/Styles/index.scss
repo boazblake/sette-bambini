@@ -328,7 +328,7 @@ icon.icon#logo-svg {
   min-width: 90vw;
   min-height: 100vh;
   background-color: $white;
-  padding: 30px;
+  padding: 30px 30px 60px 30px;
   overflow-y: auto;
 
   > h1.title,
@@ -443,7 +443,7 @@ icon.icon#logo-svg {
 }
 
 .para {
-  border: 1px solid white;
+  border: 2px solid $gold;
 }
 
 .white {
