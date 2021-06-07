@@ -63,7 +63,7 @@ export const validateForm = (mdl) => (data) => {
 
 const RegisterUser = () => {
   return {
-    view: ({ attrs: { data, errors, isSubmitted } }) => [
+    view: ({ attrs: { mdl, data, errors, isSubmitted } }) => [
       mdl.state.isLoading()
         ? m(LogoLoader, { mdl })
         : m("input.auth-input", {
@@ -150,6 +150,7 @@ export const Register = () => {
           },
           [
             m(RegisterUser, {
+              mdl,
               data: state.data.userModel,
               errors: state.errors,
               isSubmitted: state.isSubmitted,
