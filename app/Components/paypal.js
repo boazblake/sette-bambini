@@ -76,7 +76,7 @@ export const PayPal = () => {
         style: {
           maxHeight: "500px",
           overflowY: "auto",
-          minWidth: "400px",
+          display: "contents",
         },
         oncreate: ({ dom }) =>
           paypal
