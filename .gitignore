@@ -1,2 +1,5 @@
 node_modules/
 /.secrets.js
+/.*
+.clj-kondo/
+.ionide
