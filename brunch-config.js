@@ -52,7 +52,7 @@ exports.plugins = {
   workbox: {
     globDirectory: "docs/",
     globPatterns: ["**/*.*"],
-    swDest: "docs/sw.js",
+    swDest: "sw.js",
   },
   // swPrecache: {
   //   swFileName: "service-worker.js",
