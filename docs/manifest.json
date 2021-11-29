@@ -3,7 +3,7 @@
   "name": "Sette-Bambini",
   "icons": [
     {
-      "src": "icons/maskable_icon-152x",
+      "src": "icons/maskable_icon-152x.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any maskable"
