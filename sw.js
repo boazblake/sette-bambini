@@ -124,6 +124,10 @@ self.__precacheManifest = [
   {
     "url": "manifest.json",
     "revision": "eeb7f5fa3cafc1c663b6b7730d3ba68b"
+  },
+  {
+    "url": "sitemap.xml",
+    "revision": "6ada17ea0245bbc20e0f416827d9d824"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
