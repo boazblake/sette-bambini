@@ -3,10 +3,8 @@ import { isActiveRoute, getQuantity, getPrice } from "Utils/helpers"
 import { toPairs } from "ramda"
 import { productImages } from "index.images.js"
 
-const makeProducts = (cart) => {
-  console.log(cart)
-  return toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
-}
+const makeProducts = (cart) =>
+  toPairs(cart).map(([product, genders]) => [product, toPairs(genders)])
 
 const Product = ({
   attrs: {
@@ -89,7 +87,7 @@ const CartModal = ({ attrs: { mdl } }) => {
                     href: `/checkout`,
                     classList: `${isActiveRoute(`/checkout`)} para button m-0`,
                     link: [
-                      "Proceed to Checkout",
+                      "Checkout",
                       m(
                         "h1.bold text-center",
                         `Total of ${getQuantity(

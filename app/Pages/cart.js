@@ -36,15 +36,35 @@ const Gender = () => {
         ? m(
             "p.animated.frow row-start col-xs-1-4 ml-10",
             m("h4", `${sex}`),
-            m("input", {
-              type: "number",
-              inputmode: "numeric",
-              min: 0,
-              placeholder: "quantity",
-              value: quantity,
-              onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
-              pattern: "[0-9]*",
-            })
+            m(
+              "select",
+              {
+                value: quantity,
+                onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
+              },
+              [
+                m("option", { value: 0 }, 0),
+                m("option", { value: 1 }, 1),
+                m("option", { value: 2 }, 2),
+                m("option", { value: 3 }, 3),
+                m("option", { value: 4 }, 4),
+                m("option", { value: 5 }, 5),
+                m("option", { value: 6 }, 6),
+                m("option", { value: 7 }, 7),
+                m("option", { value: 8 }, 8),
+                m("option", { value: 9 }, 9),
+                m("option", { value: 10 }, 10),
+              ]
+            )
+            // m("input", {
+            //   type: "number",
+            //   inputmode: "numeric",
+            //   min: 0,
+            //   placeholder: "quantity",
+            //   value: quantity,
+            //   onchange: (e) => addToCart(mdl)(product, sex, e.target.value),
+            //   pattern: "[0-9]*",
+            // })
           )
         : null
     },

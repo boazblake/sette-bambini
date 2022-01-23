@@ -7,7 +7,7 @@ const Selector = () => {
   }
 
   const ResetState = () => {
-    state.quantity = null
+    state.quantity = 1
     state.gender = "Gender"
   }
 
@@ -43,14 +43,34 @@ const Selector = () => {
             ".col-xs-1-3.col-md-1-4",
             m(
               "label",
-              m("input", {
-                type: "number",
-                inputmode: "numeric",
-                pattern: "[0-9]*",
-                placeholder: "quantity",
-                value: state.quantity,
-                oninput: (e) => (state.quantity = e.target.value),
-              })
+
+              m(
+                "select",
+                {
+                  value: state.quantity,
+                  onchange: (e) => (state.quantity = e.target.value),
+                },
+                [
+                  m("option", { value: 1 }, 1),
+                  m("option", { value: 2 }, 2),
+                  m("option", { value: 3 }, 3),
+                  m("option", { value: 4 }, 4),
+                  m("option", { value: 5 }, 5),
+                  m("option", { value: 6 }, 6),
+                  m("option", { value: 7 }, 7),
+                  m("option", { value: 8 }, 8),
+                  m("option", { value: 9 }, 9),
+                  m("option", { value: 10 }, 10),
+                ]
+              )
+              // m("input", {
+              //   type: "number",
+              //   inputmode: "numeric",
+              //   pattern: "[0-9]*",
+              //   placeholder: "quantity",
+              //   value: state.quantity,
+              //   oninput: (e) => (state.quantity = e.target.value),
+              // })
             )
           ),
           m(

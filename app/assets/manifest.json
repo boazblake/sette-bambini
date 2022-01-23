@@ -3,12 +3,6 @@
   "name": "Sette-Bambini",
   "icons": [
     {
-      "src": "icons/maskable_icon-152x.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
       "src": "./icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
@@ -40,6 +34,7 @@
     }
   ],
   "start_url": "/sette-bambini/#!/",
+  "id": "/sette-bambini/#!/",
   "background_color": "#FFFFFF",
   "display": "fullscreen",
   "scope": "/",

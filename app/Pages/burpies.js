@@ -16,14 +16,15 @@ const Burpies = () => {
           m(".col-sm-1-2", m(Carousel, { ident: "burpies" }, burpies)),
           m(
             ".mtl-15.col-sm-1-2",
-            m("ul.frow-container px-30", [
+            m(
+              "ul.frow-container px-30",
               m("li.pb-10", "Set of 7 handcrafted Burpies"),
               m("li.pb-10", "Each guranteed to be one of a kind"),
               m("li.pb-10", 'Double sided Flannel burp cloths 21" x 12"'),
               m("li.pb-10", "Thick and absorbent!"),
               m("li.pb-10", "No two cloths are the same!"),
-              m("li.pb-10", "Proudly made in Houston Texas USA"),
-            ]),
+              m("li.pb-10", "Proudly made in Houston Texas USA")
+            ),
             m(
               "p.pb-10",
               "Gender neutral sets are available in gray, cream or yellow/ green. Please specify when ordering."
