@@ -1,11 +1,6 @@
 const xml = require("xml")
 const { writeFile } = require("fs")
 
-const log = (m) => (v) => {
-  console.log(m, v)
-  return v
-}
-
 const domain = "https://boazblake.github.io/sette-bambini/#!"
 const date = () => new Date().toISOString().split("T")[0]
 
